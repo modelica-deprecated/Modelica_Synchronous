@@ -5787,6 +5787,99 @@ form of a PI controller by using the implicit Euler discretization formula.
 </html>"));
     end PI;
 
+    block PID "Discrete-time PID controller"
+      extends Modelica_Synchronous.Interfaces.PartialRealClockedSISO;
+      parameter Real k = 1 "Gain of discrete PID controller";
+      parameter Real Ti(min=Modelica.Constants.small) = 0.5
+        "Time constant of integrator part";
+      parameter Real Td(min=0) = 0.1 "Time constant of derivative part";
+      parameter Real y_start=0 "Initial value of output"
+        annotation (Dialog(group="Initialization"));
+    protected
+      Real u_pre(start=0);
+      Real T = interval(u);
+    equation
+      when Clock() then
+        u_pre = previous(u);
+        y = previous(y) + k*( (1 + T/Ti + Td/T)*u - (1 + 2*Td/T)*u_pre + Td/T*previous(u_pre));
+      end when;
+
+      annotation (defaultComponentName="PI1",
+           Icon(graphics={
+            Polygon(
+              points={{90,-82},{68,-74},{68,-90},{90,-82}},
+              lineColor={192,192,192},
+              fillColor={192,192,192},
+              fillPattern=FillPattern.Solid),
+            Line(points={{-90,-82},{82,-82}}, color={192,192,192}),
+            Line(points={{-80,76},{-80,-92}}, color={192,192,192}),
+            Polygon(
+              points={{-80,90},{-88,68},{-72,68},{-80,90}},
+              lineColor={192,192,192},
+              fillColor={192,192,192},
+              fillPattern=FillPattern.Solid),
+            Line(
+              points={{-80,-82},{-80,48},{-32,48},{-32,-10},{16,-10},{16,22},{64,22}},
+              color={0,0,127},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dot),
+            Text(
+              extent={{-30,-4},{82,-58}},
+              lineColor={192,192,192},
+              textString="PID"),
+            Ellipse(
+              extent={{-39,-3},{-27,-15}},
+              lineColor={0,0,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{9,28},{21,16}},
+              lineColor={0,0,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{58,27},{70,15}},
+              lineColor={0,0,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{-87,55},{-75,43}},
+              lineColor={0,0,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Text(
+              extent={{-140,-140},{140,-100}},
+              lineColor={0,0,0},
+              textString="Ti=%Ti, Td=%Td"),
+            Text(
+              extent={{-140,60},{140,100}},
+              lineColor={0,0,0},
+              textString="k=%k")}),
+        Documentation(info="<html>
+<p>
+This block defines a text-book version of a discrete-time PID controller by the formula:
+</p>
+<pre>
+// Transfer function form:
+   y(z) = (b0*z^2 + b1*z + b2) / (z^2 - z);
+   b0 = k*(1 + T/Ti + Td/T)
+   b1 = -k(1 + 2*Td/T)
+   b2 = k*Td/T       
+</pre>
+<p>
+where k is the gain of the controller, Ti is the time constant of the integrative part, Td is the time constant of the derivative part, and T is the sample period.
+</p>
+
+<p>
+This discrete-time form has been derived from the continuous-time
+form of a PI controller by using the backward rectangular approximation (also called backward euler method or right-hand approximation) between the  s- and z- domain:
+</p>
+<pre>
+   s = (z - 1)/(h*z)       
+</pre>
+</html>"));
+    end PID;
+
     block MovingAverage
       "Moving average filter (= FIR filter with coefficients a = fill(1/n,n), but implemented recursively)"
       extends Modelica_Synchronous.Interfaces.PartialRealClockedSISO;
@@ -5846,7 +5939,7 @@ contrary to a general FIR filter.
                   -14,-4},{-4,-46},{0,-64},{2,-82}},
                                              color={0,0,127}),
         Polygon(points={{-84,90},{-92,68},{-76,68},{-84,90},{-84,90}}, lineColor={192,192,192}, fillColor={192,192,192},
-                fillPattern=   FillPattern.Solid),
+                fillPattern =  FillPattern.Solid),
           Line(points={{2,-82},{4,-64},{8,-56},{12,-56},{16,-60},{18,-66},{20,-82}},
                                                                              color={0,0,127}),
           Line(points={{20,-80},{20,-78},{20,-72},{22,-66},{24,-64},{28,-64},{32,-66},
@@ -5855,7 +5948,7 @@ contrary to a general FIR filter.
                   {62,-72},{64,-76},{64,-78},{64,-80},{64,-82}},
                                                 color={0,0,127}),
         Polygon(points={{90,-82},{68,-74},{68,-90},{90,-82}}, lineColor={192,192,192}, fillColor={192,192,192},
-                fillPattern=  FillPattern.Solid),
+                fillPattern = FillPattern.Solid),
             Text(
               extent={{-26,88},{88,48}},
               lineColor={175,175,175},
@@ -5911,7 +6004,7 @@ a[:] are the filter coefficients.
 </HTML>
 "),     Icon(graphics={
         Polygon(points={{-84,90},{-92,68},{-76,68},{-84,90},{-84,90}}, lineColor={192,192,192}, fillColor={192,192,192},
-                fillPattern=   FillPattern.Solid),
+                fillPattern =  FillPattern.Solid),
          Line(points={{-84,78},{-84,-90}}, color={192,192,192}),
         Line(points={{-84,30},{-72,30},{-52,28},{-32,20},{-26,16},{-22,12},{-18,6},{
                   -14,-4},{-4,-46},{0,-64},{2,-82}},
@@ -5927,7 +6020,7 @@ a[:] are the filter coefficients.
                   {62,-72},{64,-76},{64,-78},{64,-80},{64,-82}},
                                                 color={0,0,127}),
         Polygon(points={{90,-82},{68,-74},{68,-90},{90,-82}}, lineColor={192,192,192}, fillColor={192,192,192},
-                fillPattern=  FillPattern.Solid),
+                fillPattern = FillPattern.Solid),
         Line(points={{-90,-82},{82,-82}}, color={192,192,192}),
             Text(
               extent={{-26,86},{88,56}},
@@ -5986,10 +6079,10 @@ a[:] are the filter coefficients.
         graphics={
          Line(points={{-84,78},{-84,-90}}, color={192,192,192}),
         Polygon(points={{-84,90},{-92,68},{-76,68},{-84,90},{-84,90}}, lineColor={192,192,192}, fillColor={192,192,192},
-                fillPattern=   FillPattern.Solid),
+                fillPattern =  FillPattern.Solid),
         Line(points={{-90,-82},{82,-82}}, color={192,192,192}),
         Polygon(points={{90,-82},{68,-74},{68,-90},{90,-82}}, lineColor={192,192,192}, fillColor={192,192,192},
-                fillPattern=  FillPattern.Solid),
+                fillPattern = FillPattern.Solid),
         Line(points=[-84,30; -72,30; -52,28; -32,20; -26,16; -22,12; -18,6; -14,
                   -4; -4,-46; 0,-64; 2,-82], color={0,0,127}),
           Line(points=[2,-82; 4,-64; 8,-56; 12,-56; 16,-60; 18,-66; 20,-82], color={0,0,127}),
@@ -9221,7 +9314,7 @@ Connector with one output signal of type Boolean.
 
 
   annotation (preferredView="info",
-  uses(Modelica(version="3.2")),
+  uses(Modelica(version="3.2"), Modelica_LinearSystems2(version="2.2")),
     version="1.0",
     versionBuild=0,
     versionDate="2012-08-28",

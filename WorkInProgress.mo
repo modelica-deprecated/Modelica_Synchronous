@@ -2246,6 +2246,65 @@ equation
       c1 = superSample(Clock(factor), 1000);
       c2 = superSample(Clock(factor), 1000*1000);
     end TestSuperSampleClock;
+
+    model TestPIDController
+     extends Modelica_Synchronous.WorkInProgress.Icons.OperatesOnlyPartially;
+      Clocks.PeriodicRealClock periodicRealClock(period=0.1)
+        annotation (Placement(transformation(extent={{-36,-16},{-24,-4}})));
+      RealSignals.Periodic.PID PI1
+        annotation (Placement(transformation(extent={{28,0},{48,20}})));
+      Modelica.Blocks.Sources.Step step(startTime=0.19)
+        annotation (Placement(transformation(extent={{-82,0},{-62,20}})));
+      RealSignals.SampleAndHolds.SampleClocked sample1
+        annotation (Placement(transformation(extent={{-8,4},{4,16}})));
+      Modelica_LinearSystems2.Controller.Sampler sampler(blockType=
+            Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Discrete)
+        annotation (Placement(transformation(extent={{-38,-60},{-18,-40}})));
+      inner Modelica_LinearSystems2.Controller.SampleClock sampleClock(
+        blockType=Modelica_LinearSystems2.Controller.Types.BlockType.Discrete,
+        methodType=Modelica_LinearSystems2.Types.Method.ExplicitEuler,
+        sampleTime=0.1)
+        annotation (Placement(transformation(extent={{60,68},{80,88}})));
+      Modelica_LinearSystems2.Controller.PID pID(
+        Ti=0.5,
+        Td=0.1,
+        blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Discrete,
+        pidRep=Modelica_LinearSystems2.Controller.Types.PID_representation.timeConstants,
+        initType=Modelica_LinearSystems2.Controller.Types.InitWithGlobalDefault.NoInit,
+        methodType=Modelica_LinearSystems2.Controller.Types.MethodWithGlobalDefault.ExplicitEuler,
+        Nd=1) annotation (Placement(transformation(extent={{8,-60},{28,-40}})));
+
+    equation
+      connect(step.y, sample1.u) annotation (Line(
+          points={{-61,10},{-9.2,10}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(sample1.clock, periodicRealClock.y) annotation (Line(
+          points={{-2,2.8},{-2,-10},{-23.4,-10}},
+          color={175,175,175},
+          pattern=LinePattern.Dot,
+          thickness=0.5,
+          smooth=Smooth.None));
+      connect(sample1.y, PI1.u) annotation (Line(
+          points={{4.6,10},{26,10}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(sampler.u, step.y) annotation (Line(
+          points={{-40,-50},{-48,-50},{-48,10},{-61,10}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(sampler.y, pID.u) annotation (Line(
+          points={{-17,-50},{6,-50}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                -100},{100,100}}),
+                          graphics={Text(
+              extent={{-92,66},{96,18}},
+              lineColor={0,0,255},
+              textString="No direct comparison of PID blocks possible, since different discretization method used!
+=> Hard to say whether clocked PID is \"correct\".")}));
+    end TestPIDController;
   end Tests;
 
   block Interpolator
