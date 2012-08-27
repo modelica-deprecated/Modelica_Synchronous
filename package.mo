@@ -3771,6 +3771,98 @@ package RealSignals "Library of clocked blocks for Real signals"
 </html>"));
     end AssignClockVectorized;
 
+    block BackSample
+      "Shift clock of input backwards in time (and access the most recent value of the input at this new clock)"
+      parameter Integer backCounter(min=0)=0 "Numerator of shifting formula"
+            annotation(Dialog(group="Shift first clock activation backwards in time for 'shiftCounter/resolution*interval(u)' seconds"));
+      parameter Integer resolution(min=1)=1 "Denominator of shifting formula"
+            annotation(Dialog(group="Shift first clock activation backwards in time for 'shiftCounter/resolution*interval(u)' seconds"));
+      parameter Real y_start=0
+        "Value of output y before the first clock tick of the input u";
+
+      Modelica.Blocks.Interfaces.RealInput u(start=y_start)
+        "Connector of clocked, Real input signal"
+        annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
+            rotation=0)));
+      Modelica.Blocks.Interfaces.RealOutput y
+        "Connector of clocked, Real output signal (clock of y is faster als clock of u)"
+        annotation (Placement(transformation(extent={{100,-10},{120,10}},
+            rotation=0)));
+    equation
+      y = backSample(u,backCounter,resolution);
+
+      annotation (
+       defaultComponentName="backSample1",
+       Icon(coordinateSystem(
+            preserveAspectRatio=true,
+            extent={{-100,-100},{100,100}},
+            grid={2,2},
+            initialScale=0.06),
+                         graphics={
+            Rectangle(
+              extent={{-90,84},{88,-94}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),
+                                   Line(points={{20,-50},{60,-50},{60,50}},
+                                     color={0,0,127},
+              pattern=LinePattern.Dot),
+            Text(
+              extent={{-200,175},{200,110}},
+              lineColor={0,0,255},
+              textString="%name"),
+            Text(
+              extent={{-200,-135},{200,-200}},
+              lineColor={0,0,0},
+              textString="%backCounter/%resolution"),
+                                   Line(points={{-80,-50},{-40,-50},{-40,50}},
+                                     color={0,0,127},
+              pattern=LinePattern.Dot),
+            Ellipse(
+              extent={{-90,-40},{-70,-60}},
+              lineColor={0,0,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{-50,60},{-30,40}},
+              lineColor={0,0,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Polygon(
+              points={{-16,0},{4,20},{4,10},{34,10},{34,-10},{4,-10},{4,-20},{-16,0}},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid,
+              lineColor={95,95,95}),
+            Ellipse(
+              extent={{10,-40},{30,-60}},
+              lineColor={0,0,127},
+              fillColor={0,0,127},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{50,60},{70,40}},
+              lineColor={0,0,127},
+              fillColor={0,0,127},
+              fillPattern=FillPattern.Solid),
+            Text(
+              extent={{-200,-74},{200,-139}},
+              lineColor={0,0,0},
+              textString="y_start=%y_start")}),
+        Window(
+          x=0.37,
+          y=0.09,
+          width=0.52,
+          height=0.68),
+        Diagram(coordinateSystem(
+            preserveAspectRatio=true,
+            extent={{-100,-100},{100,100}},
+            grid={2,2},
+            initialScale=0.06),
+                         graphics),
+        Documentation(info="<html>
+
+</html>"));
+    end BackSample;
+
     block Hold
       "Hold the clocked, Real input signal and provide it as continuous-time output signal (zero order hold)"
     extends Modelica_Synchronous.Interfaces.PartialRealSISOHold;
@@ -4270,6 +4362,95 @@ package RealSignals "Library of clocked blocks for Real signals"
 </html>"));
     end SampleWithADeffects;
 
+    block ShiftSample "Shift (delay) input for some clock ticks"
+
+      parameter Integer shiftCounter(min=0)=0 "Numerator of shifting formula"
+            annotation(Dialog(group="Shift first clock activation for 'shiftCounter/resolution*interval(u)' seconds"));
+      parameter Integer resolution(min=1)=1 "Denominator of shifting formula"
+            annotation(Dialog(group="Shift first clock activation for 'shiftCounter/resolution*interval(u)' seconds"));
+
+      Modelica.Blocks.Interfaces.RealInput u
+        "Connector of clocked, Real input signal"
+        annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
+            rotation=0)));
+      Modelica.Blocks.Interfaces.RealOutput y
+        "Connector of clocked, Real output signal"
+        annotation (Placement(transformation(extent={{100,-10},{120,10}},
+            rotation=0)));
+    equation
+         y = shiftSample(u,shiftCounter,resolution);
+      annotation (
+       defaultComponentName="shiftSample1",
+       Icon(coordinateSystem(
+            preserveAspectRatio=true,
+            extent={{-100,-100},{100,100}},
+            grid={2,2},
+            initialScale=0.06),
+                         graphics={
+            Rectangle(
+              extent={{-94,86},{84,-92}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),
+                                   Line(points={{20,-50},{60,-50},{60,50}},
+                                     color={0,0,127},
+              pattern=LinePattern.Dot),
+            Text(
+              extent={{-200,175},{200,110}},
+              lineColor={0,0,255},
+              textString="%name"),
+            Text(
+              extent={{-200,-85},{200,-150}},
+              lineColor={0,0,0},
+              textString="%shiftCounter/%resolution"),
+                                   Line(points={{-80,-50},{-40,-50},{-40,50}},
+                                     color={0,0,127},
+              pattern=LinePattern.Dot),
+            Ellipse(
+              extent={{10,-40},{30,-60}},
+              lineColor={0,0,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{50,60},{70,40}},
+              lineColor={0,0,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Polygon(
+              points={{34,0},{14,20},{14,10},{-16,10},{-16,-10},{14,-10},{14,-20},{34,
+                  0}},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid,
+              lineColor={95,95,95}),
+            Ellipse(
+              extent={{-90,-40},{-70,-60}},
+              lineColor={0,0,127},
+              fillColor={0,0,127},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{-50,60},{-30,40}},
+              lineColor={0,0,127},
+              fillColor={0,0,127},
+              fillPattern=FillPattern.Solid)}),
+        Window(
+          x=0.37,
+          y=0.09,
+          width=0.52,
+          height=0.68),
+        Diagram(coordinateSystem(
+            preserveAspectRatio=true,
+            extent={{-100,-100},{100,100}},
+            grid={2,2},
+            initialScale=0.06),
+                         graphics),
+        Documentation(info="<html>
+<p><i>The first activation of the clock of y = shiftSample(..) is shifted in time shiftCounter/resolution*interval(u) later than the first activation of the clock of u.</i></p>
+<p>Conceptually, the operator constructs a clock &ldquo;cBase&rdquo; <b>Clock</b> cBase = <b>subSample</b>(<b>superSample</b>(u, resolution), shiftCounter) and the clock of y = <b>shiftSample</b>(..) starts at the second clock tick of cBase. At every tick of the clock of y, the operator returns the value of u from the last tick of the clock of u.</p>
+<p>Note, due to the restriction of <b>superSample</b> on Boolean clocks, <b>shiftSample</b> can only shift the number of ticks of the Boolean clock, but cannot introduce new ticks.</p>
+<p>Also note that the operator does not simply shift the signal in time, since only the value of u from the last tick of the clock of u is available at the output.</p>
+</html>"));
+    end ShiftSample;
+
     block SubSample
       "Sub-sample the clocked Real input signal and provide it as clocked output signal"
       parameter Boolean inferFactor=true
@@ -4617,186 +4798,7 @@ package RealSignals "Library of clocked blocks for Real signals"
 </html>"));
     end SuperSampleInterpolated;
 
-    block ShiftSample "Shift (delay) input for some clock ticks"
 
-      parameter Integer shiftCounter(min=0)=0 "Numerator of shifting formula"
-            annotation(Dialog(group="Shift first clock activation for 'shiftCounter/resolution*interval(u)' seconds"));
-      parameter Integer resolution(min=1)=1 "Denominator of shifting formula"
-            annotation(Dialog(group="Shift first clock activation for 'shiftCounter/resolution*interval(u)' seconds"));
-
-      Modelica.Blocks.Interfaces.RealInput u
-        "Connector of clocked, Real input signal"
-        annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
-            rotation=0)));
-      Modelica.Blocks.Interfaces.RealOutput y
-        "Connector of clocked, Real output signal"
-        annotation (Placement(transformation(extent={{100,-10},{120,10}},
-            rotation=0)));
-    equation
-         y = shiftSample(u,shiftCounter,resolution);
-      annotation (
-       defaultComponentName="shiftSample1",
-       Icon(coordinateSystem(
-            preserveAspectRatio=true,
-            extent={{-100,-100},{100,100}},
-            grid={2,2},
-            initialScale=0.06),
-                         graphics={
-            Rectangle(
-              extent={{-94,86},{84,-92}},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),
-                                   Line(points={{20,-50},{60,-50},{60,50}},
-                                     color={0,0,127},
-              pattern=LinePattern.Dot),
-            Text(
-              extent={{-200,175},{200,110}},
-              lineColor={0,0,255},
-              textString="%name"),
-            Text(
-              extent={{-200,-85},{200,-150}},
-              lineColor={0,0,0},
-              textString="%shiftCounter/%resolution"),
-                                   Line(points={{-80,-50},{-40,-50},{-40,50}},
-                                     color={0,0,127},
-              pattern=LinePattern.Dot),
-            Ellipse(
-              extent={{10,-40},{30,-60}},
-              lineColor={0,0,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{50,60},{70,40}},
-              lineColor={0,0,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Polygon(
-              points={{34,0},{14,20},{14,10},{-16,10},{-16,-10},{14,-10},{14,-20},{34,
-                  0}},
-              fillColor={95,95,95},
-              fillPattern=FillPattern.Solid,
-              lineColor={95,95,95}),
-            Ellipse(
-              extent={{-90,-40},{-70,-60}},
-              lineColor={0,0,127},
-              fillColor={0,0,127},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{-50,60},{-30,40}},
-              lineColor={0,0,127},
-              fillColor={0,0,127},
-              fillPattern=FillPattern.Solid)}),
-        Window(
-          x=0.37,
-          y=0.09,
-          width=0.52,
-          height=0.68),
-        Diagram(coordinateSystem(
-            preserveAspectRatio=true,
-            extent={{-100,-100},{100,100}},
-            grid={2,2},
-            initialScale=0.06),
-                         graphics),
-        Documentation(info="<html>
-<p><i>The first activation of the clock of y = shiftSample(..) is shifted in time shiftCounter/resolution*interval(u) later than the first activation of the clock of u.</i></p>
-<p>Conceptually, the operator constructs a clock &ldquo;cBase&rdquo; <b>Clock</b> cBase = <b>subSample</b>(<b>superSample</b>(u, resolution), shiftCounter) and the clock of y = <b>shiftSample</b>(..) starts at the second clock tick of cBase. At every tick of the clock of y, the operator returns the value of u from the last tick of the clock of u.</p>
-<p>Note, due to the restriction of <b>superSample</b> on Boolean clocks, <b>shiftSample</b> can only shift the number of ticks of the Boolean clock, but cannot introduce new ticks.</p>
-<p>Also note that the operator does not simply shift the signal in time, since only the value of u from the last tick of the clock of u is available at the output.</p>
-</html>"));
-    end ShiftSample;
-
-    block BackSample
-      "Shift clock of input backwards in time (and access the most recent value of the input at this new clock)"
-      parameter Integer backCounter(min=0)=0 "Numerator of shifting formula"
-            annotation(Dialog(group="Shift first clock activation backwards in time for 'shiftCounter/resolution*interval(u)' seconds"));
-      parameter Integer resolution(min=1)=1 "Denominator of shifting formula"
-            annotation(Dialog(group="Shift first clock activation backwards in time for 'shiftCounter/resolution*interval(u)' seconds"));
-      parameter Real y_start=0
-        "Value of output y before the first clock tick of the input u";
-
-      Modelica.Blocks.Interfaces.RealInput u(start=y_start)
-        "Connector of clocked, Real input signal"
-        annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
-            rotation=0)));
-      Modelica.Blocks.Interfaces.RealOutput y
-        "Connector of clocked, Real output signal (clock of y is faster als clock of u)"
-        annotation (Placement(transformation(extent={{100,-10},{120,10}},
-            rotation=0)));
-    equation
-      y = backSample(u,backCounter,resolution);
-
-      annotation (
-       defaultComponentName="backSample1",
-       Icon(coordinateSystem(
-            preserveAspectRatio=true,
-            extent={{-100,-100},{100,100}},
-            grid={2,2},
-            initialScale=0.06),
-                         graphics={
-            Rectangle(
-              extent={{-90,84},{88,-94}},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),
-                                   Line(points={{20,-50},{60,-50},{60,50}},
-                                     color={0,0,127},
-              pattern=LinePattern.Dot),
-            Text(
-              extent={{-200,175},{200,110}},
-              lineColor={0,0,255},
-              textString="%name"),
-            Text(
-              extent={{-200,-135},{200,-200}},
-              lineColor={0,0,0},
-              textString="%backCounter/%resolution"),
-                                   Line(points={{-80,-50},{-40,-50},{-40,50}},
-                                     color={0,0,127},
-              pattern=LinePattern.Dot),
-            Ellipse(
-              extent={{-90,-40},{-70,-60}},
-              lineColor={0,0,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{-50,60},{-30,40}},
-              lineColor={0,0,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Polygon(
-              points={{-16,0},{4,20},{4,10},{34,10},{34,-10},{4,-10},{4,-20},{-16,0}},
-              fillColor={95,95,95},
-              fillPattern=FillPattern.Solid,
-              lineColor={95,95,95}),
-            Ellipse(
-              extent={{10,-40},{30,-60}},
-              lineColor={0,0,127},
-              fillColor={0,0,127},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{50,60},{70,40}},
-              lineColor={0,0,127},
-              fillColor={0,0,127},
-              fillPattern=FillPattern.Solid),
-            Text(
-              extent={{-200,-74},{200,-139}},
-              lineColor={0,0,0},
-              textString="y_start=%y_start")}),
-        Window(
-          x=0.37,
-          y=0.09,
-          width=0.52,
-          height=0.68),
-        Diagram(coordinateSystem(
-            preserveAspectRatio=true,
-            extent={{-100,-100},{100,100}},
-            grid={2,2},
-            initialScale=0.06),
-                         graphics),
-        Documentation(info="<html>
-
-</html>"));
-    end BackSample;
 
     package Utilities "Utility components that are usually not directly used"
        extends Modelica.Icons.Package;
@@ -5844,7 +5846,7 @@ contrary to a general FIR filter.
                   -14,-4},{-4,-46},{0,-64},{2,-82}},
                                              color={0,0,127}),
         Polygon(points={{-84,90},{-92,68},{-76,68},{-84,90},{-84,90}}, lineColor={192,192,192}, fillColor={192,192,192},
-                fillPattern =  FillPattern.Solid),
+                fillPattern=   FillPattern.Solid),
           Line(points={{2,-82},{4,-64},{8,-56},{12,-56},{16,-60},{18,-66},{20,-82}},
                                                                              color={0,0,127}),
           Line(points={{20,-80},{20,-78},{20,-72},{22,-66},{24,-64},{28,-64},{32,-66},
@@ -5853,7 +5855,7 @@ contrary to a general FIR filter.
                   {62,-72},{64,-76},{64,-78},{64,-80},{64,-82}},
                                                 color={0,0,127}),
         Polygon(points={{90,-82},{68,-74},{68,-90},{90,-82}}, lineColor={192,192,192}, fillColor={192,192,192},
-                fillPattern = FillPattern.Solid),
+                fillPattern=  FillPattern.Solid),
             Text(
               extent={{-26,88},{88,48}},
               lineColor={175,175,175},
@@ -5909,7 +5911,7 @@ a[:] are the filter coefficients.
 </HTML>
 "),     Icon(graphics={
         Polygon(points={{-84,90},{-92,68},{-76,68},{-84,90},{-84,90}}, lineColor={192,192,192}, fillColor={192,192,192},
-                fillPattern =  FillPattern.Solid),
+                fillPattern=   FillPattern.Solid),
          Line(points={{-84,78},{-84,-90}}, color={192,192,192}),
         Line(points={{-84,30},{-72,30},{-52,28},{-32,20},{-26,16},{-22,12},{-18,6},{
                   -14,-4},{-4,-46},{0,-64},{2,-82}},
@@ -5925,7 +5927,7 @@ a[:] are the filter coefficients.
                   {62,-72},{64,-76},{64,-78},{64,-80},{64,-82}},
                                                 color={0,0,127}),
         Polygon(points={{90,-82},{68,-74},{68,-90},{90,-82}}, lineColor={192,192,192}, fillColor={192,192,192},
-                fillPattern = FillPattern.Solid),
+                fillPattern=  FillPattern.Solid),
         Line(points={{-90,-82},{82,-82}}, color={192,192,192}),
             Text(
               extent={{-26,86},{88,56}},
@@ -5984,10 +5986,10 @@ a[:] are the filter coefficients.
         graphics={
          Line(points={{-84,78},{-84,-90}}, color={192,192,192}),
         Polygon(points={{-84,90},{-92,68},{-76,68},{-84,90},{-84,90}}, lineColor={192,192,192}, fillColor={192,192,192},
-                fillPattern =  FillPattern.Solid),
+                fillPattern=   FillPattern.Solid),
         Line(points={{-90,-82},{82,-82}}, color={192,192,192}),
         Polygon(points={{90,-82},{68,-74},{68,-90},{90,-82}}, lineColor={192,192,192}, fillColor={192,192,192},
-                fillPattern = FillPattern.Solid),
+                fillPattern=  FillPattern.Solid),
         Line(points=[-84,30; -72,30; -52,28; -32,20; -26,16; -22,12; -18,6; -14,
                   -4; -4,-46; 0,-64; 2,-82], color={0,0,127}),
           Line(points=[2,-82; 4,-64; 8,-56; 12,-56; 16,-60; 18,-66; 20,-82], color={0,0,127}),
@@ -6438,6 +6440,100 @@ package BooleanSignals "Library of clocked blocks for Boolean signals"
 </html>"));
     end AssignClockVectorized;
 
+    block BackSample
+      "Shift clock of input backwards in time (and access the most recent value of the input at this new clock)"
+      parameter Integer backCounter(min=0)=0 "Numerator of shifting formula"
+            annotation(Dialog(group="Shift first clock activation backwards in time for 'shiftCounter/resolution*interval(u)' seconds"));
+      parameter Integer resolution(min=1)=1 "Denominator of shifting formula"
+            annotation(Dialog(group="Shift first clock activation backwards in time for 'shiftCounter/resolution*interval(u)' seconds"));
+      parameter Boolean y_start=false
+        "Value of output y before the first clock tick of the input u";
+
+      Modelica.Blocks.Interfaces.BooleanInput
+                                           u(start=y_start)
+        "Connector of clocked, Boolean input signal"
+        annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
+            rotation=0)));
+      Modelica.Blocks.Interfaces.BooleanOutput
+                                            y
+        "Connector of clocked, Boolean output signal (clock of y is faster als clock of u)"
+        annotation (Placement(transformation(extent={{100,-10},{120,10}},
+            rotation=0)));
+    equation
+      y = backSample(u,backCounter,resolution);
+
+      annotation (
+       defaultComponentName="backSample1",
+       Icon(coordinateSystem(
+            preserveAspectRatio=true,
+            extent={{-100,-100},{100,100}},
+            grid={2,2},
+            initialScale=0.06),
+                         graphics={
+            Rectangle(
+              extent={{-90,84},{88,-94}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),
+                                   Line(points={{20,-50},{60,-50},{60,50}},
+                                     color={255,0,255},
+              pattern=LinePattern.Dot),
+            Text(
+              extent={{-200,175},{200,110}},
+              lineColor={0,0,255},
+              textString="%name"),
+            Text(
+              extent={{-200,-135},{200,-200}},
+              lineColor={0,0,0},
+              textString="%backCounter/%resolution"),
+                                   Line(points={{-80,-50},{-40,-50},{-40,50}},
+                                     color={255,0,255},
+              pattern=LinePattern.Dot),
+            Ellipse(
+              extent={{-90,-40},{-70,-60}},
+              lineColor={255,0,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{-50,60},{-30,40}},
+              lineColor={255,0,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Polygon(
+              points={{-16,0},{4,20},{4,10},{34,10},{34,-10},{4,-10},{4,-20},{-16,0}},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid,
+              lineColor={95,95,95}),
+            Ellipse(
+              extent={{10,-40},{30,-60}},
+              lineColor={255,0,255},
+              fillColor={255,0,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{50,60},{70,40}},
+              lineColor={255,0,255},
+              fillColor={255,0,255},
+              fillPattern=FillPattern.Solid),
+            Text(
+              extent={{-200,-74},{200,-139}},
+              lineColor={0,0,0},
+              textString="y_start=%y_start")}),
+        Window(
+          x=0.37,
+          y=0.09,
+          width=0.52,
+          height=0.68),
+        Diagram(coordinateSystem(
+            preserveAspectRatio=false,
+            extent={{-100,-100},{100,100}},
+            grid={2,2},
+            initialScale=0.06),
+                         graphics),
+        Documentation(info="<html>
+
+</html>"));
+    end BackSample;
+
     block Hold
       "Hold the clocked, Boolean input signal and provide it as continuous-time output signal (zero order hold)"
       parameter Boolean y_start = false
@@ -6655,6 +6751,98 @@ package BooleanSignals "Library of clocked blocks for Boolean signals"
 
 </html>"));
     end SampleVectorizedAndClocked;
+
+    block ShiftSample "Shift (delay) input for some clock ticks"
+      parameter Integer shiftCounter(min=0)=0 "Numerator of shifting formula"
+            annotation(Dialog(group="Shift first clock activation for 'shiftCounter/resolution*interval(u)' seconds"));
+      parameter Integer resolution(min=1)=1
+        "Denominator of shifting formula (ignored if inferShift=true)"
+            annotation(Dialog(group="Shift first clock activation for 'shiftCounter/resolution*interval(u)' seconds"));
+
+      Modelica.Blocks.Interfaces.BooleanInput
+                                           u
+        "Connector of clocked, Boolean input signal"
+        annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
+            rotation=0)));
+      Modelica.Blocks.Interfaces.BooleanOutput
+                                            y
+        "Connector of clocked, Boolean output signal (clock of y is faster als clock of u)"
+        annotation (Placement(transformation(extent={{100,-10},{120,10}},
+            rotation=0)));
+    equation
+      y = shiftSample(u,shiftCounter,resolution);
+
+      annotation (
+       defaultComponentName="shiftSample1",
+       Icon(coordinateSystem(
+            preserveAspectRatio=true,
+            extent={{-100,-100},{100,100}},
+            grid={2,2},
+            initialScale=0.06),
+                         graphics={
+            Rectangle(
+              extent={{-94,86},{84,-92}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),
+                                   Line(points={{20,-50},{60,-50},{60,50}},
+                                     color={255,0,255},
+              pattern=LinePattern.Dot),
+            Text(
+              extent={{-200,175},{200,110}},
+              lineColor={0,0,255},
+              textString="%name"),
+            Text(
+              extent={{-200,-85},{200,-150}},
+              lineColor={0,0,0},
+              textString="%shiftCounter/%resolution"),
+                                   Line(points={{-80,-50},{-40,-50},{-40,50}},
+                                     color={255,0,255},
+              pattern=LinePattern.Dot),
+            Ellipse(
+              extent={{10,-40},{30,-60}},
+              lineColor={255,0,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{50,60},{70,40}},
+              lineColor={255,0,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Polygon(
+              points={{34,0},{14,20},{14,10},{-16,10},{-16,-10},{14,-10},{14,-20},{34,
+                  0}},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid,
+              lineColor={95,95,95}),
+            Ellipse(
+              extent={{-90,-40},{-70,-60}},
+              lineColor={255,0,255},
+              fillColor={255,0,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{-50,60},{-30,40}},
+              lineColor={255,128,0},
+              fillColor={255,0,255},
+              fillPattern=FillPattern.Solid)}),
+        Window(
+          x=0.37,
+          y=0.09,
+          width=0.52,
+          height=0.68),
+        Diagram(coordinateSystem(
+            preserveAspectRatio=false,
+            extent={{-100,-100},{100,100}},
+            grid={2,2},
+            initialScale=0.06),
+                         graphics),
+        Documentation(info="<html>
+<p><i>The first activation of the clock of y = shiftSample(..) is shifted in time shiftCounter/resolution*interval(u) later than the first activation of the clock of u.</i></p>
+<p>Conceptually, the operator constructs a clock &ldquo;cBase&rdquo; <b>Clock</b> cBase = <b>subSample</b>(<b>superSample</b>(u, resolution), shiftCounter) and the clock of y = <b>shiftSample</b>(..) starts at the second clock tick of cBase. At every tick of the clock of y, the operator returns the value of u from the last tick of the clock of u.</p>
+<p>Note, due to the restriction of <b>superSample</b> on Boolean clocks, <b>shiftSample</b> can only shift the number of ticks of the Boolean clock, but cannot introduce new ticks.</p>
+<p>Also note that the operator does not simply shift the signal in time, since only the value of u from the last tick of the clock of u is available at the output.</p>
+</html>"));
+    end ShiftSample;
 
     block SubSample
       "Sub-sample the clocked Boolean input signal and provide it as clocked output signal"
@@ -6885,97 +7073,6 @@ package BooleanSignals "Library of clocked blocks for Boolean signals"
 </html>"));
     end SuperSample;
 
-    block ShiftSample "Shift (delay) input for some clock ticks"
-      parameter Integer shiftCounter(min=0)=0 "Numerator of shifting formula"
-            annotation(Dialog(group="Shift first clock activation for 'shiftCounter/resolution*interval(u)' seconds"));
-      parameter Integer resolution(min=1)=1
-        "Denominator of shifting formula (ignored if inferShift=true)"
-            annotation(Dialog(group="Shift first clock activation for 'shiftCounter/resolution*interval(u)' seconds"));
-
-      Modelica.Blocks.Interfaces.BooleanInput
-                                           u
-        "Connector of clocked, Boolean input signal"
-        annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
-            rotation=0)));
-      Modelica.Blocks.Interfaces.BooleanOutput
-                                            y
-        "Connector of clocked, Boolean output signal (clock of y is faster als clock of u)"
-        annotation (Placement(transformation(extent={{100,-10},{120,10}},
-            rotation=0)));
-    equation
-      y = shiftSample(u,shiftCounter,resolution);
-
-      annotation (
-       defaultComponentName="shiftSample1",
-       Icon(coordinateSystem(
-            preserveAspectRatio=true,
-            extent={{-100,-100},{100,100}},
-            grid={2,2},
-            initialScale=0.06),
-                         graphics={
-            Rectangle(
-              extent={{-94,86},{84,-92}},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),
-                                   Line(points={{20,-50},{60,-50},{60,50}},
-                                     color={255,0,255},
-              pattern=LinePattern.Dot),
-            Text(
-              extent={{-200,175},{200,110}},
-              lineColor={0,0,255},
-              textString="%name"),
-            Text(
-              extent={{-200,-85},{200,-150}},
-              lineColor={0,0,0},
-              textString="%shiftCounter/%resolution"),
-                                   Line(points={{-80,-50},{-40,-50},{-40,50}},
-                                     color={255,0,255},
-              pattern=LinePattern.Dot),
-            Ellipse(
-              extent={{10,-40},{30,-60}},
-              lineColor={255,0,255},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{50,60},{70,40}},
-              lineColor={255,0,255},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Polygon(
-              points={{34,0},{14,20},{14,10},{-16,10},{-16,-10},{14,-10},{14,-20},{34,
-                  0}},
-              fillColor={95,95,95},
-              fillPattern=FillPattern.Solid,
-              lineColor={95,95,95}),
-            Ellipse(
-              extent={{-90,-40},{-70,-60}},
-              lineColor={255,0,255},
-              fillColor={255,0,255},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{-50,60},{-30,40}},
-              lineColor={255,128,0},
-              fillColor={255,0,255},
-              fillPattern=FillPattern.Solid)}),
-        Window(
-          x=0.37,
-          y=0.09,
-          width=0.52,
-          height=0.68),
-        Diagram(coordinateSystem(
-            preserveAspectRatio=false,
-            extent={{-100,-100},{100,100}},
-            grid={2,2},
-            initialScale=0.06),
-                         graphics),
-        Documentation(info="<html>
-<p><i>The first activation of the clock of y = shiftSample(..) is shifted in time shiftCounter/resolution*interval(u) later than the first activation of the clock of u.</i></p>
-<p>Conceptually, the operator constructs a clock &ldquo;cBase&rdquo; <b>Clock</b> cBase = <b>subSample</b>(<b>superSample</b>(u, resolution), shiftCounter) and the clock of y = <b>shiftSample</b>(..) starts at the second clock tick of cBase. At every tick of the clock of y, the operator returns the value of u from the last tick of the clock of u.</p>
-<p>Note, due to the restriction of <b>superSample</b> on Boolean clocks, <b>shiftSample</b> can only shift the number of ticks of the Boolean clock, but cannot introduce new ticks.</p>
-<p>Also note that the operator does not simply shift the signal in time, since only the value of u from the last tick of the clock of u is available at the output.</p>
-</html>"));
-    end ShiftSample;
 
     package Utilities "Utility components that are usually not directly used"
        extends Modelica.Icons.Package;
@@ -7205,7 +7302,127 @@ at sample times (defined by parameter <b>period</b>) and if input enable = <b>tr
         end ClockedBooleanToBooleanSquareHold;
 
     end Utilities;
+
   end SamplerAndHolds;
+
+  package NonPeriodic
+    "Library of blocks that operate on periodically and non-periodically clocked signals"
+  extends Modelica.Icons.Package;
+
+    block UnitDelay "Delays the clocked input signal for one sample period"
+      extends Modelica_Synchronous.Interfaces.PartialBooleanClockedSISO(u(final start=y_start));
+      parameter Boolean y_start=false
+        "Value of output signal at first clock tick";
+    equation
+      y = previous(u);
+      annotation (defaultComponentName="UnitDelay1",
+           Icon(graphics={
+            Line(points={{-30,0},{30,0}}, color={255,0,255}),
+            Text(
+              extent={{-90,10},{90,90}},
+              textString="1",
+              lineColor={255,0,255},
+              pattern=LinePattern.Dot),
+            Text(
+              extent={{-90,-10},{90,-90}},
+              textString="z",
+              lineColor={255,0,255}),
+            Text(
+              extent={{-150,-140},{150,-100}},
+              lineColor={0,0,0},
+              textString="y_start=%y_start")}),
+        Documentation(info="<html>
+<p>
+This block describes a unit delay:
+</p>
+<pre>
+  // Time domain description
+     y(ti) = previous(u(ti))
+
+  // Discrete transfer function
+             1
+     y(z) = --- * u(z)
+             z
+</pre>
+
+<p>
+that is, the output signal y is the input signal u at the
+previous clock tick. At the first clock tick, the output
+y is set to parameter y_start.
+</p>
+</html>"));
+    end UnitDelay;
+
+    block FractionalDelay
+      "Delays the clocked input signal for a fractional multiple of the sample period"
+    extends Modelica_Synchronous.Interfaces.PartialBooleanClockedSISO;
+
+      parameter Integer shift(min=0) = 0
+        "Delay = interval() * shift/resolution";
+      parameter Integer resolution(min=1) = 1
+        "Time quantization resolution of sample interval";
+    protected
+      parameter Integer n = div(shift,resolution);
+      Boolean u_buffer[n+1](each start=false)
+        "The previous values of the inputs; u_last[1] = u, u_last[2] = previous(u_last[1]); u_last[3] = previous(u_last[2])";
+      Boolean first(start=true) "Used to identify the first clock tick";
+    equation
+     first = false;
+     u_buffer = if previous(first) then fill(u,n+1) else cat(1, {u}, previous(u_buffer[1:n]));
+     y = shiftSample(u_buffer[n+1], shift, resolution);
+
+      annotation (Diagram(coordinateSystem(preserveAspectRatio=true,  extent={{-100,
+                -100},{100,100}}), graphics), DymolaStoredErrors,
+        Icon(graphics={
+            Line(
+              points={{-100,0},{-80,0},{-80,40},{-20,40},{-20,-40},{40,-40},{40,0},{
+                  100,0}},
+              color={215,215,215},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dot),
+            Line(
+              points={{-100,0},{-50,0},{-50,40},{10,40},{10,-40},{70,-40},{70,-0.3125},
+                  {100,0}},
+              pattern=LinePattern.Dot,
+              smooth=Smooth.None,
+              color={255,0,255}),
+            Text(
+              extent={{4,-102},{4,-142}},
+              lineColor={0,0,0},
+              textString="%shift/%resolution"),
+            Ellipse(
+              extent={{-90,50},{-70,30}},
+              lineColor={255,0,255},
+              fillColor={255,0,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{-30,-30},{-10,-50}},
+              lineColor={255,0,255},
+              fillColor={255,0,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{30,10},{50,-10}},
+              lineColor={255,0,255},
+              fillColor={255,0,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{-60,50},{-40,30}},
+              lineColor={255,0,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{0,-30},{20,-50}},
+              lineColor={255,0,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{60,10},{80,-10}},
+              lineColor={255,0,255},
+              fillColor={255,0,255},
+              fillPattern=FillPattern.Solid)}));
+    end FractionalDelay;
+
+  end NonPeriodic;
 end BooleanSignals;
 
 
@@ -7402,6 +7619,100 @@ package IntegerSignals "Library of clocked blocks for Integer signals"
 </html>"));
     end AssignClockVectorized;
 
+    block BackSample
+      "Shift clock of input backwards in time (and access the most recent value of the input at this new clock)"
+      parameter Integer backCounter(min=0)=0 "Numerator of shifting formula"
+            annotation(Dialog(group="Shift first clock activation backwards in time for 'shiftCounter/resolution*interval(u)' seconds"));
+      parameter Integer resolution(min=1)=1 "Denominator of shifting formula"
+            annotation(Dialog(group="Shift first clock activation backwards in time for 'shiftCounter/resolution*interval(u)' seconds"));
+      parameter Integer y_start=0
+        "Value of output y before the first clock tick of the input u";
+
+      Modelica.Blocks.Interfaces.IntegerInput
+                                           u(start=y_start)
+        "Connector of clocked, Integer input signal"
+        annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
+            rotation=0)));
+      Modelica.Blocks.Interfaces.IntegerOutput
+                                            y
+        "Connector of clocked, Integer output signal (clock of y is faster als clock of u)"
+        annotation (Placement(transformation(extent={{100,-10},{120,10}},
+            rotation=0)));
+    equation
+      y = backSample(u,backCounter,resolution);
+
+      annotation (
+       defaultComponentName="backSample1",
+       Icon(coordinateSystem(
+            preserveAspectRatio=true,
+            extent={{-100,-100},{100,100}},
+            grid={2,2},
+            initialScale=0.06),
+                         graphics={
+            Rectangle(
+              extent={{-90,84},{88,-94}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),
+                                   Line(points={{20,-50},{60,-50},{60,50}},
+                                     color={255,128,0},
+              pattern=LinePattern.Dot),
+            Text(
+              extent={{-200,175},{200,110}},
+              lineColor={0,0,255},
+              textString="%name"),
+            Text(
+              extent={{-200,-135},{200,-200}},
+              lineColor={0,0,0},
+              textString="%backCounter/%resolution"),
+                                   Line(points={{-80,-50},{-40,-50},{-40,50}},
+                                     color={255,128,0},
+              pattern=LinePattern.Dot),
+            Ellipse(
+              extent={{-90,-40},{-70,-60}},
+              lineColor={255,128,0},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{-50,60},{-30,40}},
+              lineColor={255,128,0},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Polygon(
+              points={{-16,0},{4,20},{4,10},{34,10},{34,-10},{4,-10},{4,-20},{-16,0}},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid,
+              lineColor={95,95,95}),
+            Ellipse(
+              extent={{10,-40},{30,-60}},
+              lineColor={255,128,0},
+              fillColor={255,128,0},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{50,60},{70,40}},
+              lineColor={255,128,0},
+              fillColor={255,128,0},
+              fillPattern=FillPattern.Solid),
+            Text(
+              extent={{-200,-74},{200,-139}},
+              lineColor={0,0,0},
+              textString="y_start=%y_start")}),
+        Window(
+          x=0.37,
+          y=0.09,
+          width=0.52,
+          height=0.68),
+        Diagram(coordinateSystem(
+            preserveAspectRatio=false,
+            extent={{-100,-100},{100,100}},
+            grid={2,2},
+            initialScale=0.06),
+                         graphics),
+        Documentation(info="<html>
+
+</html>"));
+    end BackSample;
+
     block Hold
       "Hold the clocked, Integer input signal and provide it as continuous-time output signal (zero order hold)"
       extends Modelica_Synchronous.Interfaces.PartialIntegerSISOHold;
@@ -7589,6 +7900,98 @@ package IntegerSignals "Library of clocked blocks for Integer signals"
 
 </html>"));
     end SampleVectorizedAndClocked;
+
+
+    block ShiftSample "Shift (delay) input for some clock ticks"
+      parameter Integer shiftCounter(min=0)=0 "Numerator of shifting formula"
+            annotation(Dialog(group="Shift first clock activation for 'shiftCounter/resolution*interval(u)' seconds"));
+      parameter Integer resolution(min=1)=1 "Denominator of shifting formula"
+            annotation(Dialog(group="Shift first clock activation for 'shiftCounter/resolution*interval(u)' seconds"));
+
+      Modelica.Blocks.Interfaces.IntegerInput
+                                           u
+        "Connector of clocked, Integer input signal"
+        annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
+            rotation=0)));
+      Modelica.Blocks.Interfaces.IntegerOutput
+                                            y
+        "Connector of clocked, Integer output signal"
+        annotation (Placement(transformation(extent={{100,-10},{120,10}},
+            rotation=0)));
+    equation
+      y = shiftSample(u,shiftCounter,resolution);
+
+      annotation (
+       defaultComponentName="shiftSample1",
+       Icon(coordinateSystem(
+            preserveAspectRatio=true,
+            extent={{-100,-100},{100,100}},
+            grid={2,2},
+            initialScale=0.06),
+                         graphics={
+            Rectangle(
+              extent={{-94,86},{84,-92}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),
+                                   Line(points={{20,-50},{60,-50},{60,50}},
+                                     color={255,128,0},
+              pattern=LinePattern.Dot),
+            Text(
+              extent={{-200,175},{200,110}},
+              lineColor={0,0,255},
+              textString="%name"),
+            Text(
+              extent={{-200,-85},{200,-150}},
+              lineColor={0,0,0},
+              textString="%shiftCounter/%resolution"),
+                                   Line(points={{-80,-50},{-40,-50},{-40,50}},
+                                     color={255,128,0},
+              pattern=LinePattern.Dot),
+            Ellipse(
+              extent={{10,-40},{30,-60}},
+              lineColor={255,128,0},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{50,60},{70,40}},
+              lineColor={255,128,0},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Polygon(
+              points={{34,0},{14,20},{14,10},{-16,10},{-16,-10},{14,-10},{14,-20},{34,
+                  0}},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid,
+              lineColor={95,95,95}),
+            Ellipse(
+              extent={{-90,-40},{-70,-60}},
+              lineColor={255,128,0},
+              fillColor={255,128,0},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{-50,60},{-30,40}},
+              lineColor={255,128,0},
+              fillColor={255,128,0},
+              fillPattern=FillPattern.Solid)}),
+        Window(
+          x=0.37,
+          y=0.09,
+          width=0.52,
+          height=0.68),
+        Diagram(coordinateSystem(
+            preserveAspectRatio=false,
+            extent={{-100,-100},{100,100}},
+            grid={2,2},
+            initialScale=0.06),
+                         graphics),
+        Documentation(info="<html>
+<p><i>The first activation of the clock of y = shiftSample(..) is shifted in time shiftCounter/resolution*interval(u) later than the first activation of the clock of u.</i></p>
+<p>Conceptually, the operator constructs a clock &ldquo;cBase&rdquo; <b>Clock</b> cBase = <b>subSample</b>(<b>superSample</b>(u, resolution), shiftCounter) and the clock of y = <b>shiftSample</b>(..) starts at the second clock tick of cBase. At every tick of the clock of y, the operator returns the value of u from the last tick of the clock of u.</p>
+<p>Note, due to the restriction of <b>superSample</b> on Boolean clocks, <b>shiftSample</b> can only shift the number of ticks of the Boolean clock, but cannot introduce new ticks.</p>
+<p>Also note that the operator does not simply shift the signal in time, since only the value of u from the last tick of the clock of u is available at the output.</p>
+</html>"));
+    end ShiftSample;
 
     block SubSample
       "Sub-sample the clocked Integer input signal and provide it as clocked output signal"
@@ -7819,96 +8222,6 @@ package IntegerSignals "Library of clocked blocks for Integer signals"
 </html>"));
     end SuperSample;
 
-    block ShiftSample "Shift (delay) input for some clock ticks"
-      parameter Integer shiftCounter(min=0)=0 "Numerator of shifting formula"
-            annotation(Dialog(group="Shift first clock activation for 'shiftCounter/resolution*interval(u)' seconds"));
-      parameter Integer resolution(min=1)=1 "Denominator of shifting formula"
-            annotation(Dialog(group="Shift first clock activation for 'shiftCounter/resolution*interval(u)' seconds"));
-
-      Modelica.Blocks.Interfaces.IntegerInput
-                                           u
-        "Connector of clocked, Integer input signal"
-        annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
-            rotation=0)));
-      Modelica.Blocks.Interfaces.IntegerOutput
-                                            y
-        "Connector of clocked, Integer output signal"
-        annotation (Placement(transformation(extent={{100,-10},{120,10}},
-            rotation=0)));
-    equation
-      y = shiftSample(u,shiftCounter,resolution);
-
-      annotation (
-       defaultComponentName="shiftSample1",
-       Icon(coordinateSystem(
-            preserveAspectRatio=true,
-            extent={{-100,-100},{100,100}},
-            grid={2,2},
-            initialScale=0.06),
-                         graphics={
-            Rectangle(
-              extent={{-94,86},{84,-92}},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),
-                                   Line(points={{20,-50},{60,-50},{60,50}},
-                                     color={255,128,0},
-              pattern=LinePattern.Dot),
-            Text(
-              extent={{-200,175},{200,110}},
-              lineColor={0,0,255},
-              textString="%name"),
-            Text(
-              extent={{-200,-85},{200,-150}},
-              lineColor={0,0,0},
-              textString="%shiftCounter/%resolution"),
-                                   Line(points={{-80,-50},{-40,-50},{-40,50}},
-                                     color={255,128,0},
-              pattern=LinePattern.Dot),
-            Ellipse(
-              extent={{10,-40},{30,-60}},
-              lineColor={255,128,0},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{50,60},{70,40}},
-              lineColor={255,128,0},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Polygon(
-              points={{34,0},{14,20},{14,10},{-16,10},{-16,-10},{14,-10},{14,-20},{34,
-                  0}},
-              fillColor={95,95,95},
-              fillPattern=FillPattern.Solid,
-              lineColor={95,95,95}),
-            Ellipse(
-              extent={{-90,-40},{-70,-60}},
-              lineColor={255,128,0},
-              fillColor={255,128,0},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{-50,60},{-30,40}},
-              lineColor={255,128,0},
-              fillColor={255,128,0},
-              fillPattern=FillPattern.Solid)}),
-        Window(
-          x=0.37,
-          y=0.09,
-          width=0.52,
-          height=0.68),
-        Diagram(coordinateSystem(
-            preserveAspectRatio=false,
-            extent={{-100,-100},{100,100}},
-            grid={2,2},
-            initialScale=0.06),
-                         graphics),
-        Documentation(info="<html>
-<p><i>The first activation of the clock of y = shiftSample(..) is shifted in time shiftCounter/resolution*interval(u) later than the first activation of the clock of u.</i></p>
-<p>Conceptually, the operator constructs a clock &ldquo;cBase&rdquo; <b>Clock</b> cBase = <b>subSample</b>(<b>superSample</b>(u, resolution), shiftCounter) and the clock of y = <b>shiftSample</b>(..) starts at the second clock tick of cBase. At every tick of the clock of y, the operator returns the value of u from the last tick of the clock of u.</p>
-<p>Note, due to the restriction of <b>superSample</b> on Boolean clocks, <b>shiftSample</b> can only shift the number of ticks of the Boolean clock, but cannot introduce new ticks.</p>
-<p>Also note that the operator does not simply shift the signal in time, since only the value of u from the last tick of the clock of u is available at the output.</p>
-</html>"));
-    end ShiftSample;
 
     package Utilities "Utility components that are usually not directly used"
        extends Modelica.Icons.Package;
@@ -8139,6 +8452,123 @@ at sample times (defined by parameter <b>period</b>) and if input enable = <b>tr
 
     end Utilities;
   end SamplerAndHolds;
+
+  package NonPeriodic
+    "Library of blocks that operate on periodically and non-periodically clocked signals"
+  extends Modelica.Icons.Package;
+
+    block UnitDelay "Delays the clocked input signal for one sample period"
+      extends Modelica_Synchronous.Interfaces.PartialIntegerClockedSISO(u(final start=y_start));
+      parameter Integer y_start=0 "Value of output signal at first clock tick";
+    equation
+      y = previous(u);
+      annotation (defaultComponentName="UnitDelay1",
+           Icon(graphics={
+            Line(points={{-30,0},{30,0}}, color={255,128,0}),
+            Text(
+              extent={{-90,10},{90,90}},
+              textString="1",
+              lineColor={255,128,0}),
+            Text(
+              extent={{-90,-10},{90,-90}},
+              textString="z",
+              lineColor={255,128,0}),
+            Text(
+              extent={{-150,-140},{150,-100}},
+              lineColor={0,0,0},
+              textString="y_start=%y_start")}),
+        Documentation(info="<html>
+<p>
+This block describes a unit delay:
+</p>
+<pre>
+  // Time domain description
+     y(ti) = previous(u(ti))
+
+  // Discrete transfer function
+             1
+     y(z) = --- * u(z)
+             z
+</pre>
+
+<p>
+that is, the output signal y is the input signal u at the
+previous clock tick. At the first clock tick, the output
+y is set to parameter y_start.
+</p>
+</html>"));
+    end UnitDelay;
+
+    block FractionalDelay
+      "Delays the clocked input signal for a fractional multiple of the sample period"
+    extends Modelica_Synchronous.Interfaces.PartialIntegerClockedSISO;
+
+      parameter Integer shift(min=0) = 0
+        "Delay = interval() * shift/resolution";
+      parameter Integer resolution(min=1) = 1
+        "Time quantization resolution of sample interval";
+    protected
+      parameter Integer n = div(shift,resolution);
+      Integer u_buffer[n+1](each start=0)
+        "The previous values of the inputs; u_last[1] = u, u_last[2] = previous(u_last[1]); u_last[3] = previous(u_last[2])";
+      Boolean first(start=true) "Used to identify the first clock tick";
+    equation
+     first = false;
+     u_buffer = if previous(first) then fill(u,n+1) else cat(1, {u}, previous(u_buffer[1:n]));
+     y = shiftSample(u_buffer[n+1], shift, resolution);
+
+      annotation (Diagram(coordinateSystem(preserveAspectRatio=true,  extent={{-100,
+                -100},{100,100}}), graphics), DymolaStoredErrors,
+        Icon(graphics={
+            Line(
+              points={{-100,0},{-80,0},{-80,40},{-20,40},{-20,-40},{40,-40},{40,0},{
+                  100,0}},
+              color={215,215,215},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dot),
+            Line(
+              points={{-100,0},{-50,0},{-50,40},{10,40},{10,-40},{70,-40},{70,-0.3125},
+                  {100,0}},
+              pattern=LinePattern.Dot,
+              smooth=Smooth.None,
+              color={255,128,0}),
+            Text(
+              extent={{4,-102},{4,-142}},
+              lineColor={0,0,0},
+              textString="%shift/%resolution"),
+            Ellipse(
+              extent={{-90,50},{-70,30}},
+              lineColor={255,128,0},
+              fillColor={255,128,0},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{-30,-30},{-10,-50}},
+              lineColor={255,128,0},
+              fillColor={255,128,0},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{30,10},{50,-10}},
+              lineColor={255,128,0},
+              fillColor={255,128,0},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{-60,50},{-40,30}},
+              lineColor={255,128,0},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{0,-30},{20,-50}},
+              lineColor={255,128,0},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{60,10},{80,-10}},
+              lineColor={255,128,0},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid)}));
+    end FractionalDelay;
+
+  end NonPeriodic;
 end IntegerSignals;
 
 
