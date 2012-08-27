@@ -3482,14 +3482,10 @@ package ClockSignals "Library of blocks for clocked signals"
   end SuperSample;
 
   block ShiftSample "Shift (delay) clock for some clock ticks"
-    parameter Boolean inferShift=false "= true, if input shift is inferred"
-                                            annotation(Evaluate=true, choices(__Dymola_checkBox=true));
-    parameter Integer shiftCounter(min=0)=0
-      "Numerator of shifting formula (ignored if inferShift=true)"
-          annotation(Dialog(enable=not inferShift, group="Shift first clock activation for 'shiftCounter/resolution*interval(u)' seconds"));
-    parameter Integer resolution(min=1)=1
-      "Denominator of shifting formula (ignored if inferShift=true)"
-          annotation(Dialog(enable=not inferShift, group="Shift first clock activation for 'shiftCounter/resolution*interval(u)' seconds"));
+    parameter Integer shiftCounter(min=0)=0 "Numerator of shifting formula"
+          annotation(Dialog(group="Shift first clock activation for 'shiftCounter/resolution*interval(u)' seconds"));
+    parameter Integer resolution(min=1)=1 "Denominator of shifting formula"
+          annotation(Dialog(group="Shift first clock activation for 'shiftCounter/resolution*interval(u)' seconds"));
 
     Interfaces.ClockInput                u "Connector of clock input signal"
       annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
@@ -3498,11 +3494,8 @@ package ClockSignals "Library of blocks for clocked signals"
       annotation (Placement(transformation(extent={{100,-10},{120,10}},
           rotation=0)));
   equation
-    if inferShift then
-       y = shiftSample(u);
-    else
-       y = shiftSample(u,shiftCounter,resolution);
-    end if;
+    y = shiftSample(u,shiftCounter,resolution);
+
     annotation (
      defaultComponentName="shiftSample1",
      Icon(coordinateSystem(
@@ -3523,7 +3516,7 @@ package ClockSignals "Library of blocks for clocked signals"
             extent={{-200,175},{200,110}},
             lineColor={0,0,255},
             textString="%name"),
-          Text(visible=not inferShift,
+          Text(
             extent={{-200,-85},{200,-150}},
             lineColor={0,0,0},
             textString="%shiftCounter/%resolution"),
@@ -4625,14 +4618,11 @@ package RealSignals "Library of clocked blocks for Real signals"
     end SuperSampleInterpolated;
 
     block ShiftSample "Shift (delay) input for some clock ticks"
-      parameter Boolean inferShift=false "= true, if input shift is inferred"
-                                              annotation(Evaluate=true, choices(__Dymola_checkBox=true));
-      parameter Integer shiftCounter(min=0)=0
-        "Numerator of shifting formula (ignored if inferShift=true)"
-            annotation(Dialog(enable=not inferShift, group="Shift first clock activation for 'shiftCounter/resolution*interval(u)' seconds"));
-      parameter Integer resolution(min=1)=1
-        "Denominator of shifting formula (ignored if inferShift=true)"
-            annotation(Dialog(enable=not inferShift, group="Shift first clock activation for 'shiftCounter/resolution*interval(u)' seconds"));
+
+      parameter Integer shiftCounter(min=0)=0 "Numerator of shifting formula"
+            annotation(Dialog(group="Shift first clock activation for 'shiftCounter/resolution*interval(u)' seconds"));
+      parameter Integer resolution(min=1)=1 "Denominator of shifting formula"
+            annotation(Dialog(group="Shift first clock activation for 'shiftCounter/resolution*interval(u)' seconds"));
 
       Modelica.Blocks.Interfaces.RealInput u
         "Connector of clocked, Real input signal"
@@ -4643,11 +4633,7 @@ package RealSignals "Library of clocked blocks for Real signals"
         annotation (Placement(transformation(extent={{100,-10},{120,10}},
             rotation=0)));
     equation
-      if inferShift then
-         y = shiftSample(u);
-      else
          y = shiftSample(u,shiftCounter,resolution);
-      end if;
       annotation (
        defaultComponentName="shiftSample1",
        Icon(coordinateSystem(
@@ -4668,7 +4654,7 @@ package RealSignals "Library of clocked blocks for Real signals"
               extent={{-200,175},{200,110}},
               lineColor={0,0,255},
               textString="%name"),
-            Text(visible=not inferShift,
+            Text(
               extent={{-200,-85},{200,-150}},
               lineColor={0,0,0},
               textString="%shiftCounter/%resolution"),
@@ -4722,15 +4708,10 @@ package RealSignals "Library of clocked blocks for Real signals"
 
     block BackSample
       "Shift clock of input backwards in time (and access the most recent value of the input at this new clock)"
-      parameter Boolean inferBackShift=false
-        "= true, if input back shift is inferred"
-                                              annotation(Evaluate=true, choices(__Dymola_checkBox=true));
-      parameter Integer backCounter(min=0)=0
-        "Numerator of shifting formula (ignored if inferBackShift=true)"
-            annotation(Dialog(enable = not inferBackShift, group="Shift first clock activation backwards in time for 'shiftCounter/resolution*interval(u)' seconds"));
-      parameter Integer resolution(min=1)=1
-        "Denominator of shifting formula (ignored if inferBackShift=true)"
-            annotation(Dialog(enable = not inferBackShift, group="Shift first clock activation backwards in time for 'shiftCounter/resolution*interval(u)' seconds"));
+      parameter Integer backCounter(min=0)=0 "Numerator of shifting formula"
+            annotation(Dialog(group="Shift first clock activation backwards in time for 'shiftCounter/resolution*interval(u)' seconds"));
+      parameter Integer resolution(min=1)=1 "Denominator of shifting formula"
+            annotation(Dialog(group="Shift first clock activation backwards in time for 'shiftCounter/resolution*interval(u)' seconds"));
       parameter Real y_start=0
         "Value of output y before the first clock tick of the input u";
 
@@ -4743,11 +4724,7 @@ package RealSignals "Library of clocked blocks for Real signals"
         annotation (Placement(transformation(extent={{100,-10},{120,10}},
             rotation=0)));
     equation
-      if inferBackShift then
-         y = backSample(u);
-      else
-         y = backSample(u,backCounter,resolution);
-      end if;
+      y = backSample(u,backCounter,resolution);
 
       annotation (
        defaultComponentName="backSample1",
@@ -4770,7 +4747,6 @@ package RealSignals "Library of clocked blocks for Real signals"
               lineColor={0,0,255},
               textString="%name"),
             Text(
-              visible=not inferBackShift,
               extent={{-200,-135},{200,-200}},
               lineColor={0,0,0},
               textString="%backCounter/%resolution"),
@@ -6910,14 +6886,11 @@ package BooleanSignals "Library of clocked blocks for Boolean signals"
     end SuperSample;
 
     block ShiftSample "Shift (delay) input for some clock ticks"
-      parameter Boolean inferShift=false "= true, if input shift is inferred"
-                                              annotation(Evaluate=true, choices(__Dymola_checkBox=true));
-      parameter Integer shiftCounter(min=0)=0
-        "Numerator of shifting formula (ignored if inferShift=true)"
-            annotation(Dialog(enable=not inferShift, group="Shift first clock activation for 'shiftCounter/resolution*interval(u)' seconds"));
+      parameter Integer shiftCounter(min=0)=0 "Numerator of shifting formula"
+            annotation(Dialog(group="Shift first clock activation for 'shiftCounter/resolution*interval(u)' seconds"));
       parameter Integer resolution(min=1)=1
         "Denominator of shifting formula (ignored if inferShift=true)"
-            annotation(Dialog(enable=not inferShift, group="Shift first clock activation for 'shiftCounter/resolution*interval(u)' seconds"));
+            annotation(Dialog(group="Shift first clock activation for 'shiftCounter/resolution*interval(u)' seconds"));
 
       Modelica.Blocks.Interfaces.BooleanInput
                                            u
@@ -6930,11 +6903,8 @@ package BooleanSignals "Library of clocked blocks for Boolean signals"
         annotation (Placement(transformation(extent={{100,-10},{120,10}},
             rotation=0)));
     equation
-      if inferShift then
-         y = shiftSample(u);
-      else
-         y = shiftSample(u,shiftCounter,resolution);
-      end if;
+      y = shiftSample(u,shiftCounter,resolution);
+
       annotation (
        defaultComponentName="shiftSample1",
        Icon(coordinateSystem(
@@ -6955,7 +6925,7 @@ package BooleanSignals "Library of clocked blocks for Boolean signals"
               extent={{-200,175},{200,110}},
               lineColor={0,0,255},
               textString="%name"),
-            Text(visible=not inferShift,
+            Text(
               extent={{-200,-85},{200,-150}},
               lineColor={0,0,0},
               textString="%shiftCounter/%resolution"),
@@ -7850,14 +7820,10 @@ package IntegerSignals "Library of clocked blocks for Integer signals"
     end SuperSample;
 
     block ShiftSample "Shift (delay) input for some clock ticks"
-      parameter Boolean inferShift=false "= true, if input shift is inferred"
-                                              annotation(Evaluate=true, choices(__Dymola_checkBox=true));
-      parameter Integer shiftCounter(min=0)=0
-        "Numerator of shifting formula (ignored if inferShift=true)"
-            annotation(Dialog(enable=not inferShift, group="Shift first clock activation for 'shiftCounter/resolution*interval(u)' seconds"));
-      parameter Integer resolution(min=1)=1
-        "Denominator of shifting formula (ignored if inferShift=true)"
-            annotation(Dialog(enable=not inferShift, group="Shift first clock activation for 'shiftCounter/resolution*interval(u)' seconds"));
+      parameter Integer shiftCounter(min=0)=0 "Numerator of shifting formula"
+            annotation(Dialog(group="Shift first clock activation for 'shiftCounter/resolution*interval(u)' seconds"));
+      parameter Integer resolution(min=1)=1 "Denominator of shifting formula"
+            annotation(Dialog(group="Shift first clock activation for 'shiftCounter/resolution*interval(u)' seconds"));
 
       Modelica.Blocks.Interfaces.IntegerInput
                                            u
@@ -7870,11 +7836,8 @@ package IntegerSignals "Library of clocked blocks for Integer signals"
         annotation (Placement(transformation(extent={{100,-10},{120,10}},
             rotation=0)));
     equation
-      if inferShift then
-         y = shiftSample(u);
-      else
-         y = shiftSample(u,shiftCounter,resolution);
-      end if;
+      y = shiftSample(u,shiftCounter,resolution);
+
       annotation (
        defaultComponentName="shiftSample1",
        Icon(coordinateSystem(
@@ -7895,7 +7858,7 @@ package IntegerSignals "Library of clocked blocks for Integer signals"
               extent={{-200,175},{200,110}},
               lineColor={0,0,255},
               textString="%name"),
-            Text(visible=not inferShift,
+            Text(
               extent={{-200,-85},{200,-150}},
               lineColor={0,0,0},
               textString="%shiftCounter/%resolution"),
