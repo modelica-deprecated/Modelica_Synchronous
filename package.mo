@@ -688,7 +688,7 @@ the library and has the following content:
 <li><a href=\"modelica://Modelica_Synchronous.UsersGuide.ModelicaLicense2\">Modelica License 2</a>
     is the legal license text under which this library is submitted.</li>
 <li><a href=\"modelica://Modelica_Synchronous.UsersGuide.Requirements\">Requirements</a>
-    scetches the requirements on a Modelica tool, in order that this library
+    sketches the requirements on a Modelica tool, in order that this library
     can be utilized.</li>
 <li><a href=\"modelica://Modelica_Synchronous.UsersGuide.Contact\">Contact</a>
     provides information about the authors of the library as well as
