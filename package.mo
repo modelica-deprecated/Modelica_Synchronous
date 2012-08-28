@@ -171,9 +171,9 @@ provided free of charge and the use is completely at your own risk.
 
  <li>
  &ldquo;Modelica package&rdquo; means any Modelica library that is
- defined with the<br>&ldquo;<FONT FACE=\"Courier New, monospace\"><FONT SIZE=2 STYLE=\"font-size: 9pt\"><b>package</b></FONT></FONT><FONT FACE=\"Courier New, monospace\"><FONT SIZE=2 STYLE=\"font-size: 9pt\">
- &lt;Name&gt; ... </FONT></FONT><FONT FACE=\"Courier New, monospace\"><FONT SIZE=2 STYLE=\"font-size: 9pt\"><b>end</b></FONT></FONT><FONT FACE=\"Courier New, monospace\"><FONT SIZE=2 STYLE=\"font-size: 9pt\">
- &lt;Name&gt;;</FONT></FONT>&ldquo; Modelica language element.</li>
+ defined with the<br>&ldquo;<font face=\"Courier New, monospace\"><font size=2 style=\"font-size: 9pt\"><b>package</b></font></font><font face=\"Courier New, monospace\"><font size=2 style=\"font-size: 9pt\">
+ &lt;Name&gt; ... </font></font><font face=\"Courier New, monospace\"><font size=2 style=\"font-size: 9pt\"><b>end</b></font></font><font face=\"Courier New, monospace\"><font size=2 style=\"font-size: 9pt\">
+ &lt;Name&gt;;</font></font>&ldquo; Modelica language element.</li>
 </ol>
 
 <p>
@@ -390,9 +390,9 @@ license shall prevail.</p>
 <p><br>
 </p>
 
-<p><FONT COLOR=\"#008000\"><FONT SIZE=3><b>Using
-or Distributing a Modelica </b></FONT></FONT><FONT COLOR=\"#008000\"><FONT SIZE=3><u><b>Package</b></u></FONT></FONT><FONT COLOR=\"#008000\"><FONT SIZE=3><b>
-under the Modelica License 2</b></FONT></FONT></p>
+<p><font color=\"#008000\"><font size=3><b>Using
+or Distributing a Modelica </b></font></font><font color=\"#008000\"><font size=3><u><b>Package</b></u></font></font><font color=\"#008000\"><font size=3><b>
+under the Modelica License 2</b></font></font></p>
 
 <p><b>What are the main
 differences to the previous version of the Modelica License?</b></p>
@@ -416,8 +416,8 @@ differences to the previous version of the Modelica License?</b></p>
  <li><p>
  Modelica License 1 states that &ldquo;It is not allowed to charge a
  fee for the original version or a modified version of the software,
- besides a reasonable fee for distribution and support<SPAN LANG=\"en-GB\">&ldquo;.
- Version 2 has a </SPAN>similar intention for all Original Work under
+ besides a reasonable fee for distribution and support<span lang=\"en-GB\">&ldquo;.
+ Version 2 has a </span>similar intention for all Original Work under
  <u>Modelica License 2</u> (to remain free of charge and open source)
  but states this more clearly as &ldquo;No fee, neither as a
  copyright-license fee, nor as a selling fee for the copy as such may
@@ -563,9 +563,9 @@ version for such purposes.
 
 <p><br>
 </p>
-<p><FONT COLOR=\"#008000\"><FONT SIZE=3><b>Using
-or Distributing a Modelica </b></FONT></FONT><FONT COLOR=\"#008000\"><FONT SIZE=3><u><b>Document</b></u></FONT></FONT><FONT COLOR=\"#008000\"><FONT SIZE=3><b>
-under the Modelica License 2</b></FONT></FONT></p>
+<p><font color=\"#008000\"><font size=3><b>Using
+or Distributing a Modelica </b></font></font><font color=\"#008000\"><font size=3><u><b>Document</b></u></font></font><font color=\"#008000\"><font size=3><b>
+under the Modelica License 2</b></font></font></p>
 
 <p>This
 section is devoted especially for the following applications:</p>
@@ -655,7 +655,7 @@ able to support this library.
     Postfach 1116<br>
     D-82230 Wessling<br>
     Germany<br>
-    email: <A HREF=mailto:Martin.Otter@dlr.de>Martin.Otter@dlr.de</A> or <A HREF=mailto:Bernhard.Thiele@dlr.de>Bernhard.Thiele@dlr.de</A><br></dd>
+    email: <a href=\"mailto:Martin.Otter@dlr.de\">Martin.Otter@dlr.de</A> or <a href=\"mailto:Bernhard.Thiele@dlr.de\">Bernhard.Thiele@dlr.de</A><br></dd>
 </dl>
 <p><b>Acknowledgements:</b></p>
 <ul>
