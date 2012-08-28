@@ -2,9 +2,9 @@ within ;
 package Modelica_Synchronous "Library of basic synchronous input/output control blocks
 that are triggered by clocks"
   package UsersGuide "User's Guide"
-
+    extends Modelica.Icons.Information;
     class GettingStarted "Getting started"
-
+      extends Modelica.Icons.Information;
       annotation (Documentation(info="<html>
 <p>
 In this section, a first introduction to the Modelica_Synchronous
@@ -18,7 +18,7 @@ library is given at hand of several examples.
     end GettingStarted;
 
     class Literature "Literature"
-
+      extends Modelica.Icons.Information;
       annotation (Documentation(info="<html>
 <p>
 This library is based on the following references:
@@ -53,9 +53,9 @@ This library is based on the following references:
     end Literature;
 
     package ReleaseNotes "Release notes"
-
+      extends Modelica.Icons.Information;
       class Version_0_9 "Version 0.9 (Aug. 28, 2012)"
-
+        extends Modelica.Icons.Information;
         annotation (Documentation(info="<html>
 <p>
 First public version of the library.
@@ -74,7 +74,7 @@ on the Modelica_Synchronous library.
     end ReleaseNotes;
 
   class ModelicaLicense2 "Modelica License 2"
-
+    extends Modelica.Icons.Information;
     annotation (Documentation(info="<html>
 <p>All files in this directory (Modelica_Synchronous) and in all
 subdirectories, especially all files that build package \"Modelica_Synchronous\"
@@ -628,7 +628,7 @@ printing and shipping costs may be recovered.</p>
   end ModelicaLicense2;
 
     class Requirements "Requirements"
-
+      extends Modelica.Icons.Information;
       annotation (Documentation(info="<html>
 <p>
 This library is basically a graphical user interface to conveniently
@@ -644,7 +644,7 @@ able to support this library.
     end Requirements;
 
     class Contact "Contact"
-
+      extends Modelica.Icons.Information;
       annotation (Documentation(info="<html>
 <dl>
 <dt><b>Main Authors:</b></dt>
@@ -710,6 +710,7 @@ extends Modelica.Icons.Package;
     package Effects "Examples demonstrating specific effects"
         extends Modelica.Icons.ExamplesPackage;
       block SuperSampling "Different ways to super sample a signal"
+      extends Modelica.Icons.Example;
         parameter Integer factor=4 "Super sampling factor";
 
         Modelica.Blocks.Sources.Sine sine(freqHz=2,
@@ -2061,7 +2062,7 @@ extends Modelica.Icons.Package;
 
       model ControlledMixingUnit
          extends Modelica.Icons.Example;
-        import SI = Modelica.SIunits;
+      import SI = Modelica.SIunits;
 
         parameter SI.Frequency freq = 1/300 "Critical frequency of filter";
         parameter Real c0(unit="mol/l") = 0.848 "Nominal concentration";
@@ -2987,7 +2988,7 @@ initial equation
 
           model MixingUnitWithContinuousControl
              extends Modelica.Icons.Example;
-            import SI = Modelica.SIunits;
+          import SI = Modelica.SIunits;
 
             parameter SI.Frequency freq = 1/300 "Critical frequency of filter";
             parameter Real c0(unit="mol/l") = 0.848 "Nominal concentration";
@@ -5785,7 +5786,6 @@ form of a PI controller by using the implicit Euler discretization formula.
 </html>"));
     end PI;
 
-
     block MovingAverage
       "Moving average filter (= FIR filter with coefficients a = fill(1/n,n), but implemented recursively)"
       extends Modelica_Synchronous.Interfaces.PartialRealClockedSISO;
@@ -5910,7 +5910,7 @@ a[:] are the filter coefficients.
 </HTML>
 "),     Icon(graphics={
         Polygon(points={{-84,90},{-92,68},{-76,68},{-84,90},{-84,90}}, lineColor={192,192,192}, fillColor={192,192,192},
-                fillPattern =  FillPattern.Solid),
+                fillPattern=   FillPattern.Solid),
          Line(points={{-84,78},{-84,-90}}, color={192,192,192}),
         Line(points={{-84,30},{-72,30},{-52,28},{-32,20},{-26,16},{-22,12},{-18,6},{
                   -14,-4},{-4,-46},{0,-64},{2,-82}},
@@ -5926,7 +5926,7 @@ a[:] are the filter coefficients.
                   {62,-72},{64,-76},{64,-78},{64,-80},{64,-82}},
                                                 color={0,0,127}),
         Polygon(points={{90,-82},{68,-74},{68,-90},{90,-82}}, lineColor={192,192,192}, fillColor={192,192,192},
-                fillPattern = FillPattern.Solid),
+                fillPattern=  FillPattern.Solid),
         Line(points={{-90,-82},{82,-82}}, color={192,192,192}),
             Text(
               extent={{-26,86},{88,56}},
@@ -5985,10 +5985,10 @@ a[:] are the filter coefficients.
         graphics={
          Line(points={{-84,78},{-84,-90}}, color={192,192,192}),
         Polygon(points={{-84,90},{-92,68},{-76,68},{-84,90},{-84,90}}, lineColor={192,192,192}, fillColor={192,192,192},
-                fillPattern =  FillPattern.Solid),
+                fillPattern=   FillPattern.Solid),
         Line(points={{-90,-82},{82,-82}}, color={192,192,192}),
         Polygon(points={{90,-82},{68,-74},{68,-90},{90,-82}}, lineColor={192,192,192}, fillColor={192,192,192},
-                fillPattern = FillPattern.Solid),
+                fillPattern=  FillPattern.Solid),
         Line(points=[-84,30; -72,30; -52,28; -32,20; -26,16; -22,12; -18,6; -14,
                   -4; -4,-46; 0,-64; 2,-82], color={0,0,127}),
           Line(points=[2,-82; 4,-64; 8,-56; 12,-56; 16,-60; 18,-66; 20,-82], color={0,0,127}),
@@ -9218,7 +9218,7 @@ Connector with one output signal of type Boolean.
 
   annotation (preferredView="info",
   uses(Modelica(version="3.2"), Modelica_LinearSystems2(version="2.2")),
-    version="1.0",
+    version="0.9",
     versionBuild=0,
     versionDate="2012-08-28",
     dateModified = "2012-08-28 09:27:58Z",
@@ -9247,9 +9247,9 @@ rate is defined at one location with a clock:
 For an introduction, have especially a look at:
 </p>
 <ul>
-<li> <a href=\"modelica://Modelica_Synchronous.GettingStarted\">Getting started</a>
+<li> <a href=\"modelica://Modelica_Synchronous.UsersGuide.GettingStarted\">Getting started</a>
      provides an overview of the Library
-     inside the <a href=\"modelica://Modelica_Synchronous.UsersGuide\">Users Guide</a>.</li>
+     inside the <a href=\"modelica://Modelica_Synchronous.UsersGuide\">User's Guide</a>.</li>
 <li><a href=\"modelica://Modelica_Synchronous.UsersGuide.ReleaseNotes\">Release Notes</a>
     summarizes the changes of new versions of this package.</li>
 <li> <a href=\"modelica://Modelica_Synchronous.UsersGuide.Contact\">Contact</a>
