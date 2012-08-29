@@ -5913,7 +5913,7 @@ a[:] are the filter coefficients.
 </HTML>
 "),     Icon(graphics={
         Polygon(points={{-84,90},{-92,68},{-76,68},{-84,90},{-84,90}}, lineColor={192,192,192}, fillColor={192,192,192},
-                fillPattern=   FillPattern.Solid),
+                fillPattern =  FillPattern.Solid),
          Line(points={{-84,78},{-84,-90}}, color={192,192,192}),
         Line(points={{-84,30},{-72,30},{-52,28},{-32,20},{-26,16},{-22,12},{-18,6},{
                   -14,-4},{-4,-46},{0,-64},{2,-82}},
@@ -5929,7 +5929,7 @@ a[:] are the filter coefficients.
                   {62,-72},{64,-76},{64,-78},{64,-80},{64,-82}},
                                                 color={0,0,127}),
         Polygon(points={{90,-82},{68,-74},{68,-90},{90,-82}}, lineColor={192,192,192}, fillColor={192,192,192},
-                fillPattern=  FillPattern.Solid),
+                fillPattern = FillPattern.Solid),
         Line(points={{-90,-82},{82,-82}}, color={192,192,192}),
             Text(
               extent={{-26,86},{88,56}},
@@ -5988,10 +5988,10 @@ a[:] are the filter coefficients.
         graphics={
          Line(points={{-84,78},{-84,-90}}, color={192,192,192}),
         Polygon(points={{-84,90},{-92,68},{-76,68},{-84,90},{-84,90}}, lineColor={192,192,192}, fillColor={192,192,192},
-                fillPattern=   FillPattern.Solid),
+                fillPattern =  FillPattern.Solid),
         Line(points={{-90,-82},{82,-82}}, color={192,192,192}),
         Polygon(points={{90,-82},{68,-74},{68,-90},{90,-82}}, lineColor={192,192,192}, fillColor={192,192,192},
-                fillPattern=  FillPattern.Solid),
+                fillPattern = FillPattern.Solid),
         Line(points=[-84,30; -72,30; -52,28; -32,20; -26,16; -22,12; -18,6; -14,
                   -4; -4,-46; 0,-64; 2,-82], color={0,0,127}),
           Line(points=[2,-82; 4,-64; 8,-56; 12,-56; 16,-60; 18,-66; 20,-82], color={0,0,127}),
@@ -9222,7 +9222,7 @@ Connector with one output signal of type Boolean.
   annotation (preferredView="info",
   uses(Modelica(version="3.2"), Modelica_LinearSystems2(version="2.2")),
     version="0.9",
-    versionBuild=0,
+    versionBuild=1,
     versionDate="2012-08-28",
     dateModified = "2012-08-28 09:27:58Z",
     revisionID="$Id:: package.mo 4356 2012-08-28 08:11:36Z #$",
