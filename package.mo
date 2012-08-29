@@ -1227,7 +1227,10 @@ extends Modelica.Icons.Package;
           T=0.1,
           k=110)
           annotation (Placement(transformation(extent={{-20,0},{0,20}})));
-      Clocks.PeriodicRealClock periodicClock(period=0.1)
+      Clocks.PeriodicRealClock periodicClock(
+        period=0.1,
+        useSolver=true,
+        solverMethod="ImplicitEuler")
         annotation (Placement(transformation(extent={{-94,-32},{-82,-20}})));
       equation
         connect(speed.flange, load.flange_b)       annotation (Line(
