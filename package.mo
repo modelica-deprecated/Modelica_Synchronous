@@ -3,8 +3,62 @@ package Modelica_Synchronous "Library of basic synchronous input/output control 
 that are triggered by clocks"
   package UsersGuide "User's Guide"
     extends Modelica.Icons.Information;
-    class GettingStarted "Getting started"
+    package GettingStarted "Getting started"
       extends Modelica.Icons.Information;
+      class Clocks "Clocks"
+        extends Modelica.Icons.Information;
+        annotation (Documentation(info="<html>
+<p>
+A <b>Clock</b> type is a base data type (introduced in Modelica 3.3, additionally to Real, Integer, Boolean, String) that defines when a particular partition consisting of a set of equations is active. Every variable and every equation is either continuous-time or is associated exactly to one clock. This feature is visualized in the figure below where c(ti) is a clock that is active at particular time instants ti and r(ti) is a variable that is associated to this clock. A clocked variable has only a value when the corresponding clock is active:
+</p>
+
+<p>
+<img src=\"modelica://Modelica_Synchronous/Resources/Images/Clocks/clockSignals.png\">
+</p>
+
+<p>
+Similarly to RealInput, RealOutput etc., clock input and output connectors, called ClockInput and ClockOutput, are defined in sublibrary 
+<a href=\"modelica://Modelica_Synchronous.Interfaces\">Interfaces</a>
+in order to propagate clocks via connections. A clock signal can be generated with
+one of the blocks of sublibrary
+<a href=\"modelica://Modelica_Synchronous.Clocks\">Clocks</a>:
+</p>
+
+<p>
+<img src=\"modelica://Modelica_Synchronous/Resources/Images/Clocks/clocks.png\">
+</p>
+
+<p>
+The output signals of the blocks in the above figure are clock signals,
+by default visualized with dotted grey lines.
+</p>
+
+<p>
+With the blocks of sublibrary
+<a href=\"modelica://Modelica_Synchronous.ClockSignals\">ClockSignals</a>
+a clock signal can be sub-sampled, super-sampled, or shift-sampled to generate
+a new clock signal. For example, with the following model, a periodic clock signal of 0.1 s 
+is sub-sampled with a factor 3 and therefore a clock signal with a period of 0.3 s
+is generated:
+</p>
+
+<p>
+<img src=\"modelica://Modelica_Synchronous/Resources/Images/Clocks/subSampledClockExample.png\"><br>
+<img src=\"modelica://Modelica_Synchronous/Resources/Images/Clocks/subSampledClockResult.png\"><br>
+</p>
+
+<p>
+As usual in synchronous languages, a clock is represented by a <b>true</b> value
+when the clock is active. The relationship between such derived
+clocks is <b>exact</b>, so it is guaranteed that at every 3rd tick of clock
+\"periodicRealClock.y\", the clock \"subSample.y\" is active.
+</p>
+
+
+
+</html>
+"));
+      end Clocks;
       annotation (Documentation(info="<html>
 <p>
 In this section, a first introduction to the Modelica_Synchronous
@@ -655,7 +709,7 @@ able to support this library.
     Postfach 1116<br>
     D-82230 Wessling<br>
     Germany<br>
-    email: <a href=\"mailto:Martin.Otter@dlr.de\">Martin.Otter@dlr.de</A> or <a href=\"mailto:Bernhard.Thiele@dlr.de\">Bernhard.Thiele@dlr.de</A><br></dd>
+    email: <a href=\"mailto:Martin.Otter@dlr.de\">Martin.Otter@dlr.de</A>, <a href=\"mailto:Bernhard.Thiele@dlr.de\">Bernhard.Thiele@dlr.de</A><br></dd>
 </dl>
 <p><b>Acknowledgements:</b></p>
 <ul>
@@ -3160,6 +3214,7 @@ initial equation
       end if;
 
       annotation (
+         defaultComponentName="periodicClock1",
         Icon(coordinateSystem(preserveAspectRatio=true,  extent={{-100,-100},{100,100}}, initialScale=0.06),
                         graphics={
             Text(
@@ -3182,9 +3237,19 @@ initial equation
               lineColor={0,0,0},
               fillColor={95,95,95})}),
         Diagram,
-        Documentation(info="<HTML>
+        Documentation(info="<html>
+<p>
+This component generates a periodic clock that starts ticking when
+the simulation starts. The <b>period</b> is defined in seconds
+by a <b>Real</b> number.
+</p>
 
-</HTML>
+<p>
+For an introduction to clocks see
+<a href=\"modelica://Modelica_Synchronous.UsersGuide.GettingStarted.Clocks\">UsersGuide.GettingStarted.Clocks</a>.
+</p>
+
+</html>
 "));
     end PeriodicRealClock;
 
@@ -3216,6 +3281,7 @@ initial equation
       end if;
 
       annotation (
+           defaultComponentName="periodicClock1",
         Icon(coordinateSystem(preserveAspectRatio=true,  extent={{-100,-100},{100,100}}, initialScale=0.06),
                         graphics={
             Text(
@@ -3264,6 +3330,14 @@ initial equation
 </HTML>
 "));
     end EventClock;
+  annotation (Documentation(info="<html>
+<p>
+This package contains blocks that generate clock signals. For an introduction
+to clocks see
+<a href=\"modelica://Modelica_Synchronous.UsersGuide.GettingStarted.Clocks\">UsersGuide.GettingStarted.Clocks</a>.
+</p>
+
+</html>"));
   end Clocks;
 
 
@@ -3568,6 +3642,12 @@ package ClockSignals "Library of blocks for clocked signals"
 <p><i>The first activation of the clock of y = shiftSample(..) is shifted in time shiftCounter/resolution*interval(u) later than the first activation of the clock of u.</i></p>
 </html>"));
   end ShiftSample;
+  annotation (Documentation(info="<html>
+<p>
+A <b>Clock</b> type is a base data type (introduced in Modelica 3., additionally to Real, Integer, Boolean, String) that defines when a particular partition of equations of a model is active. Every variable and every equation is either continuous-time or is associated exactly to one clock. This feature is visualized in the figure below where c(ti) is a clock that is active at particular time instants and r(ti) is a variable that is associated to this clock. A clocked variable has only a value when the corresponding clock is active:
+</p>
+
+</html>"));
 end ClockSignals;
 
 
@@ -8669,10 +8749,10 @@ Connector with one output signal of type Boolean.
               fillPattern=FillPattern.Solid),
             Line(points={{-1,0},{52,50}},  color={95,95,95}),
             Text(
-              extent={{-200,175},{200,110}},
-              textString="%name",
-              lineColor={0,0,255},
-              fontSize=0),
+            extent={{-300,175},{300,110}},
+            textString="%name",
+            lineColor={0,0,255},
+            fontSize=0),
             Rectangle(
               extent={{80,6},{100,-6}},
               fillPattern=FillPattern.Solid,
@@ -8985,7 +9065,7 @@ Connector with one output signal of type Boolean.
             Text(
               extent={{-200,-80},{200,-145}},
               lineColor={0,0,0},
-              textString="y_start=%y_start"),
+            textString="%y_start"),
             Text(
               extent={{-200,129},{200,64}},
               lineColor={0,0,255},
@@ -9220,9 +9300,9 @@ Connector with one output signal of type Boolean.
 
 
   annotation (preferredView="info",
-  uses(Modelica(version="3.2"), Modelica_LinearSystems2(version="2.2")),
+  uses(Modelica(version="3.2")),
     version="0.9",
-    versionBuild=1,
+    versionBuild=2,
     versionDate="2012-08-28",
     dateModified = "2012-08-28 09:27:58Z",
     revisionID="$Id:: package.mo 4356 2012-08-28 08:11:36Z #$",

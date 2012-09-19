@@ -1,6 +1,4 @@
 within Modelica_Synchronous;
-
-
 package WorkInProgress "Models that are under developmend and test models"
   package Incubate "Stuff that might be adapted and used at some future time"
 
@@ -14,8 +12,8 @@ package WorkInProgress "Models that are under developmend and test models"
 
         encapsulated function constructor
             "Initialize simulated real-time kernel"
-          import
-            Modelica_Synchronous.WorkInProgress.Incubate.TrueTime.ExternalC.Kernel;
+            import
+              Modelica_Synchronous.WorkInProgress.Incubate.TrueTime.ExternalC.Kernel;
 
           input Integer policy "Scheduling policy";
           input Integer numberOfTasks "Number of tasks";
@@ -27,8 +25,8 @@ package WorkInProgress "Models that are under developmend and test models"
         end constructor;
 
         encapsulated function destructor "Terminate simulated real-time kernel"
-          import
-            Modelica_Synchronous.WorkInProgress.Incubate.TrueTime.ExternalC.Kernel;
+            import
+              Modelica_Synchronous.WorkInProgress.Incubate.TrueTime.ExternalC.Kernel;
 
           input Kernel kernelHandle "Handle to kernel simulator object";
 
@@ -37,8 +35,8 @@ package WorkInProgress "Models that are under developmend and test models"
         end destructor;
 
           encapsulated function runKernel "Run the kernel simulator instance"
-          import
-            Modelica_Synchronous.WorkInProgress.Incubate.TrueTime.ExternalC.Kernel;
+            import
+              Modelica_Synchronous.WorkInProgress.Incubate.TrueTime.ExternalC.Kernel;
 
             input Kernel kernelHandle "Handle to kernel simulator object";
             input Real currTime "Current time";
@@ -49,8 +47,8 @@ package WorkInProgress "Models that are under developmend and test models"
 
           encapsulated function getNextHitKernel
             "Get next event time for kernel simulator"
-          import
-            Modelica_Synchronous.WorkInProgress.Incubate.TrueTime.ExternalC.Kernel;
+            import
+              Modelica_Synchronous.WorkInProgress.Incubate.TrueTime.ExternalC.Kernel;
 
             input Kernel kernelHandle "Handle to kernel simulator object";
             input Real currTime "Current time";
@@ -61,8 +59,8 @@ package WorkInProgress "Models that are under developmend and test models"
           end getNextHitKernel;
 
           encapsulated function getSchedule "Get the real-time task schedule"
-          import
-            Modelica_Synchronous.WorkInProgress.Incubate.TrueTime.ExternalC.Kernel;
+            import
+              Modelica_Synchronous.WorkInProgress.Incubate.TrueTime.ExternalC.Kernel;
 
             input Kernel kernelHandle "Handle to kernel simulator object";
             input Integer numberOfTasks "Number of tasks";
@@ -75,8 +73,8 @@ package WorkInProgress "Models that are under developmend and test models"
 
           encapsulated function createTask
             "Create a real-time kernel task (called during initialization)"
-          import
-            Modelica_Synchronous.WorkInProgress.Incubate.TrueTime.ExternalC.Kernel;
+            import
+              Modelica_Synchronous.WorkInProgress.Incubate.TrueTime.ExternalC.Kernel;
 
             input Kernel kernelHandle "Handle to kernel simulator object";
             input Integer taskID "Task ID";
@@ -93,8 +91,8 @@ package WorkInProgress "Models that are under developmend and test models"
 
           encapsulated function createJob
             "Create task instance for controller calculation"
-          import
-            Modelica_Synchronous.WorkInProgress.Incubate.TrueTime.ExternalC.Kernel;
+            import
+              Modelica_Synchronous.WorkInProgress.Incubate.TrueTime.ExternalC.Kernel;
 
             input Kernel kernelHandle "Handle to kernel simulator object";
             input String taskName "Task name";
@@ -109,10 +107,10 @@ package WorkInProgress "Models that are under developmend and test models"
 
           encapsulated function createJobNw
             "Create task instance for controller calculation and network transmission"
-          import
-            Modelica_Synchronous.WorkInProgress.Incubate.TrueTime.ExternalC.Kernel;
-          import
-            Modelica_Synchronous.WorkInProgress.Incubate.TrueTime.ExternalC.Network;
+            import
+              Modelica_Synchronous.WorkInProgress.Incubate.TrueTime.ExternalC.Kernel;
+            import
+              Modelica_Synchronous.WorkInProgress.Incubate.TrueTime.ExternalC.Network;
 
             input Kernel kernelHandle "Handle to kernel simulator object";
             input String taskName "Task name";
@@ -131,8 +129,8 @@ package WorkInProgress "Models that are under developmend and test models"
           end createJobNw;
 
         encapsulated function setControl "Set computed control signal for task"
-          import
-            Modelica_Synchronous.WorkInProgress.Incubate.TrueTime.ExternalC.Kernel;
+            import
+              Modelica_Synchronous.WorkInProgress.Incubate.TrueTime.ExternalC.Kernel;
 
             input Kernel kernelHandle "Handle to kernel simulator object";
             input String taskName "Task name";
@@ -145,8 +143,8 @@ package WorkInProgress "Models that are under developmend and test models"
         end setControl;
 
         encapsulated function analogOut "Output calculated control signal"
-          import
-            Modelica_Synchronous.WorkInProgress.Incubate.TrueTime.ExternalC.Kernel;
+            import
+              Modelica_Synchronous.WorkInProgress.Incubate.TrueTime.ExternalC.Kernel;
 
             input Kernel kernelHandle "Handle to kernel simulator object";
             input String taskName "Task name";
@@ -164,8 +162,8 @@ package WorkInProgress "Models that are under developmend and test models"
         extends ExternalObject;
 
         encapsulated function constructor "Initialize simulated network bus"
-          import
-            Modelica_Synchronous.WorkInProgress.Incubate.TrueTime.ExternalC.Network;
+            import
+              Modelica_Synchronous.WorkInProgress.Incubate.TrueTime.ExternalC.Network;
 
           input Real params[:] "General parameter vector";
           input Real schedule[:] "Schedule for TDMA";
@@ -183,8 +181,8 @@ package WorkInProgress "Models that are under developmend and test models"
         end constructor;
 
         encapsulated function destructor "Terminate simulated network bus"
-          import
-            Modelica_Synchronous.WorkInProgress.Incubate.TrueTime.ExternalC.Network;
+            import
+              Modelica_Synchronous.WorkInProgress.Incubate.TrueTime.ExternalC.Network;
 
           input Network networkHandle "Handle to network simulator object";
 
@@ -193,8 +191,8 @@ package WorkInProgress "Models that are under developmend and test models"
         end destructor;
 
           encapsulated function runNetwork "Run the network simulator instance"
-          import
-            Modelica_Synchronous.WorkInProgress.Incubate.TrueTime.ExternalC.Network;
+            import
+              Modelica_Synchronous.WorkInProgress.Incubate.TrueTime.ExternalC.Network;
 
             input Network networkHandle "Handle to network simulator object";
             input Real currTime "Current time";
@@ -205,8 +203,8 @@ package WorkInProgress "Models that are under developmend and test models"
 
           encapsulated function getNextHitNetwork
             "Get next event time for network simulator"
-          import
-            Modelica_Synchronous.WorkInProgress.Incubate.TrueTime.ExternalC.Network;
+            import
+              Modelica_Synchronous.WorkInProgress.Incubate.TrueTime.ExternalC.Network;
 
             input Network networkHandle "Handle to network simulator object";
             input Real currTime "Current time";
@@ -217,8 +215,8 @@ package WorkInProgress "Models that are under developmend and test models"
           end getNextHitNetwork;
 
           encapsulated function getNwSchedule "Get the network schedule"
-          import
-            Modelica_Synchronous.WorkInProgress.Incubate.TrueTime.ExternalC.Network;
+            import
+              Modelica_Synchronous.WorkInProgress.Incubate.TrueTime.ExternalC.Network;
 
             input Network networkHandle "Handle to network simulator object";
             input Integer numberOfFrames "Number of frames";
@@ -230,8 +228,8 @@ package WorkInProgress "Models that are under developmend and test models"
           end getNwSchedule;
 
           encapsulated function transmitFrame "Transmit a network frame"
-          import
-            Modelica_Synchronous.WorkInProgress.Incubate.TrueTime.ExternalC.Network;
+            import
+              Modelica_Synchronous.WorkInProgress.Incubate.TrueTime.ExternalC.Network;
 
             input Network networkHandle "Handle to network simulator object";
             input Integer frameID "Frame identifier";
@@ -246,8 +244,8 @@ package WorkInProgress "Models that are under developmend and test models"
           end transmitFrame;
 
         encapsulated function receiveFrame "Receive a network frame"
-          import
-            Modelica_Synchronous.WorkInProgress.Incubate.TrueTime.ExternalC.Network;
+            import
+              Modelica_Synchronous.WorkInProgress.Incubate.TrueTime.ExternalC.Network;
 
             input Network networkHandle "Handle to network simulator object";
             input Integer frameID "Frame identifier";
@@ -974,7 +972,7 @@ equation
 
       function realDelay2shiftSampleParameters
         "Beta Warning: Function might be not robust for all kind of (seemingly) valid input"
-      import Modelica.Utilities.Strings.*;
+        import Modelica.Utilities.Strings.*;
       input Real delay "Delay in seconds";
       input Real rate "Sample rate in seconds";
       output Integer param[2]
@@ -2418,6 +2416,67 @@ form of a PID controller by using the backward rectangular approximation (also c
     end TestSuperSampleClock;
 
   end Tests;
+
+  package ForDocumentation
+    model TheDifferentClocks
+      Clocks.PeriodicRealClock periodicRealClock(period=0.01)
+        annotation (Placement(transformation(extent={{-36,44},{-24,56}})));
+      Clocks.PeriodicExactClock periodicExactClock(factor=10, resolution=
+            Modelica_Synchronous.Types.Resolution.ms)
+        annotation (Placement(transformation(extent={{-36,14},{-24,26}})));
+      Clocks.EventClock eventClock
+        annotation (Placement(transformation(extent={{-36,-16},{-24,-4}})));
+      Modelica.Blocks.Sources.BooleanPulse booleanPulse
+        annotation (Placement(transformation(extent={{-96,-20},{-76,0}})));
+      Interfaces.ClockOutput y1
+        annotation (Placement(transformation(extent={{0,44},{12,56}})));
+      Interfaces.ClockOutput y2
+        annotation (Placement(transformation(extent={{0,14},{12,26}})));
+      Interfaces.ClockOutput y3
+        annotation (Placement(transformation(extent={{0,-16},{12,-4}})));
+    equation
+      connect(booleanPulse.y, eventClock.u) annotation (Line(
+          points={{-75,-10},{-37.2,-10}},
+          color={255,0,255},
+          smooth=Smooth.None));
+      connect(periodicRealClock.y, y1) annotation (Line(
+          points={{-23.4,50},{6,50}},
+          color={175,175,175},
+          pattern=LinePattern.Dot,
+          thickness=0.5,
+          smooth=Smooth.None));
+      connect(periodicExactClock.y, y2) annotation (Line(
+          points={{-23.4,20},{6,20}},
+          color={175,175,175},
+          pattern=LinePattern.Dot,
+          thickness=0.5,
+          smooth=Smooth.None));
+      connect(eventClock.y, y3) annotation (Line(
+          points={{-23.4,-10},{6,-10}},
+          color={175,175,175},
+          pattern=LinePattern.Dot,
+          thickness=0.5,
+          smooth=Smooth.None));
+      annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
+                -100,-100},{100,100}}), graphics));
+    end TheDifferentClocks;
+
+    model SubSampledClock
+      Clocks.PeriodicRealClock periodicRealClock(period=0.1)
+        annotation (Placement(transformation(extent={{-76,44},{-64,56}})));
+      ClockSignals.SubSample subSample(factor=3)
+        annotation (Placement(transformation(extent={{-44,44},{-32,56}})));
+    equation
+      connect(periodicRealClock.y, subSample.u) annotation (Line(
+          points={{-63.4,50},{-45.2,50}},
+          color={175,175,175},
+          pattern=LinePattern.Dot,
+          thickness=0.5,
+          smooth=Smooth.None));
+      annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
+                -100,-100},{100,100}}), graphics));
+    end SubSampledClock;
+  end ForDocumentation;
 
   block Interpolator
     "Super-sample the clocked Real input signal and provide it linearly interpolated and optionally filterd as clocked output signal"
