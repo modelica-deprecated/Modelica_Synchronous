@@ -323,7 +323,7 @@ package WorkInProgress "Models that are under developmend and test models"
                   time,
                   u);
 
-          annotation (Placement(transformation(extent={{100,-50},{120,-30}})),
+          annotation (
           Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                   -100},{100,100}}), graphics),
           Icon(coordinateSystem(preserveAspectRatio=true,  extent={{-100,-100},
@@ -661,7 +661,7 @@ package WorkInProgress "Models that are under developmend and test models"
 
     package IntegerSignals
           block Limiter "Limit the range of a signal"
-          extends Modelica_Synchronous.Interfaces.ClockedBlockIcon;
+          extends Modelica_Synchronous.ClockSignals.Interfaces.ClockedBlockIcon;
             parameter Integer uMax(start=1) "Upper limits of input signals";
             parameter Integer uMin= -uMax "Lower limits of input signals";
             parameter Boolean limitsAtInit = true
@@ -746,7 +746,7 @@ as output.
           end Limiter;
 
       block ComputationalDelay
-      extends Modelica_Synchronous.Interfaces.PartialIntegerClockedSISO;
+      extends Modelica_Synchronous.IntegerSignals.Interfaces.PartialClockedSISO;
         parameter Integer shiftCounter(min=0,max=resolution) = 0
           "(min=0, max=resolution), computational delay = interval()*shiftCounter/resolution"
                                                                                        annotation(Dialog(group="Computational delay in seconds = interval() * shiftCounter/resolution"));
@@ -771,11 +771,11 @@ as output.
         parameter Integer firstSeed[3](each min=0, each max=255) = {23,87,187}
           "Integer[3] defining random sequence; required element range: 0..255";
       protected
-        Integer seedState[3] "State of seed" annotation(Hide=true);
-        Real noise "Noise in the range 0..1" annotation(Hide=true);
+        Integer seedState[3] "State of seed" annotation(HideResult=true);
+        Real noise "Noise in the range 0..1" annotation(HideResult=true);
       equation
           (noise,seedState) =
-            Modelica_Synchronous.RealSignals.SampleAndHolds.Utilities.Internal.random(
+            Modelica_Synchronous.RealSignals.Sampler.Utilities.Internal.random(
                                                              previous(seedState));
           y = u + noiseMin + integer((noiseMax - noiseMin)*noise + 0.5);
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
@@ -784,7 +784,7 @@ as output.
 
       block FractionalDelay
         "Delay clocked input signal for a fractional multiple of the sample period"
-      extends Modelica_Synchronous.Interfaces.PartialIntegerClockedSISO;
+      extends Modelica_Synchronous.IntegerSignals.Interfaces.PartialClockedSISO;
 
         parameter Integer shift(min=0) = 0
           "Delay = interval() * shift/resolution";
@@ -805,7 +805,7 @@ as output.
        y = shiftSample(u_buffer[n+1], shift, resolution);
 
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true,  extent={{-100,
-                  -100},{100,100}}), graphics), DymolaStoredErrors,
+                  -100},{100,100}}), graphics),
           Icon(graphics={
               Line(
                 points={{-100,0},{-80,0},{-80,40},{-20,40},{-20,-40},{40,-40},{40,0},{
@@ -857,7 +857,8 @@ as output.
 
       partial block PartialIntegerNoise
         "Interface for SISO blocks with Integer signals that add noise to the signal"
-        extends Modelica_Synchronous.Interfaces.PartialIntegerClockedSISO;
+        extends
+          Modelica_Synchronous.IntegerSignals.Interfaces.PartialClockedSISO;
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                   -100},{100,100}}), graphics));
       end PartialIntegerNoise;
@@ -865,7 +866,7 @@ as output.
 
     package BooleanSignals
       block ComputationalDelay
-      extends Modelica_Synchronous.Interfaces.PartialBooleanClockedSISO;
+      extends Modelica_Synchronous.BooleanSignals.Interfaces.PartialClockedSISO;
         parameter Integer shiftCounter(min=0,max=resolution) = 0
           "(min=0, max=resolution), computational delay = interval()*shiftCounter/resolution"
                                                                                        annotation(Dialog(group="Computational delay in seconds = interval() * shiftCounter/resolution"));
@@ -884,7 +885,7 @@ as output.
 
       block FractionalDelay
         "Delay clocked input signal for a fractional multiple of the sample period"
-      extends Modelica_Synchronous.Interfaces.PartialBooleanClockedSISO;
+      extends Modelica_Synchronous.BooleanSignals.Interfaces.PartialClockedSISO;
 
         parameter Integer shift(min=0) = 0
           "Delay = interval() * shift/resolution";
@@ -905,7 +906,7 @@ as output.
        y = shiftSample(u_buffer[n+1], shift, resolution);
 
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true,  extent={{-100,
-                  -100},{100,100}}), graphics), DymolaStoredErrors,
+                  -100},{100,100}}), graphics),
           Icon(graphics={
               Line(
                 points={{-100,0},{-80,0},{-80,40},{-20,40},{-20,-40},{40,-40},{40,0},{
@@ -959,7 +960,7 @@ as output.
     package RealSignals
       block CommunicationDelaySpecifiedInSeconds
         "NOT VALID MODELICA 3.3! Might be nice to provide a block that allows to specify delay in seconds instead of indirectly as fractions of the current rate"
-      extends Modelica_Synchronous.Interfaces.PartialRealClockedSISO;
+      extends Modelica_Synchronous.RealSignals.Interfaces.PartialClockedSISO;
       extends Modelica_Synchronous.WorkInProgress.Icons.BlockNotReady;
         parameter Modelica.SIunits.Time communicationDelayTime(min=0)=0
           "Time delay due to communication";
@@ -975,7 +976,7 @@ equation
         y = 0;
 
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true,  extent={{-100,
-                  -100},{100,100}}), graphics), DymolaStoredErrors);
+                  -100},{100,100}}), graphics));
       end CommunicationDelaySpecifiedInSeconds;
 
       function realDelay2shiftSampleParameters
@@ -1012,7 +1013,7 @@ equation
     end RealSignals;
 
     block PID "Discrete-time PID controller"
-      extends Modelica_Synchronous.Interfaces.PartialRealClockedSISO;
+      extends Modelica_Synchronous.RealSignals.Interfaces.PartialClockedSISO;
       parameter Real k = 1 "Gain of PID controller";
       parameter Real Ti(min=Modelica.Constants.small) = 0.5
         "Time constant of integrator part";
@@ -1107,14 +1108,15 @@ form of a PID controller by using the backward rectangular approximation (also c
     model TestPIDController
       import Modelica_Synchronous;
      extends Modelica_Synchronous.WorkInProgress.Icons.OperatesOnlyPartially;
-      Clocks.PeriodicRealClock periodicRealClock(period=0.1)
+      Modelica_Synchronous.ClockSignals.Clocks.PeriodicRealClock
+                               periodicRealClock(period=0.1)
         annotation (Placement(transformation(extent={{-36,-16},{-24,-4}})));
       Modelica_Synchronous.WorkInProgress.Incubate.PID
                                PI1
         annotation (Placement(transformation(extent={{28,0},{48,20}})));
       Modelica.Blocks.Sources.Step step(startTime=0.19)
         annotation (Placement(transformation(extent={{-82,0},{-62,20}})));
-      Modelica_Synchronous.RealSignals.SampleAndHolds.SampleClocked sample1
+      Modelica_Synchronous.RealSignals.Sampler.SampleClocked        sample1
         annotation (Placement(transformation(extent={{-8,4},{4,16}})));
       Modelica_LinearSystems2.Controller.Sampler sampler(blockType=
             Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Discrete)
@@ -1241,10 +1243,11 @@ form of a PID controller by using the backward rectangular approximation (also c
         offset=0.1,
         startTime=0.1)
         annotation (Placement(transformation(extent={{-80,20},{-60,40}})));
-      Modelica_Synchronous.RealSignals.SampleAndHolds.SampleClocked
+      Modelica_Synchronous.RealSignals.Sampler.SampleClocked
                                                 sample1
         annotation (Placement(transformation(extent={{-44,24},{-32,36}})));
-      Clocks.PeriodicRealClock periodicRealClock(period=0.01)
+      Modelica_Synchronous.ClockSignals.Clocks.PeriodicRealClock
+                               periodicRealClock(period=0.01)
         annotation (Placement(transformation(extent={{-74,-14},{-62,-2}})));
 
     equation
@@ -1276,10 +1279,11 @@ form of a PID controller by using the backward rectangular approximation (also c
         offset=0.1,
         startTime=0.1)
         annotation (Placement(transformation(extent={{-80,20},{-60,40}})));
-      Modelica_Synchronous.RealSignals.SampleAndHolds.SampleClocked
+      Modelica_Synchronous.RealSignals.Sampler.SampleClocked
                                                 sample1
         annotation (Placement(transformation(extent={{-44,24},{-32,36}})));
-      Clocks.PeriodicRealClock periodicRealClock(period=0.01)
+      Modelica_Synchronous.ClockSignals.Clocks.PeriodicRealClock
+                               periodicRealClock(period=0.01)
         annotation (Placement(transformation(extent={{-74,-14},{-62,-2}})));
       Modelica_LinearSystems2.Controller.FilterFIR filter(
         blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Discrete,
@@ -1338,10 +1342,11 @@ form of a PID controller by using the backward rectangular approximation (also c
       Modelica_Synchronous.RealSignals.Periodic.FIRbyCoefficients
                                  fIRbyCoefficients(a=a)
         annotation (Placement(transformation(extent={{-20,6},{0,26}})));
-      Modelica_Synchronous.RealSignals.SampleAndHolds.SampleClocked
+      Modelica_Synchronous.RealSignals.Sampler.SampleClocked
                                                 sample1
         annotation (Placement(transformation(extent={{-44,10},{-32,22}})));
-      Clocks.PeriodicRealClock periodicRealClock(period=0.1)
+      Modelica_Synchronous.ClockSignals.Clocks.PeriodicRealClock
+                               periodicRealClock(period=0.1)
         annotation (Placement(transformation(extent={{-74,-40},{-62,-28}})));
       Modelica.Blocks.Sources.Step step1(                 offset=0.5, startTime=0.5)
         annotation (Placement(transformation(extent={{-80,-94},{-60,-74}})));
@@ -1398,10 +1403,11 @@ form of a PID controller by using the backward rectangular approximation (also c
         annotation (Placement(transformation(extent={{20,0},{40,20}})));
       Modelica.Blocks.Sources.Step step(startTime=0.4999, offset=0.5)
         annotation (Placement(transformation(extent={{-80,40},{-60,60}})));
-      Modelica_Synchronous.RealSignals.SampleAndHolds.SampleClocked
+      Modelica_Synchronous.RealSignals.Sampler.SampleClocked
                                                 sample1
         annotation (Placement(transformation(extent={{-44,44},{-32,56}})));
-      Clocks.PeriodicRealClock periodicRealClock(period=0.1)
+      Modelica_Synchronous.ClockSignals.Clocks.PeriodicRealClock
+                               periodicRealClock(period=0.1)
         annotation (Placement(transformation(extent={{-62,-6},{-50,6}})));
       Modelica.Blocks.Sources.Step step1(                 offset=0.5, startTime=0.5)
         annotation (Placement(transformation(extent={{-80,-60},{-60,-40}})));
@@ -1452,10 +1458,11 @@ form of a PID controller by using the backward rectangular approximation (also c
 
       Modelica.Blocks.Sources.Step step(startTime=0.4999, offset=0.5)
         annotation (Placement(transformation(extent={{-80,40},{-60,60}})));
-      Modelica_Synchronous.RealSignals.SampleAndHolds.SampleClocked
+      Modelica_Synchronous.RealSignals.Sampler.SampleClocked
                                                 sample1
         annotation (Placement(transformation(extent={{-44,44},{-32,56}})));
-      Clocks.PeriodicRealClock periodicRealClock(period=0.1)
+      Modelica_Synchronous.ClockSignals.Clocks.PeriodicRealClock
+                               periodicRealClock(period=0.1)
         annotation (Placement(transformation(extent={{-62,-6},{-50,6}})));
       Modelica_Synchronous.RealSignals.Periodic.FIRbyWindow
                            FIR1(
@@ -1497,20 +1504,21 @@ form of a PID controller by using the backward rectangular approximation (also c
             Modelica_LinearSystems2.Controller.Types.BlockType.Discrete,
           sampleTime=0.025)
         annotation (Placement(transformation(extent={{60,-60},{80,-40}})));
-      Modelica_Synchronous.RealSignals.SampleAndHolds.SampleClocked
+      Modelica_Synchronous.RealSignals.Sampler.SampleClocked
                                                 sample1
         annotation (Placement(transformation(extent={{-36,44},{-24,56}})));
-      Clocks.PeriodicRealClock periodicRealClock(period=0.1)
+      Modelica_Synchronous.ClockSignals.Clocks.PeriodicRealClock
+                               periodicRealClock(period=0.1)
         annotation (Placement(transformation(extent={{-50,-6},{-38,6}})));
       Modelica_LinearSystems2.Controller.Sampler sampler(sampleFactor=4)
         annotation (Placement(transformation(extent={{-42,-60},{-22,-40}})));
       Modelica_LinearSystems2.Controller.Interpolator ls_interpolator(
           inputSampleFactor=4, meanValueFilter=true)
         annotation (Placement(transformation(extent={{0,-60},{20,-40}})));
-      Modelica_Synchronous.RealSignals.SampleAndHolds.AssignClock
+      Modelica_Synchronous.RealSignals.Sampler.AssignClock
                                               assignClock1
         annotation (Placement(transformation(extent={{52,44},{64,56}})));
-      Modelica_Synchronous.ClockSignals.SuperSample
+      Modelica_Synchronous.ClockSignals.Sampler.SuperSample
                                                superSample1(factor=4)
         annotation (Placement(transformation(extent={{6,-6},{18,6}})));
       Modelica_Synchronous.WorkInProgress.Interpolator
@@ -1582,10 +1590,11 @@ form of a PID controller by using the backward rectangular approximation (also c
             Modelica_LinearSystems2.Controller.Types.BlockType.Discrete,
           sampleTime=0.1)
         annotation (Placement(transformation(extent={{60,-60},{80,-40}})));
-      Modelica_Synchronous.RealSignals.SampleAndHolds.SampleClocked
+      Modelica_Synchronous.RealSignals.Sampler.SampleClocked
                                                 sample1
         annotation (Placement(transformation(extent={{-36,44},{-24,56}})));
-      Clocks.PeriodicRealClock periodicRealClock(period=0.1)
+      Modelica_Synchronous.ClockSignals.Clocks.PeriodicRealClock
+                               periodicRealClock(period=0.1)
         annotation (Placement(transformation(extent={{-50,-6},{-38,6}})));
       Modelica_LinearSystems2.Controller.Sampler sampler(sampleFactor=1)
         annotation (Placement(transformation(extent={{-42,-60},{-22,-40}})));
@@ -1626,10 +1635,11 @@ form of a PID controller by using the backward rectangular approximation (also c
         offset=0.1,
         startTime=0)
         annotation (Placement(transformation(extent={{-92,40},{-72,60}})));
-      Modelica_Synchronous.RealSignals.SampleAndHolds.SampleClocked
+      Modelica_Synchronous.RealSignals.Sampler.SampleClocked
                                                 sample1
         annotation (Placement(transformation(extent={{-18,44},{-6,56}})));
-      Clocks.PeriodicRealClock periodicRealClock(period=0.1)
+      Modelica_Synchronous.ClockSignals.Clocks.PeriodicRealClock
+                               periodicRealClock(period=0.1)
         annotation (Placement(transformation(extent={{-40,14},{-28,26}})));
       Modelica.Blocks.Discrete.Sampler sampler(samplePeriod=0.1)
         annotation (Placement(transformation(extent={{-50,-40},{-30,-20}})));
@@ -1673,9 +1683,10 @@ form of a PID controller by using the backward rectangular approximation (also c
         offset=0.1,
         startTime=0)
         annotation (Placement(transformation(extent={{-92,40},{-72,60}})));
-      Clocks.PeriodicRealClock periodicRealClock(period=0.1)
+      Modelica_Synchronous.ClockSignals.Clocks.PeriodicRealClock
+                               periodicRealClock(period=0.1)
         annotation (Placement(transformation(extent={{-44,24},{-32,36}})));
-      Modelica_Synchronous.RealSignals.SampleAndHolds.SampleClocked
+      Modelica_Synchronous.RealSignals.Sampler.SampleClocked
                                                 sample1
         annotation (Placement(transformation(extent={{-16,44},{-4,56}})));
       Modelica.Blocks.Discrete.StateSpace stateSpace2(
@@ -1734,17 +1745,22 @@ form of a PID controller by using the backward rectangular approximation (also c
         annotation (Placement(transformation(extent={{-94,-20},{-74,0}})));
       Modelica.Blocks.Routing.Multiplex2 multiplex2_1
         annotation (Placement(transformation(extent={{-48,0},{-28,20}})));
-      Clocks.PeriodicRealClock periodicClock1(period=0.1)
+      Modelica_Synchronous.ClockSignals.Clocks.PeriodicRealClock
+                               periodicClock1(period=0.1)
         annotation (Placement(transformation(extent={{-26,-36},{-14,-24}})));
-      RealSignals.SampleAndHolds.AssignClockVectorized assignClock1(n=2)
+      Modelica_Synchronous.RealSignals.Sampler.AssignClockVectorized
+                                                       assignClock1(n=2)
         annotation (Placement(transformation(extent={{10,4},{22,16}})));
       Modelica.Blocks.Math.Gain gain[2](k={2,3})
         annotation (Placement(transformation(extent={{40,0},{60,20}})));
-      RealSignals.SampleAndHolds.Sample sample1[2]
+      Modelica_Synchronous.RealSignals.Sampler.Sample
+                                        sample1[2]
         annotation (Placement(transformation(extent={{-14,4},{-2,16}})));
-      RealSignals.SampleAndHolds.SampleVectorizedAndClocked sample2(n=2)
+      Modelica_Synchronous.RealSignals.Sampler.SampleVectorizedAndClocked
+                                                            sample2(n=2)
         annotation (Placement(transformation(extent={{-10,48},{2,60}})));
-      RealSignals.SampleAndHolds.SubSample subSample1[2](each inferFactor=false, each factor=3) annotation (Placement(transformation(extent={{14,48},{26,60}})));
+      Modelica_Synchronous.RealSignals.Sampler.SubSample
+                                           subSample1[2](each inferFactor=false, each factor=3) annotation (Placement(transformation(extent={{14,48},{26,60}})));
     equation
       connect(sine1.y, multiplex2_1.u1[1]) annotation (Line(
           points={{-73,30},{-62,30},{-62,16},{-50,16}},
@@ -1796,22 +1812,24 @@ form of a PID controller by using the backward rectangular approximation (also c
         offset=0.1,
         startTime=0)
         annotation (Placement(transformation(extent={{-92,40},{-72,60}})));
-      Clocks.PeriodicRealClock periodicRealClock(period=0.1)
+      Modelica_Synchronous.ClockSignals.Clocks.PeriodicRealClock
+                               periodicRealClock(period=0.1)
         annotation (Placement(transformation(extent={{-84,-6},{-72,6}})));
-      Modelica_Synchronous.RealSignals.SampleAndHolds.SampleClocked
+      Modelica_Synchronous.RealSignals.Sampler.SampleClocked
                                                 sample1
         annotation (Placement(transformation(extent={{-34,44},{-22,56}})));
-      Modelica_Synchronous.RealSignals.SampleAndHolds.ShiftSample
+      Modelica_Synchronous.RealSignals.Sampler.ShiftSample
                                               shiftSample1(shiftCounter=3,
           resolution=2)
         annotation (Placement(transformation(extent={{6,44},{18,56}})));
       Modelica.Blocks.Math.Add add
         annotation (Placement(transformation(extent={{40,20},{60,40}})));
-      Modelica_Synchronous.RealSignals.SampleAndHolds.ShiftSample
+      Modelica_Synchronous.RealSignals.Sampler.ShiftSample
                                               shiftSample2(shiftCounter=3,
           resolution=2)
         annotation (Placement(transformation(extent={{10,18},{22,30}})));
-      ClockSignals.ShiftSample shiftSample3(shiftCounter=1, resolution=3)
+      Modelica_Synchronous.ClockSignals.Sampler.ShiftSample
+                               shiftSample3(shiftCounter=1, resolution=3)
         annotation (Placement(transformation(extent={{-54,-6},{-42,6}})));
     equation
       connect(sine.y, sample1.u) annotation (Line(
@@ -1856,12 +1874,13 @@ form of a PID controller by using the backward rectangular approximation (also c
         offset=0.1,
         startTime=0)
         annotation (Placement(transformation(extent={{-92,20},{-72,40}})));
-      Clocks.PeriodicRealClock periodicRealClock(period=0.1)
+      Modelica_Synchronous.ClockSignals.Clocks.PeriodicRealClock
+                               periodicRealClock(period=0.1)
         annotation (Placement(transformation(extent={{-56,4},{-44,16}})));
-      Modelica_Synchronous.RealSignals.SampleAndHolds.SampleClocked
+      Modelica_Synchronous.RealSignals.Sampler.SampleClocked
                                                 sample1
         annotation (Placement(transformation(extent={{-34,24},{-22,36}})));
-      Modelica_Synchronous.RealSignals.SampleAndHolds.Utilities.ClockedRealToBooleanTriggerHold
+      Modelica_Synchronous.RealSignals.Sampler.Utilities.ClockedRealToBooleanTriggerHold
         ClockedRealToTrigger
         annotation (Placement(transformation(extent={{0,20},{20,40}})));
       Modelica.Blocks.Discrete.TriggeredSampler triggeredSampler
@@ -1896,12 +1915,13 @@ form of a PID controller by using the backward rectangular approximation (also c
     end TestClockedRealToTrigger;
 
     model TestClockedBooleanToTrigger
-      Clocks.PeriodicRealClock periodicRealClock(period=0.1)
+      Modelica_Synchronous.ClockSignals.Clocks.PeriodicRealClock
+                               periodicRealClock(period=0.1)
         annotation (Placement(transformation(extent={{-56,4},{-44,16}})));
-      BooleanSignals.SamplerAndHolds.SampleClocked
+      Modelica_Synchronous.BooleanSignals.Sampler.SampleClocked
                                                 sample1
         annotation (Placement(transformation(extent={{-34,24},{-22,36}})));
-      BooleanSignals.SamplerAndHolds.Utilities.ClockedBooleanToBooleanTriggerHold
+      Modelica_Synchronous.BooleanSignals.Sampler.Utilities.ClockedBooleanToBooleanTriggerHold
         ClockedSignalToTrigger
         annotation (Placement(transformation(extent={{0,20},{20,40}})));
       Modelica.Blocks.Sources.BooleanPulse booleanPulse(period=0.2)
@@ -1939,12 +1959,13 @@ form of a PID controller by using the backward rectangular approximation (also c
     end TestClockedBooleanToTrigger;
 
     model TestClockedIntegerToTrigger
-      Clocks.PeriodicRealClock periodicRealClock(period=0.1)
+      Modelica_Synchronous.ClockSignals.Clocks.PeriodicRealClock
+                               periodicRealClock(period=0.1)
         annotation (Placement(transformation(extent={{-56,4},{-44,16}})));
-      IntegerSignals.SamplerAndHolds.SampleClocked
+      Modelica_Synchronous.IntegerSignals.Sampler.SampleClocked
                                                 sample1
         annotation (Placement(transformation(extent={{-34,24},{-22,36}})));
-      IntegerSignals.SamplerAndHolds.Utilities.ClockedIntegerToBooleanTriggerHold
+      Modelica_Synchronous.IntegerSignals.Sampler.Utilities.ClockedIntegerToBooleanTriggerHold
         ClockedSignalToTrigger
         annotation (Placement(transformation(extent={{0,20},{20,40}})));
       TriggeredIntegerSampler triggeredBooleanSampler
@@ -1987,16 +2008,17 @@ form of a PID controller by using the backward rectangular approximation (also c
         offset=0.1,
         startTime=0)
         annotation (Placement(transformation(extent={{-92,40},{-72,60}})));
-      Clocks.PeriodicRealClock periodicRealClock(period=0.1)
+      Modelica_Synchronous.ClockSignals.Clocks.PeriodicRealClock
+                               periodicRealClock(period=0.1)
         annotation (Placement(transformation(extent={{-60,2},{-48,14}})));
-      Modelica_Synchronous.RealSignals.SampleAndHolds.SampleClocked
+      Modelica_Synchronous.RealSignals.Sampler.SampleClocked
                                                 sample1
         annotation (Placement(transformation(extent={{-34,44},{-22,56}})));
-      Modelica_Synchronous.RealSignals.SampleAndHolds.ShiftSample
+      Modelica_Synchronous.RealSignals.Sampler.ShiftSample
                                               shiftSample1(resolution=2,
           shiftCounter=1)
         annotation (Placement(transformation(extent={{6,44},{18,56}})));
-      Modelica_Synchronous.RealSignals.SampleAndHolds.BackSample
+      Modelica_Synchronous.RealSignals.Sampler.BackSample
                                              backSample2(
         backCounter=1,
         resolution=2,
@@ -2004,7 +2026,7 @@ form of a PID controller by using the backward rectangular approximation (also c
         annotation (Placement(transformation(extent={{34,44},{46,56}})));
       Modelica.Blocks.Math.Add add
         annotation (Placement(transformation(extent={{68,24},{88,44}})));
-      Modelica_Synchronous.RealSignals.SampleAndHolds.BackSample
+      Modelica_Synchronous.RealSignals.Sampler.BackSample
                                              backSample3(
         backCounter=1,
         y_start=0.3,
@@ -2052,12 +2074,13 @@ form of a PID controller by using the backward rectangular approximation (also c
         offset=0.1,
         startTime=0)
         annotation (Placement(transformation(extent={{-92,40},{-72,60}})));
-      Clocks.PeriodicRealClock periodicRealClock(period=0.1)
+      Modelica_Synchronous.ClockSignals.Clocks.PeriodicRealClock
+                               periodicRealClock(period=0.1)
         annotation (Placement(transformation(extent={{-50,-6},{-38,6}})));
-      Modelica_Synchronous.RealSignals.SampleAndHolds.SampleClocked
+      Modelica_Synchronous.RealSignals.Sampler.SampleClocked
                                                 sample1
         annotation (Placement(transformation(extent={{-34,44},{-22,56}})));
-      Modelica_Synchronous.RealSignals.SampleAndHolds.Utilities.ClockedRealToBooleanSquareHold
+      Modelica_Synchronous.RealSignals.Sampler.Utilities.ClockedRealToBooleanSquareHold
         ClockedRealToSquare
         annotation (Placement(transformation(extent={{-4,40},{16,60}})));
     equation
@@ -2079,53 +2102,56 @@ form of a PID controller by using the backward rectangular approximation (also c
         experiment(StopTime=1.2));
     end TestClockedRealToSquare;
 
-
     model TestIntegerSamplerAndHolds
 
-      Modelica_Synchronous.IntegerSignals.SamplerAndHolds.AssignClock
+      Modelica_Synchronous.IntegerSignals.Sampler.AssignClock
                                                  assignClock1
         annotation (Placement(transformation(extent={{-46,64},{-34,76}})));
-      Clocks.PeriodicRealClock periodicRealClock(period=0.1)
+      Modelica_Synchronous.ClockSignals.Clocks.PeriodicRealClock
+                               periodicRealClock(period=0.1)
         annotation (Placement(transformation(extent={{-88,-96},{-76,-84}})));
-      Modelica_Synchronous.IntegerSignals.SamplerAndHolds.Hold
+      Modelica_Synchronous.IntegerSignals.Sampler.Hold
                                           hold1
         annotation (Placement(transformation(extent={{-20,64},{-8,76}})));
       Modelica.Blocks.Sources.IntegerConstant integerConstant1(k=1)
         annotation (Placement(transformation(extent={{-80,-20},{-60,0}})));
-      Modelica_Synchronous.IntegerSignals.SamplerAndHolds.SampleClocked
+      Modelica_Synchronous.IntegerSignals.Sampler.SampleClocked
                                                    sample2
         annotation (Placement(transformation(extent={{-44,-16},{-32,-4}})));
-      Modelica_Synchronous.IntegerSignals.SamplerAndHolds.SampleVectorizedAndClocked
+      Modelica_Synchronous.IntegerSignals.Sampler.SampleVectorizedAndClocked
                                                                 sample1(n=3)
         annotation (Placement(transformation(extent={{-44,-54},{-32,-42}})));
       Modelica.Blocks.Sources.IntegerConstant integerConstant2[3](each k=1)
         annotation (Placement(transformation(extent={{-80,-60},{-60,-40}})));
       Modelica.Blocks.Sources.IntegerConstant integerConstant3[3](each k=1)
         annotation (Placement(transformation(extent={{-80,20},{-60,40}})));
-      Modelica_Synchronous.IntegerSignals.SamplerAndHolds.AssignClockVectorized
+      Modelica_Synchronous.IntegerSignals.Sampler.AssignClockVectorized
                                                            assignClock2(n=3)
         annotation (Placement(transformation(extent={{-46,24},{-34,36}})));
-      Modelica_Synchronous.IntegerSignals.SamplerAndHolds.SubSample
+      Modelica_Synchronous.IntegerSignals.Sampler.SubSample
                                                subSample1(inferFactor=false,
           factor=2)
         annotation (Placement(transformation(extent={{-20,26},{-8,38}})));
-      Modelica_Synchronous.IntegerSignals.SamplerAndHolds.SuperSample
+      Modelica_Synchronous.IntegerSignals.Sampler.SuperSample
                                                  superSample1(inferFactor=
             false, factor=2)
         annotation (Placement(transformation(extent={{12,26},{24,38}})));
-      Modelica_Synchronous.IntegerSignals.SamplerAndHolds.ShiftSample
+      Modelica_Synchronous.IntegerSignals.Sampler.ShiftSample
                                                  shiftSample1(shiftCounter=2,
           resolution=3)
         annotation (Placement(transformation(extent={{-16,-16},{-4,-4}})));
-      IntegerSignals.SamplerAndHolds.BackSample backSample1(backCounter=2,
+      Modelica_Synchronous.IntegerSignals.Sampler.BackSample
+                                                backSample1(backCounter=2,
           resolution=3)
         annotation (Placement(transformation(extent={{8,-16},{20,-4}})));
       Modelica.Blocks.Sources.IntegerTable integerTable(table=[0,1; 0.2,3; 0.5,
             5; 0.9,2; 1.1,-1; 1.4,9])
         annotation (Placement(transformation(extent={{-98,60},{-78,80}})));
-      IntegerSignals.SamplerAndHolds.Sample sample3
+      Modelica_Synchronous.IntegerSignals.Sampler.Sample
+                                            sample3
         annotation (Placement(transformation(extent={{-68,64},{-56,76}})));
-      IntegerSignals.SamplerAndHolds.Utilities.UpSample upSample1(inferFactor=
+      Modelica_Synchronous.IntegerSignals.Sampler.Utilities.UpSample
+                                                        upSample1(inferFactor=
             false, factor=2)
         annotation (Placement(transformation(extent={{36,106},{48,118}})));
       IntegerSignals.NonPeriodic.UnitDelay UnitDelay1(y_start=2)
@@ -2133,7 +2159,7 @@ form of a PID controller by using the backward rectangular approximation (also c
       IntegerSignals.NonPeriodic.FractionalDelay fractionalDelay(shift=2,
           resolution=3)
         annotation (Placement(transformation(extent={{34,46},{54,66}})));
-      IntegerSignals.SamplerAndHolds.Utilities.ClockedIntegerToBooleanSquareHold
+      Modelica_Synchronous.IntegerSignals.Sampler.Utilities.ClockedIntegerToBooleanSquareHold
         ClockedSignalToSquare
         annotation (Placement(transformation(extent={{52,12},{72,32}})));
     equation
@@ -2203,9 +2229,9 @@ form of a PID controller by using the backward rectangular approximation (also c
           smooth=Smooth.None));
       connect(assignClock1.y, upSample1.u) annotation (Line(
           points={{-33.4,70},{-27.7,70},{-27.7,70},{-26,70},{-26,112},{34.8,112}},
-
           color={255,127,0},
           smooth=Smooth.None));
+
       connect(assignClock1.y, UnitDelay1.u) annotation (Line(
           points={{-33.4,70},{-26,70},{-26,88},{30,88}},
           color={255,127,0},
@@ -2226,32 +2252,33 @@ form of a PID controller by using the backward rectangular approximation (also c
 
     model TestBooleanSamplerAndHolds
 
-      Modelica_Synchronous.BooleanSignals.SamplerAndHolds.AssignClock
+      Modelica_Synchronous.BooleanSignals.Sampler.AssignClock
                                                  assignClock1
         annotation (Placement(transformation(extent={{-48,64},{-36,76}})));
-      Clocks.PeriodicRealClock periodicRealClock(period=0.1)
+      Modelica_Synchronous.ClockSignals.Clocks.PeriodicRealClock
+                               periodicRealClock(period=0.1)
         annotation (Placement(transformation(extent={{-88,-96},{-76,-84}})));
-      Modelica_Synchronous.BooleanSignals.SamplerAndHolds.Hold
+      Modelica_Synchronous.BooleanSignals.Sampler.Hold
                                           hold1
         annotation (Placement(transformation(extent={{-22,64},{-10,76}})));
-      Modelica_Synchronous.BooleanSignals.SamplerAndHolds.SampleClocked
+      Modelica_Synchronous.BooleanSignals.Sampler.SampleClocked
                                                    sample2
         annotation (Placement(transformation(extent={{-44,-16},{-32,-4}})));
-      Modelica_Synchronous.BooleanSignals.SamplerAndHolds.SampleVectorizedAndClocked
+      Modelica_Synchronous.BooleanSignals.Sampler.SampleVectorizedAndClocked
                                                                 sample1(n=3)
         annotation (Placement(transformation(extent={{-44,-54},{-32,-42}})));
-      Modelica_Synchronous.BooleanSignals.SamplerAndHolds.AssignClockVectorized
+      Modelica_Synchronous.BooleanSignals.Sampler.AssignClockVectorized
                                                            assignClock2(n=3)
         annotation (Placement(transformation(extent={{-46,24},{-34,36}})));
-      Modelica_Synchronous.BooleanSignals.SamplerAndHolds.SubSample
+      Modelica_Synchronous.BooleanSignals.Sampler.SubSample
                                                subSample1(inferFactor=false,
           factor=2)
         annotation (Placement(transformation(extent={{-20,42},{-8,54}})));
-      Modelica_Synchronous.BooleanSignals.SamplerAndHolds.SuperSample
+      Modelica_Synchronous.BooleanSignals.Sampler.SuperSample
                                                  superSample1(inferFactor=
             false, factor=2)
         annotation (Placement(transformation(extent={{12,42},{24,54}})));
-      Modelica_Synchronous.BooleanSignals.SamplerAndHolds.ShiftSample
+      Modelica_Synchronous.BooleanSignals.Sampler.ShiftSample
                                                  shiftSample1(shiftCounter=2, resolution=3)
         annotation (Placement(transformation(extent={{-16,-16},{-4,-4}})));
       Modelica.Blocks.Sources.BooleanPulse    booleanConstant(period=0.2)
@@ -2262,12 +2289,14 @@ form of a PID controller by using the backward rectangular approximation (also c
         annotation (Placement(transformation(extent={{-80,-20},{-60,0}})));
       Modelica.Blocks.Sources.BooleanConstant booleanConstant3[3]
         annotation (Placement(transformation(extent={{-80,-60},{-60,-40}})));
-      Modelica_Synchronous.BooleanSignals.SamplerAndHolds.Utilities.ClockedBooleanToBooleanSquareHold
+      Modelica_Synchronous.BooleanSignals.Sampler.Utilities.ClockedBooleanToBooleanSquareHold
         ClockedSignalToSquare
         annotation (Placement(transformation(extent={{20,-20},{40,0}})));
-      BooleanSignals.SamplerAndHolds.Sample sample3
+      Modelica_Synchronous.BooleanSignals.Sampler.Sample
+                                            sample3
         annotation (Placement(transformation(extent={{-66,64},{-54,76}})));
-      BooleanSignals.SamplerAndHolds.Utilities.UpSample upSample1(inferFactor=
+      Modelica_Synchronous.BooleanSignals.Sampler.Utilities.UpSample
+                                                        upSample1(inferFactor=
             false, factor=2)
         annotation (Placement(transformation(extent={{16,88},{28,100}})));
       BooleanSignals.NonPeriodic.UnitDelay UnitDelay1
@@ -2275,7 +2304,8 @@ form of a PID controller by using the backward rectangular approximation (also c
       BooleanSignals.NonPeriodic.FractionalDelay fractionalDelay(shift=2,
           resolution=3)
         annotation (Placement(transformation(extent={{-14,100},{6,120}})));
-      BooleanSignals.SamplerAndHolds.BackSample backSample1(backCounter=2,
+      Modelica_Synchronous.BooleanSignals.Sampler.BackSample
+                                                backSample1(backCounter=2,
           resolution=3)
         annotation (Placement(transformation(extent={{16,-44},{28,-32}})));
     equation
@@ -2387,19 +2417,20 @@ form of a PID controller by using the backward rectangular approximation (also c
       Modelica.Mechanics.Rotational.Sources.Torque torque
         annotation (Placement(transformation(extent={{60,0},{80,20}})));
 
-      Modelica_Synchronous.Clocks.PeriodicRealClock periodicClock(period=0.1)
+      Modelica_Synchronous.ClockSignals.Clocks.PeriodicRealClock
+                                                    periodicClock(period=0.1)
         annotation (Placement(transformation(extent={{-78,-72},{-58,-52}})));
-      replaceable
-        Modelica_Synchronous.RealSignals.SampleAndHolds.SampleWithADeffects
-        sample2 constrainedby Interfaces.PartialRealSISOSampler(
+      replaceable Modelica_Synchronous.RealSignals.Sampler.SampleWithADeffects
+        sample2 constrainedby
+        Modelica_Synchronous.RealSignals.Interfaces.PartialSISOSampler(
         limited=true,
         quantized=true,
         yMax=10,
         bits=16)
         annotation (Placement(transformation(extent={{-68,4},{-56,16}})));
-      replaceable
-        Modelica_Synchronous.RealSignals.SampleAndHolds.HoldWithDAeffects
-        hold1 constrainedby Modelica_Synchronous.Interfaces.PartialRealSISOHold(
+      replaceable Modelica_Synchronous.RealSignals.Sampler.HoldWithDAeffects
+        hold1 constrainedby
+        Modelica_Synchronous.RealSignals.Interfaces.PartialSISOHold(
         computationalDelay=true,
         resolution=10,
         shiftCounter=2,
@@ -2409,9 +2440,10 @@ form of a PID controller by using the backward rectangular approximation (also c
         yMin=-9.5,
         bits=16)
         annotation (Placement(transformation(extent={{26,4},{38,16}})));
-      replaceable
-        Modelica_Synchronous.RealSignals.SampleAndHolds.SampleWithADeffects
-        sample1 constrainedby Interfaces.PartialRealSISOSampler(noisy=
+      replaceable Modelica_Synchronous.RealSignals.Sampler.SampleWithADeffects
+        sample1 constrainedby
+        Modelica_Synchronous.RealSignals.Interfaces.PartialSISOSampler(
+                                                                noisy=
             true, noise(noiseMax=0.01))
         annotation (Placement(transformation(extent={{38,-36},{26,-24}})));
       Modelica_Synchronous.RealSignals.NonPeriodic.PI
@@ -2420,7 +2452,7 @@ form of a PID controller by using the backward rectangular approximation (also c
         T=0.1,
         k=110)
         annotation (Placement(transformation(extent={{-14,0},{6,20}})));
-      Modelica_Synchronous.RealSignals.SampleAndHolds.AssignClock
+      Modelica_Synchronous.RealSignals.Sampler.AssignClock
                                               assignClock1
         annotation (Placement(transformation(extent={{8,-36},{-4,-24}})));
     equation
@@ -2488,7 +2520,6 @@ form of a PID controller by using the backward rectangular approximation (also c
               textString="reference"),
             Rectangle(extent={{-46,40},{14,-48}}, lineColor={255,0,0}),
             Rectangle(extent={{50,40},{132,-48}}, lineColor={255,0,0})}),
-                                          DymolaStoredErrors,
         Icon(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
@@ -2496,10 +2527,7 @@ form of a PID controller by using the backward rectangular approximation (also c
         Documentation(info="<HTML>
 </HTML>"),
         experiment(
-          StopTime=5,
-          __Dymola_fixedstepsize=0.001,
-          __Dymola_Algorithm="Dassl"),
-        experimentSetupOutput);
+          StopTime=5));
     end TestReplaceableSamplerHold;
 
     model TestSimulatedADC
@@ -2507,15 +2535,16 @@ form of a PID controller by using the backward rectangular approximation (also c
         offset=0.1,
         startTime=0)
         annotation (Placement(transformation(extent={{-92,40},{-72,60}})));
-      Clocks.PeriodicRealClock periodicRealClock(period=0.1)
+      Modelica_Synchronous.ClockSignals.Clocks.PeriodicRealClock
+                               periodicRealClock(period=0.1)
         annotation (Placement(transformation(extent={{-58,22},{-46,34}})));
-      Modelica_Synchronous.RealSignals.SampleAndHolds.SampleWithADeffects
+      Modelica_Synchronous.RealSignals.Sampler.SampleWithADeffects
                                                       sample1
         annotation (Placement(transformation(extent={{-44,44},{-32,56}})));
-      Modelica_Synchronous.RealSignals.SampleAndHolds.AssignClock
+      Modelica_Synchronous.RealSignals.Sampler.AssignClock
                                               assignClock1
         annotation (Placement(transformation(extent={{-16,44},{-4,56}})));
-      Modelica_Synchronous.RealSignals.SampleAndHolds.HoldWithDAeffects
+      Modelica_Synchronous.RealSignals.Sampler.HoldWithDAeffects
                                                     hold1(
         computationalDelay=true,
         shiftCounter=1,
@@ -2552,12 +2581,13 @@ form of a PID controller by using the backward rectangular approximation (also c
         offset=0.1,
         startTime=0)
         annotation (Placement(transformation(extent={{-92,40},{-72,60}})));
-      Clocks.PeriodicRealClock periodicRealClock(period=0.1)
+      Modelica_Synchronous.ClockSignals.Clocks.PeriodicRealClock
+                               periodicRealClock(period=0.1)
         annotation (Placement(transformation(extent={{-66,18},{-54,30}})));
-      Modelica_Synchronous.RealSignals.SampleAndHolds.SampleWithADeffects
+      Modelica_Synchronous.RealSignals.Sampler.SampleWithADeffects
                                                       sample1
         annotation (Placement(transformation(extent={{-58,44},{-46,56}})));
-      Modelica_Synchronous.RealSignals.SampleAndHolds.AssignClock
+      Modelica_Synchronous.RealSignals.Sampler.AssignClock
                                               assignClock1
         annotation (Placement(transformation(extent={{-30,44},{-18,56}})));
       Modelica_Synchronous.RealSignals.NonPeriodic.FractionalDelay
@@ -2589,7 +2619,8 @@ form of a PID controller by using the backward rectangular approximation (also c
     end TestCommunicationDelay;
 
     model TestEventClockWithIntegrator
-      Clocks.EventClock eventClock(useSolver=true, solverMethod="ExplicitEuler")
+      Modelica_Synchronous.ClockSignals.Clocks.EventClock
+                        eventClock(useSolver=true, solverMethod="ExplicitEuler")
         annotation (Placement(transformation(extent={{-36,23},{-24,37}})));
       Modelica.Blocks.Sources.BooleanPulse booleanPulse(width=60, period=0.1)
         annotation (Placement(transformation(extent={{-80,20},{-60,40}})));
@@ -2597,7 +2628,7 @@ form of a PID controller by using the backward rectangular approximation (also c
         annotation (Placement(transformation(extent={{20,60},{40,80}})));
       Modelica.Blocks.Sources.Sine sine(freqHz=2)
         annotation (Placement(transformation(extent={{-40,60},{-20,80}})));
-      Modelica_Synchronous.RealSignals.SampleAndHolds.SampleClocked
+      Modelica_Synchronous.RealSignals.Sampler.SampleClocked
                                                 sample1
         annotation (Placement(transformation(extent={{-6,64},{6,76}})));
     equation
@@ -2631,10 +2662,11 @@ form of a PID controller by using the backward rectangular approximation (also c
         annotation (Placement(transformation(extent={{20,60},{40,80}})));
       Modelica.Blocks.Sources.Sine sine(freqHz=2e5)
         annotation (Placement(transformation(extent={{-40,60},{-20,80}})));
-      Modelica_Synchronous.RealSignals.SampleAndHolds.SampleClocked
+      Modelica_Synchronous.RealSignals.Sampler.SampleClocked
                                                 sample1
         annotation (Placement(transformation(extent={{-6,64},{6,76}})));
-      Clocks.PeriodicExactClock periodicExactClock(
+      Modelica_Synchronous.ClockSignals.Clocks.PeriodicExactClock
+                                periodicExactClock(
         factor=2,
         useSolver=true,
         solverMethod="ExplicitEuler",
@@ -2807,20 +2839,26 @@ the initial value defined via parameter <b>y0</b>.
 
   package ForDocumentation
     model TheDifferentClocks
-      Clocks.PeriodicRealClock periodicRealClock(period=0.01)
+      Modelica_Synchronous.ClockSignals.Clocks.PeriodicRealClock
+                               periodicRealClock(period=0.01)
         annotation (Placement(transformation(extent={{-36,44},{-24,56}})));
-      Clocks.PeriodicExactClock periodicExactClock(factor=10, resolution=
+      Modelica_Synchronous.ClockSignals.Clocks.PeriodicExactClock
+                                periodicExactClock(factor=10, resolution=
             Modelica_Synchronous.Types.Resolution.ms)
         annotation (Placement(transformation(extent={{-36,14},{-24,26}})));
-      Clocks.EventClock eventClock
+      Modelica_Synchronous.ClockSignals.Clocks.EventClock
+                        eventClock
         annotation (Placement(transformation(extent={{-36,-16},{-24,-4}})));
       Modelica.Blocks.Sources.BooleanPulse booleanPulse
         annotation (Placement(transformation(extent={{-96,-20},{-76,0}})));
-      Interfaces.ClockOutput y1
+      Modelica_Synchronous.ClockSignals.Interfaces.ClockOutput
+                             y1
         annotation (Placement(transformation(extent={{0,44},{12,56}})));
-      Interfaces.ClockOutput y2
+      Modelica_Synchronous.ClockSignals.Interfaces.ClockOutput
+                             y2
         annotation (Placement(transformation(extent={{0,14},{12,26}})));
-      Interfaces.ClockOutput y3
+      Modelica_Synchronous.ClockSignals.Interfaces.ClockOutput
+                             y3
         annotation (Placement(transformation(extent={{0,-16},{12,-4}})));
     equation
       connect(booleanPulse.y, eventClock.u) annotation (Line(
@@ -2850,9 +2888,11 @@ the initial value defined via parameter <b>y0</b>.
     end TheDifferentClocks;
 
     model SubSampledClock
-      Clocks.PeriodicRealClock periodicRealClock(period=0.1)
+      Modelica_Synchronous.ClockSignals.Clocks.PeriodicRealClock
+                               periodicRealClock(period=0.1)
         annotation (Placement(transformation(extent={{-76,44},{-64,56}})));
-      ClockSignals.SubSample subSample(factor=3)
+      Modelica_Synchronous.ClockSignals.Sampler.SubSample
+                             subSample(factor=3)
         annotation (Placement(transformation(extent={{-44,44},{-32,56}})));
     equation
       connect(periodicRealClock.y, subSample.u) annotation (Line(
@@ -2885,7 +2925,7 @@ the initial value defined via parameter <b>y0</b>.
       "Connector of clocked, Real output signal (clock of y is faster als clock of u)"
       annotation (Placement(transformation(extent={{100,-10},{120,10}},
           rotation=0)));
-    Modelica_Synchronous.RealSignals.SampleAndHolds.SuperSampleInterpolated  superSampleIpo(final
+    Modelica_Synchronous.RealSignals.Sampler.SuperSampleInterpolated         superSampleIpo(final
         inferFactor=inferFactor, final factor=factor)
       annotation (Placement(transformation(extent={{-76,-6},{-64,6}})));
     Modelica_Synchronous.RealSignals.Periodic.MovingAverage
