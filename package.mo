@@ -1,5 +1,5 @@
 within ;
-package Modelica_Synchronous "Library of basic synchronous input/output control blocks
+package Modelica_Synchronous "Modelica_Synchronous (version 0.91) - Basic synchronous input/output control blocks
 that are triggered by clocks"
   package UsersGuide "User's Guide"
     extends Modelica.Icons.Information;
@@ -19,7 +19,7 @@ library is given at hand of several examples.
       extends Modelica.Icons.Information;
       annotation (Documentation(info="<html>
 <p>
-A central element of the Modelica_Synchronous library is a <b>clock</b>. 
+A central element of the Modelica_Synchronous library is a <b>clock</b>.
 Below, the most important information for clocks is summarized.
 For more details, see the Modelica Language Specification,
 Chapter 16 (for Modelica Language Version &ge; 3.3).
@@ -34,7 +34,7 @@ A <b>Clock</b> type is a base data type (introduced in Modelica 3.3, additionall
 </p>
 
 <p>
-Similarly to RealInput, RealOutput etc., clock input and output connectors, called ClockInput and ClockOutput, are defined in sublibrary 
+Similarly to RealInput, RealOutput etc., clock input and output connectors, called ClockInput and ClockOutput, are defined in sublibrary
 <a href=\"modelica://Modelica_Synchronous.Interfaces\">Interfaces</a>
 in order to propagate clocks via connections. A clock signal can be generated with
 one of the blocks of sublibrary
@@ -54,7 +54,7 @@ by default visualized with dotted grey lines.
 With the blocks of sublibrary
 <a href=\"modelica://Modelica_Synchronous.ClockSignals\">ClockSignals</a>
 a clock signal can be sub-sampled, super-sampled, or shift-sampled to generate
-a new clock signal. For example, with the following model, a periodic clock signal of 0.1 s 
+a new clock signal. For example, with the following model, a periodic clock signal of 0.1 s
 is sub-sampled with a factor 3 and therefore a clock signal with a period of 0.3 s
 is generated:
 </p>
@@ -75,30 +75,30 @@ clocks is <b>exact</b>, so it is guaranteed that at every 3rd tick of clock
 If a clock is associated to a clocked continuous-time partition, then an <b>integrator</b>
 has to be defined that is used to integrate the partition from the previous
 to the current clock tick. This is performed by setting parameter <b>useSolver</b>
-= <b>true</b> and defining the integration method as String with 
+= <b>true</b> and defining the integration method as String with
 parameter <b>solver</b>. Both parameters are in tab <b>Advanced</b>
 of one of the clock signal generating blocks.
 The possible integration methods are tool dependent. It is expected that
 at least the solvers \"External\" (= use the integrator selected in the
 simulation environment) and \"ExplicitEuler\" (= explicit Euler method)
-are supported by every tool. For an example, see 
+are supported by every tool. For an example, see
 <a href=\"modelica://Modelica_Synchronous.Examples.Systems.ControlledMixingUnit\">Examples.Systems.ControlledMixingUnit</a>.
 </p>
 
 <p>
 A clocked partition is a set of equations that depend
 on each other and where the boundary variables are marked
-with sample and hold operators. 
+with sample and hold operators.
 If a clocked partition contains no operator <b>der</b>, <b>delay</b>,
 <b>spatialDistribution</b>, no event related operators (with exception of <b>noEvent</b>(..)),
 and no <b>when</b>-clause with a Boolean condition, it is a <b>clocked discrete-time</b>
 partition, that is, it is a standard sampled data system that is described by difference equations.
 If a clocked partition is <b>not</b> a <b>clocked discrete-time</b> partition and
-it contains neither operator <b>previous</b> nor operator 
-<b>interval</b>, it is a 
-<b>clocked discretized continuous-time</b> partition. 
+it contains neither operator <b>previous</b> nor operator
+<b>interval</b>, it is a
+<b>clocked discretized continuous-time</b> partition.
 Such a partition has to be solved with a <b>solver</b> method.
-It is an error, if none of the two properties hold, e.g., if operators 
+It is an error, if none of the two properties hold, e.g., if operators
 <b>previous</b> and <b>der</b> are both used in the same partition.
 In a clocked discrete-time partition all event generating mechanisms
 do no longer apply. Especially neither relations, nor one of the built-in event
@@ -3273,7 +3273,7 @@ then only one of the clocks can be defined with PeriodicRealClock.
 For an introduction to clocks see
 <a href=\"modelica://Modelica_Synchronous.UsersGuide.Clocks\">UsersGuide.Clocks</a>.
 If exact, integer based, time synchronization with absolute period definitions is
-desired, use block 
+desired, use block
 <a href=\"modelica://Modelica_Synchronous.Clocks.PeriodicExactClock\">PeriodicExactClock</a>
 to generate a periodic clock signal.
 </p>
@@ -3283,9 +3283,9 @@ to generate a periodic clock signal.
 If a clock is associated to a clocked continuous-time partition, then an <b>integrator</b>
 has to be defined that is used to integrate the partition from the previous
 to the current clock tick. This is performed by setting parameter <b>useSolver</b>
-= <b>true</b> and defining the integration method as String with 
+= <b>true</b> and defining the integration method as String with
 parameter <b>solver</b>. Both parameters are in tab <b>Advanced</b>.
-For an example, see 
+For an example, see
 <a href=\"modelica://Modelica_Synchronous.Examples.Systems.ControlledMixingUnit\">Examples.Systems.ControlledMixingUnit</a>.
 </p>
 </html>"));
@@ -3350,8 +3350,8 @@ For an example, see
 <p>
 This component generates a periodic clock that starts ticking when
 the simulation starts. The <b>period</b> is defined as the product
-of a resolution, defined with enumeration 
-<a href=\"modelica://Modelica_Synchronous.Types.Resolution\">Resolution</a>, 
+of a resolution, defined with enumeration
+<a href=\"modelica://Modelica_Synchronous.Types.Resolution\">Resolution</a>,
 and Integer parameter <b>factor</b>. Internally, the period is
 represented as a rational number. All clocks with rational number definitions
 are exactly time synchronized to each other.
@@ -3377,9 +3377,9 @@ For an introduction to clocks see
 If a clock is associated to a clocked continuous-time partition, then an <b>integrator</b>
 has to be defined that is used to integrate the partition from the previous
 to the current clock tick. This is performed by setting parameter <b>useSolver</b>
-= <b>true</b> and defining the integration method as String with 
+= <b>true</b> and defining the integration method as String with
 parameter <b>solver</b>. Both parameters are in tab <b>Advanced</b>.
-For an example, see 
+For an example, see
 <a href=\"modelica://Modelica_Synchronous.Examples.Systems.ControlledMixingUnit\">Examples.Systems.ControlledMixingUnit</a>.
 </p>
 </html>"));
@@ -3423,9 +3423,9 @@ For an introduction to clocks see
 If a clock is associated to a clocked continuous-time partition, then an <b>integrator</b>
 has to be defined that is used to integrate the partition from the previous
 to the current clock tick. This is performed by setting parameter <b>useSolver</b>
-= <b>true</b> and defining the integration method as String with 
+= <b>true</b> and defining the integration method as String with
 parameter <b>solver</b>. Both parameters are in tab <b>Advanced</b>.
-For an example, see 
+For an example, see
 <a href=\"modelica://Modelica_Synchronous.Examples.Systems.ControlledMixingUnit\">Examples.Systems.ControlledMixingUnit</a>.
 </p>
 </html>"));
@@ -9268,9 +9268,9 @@ in blocks of the Modelica_Synchronous package.
 
   annotation (preferredView="info",
   uses(Modelica(version="3.2")),
-    version="0.9",
-    versionBuild=3,
-    versionDate="2012-08-28",
+    version="0.91",
+    versionBuild=0,
+    versionDate="2012-09-20",
     dateModified = "2012-09-20 09:27:58Z",
     revisionId="$Id::                                       $",
   Documentation(info="<html>
