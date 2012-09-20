@@ -5,11 +5,28 @@ that are triggered by clocks"
     extends Modelica.Icons.Information;
     package GettingStarted "Getting started"
       extends Modelica.Icons.Information;
-      class Clocks "Clocks"
-        extends Modelica.Icons.Information;
-        annotation (Documentation(info="<html>
+      annotation (Documentation(info="<html>
 <p>
-A <b>Clock</b> type is a base data type (introduced in Modelica 3.3, additionally to Real, Integer, Boolean, String) that defines when a particular partition consisting of a set of equations is active. Every variable and every equation is either continuous-time or is associated exactly to one clock. This feature is visualized in the figure below where c(ti) is a clock that is active at particular time instants ti and r(ti) is a variable that is associated to this clock. A clocked variable has only a value when the corresponding clock is active:
+In this section, a first introduction to the Modelica_Synchronous
+library is given at hand of several examples.
+<br>
+(needs still to be provided).
+</p>
+</html>"));
+    end GettingStarted;
+
+    class Clocks "Clocks"
+      extends Modelica.Icons.Information;
+      annotation (Documentation(info="<html>
+<p>
+A central element of the Modelica_Synchronous library is a <b>clock</b>. 
+Below, the most important information for clocks is summarized.
+For more details, see the Modelica Language Specification,
+Chapter 16 (for Modelica Language Version &ge; 3.3).
+</p>
+
+<p>
+A <b>Clock</b> type is a base data type (introduced in Modelica 3.3, additionally to Real, Integer, Boolean, String) that defines when a particular partition consisting of a set of equations is active. Starting with Modelica Language Version 3.3, every variable and every equation is either continuous-time or is associated exactly to one clock. This feature is visualized in the figure below where c(ti) is a clock that is active at particular time instants ti and r(ti) is a variable that is associated to this clock. A clocked variable has only a value when the corresponding clock is active:
 </p>
 
 <p>
@@ -54,22 +71,41 @@ clocks is <b>exact</b>, so it is guaranteed that at every 3rd tick of clock
 \"periodicRealClock.y\", the clock \"subSample.y\" is active.
 </p>
 
-
-
-</html>
-"));
-      end Clocks;
-      annotation (Documentation(info="<html>
 <p>
-In this section, a first introduction to the Modelica_Synchronous
-library is given at hand of several examples.
-<br>
-(needs still to be provided).
+If a clock is associated to a clocked continuous-time partition, then an <b>integrator</b>
+has to be defined that is used to integrate the partition from the previous
+to the current clock tick. This is performed by setting parameter <b>useSolver</b>
+= <b>true</b> and defining the integration method as String with 
+parameter <b>solver</b>. Both parameters are in tab <b>Advanced</b>
+of one of the clock signal generating blocks.
+The possible integration methods are tool dependent. It is expected that
+at least the solvers \"External\" (= use the integrator selected in the
+simulation environment) and \"ExplicitEuler\" (= explicit Euler method)
+are supported by every tool. For an example, see 
+<a href=\"modelica://Modelica_Synchronous.Examples.Systems.ControlledMixingUnit\">Examples.Systems.ControlledMixingUnit</a>.
 </p>
 
-</html>
-"));
-    end GettingStarted;
+<p>
+A clocked partition is a set of equations that depend
+on each other and where the boundary variables are marked
+with sample and hold operators. 
+If a clocked partition contains no operator <b>der</b>, <b>delay</b>,
+<b>spatialDistribution</b>, no event related operators (with exception of <b>noEvent</b>(..)),
+and no <b>when</b>-clause with a Boolean condition, it is a <b>clocked discrete-time</b>
+partition, that is, it is a standard sampled data system that is described by difference equations.
+If a clocked partition is <b>not</b> a <b>clocked discrete-time</b> partition and
+it contains neither operator <b>previous</b> nor operator 
+<b>interval</b>, it is a 
+<b>clocked discretized continuous-time</b> partition. 
+Such a partition has to be solved with a <b>solver</b> method.
+It is an error, if none of the two properties hold, e.g., if operators 
+<b>previous</b> and <b>der</b> are both used in the same partition.
+In a clocked discrete-time partition all event generating mechanisms
+do no longer apply. Especially neither relations, nor one of the built-in event
+triggering operators will trigger an event.
+</p>
+</html>"));
+    end Clocks;
 
     class Literature "Literature"
       extends Modelica.Icons.Information;
@@ -77,12 +113,13 @@ library is given at hand of several examples.
 <p>
 This library is based on the following references:
 </p>
+
 <dl>
 <dt>Astr&ouml;m K.J., Wittenmark B. (1997):</dt>
 <dd> <b>Computer Controlled Systems: Theory and Design</b>.
      Prentice Hall. 3rd edition.<br>&nbsp;</dd>
 
-<dt>Elmqvist H., Otter M., and Mattsson S.E. (2012):<dt>
+<dt>Elmqvist H., Otter M., and Mattsson S.E. (2012):</dt>
 <dd><b>Fundamentals of Synchronous Control in Modelica.</b>
     Proceedings of 9th International Modelica Conference, Munich,
     Germany, Sep. 3-5.<br>&nbsp;</dd>
@@ -96,14 +133,9 @@ This library is based on the following references:
 <dd> <b>Praxisgerechte Modelica-Bibliothek f&uuml;r Abtastregler</b>.
      Diplomarbeit, HTWK Leipzig, Fachbereich Elektro- und
      Informationstechnik, supervised by Prof. M&uuml;ller (HTWK)
-     and Prof. Martin Otter (DLR), 12 Nov. 2002.
-     <br>&nbsp;</dd>
+     and Prof. Martin Otter (DLR), 12 Nov. 2002.<br>&nbsp;</dd>
 </dl>
-
-
-
-</html>
-"));
+</html>"));
     end Literature;
 
     package ReleaseNotes "Release notes"
@@ -114,16 +146,13 @@ This library is based on the following references:
 <p>
 First public version of the library.
 </p>
-
-</html>
-"));
+</html>"));
       end Version_0_9;
       annotation (Documentation(info="<html>
 <p>
 This section summarizes the changes that have been performed
 on the Modelica_Synchronous library.
 </p>
-
 </html>"));
     end ReleaseNotes;
 
@@ -676,8 +705,7 @@ Modelica Language Specification?</b></p>
 if you are not the copyright-holder, since article 2c) does not allow
 a selling fee for a (in this case physical) copy. However, mere
 printing and shipping costs may be recovered.</p>
-</html>
-"));
+</html>"));
 
   end ModelicaLicense2;
 
@@ -692,9 +720,7 @@ Every tool that supports these language
 elements, as well as basic language elements of Modelica 3.1, should be
 able to support this library.
 </p>
-
-</html>
-"));
+</html>"));
     end Requirements;
 
     class Contact "Contact"
@@ -721,8 +747,7 @@ able to support this library.
      Without this prototype,
      it would not have been possible to develop the Modelica_Synchronous library.</li>
 </ul>
-</html>
-"));
+</html>"));
     end Contact;
     annotation (DocumentationClass=true, Documentation(info="<html>
 <p>
@@ -748,8 +773,6 @@ the library and has the following content:
     provides information about the authors of the library as well as
     acknowledgments.</li>
 </ol>
-
-
 </html>"));
   end UsersGuide;
 
@@ -760,71 +783,6 @@ extends Modelica.Icons.Package;
   package Examples
   "Library of examples to demonstrate the usage of package Modelica_Synchronous"
     extends Modelica.Icons.ExamplesPackage;
-
-    package Effects "Examples demonstrating specific effects"
-        extends Modelica.Icons.ExamplesPackage;
-      block SuperSampling "Different ways to super sample a signal"
-      extends Modelica.Icons.Example;
-        parameter Integer factor=4 "Super sampling factor";
-
-        Modelica.Blocks.Sources.Sine sine(freqHz=2,
-          offset=0.1,
-          startTime=0.0)
-          annotation (Placement(transformation(extent={{-60,0},{-40,20}})));
-        Modelica_Synchronous.RealSignals.SampleAndHolds.SuperSample
-                                                superSample1(inferFactor=false, factor=
-              factor) annotation (Placement(transformation(extent={{24,34},{36,46}})));
-        Modelica_Synchronous.RealSignals.SampleAndHolds.SampleClocked
-                                                  sample1
-          annotation (Placement(transformation(extent={{-24,4},{-12,16}})));
-        Clocks.PeriodicRealClock periodicRealClock(period=0.02)
-          annotation (Placement(transformation(extent={{-54,-34},{-42,-22}})));
-        Modelica_Synchronous.RealSignals.SampleAndHolds.Utilities.UpSample
-                                                       upSample1(
-            inferFactor=false, factor=factor)
-          annotation (Placement(transformation(extent={{22,4},{34,16}})));
-        Modelica_Synchronous.RealSignals.SampleAndHolds.SuperSampleInterpolated
-          superSampleIpo1(inferFactor=false, factor=factor)
-          annotation (Placement(transformation(extent={{24,-26},{36,-14}})));
-        Modelica_Synchronous.RealSignals.Periodic.MovingAverage
-                               movingAverage(n=factor)
-          annotation (Placement(transformation(extent={{58,-30},{78,-10}})));
-      equation
-        connect(sine.y, sample1.u) annotation (Line(
-            points={{-39,10},{-25.2,10}},
-            color={0,0,127},
-            smooth=Smooth.None));
-        connect(periodicRealClock.y, sample1.clock) annotation (Line(
-            points={{-41.4,-28},{-18,-28},{-18,2.8}},
-            color={175,175,175},
-            pattern=LinePattern.Dot,
-            thickness=0.5,
-            smooth=Smooth.None));
-        connect(sample1.y, superSample1.u) annotation (Line(
-            points={{-11.4,10},{0,10},{0,40},{22.8,40}},
-            color={0,0,127},
-            smooth=Smooth.None));
-        connect(sample1.y, upSample1.u)
-                                       annotation (Line(
-            points={{-11.4,10},{20.8,10}},
-            color={0,0,127},
-            smooth=Smooth.None));
-        connect(sample1.y, superSampleIpo1.u)
-                                           annotation (Line(
-            points={{-11.4,10},{0,10},{0,-20},{22.8,-20}},
-            color={0,0,127},
-            smooth=Smooth.None));
-        connect(superSampleIpo1.y, movingAverage.u) annotation (Line(
-            points={{36.6,-20},{56,-20}},
-            color={0,0,127},
-            smooth=Smooth.None));
-        annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-                  -100},{100,100}}),
-                            graphics),
-          experiment(StopTime=0.5),
-          __Dymola_experimentSetupOutput);
-      end SuperSampling;
-    end Effects;
 
     package SimpleControlledDrive
     "Example of a simple controlled drive with different ways to define the sampling"
@@ -1170,7 +1128,8 @@ extends Modelica.Icons.Package;
           T=0.1,
           k=110)
           annotation (Placement(transformation(extent={{-14,0},{6,20}})));
-      Clocks.PeriodicExactClock periodicClock(factor=100)
+      Clocks.PeriodicExactClock periodicClock(factor=100, resolution=
+            Modelica_Synchronous.Types.Resolution.ms)
         annotation (Placement(transformation(extent={{-100,-46},{-88,-34}})));
       equation
         connect(speed.flange, load.flange_b)       annotation (Line(
@@ -1210,7 +1169,7 @@ extends Modelica.Icons.Package;
             color={0,0,127},
             smooth=Smooth.None));
       connect(periodicClock.y, sample2.clock) annotation (Line(
-          points={{-87.4,-40},{-74,-40},{-74,-40},{-62,-40},{-62,2.8}},
+          points={{-87.4,-40},{-62,-40},{-62,2.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
           thickness=0.5,
@@ -2001,9 +1960,11 @@ extends Modelica.Icons.Package;
         Modelica_Synchronous.RealSignals.SampleAndHolds.SuperSample
                                                 super1(inferFactor=true)
           annotation (Placement(transformation(extent={{-28,4},{-16,16}})));
-        Clocks.PeriodicExactClock slowClock(factor=100) annotation (Placement(
+        Clocks.PeriodicExactClock slowClock(factor=100, resolution=
+            Modelica_Synchronous.Types.Resolution.ms)   annotation (Placement(
               transformation(extent={{-128,-74},{-116,-62}})));
-        Clocks.PeriodicExactClock fastClock(factor=20)
+        Clocks.PeriodicExactClock fastClock(factor=20, resolution=
+            Modelica_Synchronous.Types.Resolution.ms)
           annotation (Placement(transformation(extent={{22,-76},{34,-64}})));
       equation
         connect(speed.flange, load.flange_b)       annotation (Line(
@@ -2113,6 +2074,71 @@ extends Modelica.Icons.Package;
       end AbsoluteClocks;
 
     end CascadeControlledDrive;
+
+    package Effects "Examples demonstrating specific effects"
+        extends Modelica.Icons.ExamplesPackage;
+      model SuperSampling "Different ways to super sample a signal"
+      extends Modelica.Icons.Example;
+        parameter Integer factor=4 "Super sampling factor";
+
+        Modelica.Blocks.Sources.Sine sine(freqHz=2,
+          offset=0.1,
+          startTime=0.0)
+          annotation (Placement(transformation(extent={{-60,0},{-40,20}})));
+        Modelica_Synchronous.RealSignals.SampleAndHolds.SuperSample
+                                                superSample1(inferFactor=false, factor=
+              factor) annotation (Placement(transformation(extent={{24,34},{36,46}})));
+        Modelica_Synchronous.RealSignals.SampleAndHolds.SampleClocked
+                                                  sample1
+          annotation (Placement(transformation(extent={{-24,4},{-12,16}})));
+        Clocks.PeriodicRealClock periodicRealClock(period=0.02)
+          annotation (Placement(transformation(extent={{-54,-34},{-42,-22}})));
+        Modelica_Synchronous.RealSignals.SampleAndHolds.Utilities.UpSample
+                                                       upSample1(
+            inferFactor=false, factor=factor)
+          annotation (Placement(transformation(extent={{22,4},{34,16}})));
+        Modelica_Synchronous.RealSignals.SampleAndHolds.SuperSampleInterpolated
+          superSampleIpo1(inferFactor=false, factor=factor)
+          annotation (Placement(transformation(extent={{24,-26},{36,-14}})));
+        Modelica_Synchronous.RealSignals.Periodic.MovingAverage
+                               movingAverage(n=factor)
+          annotation (Placement(transformation(extent={{58,-30},{78,-10}})));
+      equation
+        connect(sine.y, sample1.u) annotation (Line(
+            points={{-39,10},{-25.2,10}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(periodicRealClock.y, sample1.clock) annotation (Line(
+            points={{-41.4,-28},{-18,-28},{-18,2.8}},
+            color={175,175,175},
+            pattern=LinePattern.Dot,
+            thickness=0.5,
+            smooth=Smooth.None));
+        connect(sample1.y, superSample1.u) annotation (Line(
+            points={{-11.4,10},{0,10},{0,40},{22.8,40}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(sample1.y, upSample1.u)
+                                       annotation (Line(
+            points={{-11.4,10},{20.8,10}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(sample1.y, superSampleIpo1.u)
+                                           annotation (Line(
+            points={{-11.4,10},{0,10},{0,-20},{22.8,-20}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(superSampleIpo1.y, movingAverage.u) annotation (Line(
+            points={{36.6,-20},{56,-20}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                  -100},{100,100}}),
+                            graphics),
+          experiment(StopTime=0.5),
+          __Dymola_experimentSetupOutput);
+      end SuperSampling;
+    end Effects;
 
     package Systems "Complete systems"
       extends Modelica.Icons.ExamplesPackage;
@@ -2380,7 +2406,9 @@ extends Modelica.Icons.Package;
                 textString="Load torque")}),
                                        Icon(coordinateSystem(preserveAspectRatio=true,
                         extent={{-100,-100},{100,100}}),
-                                            graphics));
+                                            graphics),
+        experiment(StopTime=1.1),
+        __Dymola_experimentSetupOutput);
       end EngineThrottleControl;
 
       package Utilities
@@ -3205,7 +3233,7 @@ initial equation
     "Generates a periodic clock signal with a period defined by a Real number"
       parameter Modelica.SIunits.Time period
       "Period of clock (defined as Real number)"   annotation(Evaluate=true);
-      extends Modelica_Synchronous.Interfaces.PartialClock;
+      extends Modelica_Synchronous.Interfaces.PartialPeriodicClock;
     equation
       if useSolver then
          y = Clock(Clock(period), solverMethod=solverMethod);
@@ -3235,22 +3263,41 @@ initial equation
               origin={52,60},
               pattern=LinePattern.None,
               lineColor={0,0,0},
-              fillColor={95,95,95})}),
+              fillColor={95,95,95}),
+            Text(
+              visible=useSolver,
+              extent={{-300,-180},{300,-245}},
+              lineColor={0,0,0},
+              textString="%solverMethod")}),
         Diagram,
         Documentation(info="<html>
 <p>
 This component generates a periodic clock that starts ticking when
 the simulation starts. The <b>period</b> is defined in seconds
-by a <b>Real</b> number.
+by a <b>Real</b> number. If clocks are synchronized relatively to each other
+then only one of the clocks can be defined with PeriodicRealClock.
 </p>
 
 <p>
 For an introduction to clocks see
-<a href=\"modelica://Modelica_Synchronous.UsersGuide.GettingStarted.Clocks\">UsersGuide.GettingStarted.Clocks</a>.
+<a href=\"modelica://Modelica_Synchronous.UsersGuide.Clocks\">UsersGuide.Clocks</a>.
+If exact, integer based, time synchronization with absolute period definitions is
+desired, use block 
+<a href=\"modelica://Modelica_Synchronous.Clocks.PeriodicExactClock\">PeriodicExactClock</a>
+to generate a periodic clock signal.
 </p>
 
-</html>
-"));
+
+<p>
+If a clock is associated to a clocked continuous-time partition, then an <b>integrator</b>
+has to be defined that is used to integrate the partition from the previous
+to the current clock tick. This is performed by setting parameter <b>useSolver</b>
+= <b>true</b> and defining the integration method as String with 
+parameter <b>solver</b>. Both parameters are in tab <b>Advanced</b>.
+For an example, see 
+<a href=\"modelica://Modelica_Synchronous.Examples.Systems.ControlledMixingUnit\">Examples.Systems.ControlledMixingUnit</a>.
+</p>
+</html>"));
     end PeriodicRealClock;
 
     block PeriodicExactClock
@@ -3261,7 +3308,7 @@ For an introduction to clocks see
       "Sample factor with respect to resolution"                                 annotation(Evaluate=true);
       parameter Modelica_Synchronous.Types.Resolution resolution=R.ms
       "Clock resolution"   annotation(Evaluate=true, __Dymola_editText=false);
-      extends Modelica_Synchronous.Interfaces.PartialClock;
+      extends Modelica_Synchronous.Interfaces.PartialPeriodicClock;
   protected
       constant Integer conversionTable[8]={365*24*60*60, 24*60*60, 60*60, 60, 1, 1000, 1000*1000, 1000*1000*1000}
       "Table to convert from Resolution to Integer clock resolution";
@@ -3301,12 +3348,50 @@ For an introduction to clocks see
               rotation=45,
               origin={-50,-120},
               lineColor={95,95,95},
-              fillColor={95,95,95})}),
+              fillColor={95,95,95}),
+            Text(
+              visible=useSolver,
+              extent={{-300,-180},{300,-245}},
+              lineColor={0,0,0},
+              textString="%solverMethod")}),
         Diagram,
-        Documentation(info="<HTML>
+        Documentation(info="<html>
+<p>
+This component generates a periodic clock that starts ticking when
+the simulation starts. The <b>period</b> is defined as the product
+of a resolution, defined with enumeration 
+<a href=\"modelica://Modelica_Synchronous.Types.Resolution\">Resolution</a>, 
+and Integer parameter <b>factor</b>. Internally, the period is
+represented as a rational number. All clocks with rational number definitions
+are exactly time synchronized to each other.
+</p>
 
-</HTML>
-"));
+<p>
+Example:
+</p>
+
+<pre>
+  import M = Modelica_Synchronous;
+  M.Clocks.PeriodicExactClock periodicClock(factor=10,
+                                            resolution=M.Types.Resolution.ms);
+  // Clock ticks every 1/100 seconds
+</pre>
+
+<p>
+For an introduction to clocks see
+<a href=\"modelica://Modelica_Synchronous.UsersGuide.Clocks\">UsersGuide.Clocks</a>.
+</p>
+
+<p>
+If a clock is associated to a clocked continuous-time partition, then an <b>integrator</b>
+has to be defined that is used to integrate the partition from the previous
+to the current clock tick. This is performed by setting parameter <b>useSolver</b>
+= <b>true</b> and defining the integration method as String with 
+parameter <b>solver</b>. Both parameters are in tab <b>Advanced</b>.
+For an example, see 
+<a href=\"modelica://Modelica_Synchronous.Examples.Systems.ControlledMixingUnit\">Examples.Systems.ControlledMixingUnit</a>.
+</p>
+</html>"));
     end PeriodicExactClock;
 
     block EventClock
@@ -3323,20 +3408,43 @@ For an introduction to clocks see
 
       annotation (
         Icon(coordinateSystem(preserveAspectRatio=true,  extent={{-100,-100},{100,100}}, initialScale=0.06),
-                        graphics),
+                        graphics={
+            Text(
+              visible=useSolver,
+              extent={{-300,-110},{300,-175}},
+              lineColor={0,0,0},
+              textString="%solverMethod")}),
         Diagram,
-        Documentation(info="<HTML>
+        Documentation(info="<html>
+<p>
+This component generates a clock signal triggered by a continuous-time
+Boolean input signal u: Whenever the Boolean input signal <b>u</b>
+changes from <b>false</b> to <b>true</b>, then the output
+clock signal <b>y</b> ticks.
+</p>
 
-</HTML>
-"));
+<p>
+For an introduction to clocks see
+<a href=\"modelica://Modelica_Synchronous.UsersGuide.Clocks\">UsersGuide.Clocks</a>.
+</p>
+
+<p>
+If a clock is associated to a clocked continuous-time partition, then an <b>integrator</b>
+has to be defined that is used to integrate the partition from the previous
+to the current clock tick. This is performed by setting parameter <b>useSolver</b>
+= <b>true</b> and defining the integration method as String with 
+parameter <b>solver</b>. Both parameters are in tab <b>Advanced</b>.
+For an example, see 
+<a href=\"modelica://Modelica_Synchronous.Examples.Systems.ControlledMixingUnit\">Examples.Systems.ControlledMixingUnit</a>.
+</p>
+</html>"));
     end EventClock;
   annotation (Documentation(info="<html>
 <p>
 This package contains blocks that generate clock signals. For an introduction
 to clocks see
-<a href=\"modelica://Modelica_Synchronous.UsersGuide.GettingStarted.Clocks\">UsersGuide.GettingStarted.Clocks</a>.
+<a href=\"modelica://Modelica_Synchronous.UsersGuide.Clocks\">UsersGuide.Clocks</a>.
 </p>
-
 </html>"));
   end Clocks;
 
@@ -3644,9 +3752,11 @@ package ClockSignals "Library of blocks for clocked signals"
   end ShiftSample;
   annotation (Documentation(info="<html>
 <p>
-A <b>Clock</b> type is a base data type (introduced in Modelica 3., additionally to Real, Integer, Boolean, String) that defines when a particular partition of equations of a model is active. Every variable and every equation is either continuous-time or is associated exactly to one clock. This feature is visualized in the figure below where c(ti) is a clock that is active at particular time instants and r(ti) is a variable that is associated to this clock. A clocked variable has only a value when the corresponding clock is active:
+This package contains blocks that transform a clock signal, by
+sub-, super-, and shift-sampling a clock. For an introduction
+to clocks see
+<a href=\"modelica://Modelica_Synchronous.UsersGuide.Clocks\">UsersGuide.Clocks</a>.
 </p>
-
 </html>"));
 end ClockSignals;
 
@@ -5028,10 +5138,13 @@ package RealSignals "Library of clocked blocks for Real signals"
                 iconTransformation(extent={{100,-10},{120,10}})));
       protected
           Boolean y2(start=y_start);
-          Boolean y3;
+          Boolean y3(start=y_start, fixed=true);
+          Real uu annotation(HideResult=true);
         equation
-          // dummy condition to relate clock of u with y2
-          y2 = if u > 0 then not previous(y2) else not previous(y2);
+          when Clock() then
+             uu = u "Dummy assignment to relate clock of u with y2";
+             y2 = not previous(y2);
+          end when;
           y3 = hold(y2);
           y = change(y3);
           annotation (
@@ -5585,11 +5698,10 @@ y is set to parameter y_start.
       parameter Real C[:, size(A, 1)] "Matrix C of state space model";
       parameter Real D[size(C, 1), size(B, 2)]=zeros(size(C, 1), size(B, 2))
         "Matrix D of state space model";
-
       extends Modelica_Synchronous.Interfaces.PartialRealClockedMIMO(
-                                                                 final nin=size(B, 2), final
-          nout=size(C, 1));
-      output Real x[size(A, 1)] "State vector";
+                 final nin=size(B, 2),
+                 final nout=size(C, 1));
+      output Real x[size(A, 1)](each start=0.0) "State vector";
 
     equation
       when Clock() then
@@ -5692,8 +5804,8 @@ results in the following equations:
       parameter Real b[:]={1} "Numerator coefficients of transfer function.";
       parameter Real a[:] "Denominator coefficients of transfer function.";
 
-      output Real x[size(a, 1) - 1](each start=0)
-        "State of transfer function from controller canonical form";
+      output Real x[size(a, 1) - 1](each start=0.0)
+        "State vector of controller canonical form";
     protected
       parameter Integer nb=size(b, 1) "Size of Numerator of transfer function";
       parameter Integer na=size(a, 1)
@@ -5751,7 +5863,7 @@ states can be set as start values of <b>x</b>.<p>
 </ul>
 </html>"),
         Icon(coordinateSystem(
-            preserveAspectRatio=true,
+            preserveAspectRatio=false,
             extent={{-100,-100},{100,100}},
             grid={2,2}), graphics={
             Line(points={{82,0},{-84,0}}, color={0,0,127}),
@@ -5762,7 +5874,15 @@ states can be set as start values of <b>x</b>.<p>
             Text(
               extent={{-90,-12},{90,-90}},
               lineColor={0,0,127},
-              textString="a(z)")}),
+              textString="a(z)"),
+            Text(
+              extent={{-200,-105},{200,-145}},
+              lineColor={0,0,0},
+              textString="b=%b"),
+            Text(
+              extent={{-200,-150},{200,-190}},
+              lineColor={0,0,0},
+              textString="a=%a")}),
         Diagram(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
@@ -6326,6 +6446,15 @@ The function is used to calculate the Kaiser-window via
 
     end Internal;
   end Periodic;
+  annotation (Documentation(info="<html>
+<p>
+This package contains blocks that operate on clocked Real signals.
+Especially blocks are provided to transform from continuous-time Real signals to
+clocked Real signals (with Sampler blocks) and vice versa
+(with Hold blocks), as well as to transform a clocked Real signal to
+another (time-synchronized) clock.
+</p>
+</html>"));
 end RealSignals;
 
 
@@ -7304,10 +7433,13 @@ package BooleanSignals "Library of clocked blocks for Boolean signals"
                 iconTransformation(extent={{100,-10},{120,10}})));
       protected
           Boolean y2(start=y_start);
-          Boolean y3;
+          Boolean y3(start=y_start, fixed=true);
+          Boolean uu annotation(HideResult=true);
         equation
-          // dummy condition to relate clock of u with y2
-          y2 = if u then not previous(y2) else not previous(y2);
+          when Clock() then
+             uu = u "Dummy assignment to relate clock of u with y2";
+             y2 = not previous(y2);
+          end when;
           y3 = hold(y2);
           y = change(y3);
           annotation (
@@ -7504,6 +7636,15 @@ y is set to parameter y_start.
     end FractionalDelay;
 
   end NonPeriodic;
+  annotation (Documentation(info="<html>
+<p>
+This package contains blocks that operate on clocked Boolean signals.
+Especially blocks are provided to transform from continuous-time Boolean signals to
+clocked Boolean signals (with Sampler blocks) and vice versa
+(with Hold blocks), as well as to transform a clocked Boolean signal to
+another (time-synchronized) clock.
+</p>
+</html>"));
 end BooleanSignals;
 
 
@@ -8451,10 +8592,13 @@ package IntegerSignals "Library of clocked blocks for Integer signals"
                 iconTransformation(extent={{100,-10},{120,10}})));
       protected
           Boolean y2(start=y_start);
-          Boolean y3;
+          Boolean y3(start=y_start, fixed=true);
+          Real uu annotation(HideResult=true);
         equation
-          // dummy condition to relate clock of u with y2
-          y2 = if u > 0 then not previous(y2) else not previous(y2);
+          when Clock() then
+             uu = u "Dummy assignment to relate clock of u with y2";
+             y2 = not previous(y2);
+          end when;
           y3 = hold(y2);
           y = change(y3);
           annotation (
@@ -8648,6 +8792,15 @@ y is set to parameter y_start.
     end FractionalDelay;
 
   end NonPeriodic;
+  annotation (Documentation(info="<html>
+<p>
+This package contains blocks that operate on clocked Integer signals.
+Especially blocks are provided to transform from continuous-time Integer signals to
+clocked Integer signals (with Sampler blocks) and vice versa
+(with Hold blocks), as well as to transform a clocked Integer signal to
+another (time-synchronized) clock.
+</p>
+</html>"));
 end IntegerSignals;
 
 
@@ -8790,17 +8943,19 @@ Connector with one output signal of type Boolean.
               rotation=135,
               origin={122,-48},
               lineColor={95,95,95},
-              fillColor={95,95,95}),
-            Text(visible=useSolver,
-              extent={{-100,-12},{100,-60}},
-              lineColor={95,95,95},
-              textString="%solverMethod")}),
+              fillColor={95,95,95})}),
         Diagram,
         Documentation(info="<HTML>
 
 </HTML>
 "));
     end PartialClock;
+
+    partial block PartialPeriodicClock
+    "Icon, connector, and solver method of a block that generates a periodic clock"
+      extends Modelica_Synchronous.Interfaces.PartialClock;
+
+    end PartialPeriodicClock;
 
     partial block BooleanSamplerIcon
     "Basic graphical layout of block used for sampling of Boolean signals"
@@ -9105,34 +9260,6 @@ Connector with one output signal of type Boolean.
           height=0.43));
     end ClockedBlockIcon;
 
-    partial block ClockedBlockSmallIcon
-    "Basic graphical layout of block where at least one input or output is a clocked variable and the icon is smaller as a standard icon"
-
-      annotation (
-        Coordsys(
-          extent=[-100, -100; 100, 100],
-          grid=[2, 2],
-          component=[20, 20]),
-        Icon(
-          coordinateSystem(
-            preserveAspectRatio=true,
-            extent={{-100,-100},{100,100}},
-            initialScale=0.06),
-          graphics={Rectangle(
-              extent={{-100,100},{100,-100}},
-              lineColor={95,95,95},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid), Text(
-              extent={{-200,178},{200,110}},
-              lineColor={0,0,255},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              textString="%name")}),
-        Diagram(coordinateSystem(
-            preserveAspectRatio=true,
-            extent={{-100,-100},{100,100}},
-            initialScale=0.06)));
-    end ClockedBlockSmallIcon;
 
     partial block PartialBooleanClockedSISO
     "Block with clocked single input and clocked single output Boolean signals"
@@ -9207,12 +9334,6 @@ Connector with one output signal of type Boolean.
       annotation (Icon(graphics));
     end PartialRealClockedMIMO;
 
-    partial block PartialIntegerNoise
-    "Interface for SISO blocks with Integer signals that add noise to the signal"
-      extends Modelica_Synchronous.Interfaces.PartialIntegerClockedSISO;
-      annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-                -100},{100,100}}), graphics));
-    end PartialIntegerNoise;
 
     partial block PartialRealNoise
     "Interface for SISO blocks with Real signals that add noise to the signal"
@@ -9277,7 +9398,47 @@ Connector with one output signal of type Boolean.
       ms "ms (milli seconds)",
       us "us (micro seconds)",
       ns "ns (nano seconds)")
-    "Enumeration defining the resolution of a clocked signal";
+    "Enumeration defining the resolution of a clocked signal" annotation (
+      Documentation(info="<html>
+<p>
+Enumeration defining the resolution of a clock signal, especially
+of the clock signal generated by block
+<a href=\"modelica://Modelica_Synchronous.Clocks.PeriodicExactClock\">PeriodicExactClock</a>.
+The following values are possible:
+</p>
+
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th><b>Types.Resolution.</b></th><th><b>Meaning</b></th></tr>
+<tr><td valign=\"top\">y</td>
+    <td valign=\"top\">year (= 365*24*60*60 seconds)</td></tr>
+
+<tr><td valign=\"top\">d</td>
+    <td valign=\"top\">day (= 24*60*60 seconds)</td></tr>
+
+<tr><td valign=\"top\">h</td>
+    <td valign=\"top\">hour (= 60*60 seconds)</td></tr>
+
+<tr><td valign=\"top\">min</td>
+    <td valign=\"top\">minute (= 60 seconds)</td></tr>
+
+<tr><td valign=\"top\">s</td>
+    <td valign=\"top\">seconds</td></tr>
+
+<tr><td valign=\"top\">ms</td>
+    <td valign=\"top\">milli seconds (= 1/1000 seconds)</td></tr>
+
+
+<tr><td valign=\"top\">us</td>
+    <td valign=\"top\">micro seconds (= 1/(1000*1000) seconds)</td></tr>
+
+
+<tr><td valign=\"top\">ns</td>
+    <td valign=\"top\">nano seconds (= 1/(1000*1000*1000) seconds)</td></tr>
+</table>
+
+
+
+</html>"));
 
     type FIR_FilterType = enumeration(
       LowPass "Low pass filter",
@@ -9295,6 +9456,12 @@ Connector with one output signal of type Boolean.
       Kaiser) "Enumeration defining the window type for a FIR filter"
         annotation (Evaluate=true, Documentation(info="<html>
 
+</html>"));
+  annotation (Documentation(info="<html>
+<p>
+This package contains enumeration definitions utilized
+in blocks of the Modelica_Synchronous package.
+</p>
 </html>"));
   end Types;
 
@@ -9317,8 +9484,8 @@ are becoming obsolete and instead Modelica_Synchronous should be utilized instea
 
 <p>
 In the following figure a simple sampled data system is show, where the borders of the
-discrete-time partition are marked by the sample and hold operators, a continuous PI
-controller is used in the partition that is automatically discretized and the sample
+discrete-time partition are marked by the sample and hold operators, a clocked PI
+controller is used in the partition and the sample
 rate is defined at one location with a clock:
 </p>
 
@@ -9362,6 +9529,5 @@ or at
 <a href=\"http://www.Modelica.org/licenses/ModelicaLicense2\">
 http://www.Modelica.org/licenses/ModelicaLicense2</a>.</i>
 </p>
-
 </html>", revisions=""));
 end Modelica_Synchronous;

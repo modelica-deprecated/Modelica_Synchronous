@@ -764,7 +764,8 @@ as output.
       end ComputationalDelay;
 
       block UniformNoise
-        extends Modelica_Synchronous.Interfaces.PartialIntegerNoise;
+        extends
+          Modelica_Synchronous.WorkInProgress.Incubate.IntegerSignals.PartialIntegerNoise;
         parameter Integer noiseMin=-1 "Lower limit of noise band";
         parameter Integer noiseMax=1 "Upper limit of noise band";
         parameter Integer firstSeed[3](each min=0, each max=255) = {23,87,187}
@@ -853,6 +854,13 @@ as output.
                 fillColor={255,255,255},
                 fillPattern=FillPattern.Solid)}));
       end FractionalDelay;
+
+      partial block PartialIntegerNoise
+        "Interface for SISO blocks with Integer signals that add noise to the signal"
+        extends Modelica_Synchronous.Interfaces.PartialIntegerClockedSISO;
+        annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                  -100},{100,100}}), graphics));
+      end PartialIntegerNoise;
     end IntegerSignals;
 
     package BooleanSignals
@@ -1254,7 +1262,7 @@ form of a PID controller by using the backward rectangular approximation (also c
           pattern=LinePattern.Dot,
           thickness=0.5,
           smooth=Smooth.None));
-      annotation (Diagram(graphics));
+      annotation (Diagram(graphics), experiment(StopTime=0.5));
     end TestFIR_1;
 
     model TestFIR
@@ -1307,7 +1315,8 @@ form of a PID controller by using the backward rectangular approximation (also c
               extent={{-94,88},{94,40}},
               lineColor={0,0,255},
               textString=
-                  "Needs \"Evaluate Parameters\"=true in Translation settings in order to compile.")}));
+                  "Needs \"Evaluate Parameters\"=true in Translation settings in order to compile.")}),
+          experiment(StopTime=0.5));
     end TestFIR;
 
     block TestFIR_Step
@@ -1376,7 +1385,8 @@ form of a PID controller by using the backward rectangular approximation (also c
               extent={{-92,110},{96,62}},
               lineColor={0,0,255},
               textString=
-                  "Needs \"Evaluate Parameters\"=true in Translation settings in order to compile.")}));
+                  "Needs \"Evaluate Parameters\"=true in Translation settings in order to compile.")}),
+          experiment(StopTime=1.5));
     end TestFIR_Step;
 
     block TestFIR_Step2
@@ -1433,7 +1443,8 @@ form of a PID controller by using the backward rectangular approximation (also c
               extent={{-94,106},{94,58}},
               lineColor={0,0,255},
               textString=
-                  "Needs \"Evaluate Parameters\"=true in Translation settings in order to compile.")}));
+                  "Needs \"Evaluate Parameters\"=true in Translation settings in order to compile.")}),
+          experiment(StopTime=1.5));
     end TestFIR_Step2;
 
     block TestFIR_Step2b
@@ -1472,7 +1483,8 @@ form of a PID controller by using the backward rectangular approximation (also c
               extent={{-90,106},{98,58}},
               lineColor={0,0,255},
               textString=
-                  "Needs \"Evaluate Parameters\"=true in Translation settings in order to compile.")}));
+                  "Needs \"Evaluate Parameters\"=true in Translation settings in order to compile.")}),
+          experiment(StopTime=1.5));
     end TestFIR_Step2b;
 
     model TestInterpolator
@@ -1558,7 +1570,7 @@ form of a PID controller by using the backward rectangular approximation (also c
           points={{-23.4,50},{-12,50},{-12,24},{0.8,24}},
           color={0,0,127},
           smooth=Smooth.None));
-      annotation (Diagram(graphics));
+      annotation (Diagram(graphics), experiment(StopTime=0.6));
     end TestInterpolator;
 
     model TestUnitDelay
@@ -1606,7 +1618,7 @@ form of a PID controller by using the backward rectangular approximation (also c
           points={{-23.4,50},{-2,50}},
           color={0,0,127},
           smooth=Smooth.None));
-      annotation (Diagram(graphics));
+      annotation (Diagram(graphics), experiment(StopTime=1.2));
     end TestUnitDelay;
 
     model TestTransferFunction
@@ -1616,41 +1628,44 @@ form of a PID controller by using the backward rectangular approximation (also c
         annotation (Placement(transformation(extent={{-92,40},{-72,60}})));
       Modelica_Synchronous.RealSignals.SampleAndHolds.SampleClocked
                                                 sample1
-        annotation (Placement(transformation(extent={{-36,44},{-24,56}})));
+        annotation (Placement(transformation(extent={{-18,44},{-6,56}})));
       Clocks.PeriodicRealClock periodicRealClock(period=0.1)
-        annotation (Placement(transformation(extent={{-50,-6},{-38,6}})));
-      Modelica.Blocks.Discrete.Sampler sampler
+        annotation (Placement(transformation(extent={{-40,14},{-28,26}})));
+      Modelica.Blocks.Discrete.Sampler sampler(samplePeriod=0.1)
         annotation (Placement(transformation(extent={{-50,-40},{-30,-20}})));
-      Modelica.Blocks.Discrete.TransferFunction transferFunction(samplePeriod=
-            0.1, a={1,0.5})
+      Modelica.Blocks.Discrete.TransferFunction transferFunction2(
+        samplePeriod=0.1,
+        a={1,0.5},
+        b={0.1,0.2})
         annotation (Placement(transformation(extent={{0,-40},{20,-20}})));
       Modelica_Synchronous.RealSignals.Periodic.TransferFunction
-                                transferFunction1(a={1,0.5})
-        annotation (Placement(transformation(extent={{0,40},{20,60}})));
+                                transferFunction1(a={1,0.5}, b={0.1,0.2})
+        annotation (Placement(transformation(extent={{20,40},{40,60}})));
     equation
       connect(periodicRealClock.y,sample1. clock) annotation (Line(
-          points={{-37.4,0},{-30,0},{-30,42.8}},
+          points={{-27.4,20},{-12,20},{-12,42.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
           thickness=0.5,
           smooth=Smooth.None));
       connect(sine.y, sample1.u) annotation (Line(
-          points={{-71,50},{-37.2,50}},
+          points={{-71,50},{-19.2,50}},
           color={0,0,127},
           smooth=Smooth.None));
       connect(sampler.u, sine.y) annotation (Line(
           points={{-52,-30},{-64,-30},{-64,50},{-71,50}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(sampler.y, transferFunction.u) annotation (Line(
+      connect(sampler.y, transferFunction2.u)
+                                             annotation (Line(
           points={{-29,-30},{-2,-30}},
           color={0,0,127},
           smooth=Smooth.None));
       connect(sample1.y, transferFunction1.u) annotation (Line(
-          points={{-23.4,50},{-2,50}},
+          points={{-5.4,50},{18,50}},
           color={0,0,127},
           smooth=Smooth.None));
-      annotation (Diagram(graphics));
+      annotation (Diagram(graphics), experiment(StopTime=1.2));
     end TestTransferFunction;
 
     model TestStateSpace
@@ -1659,36 +1674,37 @@ form of a PID controller by using the backward rectangular approximation (also c
         startTime=0)
         annotation (Placement(transformation(extent={{-92,40},{-72,60}})));
       Clocks.PeriodicRealClock periodicRealClock(period=0.1)
-        annotation (Placement(transformation(extent={{-50,-6},{-38,6}})));
+        annotation (Placement(transformation(extent={{-44,24},{-32,36}})));
       Modelica_Synchronous.RealSignals.SampleAndHolds.SampleClocked
                                                 sample1
-        annotation (Placement(transformation(extent={{-34,44},{-22,56}})));
-      Modelica.Blocks.Discrete.StateSpace stateSpace1(
+        annotation (Placement(transformation(extent={{-16,44},{-4,56}})));
+      Modelica.Blocks.Discrete.StateSpace stateSpace2(
         samplePeriod=0.1,
         A=[1],
         B=[1],
         C=[1],
-        D=[1]) annotation (Placement(transformation(extent={{0,-40},{20,-20}})));
-      Modelica.Blocks.Discrete.Sampler sampler
+        D=[1],
+        x(each start=0.0, each fixed=true))
+               annotation (Placement(transformation(extent={{0,-40},{20,-20}})));
+      Modelica.Blocks.Discrete.Sampler sampler(samplePeriod=0.1)
         annotation (Placement(transformation(extent={{-44,-40},{-24,-20}})));
-      Modelica_Synchronous.RealSignals.Periodic.StateSpace
-                          stateSpace(
+      Modelica_Synchronous.RealSignals.Periodic.StateSpace stateSpace1(
         A=[1],
         B=[1],
         C=[1],
-        D=[1]) annotation (Placement(transformation(extent={{0,40},{20,60}})));
+        D=[1]) annotation (Placement(transformation(extent={{20,40},{40,60}})));
     equation
       connect(sine.y, sample1.u) annotation (Line(
-          points={{-71,50},{-35.2,50}},
+          points={{-71,50},{-17.2,50}},
           color={0,0,127},
           smooth=Smooth.None));
       connect(periodicRealClock.y, sample1.clock) annotation (Line(
-          points={{-37.4,0},{-28,0},{-28,42.8}},
+          points={{-31.4,30},{-10,30},{-10,42.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
           thickness=0.5,
           smooth=Smooth.None));
-      connect(sampler.y, stateSpace1.u[1]) annotation (Line(
+      connect(sampler.y,stateSpace2. u[1]) annotation (Line(
           points={{-23,-30},{-2,-30}},
           color={0,0,127},
           smooth=Smooth.None));
@@ -1696,12 +1712,83 @@ form of a PID controller by using the backward rectangular approximation (also c
           points={{-46,-30},{-62,-30},{-62,50},{-71,50}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(sample1.y, stateSpace.u[1]) annotation (Line(
-          points={{-21.4,50},{-2,50}},
+      connect(sample1.y, stateSpace1.u[1])
+                                          annotation (Line(
+          points={{-3.4,50},{18,50}},
           color={0,0,127},
           smooth=Smooth.None));
-      annotation (Diagram(graphics));
+      annotation (Diagram(graphics), experiment(StopTime=1.2));
     end TestStateSpace;
+
+    model TestRealSampler
+
+      Modelica.Blocks.Sources.Sine sine1(
+        freqHz=2,
+        offset=0.1,
+        startTime=0)
+        annotation (Placement(transformation(extent={{-94,20},{-74,40}})));
+      Modelica.Blocks.Sources.Sine sine2(
+        offset=0.1,
+        startTime=0,
+        freqHz=3)
+        annotation (Placement(transformation(extent={{-94,-20},{-74,0}})));
+      Modelica.Blocks.Routing.Multiplex2 multiplex2_1
+        annotation (Placement(transformation(extent={{-48,0},{-28,20}})));
+      Clocks.PeriodicRealClock periodicClock1(period=0.1)
+        annotation (Placement(transformation(extent={{-26,-36},{-14,-24}})));
+      RealSignals.SampleAndHolds.AssignClockVectorized assignClock1(n=2)
+        annotation (Placement(transformation(extent={{10,4},{22,16}})));
+      Modelica.Blocks.Math.Gain gain[2](k={2,3})
+        annotation (Placement(transformation(extent={{40,0},{60,20}})));
+      RealSignals.SampleAndHolds.Sample sample1[2]
+        annotation (Placement(transformation(extent={{-14,4},{-2,16}})));
+      RealSignals.SampleAndHolds.SampleVectorizedAndClocked sample2(n=2)
+        annotation (Placement(transformation(extent={{-10,48},{2,60}})));
+      RealSignals.SampleAndHolds.SubSample subSample1[2](each inferFactor=false, each factor=3) annotation (Placement(transformation(extent={{14,48},{26,60}})));
+    equation
+      connect(sine1.y, multiplex2_1.u1[1]) annotation (Line(
+          points={{-73,30},{-62,30},{-62,16},{-50,16}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(sine2.y, multiplex2_1.u2[1]) annotation (Line(
+          points={{-73,-10},{-62,-10},{-62,4},{-50,4}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(periodicClock1.y, assignClock1.clock) annotation (Line(
+          points={{-13.4,-30},{16,-30},{16,2.8}},
+          color={175,175,175},
+          pattern=LinePattern.Dot,
+          thickness=0.5,
+          smooth=Smooth.None));
+      connect(assignClock1.y, gain.u) annotation (Line(
+          points={{22.6,10},{38,10}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(multiplex2_1.y, sample1.u) annotation (Line(
+          points={{-27,10},{-15.2,10}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(sample1.y, assignClock1.u) annotation (Line(
+          points={{-1.4,10},{4,10},{4,10},{8.8,10}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(multiplex2_1.y, sample2.u) annotation (Line(
+          points={{-27,10},{-24,10},{-24,54},{-11.2,54}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(periodicClock1.y, sample2.clock) annotation (Line(
+          points={{-13.4,-30},{2,-30},{2,38},{-4,38},{-4,46.8}},
+          color={175,175,175},
+          pattern=LinePattern.Dot,
+          thickness=0.5,
+          smooth=Smooth.None));
+      connect(sample2.y, subSample1.u) annotation (Line(
+          points={{2.6,54},{12.8,54}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                -100},{100,100}}), graphics), experiment(StopTime=1.2));
+    end TestRealSampler;
 
     model TestShiftSample
 
@@ -1710,7 +1797,7 @@ form of a PID controller by using the backward rectangular approximation (also c
         startTime=0)
         annotation (Placement(transformation(extent={{-92,40},{-72,60}})));
       Clocks.PeriodicRealClock periodicRealClock(period=0.1)
-        annotation (Placement(transformation(extent={{-50,-6},{-38,6}})));
+        annotation (Placement(transformation(extent={{-84,-6},{-72,6}})));
       Modelica_Synchronous.RealSignals.SampleAndHolds.SampleClocked
                                                 sample1
         annotation (Placement(transformation(extent={{-34,44},{-22,56}})));
@@ -1724,16 +1811,12 @@ form of a PID controller by using the backward rectangular approximation (also c
                                               shiftSample2(shiftCounter=3,
           resolution=2)
         annotation (Placement(transformation(extent={{10,18},{22,30}})));
+      ClockSignals.ShiftSample shiftSample3(shiftCounter=1, resolution=3)
+        annotation (Placement(transformation(extent={{-54,-6},{-42,6}})));
     equation
       connect(sine.y, sample1.u) annotation (Line(
           points={{-71,50},{-35.2,50}},
           color={0,0,127},
-          smooth=Smooth.None));
-      connect(periodicRealClock.y, sample1.clock) annotation (Line(
-          points={{-37.4,0},{-28,0},{-28,42.8}},
-          color={175,175,175},
-          pattern=LinePattern.Dot,
-          thickness=0.5,
           smooth=Smooth.None));
       connect(sample1.y, shiftSample1.u) annotation (Line(
           points={{-21.4,50},{4.8,50}},
@@ -1751,112 +1834,22 @@ form of a PID controller by using the backward rectangular approximation (also c
           points={{8.8,24},{-6,24},{-6,50},{-21.4,50}},
           color={0,0,127},
           smooth=Smooth.None));
-      annotation (Diagram(graphics));
+      connect(periodicRealClock.y, shiftSample3.u) annotation (Line(
+          points={{-71.4,0},{-55.2,0}},
+          color={175,175,175},
+          pattern=LinePattern.Dot,
+          thickness=0.5,
+          smooth=Smooth.None));
+      connect(shiftSample3.y, sample1.clock) annotation (Line(
+          points={{-41.4,0},{-28,0},{-28,42.8}},
+          color={175,175,175},
+          pattern=LinePattern.Dot,
+          thickness=0.5,
+          smooth=Smooth.None));
+      annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
+                -100,-100},{100,100}}),
+                          graphics), experiment(StopTime=1.2));
     end TestShiftSample;
-
-    model TestBackSample
-      extends Modelica_Synchronous.WorkInProgress.Icons.DoesNotTranslate;
-      Modelica.Blocks.Sources.Sine sine(freqHz=2,
-        offset=0.1,
-        startTime=0)
-        annotation (Placement(transformation(extent={{-92,40},{-72,60}})));
-      Clocks.PeriodicRealClock periodicRealClock(period=0.1)
-        annotation (Placement(transformation(extent={{-48,2},{-36,14}})));
-      Modelica_Synchronous.RealSignals.SampleAndHolds.SampleClocked
-                                                sample1
-        annotation (Placement(transformation(extent={{-34,44},{-22,56}})));
-      Modelica_Synchronous.RealSignals.SampleAndHolds.ShiftSample
-                                              shiftSample1(resolution=2,
-          shiftCounter=1)
-        annotation (Placement(transformation(extent={{6,44},{18,56}})));
-      Modelica_Synchronous.RealSignals.SampleAndHolds.BackSample
-                                             backSample1(backCounter=1,
-          resolution=2)
-        annotation (Placement(transformation(extent={{6,-20},{18,-8}})));
-      Modelica_Synchronous.RealSignals.SampleAndHolds.BackSample
-                                             backSample2(
-        backCounter=1,
-        resolution=2,
-        y_start=0.1)
-        annotation (Placement(transformation(extent={{34,44},{46,56}})));
-      Modelica.Blocks.Math.Add add
-        annotation (Placement(transformation(extent={{68,24},{88,44}})));
-      Modelica_Synchronous.RealSignals.SampleAndHolds.BackSample
-                                             backSample3(
-        backCounter=1,
-        resolution=2,
-        y_start=0.1)
-        annotation (Placement(transformation(extent={{34,10},{46,22}})));
-    equation
-      connect(sine.y, sample1.u) annotation (Line(
-          points={{-71,50},{-35.2,50}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(periodicRealClock.y, sample1.clock) annotation (Line(
-          points={{-35.4,8},{-28,8},{-28,42.8}},
-          color={175,175,175},
-          pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
-      connect(sample1.y, shiftSample1.u) annotation (Line(
-          points={{-21.4,50},{4.8,50}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(backSample1.u, sample1.y) annotation (Line(
-          points={{4.8,-14},{-8,-14},{-8,50},{-21.4,50}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(backSample2.u, shiftSample1.y) annotation (Line(
-          points={{32.8,50},{18.6,50}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(backSample3.u, shiftSample1.y) annotation (Line(
-          points={{32.8,16},{26,16},{26,50},{18.6,50}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(backSample2.y, add.u1) annotation (Line(
-          points={{46.6,50},{56,50},{56,40},{66,40}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(backSample3.y, add.u2) annotation (Line(
-          points={{46.6,16},{56,16},{56,28},{66,28}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-                -100},{100,100}}),
-                          graphics), Icon(graphics));
-    end TestBackSample;
-
-    model TestClockedRealToSquare
-      Modelica.Blocks.Sources.Sine sine(freqHz=2,
-        offset=0.1,
-        startTime=0)
-        annotation (Placement(transformation(extent={{-92,40},{-72,60}})));
-      Clocks.PeriodicRealClock periodicRealClock(period=0.1)
-        annotation (Placement(transformation(extent={{-50,-6},{-38,6}})));
-      Modelica_Synchronous.RealSignals.SampleAndHolds.SampleClocked
-                                                sample1
-        annotation (Placement(transformation(extent={{-34,44},{-22,56}})));
-      Modelica_Synchronous.RealSignals.SampleAndHolds.Utilities.ClockedRealToBooleanSquareHold
-        ClockedRealToSquare
-        annotation (Placement(transformation(extent={{-4,40},{16,60}})));
-    equation
-      connect(sine.y, sample1.u) annotation (Line(
-          points={{-71,50},{-35.2,50}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(periodicRealClock.y, sample1.clock) annotation (Line(
-          points={{-37.4,0},{-28,0},{-28,42.8}},
-          color={175,175,175},
-          pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
-      connect(sample1.y, ClockedRealToSquare.u) annotation (Line(
-          points={{-21.4,50},{-6,50}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      annotation (Diagram(graphics), Icon(graphics));
-    end TestClockedRealToSquare;
 
     model TestClockedRealToTrigger
       Modelica.Blocks.Sources.Sine sine(freqHz=2,
@@ -1898,16 +1891,200 @@ form of a PID controller by using the backward rectangular approximation (also c
           smooth=Smooth.None));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}),
-                          graphics), Icon(graphics));
+                          graphics), Icon(graphics),
+        experiment(StopTime=1.2));
     end TestClockedRealToTrigger;
+
+    model TestClockedBooleanToTrigger
+      Clocks.PeriodicRealClock periodicRealClock(period=0.1)
+        annotation (Placement(transformation(extent={{-56,4},{-44,16}})));
+      BooleanSignals.SamplerAndHolds.SampleClocked
+                                                sample1
+        annotation (Placement(transformation(extent={{-34,24},{-22,36}})));
+      BooleanSignals.SamplerAndHolds.Utilities.ClockedBooleanToBooleanTriggerHold
+        ClockedSignalToTrigger
+        annotation (Placement(transformation(extent={{0,20},{20,40}})));
+      Modelica.Blocks.Sources.BooleanPulse booleanPulse(period=0.2)
+        annotation (Placement(transformation(extent={{-86,20},{-66,40}})));
+      TriggeredBooleanSampler triggeredBooleanSampler
+        annotation (Placement(transformation(extent={{34,56},{54,76}})));
+    equation
+      connect(periodicRealClock.y, sample1.clock) annotation (Line(
+          points={{-43.4,10},{-28,10},{-28,22.8}},
+          color={175,175,175},
+          pattern=LinePattern.Dot,
+          thickness=0.5,
+          smooth=Smooth.None));
+      connect(booleanPulse.y, sample1.u) annotation (Line(
+          points={{-65,30},{-35.2,30}},
+          color={255,0,255},
+          smooth=Smooth.None));
+      connect(sample1.y, ClockedSignalToTrigger.u) annotation (Line(
+          points={{-21.4,30},{-2,30}},
+          color={255,0,255},
+          smooth=Smooth.None));
+      connect(ClockedSignalToTrigger.y, triggeredBooleanSampler.trigger)
+        annotation (Line(
+          points={{21,30},{44,30},{44,54.2}},
+          color={255,0,255},
+          smooth=Smooth.None));
+      connect(booleanPulse.y, triggeredBooleanSampler.u) annotation (Line(
+          points={{-65,30},{-54,30},{-54,66},{32,66}},
+          color={255,0,255},
+          smooth=Smooth.None));
+      annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                -100},{100,100}}),
+                          graphics), Icon(graphics),
+        experiment(StopTime=1.2));
+    end TestClockedBooleanToTrigger;
+
+    model TestClockedIntegerToTrigger
+      Clocks.PeriodicRealClock periodicRealClock(period=0.1)
+        annotation (Placement(transformation(extent={{-56,4},{-44,16}})));
+      IntegerSignals.SamplerAndHolds.SampleClocked
+                                                sample1
+        annotation (Placement(transformation(extent={{-34,24},{-22,36}})));
+      IntegerSignals.SamplerAndHolds.Utilities.ClockedIntegerToBooleanTriggerHold
+        ClockedSignalToTrigger
+        annotation (Placement(transformation(extent={{0,20},{20,40}})));
+      TriggeredIntegerSampler triggeredBooleanSampler
+        annotation (Placement(transformation(extent={{34,56},{54,76}})));
+      Modelica.Blocks.Sources.IntegerTable integerTable(table=[0,2; 0.2,3; 0.5,
+            4; 0.9,-2; 1.1,5; 1.3,6])
+        annotation (Placement(transformation(extent={{-88,20},{-68,40}})));
+    equation
+      connect(periodicRealClock.y, sample1.clock) annotation (Line(
+          points={{-43.4,10},{-28,10},{-28,22.8}},
+          color={175,175,175},
+          pattern=LinePattern.Dot,
+          thickness=0.5,
+          smooth=Smooth.None));
+      connect(ClockedSignalToTrigger.y, triggeredBooleanSampler.trigger)
+        annotation (Line(
+          points={{21,30},{44,30},{44,54.2}},
+          color={255,0,255},
+          smooth=Smooth.None));
+      connect(integerTable.y, sample1.u) annotation (Line(
+          points={{-67,30},{-35.2,30}},
+          color={255,127,0},
+          smooth=Smooth.None));
+      connect(integerTable.y, triggeredBooleanSampler.u) annotation (Line(
+          points={{-67,30},{-52,30},{-52,66},{32,66}},
+          color={255,127,0},
+          smooth=Smooth.None));
+      connect(sample1.y, ClockedSignalToTrigger.u) annotation (Line(
+          points={{-21.4,30},{-2,30}},
+          color={255,127,0},
+          smooth=Smooth.None));
+      annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                -100},{100,100}}),
+                          graphics), Icon(graphics),
+        experiment(StopTime=1.2));
+    end TestClockedIntegerToTrigger;
+
+    model TestBackSample
+      Modelica.Blocks.Sources.Sine sine(freqHz=2,
+        offset=0.1,
+        startTime=0)
+        annotation (Placement(transformation(extent={{-92,40},{-72,60}})));
+      Clocks.PeriodicRealClock periodicRealClock(period=0.1)
+        annotation (Placement(transformation(extent={{-60,2},{-48,14}})));
+      Modelica_Synchronous.RealSignals.SampleAndHolds.SampleClocked
+                                                sample1
+        annotation (Placement(transformation(extent={{-34,44},{-22,56}})));
+      Modelica_Synchronous.RealSignals.SampleAndHolds.ShiftSample
+                                              shiftSample1(resolution=2,
+          shiftCounter=1)
+        annotation (Placement(transformation(extent={{6,44},{18,56}})));
+      Modelica_Synchronous.RealSignals.SampleAndHolds.BackSample
+                                             backSample2(
+        backCounter=1,
+        resolution=2,
+        y_start=0.1)
+        annotation (Placement(transformation(extent={{34,44},{46,56}})));
+      Modelica.Blocks.Math.Add add
+        annotation (Placement(transformation(extent={{68,24},{88,44}})));
+      Modelica_Synchronous.RealSignals.SampleAndHolds.BackSample
+                                             backSample3(
+        backCounter=1,
+        y_start=0.3,
+        resolution=2)
+        annotation (Placement(transformation(extent={{34,10},{46,22}})));
+    equation
+      connect(sine.y, sample1.u) annotation (Line(
+          points={{-71,50},{-35.2,50}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(periodicRealClock.y, sample1.clock) annotation (Line(
+          points={{-47.4,8},{-28,8},{-28,42.8}},
+          color={175,175,175},
+          pattern=LinePattern.Dot,
+          thickness=0.5,
+          smooth=Smooth.None));
+      connect(sample1.y, shiftSample1.u) annotation (Line(
+          points={{-21.4,50},{4.8,50}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(backSample2.u, shiftSample1.y) annotation (Line(
+          points={{32.8,50},{18.6,50}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(backSample3.u, shiftSample1.y) annotation (Line(
+          points={{32.8,16},{26,16},{26,50},{18.6,50}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(backSample2.y, add.u1) annotation (Line(
+          points={{46.6,50},{56,50},{56,40},{66,40}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(backSample3.y, add.u2) annotation (Line(
+          points={{46.6,16},{56,16},{56,28},{66,28}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                -100},{100,100}}),
+                          graphics), Icon(graphics),
+        experiment(StopTime=1.2));
+    end TestBackSample;
+
+    model TestClockedRealToSquare
+      Modelica.Blocks.Sources.Sine sine(freqHz=2,
+        offset=0.1,
+        startTime=0)
+        annotation (Placement(transformation(extent={{-92,40},{-72,60}})));
+      Clocks.PeriodicRealClock periodicRealClock(period=0.1)
+        annotation (Placement(transformation(extent={{-50,-6},{-38,6}})));
+      Modelica_Synchronous.RealSignals.SampleAndHolds.SampleClocked
+                                                sample1
+        annotation (Placement(transformation(extent={{-34,44},{-22,56}})));
+      Modelica_Synchronous.RealSignals.SampleAndHolds.Utilities.ClockedRealToBooleanSquareHold
+        ClockedRealToSquare
+        annotation (Placement(transformation(extent={{-4,40},{16,60}})));
+    equation
+      connect(sine.y, sample1.u) annotation (Line(
+          points={{-71,50},{-35.2,50}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(periodicRealClock.y, sample1.clock) annotation (Line(
+          points={{-37.4,0},{-28,0},{-28,42.8}},
+          color={175,175,175},
+          pattern=LinePattern.Dot,
+          thickness=0.5,
+          smooth=Smooth.None));
+      connect(sample1.y, ClockedRealToSquare.u) annotation (Line(
+          points={{-21.4,50},{-6,50}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      annotation (Diagram(graphics), Icon(graphics),
+        experiment(StopTime=1.2));
+    end TestClockedRealToSquare;
+
 
     model TestIntegerSamplerAndHolds
 
       Modelica_Synchronous.IntegerSignals.SamplerAndHolds.AssignClock
                                                  assignClock1
         annotation (Placement(transformation(extent={{-46,64},{-34,76}})));
-      Modelica.Blocks.Sources.IntegerConstant integerConstant(k=2)
-        annotation (Placement(transformation(extent={{-80,60},{-60,80}})));
       Clocks.PeriodicRealClock periodicRealClock(period=0.1)
         annotation (Placement(transformation(extent={{-88,-96},{-76,-84}})));
       Modelica_Synchronous.IntegerSignals.SamplerAndHolds.Hold
@@ -1940,11 +2117,26 @@ form of a PID controller by using the backward rectangular approximation (also c
                                                  shiftSample1(shiftCounter=2,
           resolution=3)
         annotation (Placement(transformation(extent={{-16,-16},{-4,-4}})));
+      IntegerSignals.SamplerAndHolds.BackSample backSample1(backCounter=2,
+          resolution=3)
+        annotation (Placement(transformation(extent={{8,-16},{20,-4}})));
+      Modelica.Blocks.Sources.IntegerTable integerTable(table=[0,1; 0.2,3; 0.5,
+            5; 0.9,2; 1.1,-1; 1.4,9])
+        annotation (Placement(transformation(extent={{-98,60},{-78,80}})));
+      IntegerSignals.SamplerAndHolds.Sample sample3
+        annotation (Placement(transformation(extent={{-68,64},{-56,76}})));
+      IntegerSignals.SamplerAndHolds.Utilities.UpSample upSample1(inferFactor=
+            false, factor=2)
+        annotation (Placement(transformation(extent={{36,106},{48,118}})));
+      IntegerSignals.NonPeriodic.UnitDelay UnitDelay1(y_start=2)
+        annotation (Placement(transformation(extent={{32,78},{52,98}})));
+      IntegerSignals.NonPeriodic.FractionalDelay fractionalDelay(shift=2,
+          resolution=3)
+        annotation (Placement(transformation(extent={{34,46},{54,66}})));
+      IntegerSignals.SamplerAndHolds.Utilities.ClockedIntegerToBooleanSquareHold
+        ClockedSignalToSquare
+        annotation (Placement(transformation(extent={{52,12},{72,32}})));
     equation
-      connect(integerConstant.y, assignClock1.u) annotation (Line(
-          points={{-59,70},{-47.2,70}},
-          color={255,127,0},
-          smooth=Smooth.None));
       connect(assignClock1.y, hold1.u) annotation (Line(
           points={{-33.4,70},{-21.2,70}},
           color={255,127,0},
@@ -1997,16 +2189,46 @@ form of a PID controller by using the backward rectangular approximation (also c
           points={{-31.4,-10},{-17.2,-10}},
           color={255,127,0},
           smooth=Smooth.None));
+      connect(shiftSample1.y, backSample1.u) annotation (Line(
+          points={{-3.4,-10},{6.8,-10}},
+          color={255,127,0},
+          smooth=Smooth.None));
+      connect(integerTable.y, sample3.u) annotation (Line(
+          points={{-77,70},{-69.2,70}},
+          color={255,127,0},
+          smooth=Smooth.None));
+      connect(sample3.y, assignClock1.u) annotation (Line(
+          points={{-55.4,70},{-47.2,70}},
+          color={255,127,0},
+          smooth=Smooth.None));
+      connect(assignClock1.y, upSample1.u) annotation (Line(
+          points={{-33.4,70},{-27.7,70},{-27.7,70},{-26,70},{-26,112},{34.8,112}},
+
+          color={255,127,0},
+          smooth=Smooth.None));
+      connect(assignClock1.y, UnitDelay1.u) annotation (Line(
+          points={{-33.4,70},{-26,70},{-26,88},{30,88}},
+          color={255,127,0},
+          smooth=Smooth.None));
+      connect(fractionalDelay.u, assignClock1.y) annotation (Line(
+          points={{32,56},{14,56},{14,88},{-26,88},{-26,70},{-33.4,70}},
+          color={255,127,0},
+          smooth=Smooth.None));
+      connect(superSample1.y, ClockedSignalToSquare.u) annotation (Line(
+          points={{24.6,32},{36,32},{36,22},{50,22}},
+          color={255,127,0},
+          smooth=Smooth.None));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}),
-                          graphics), Icon(graphics));
+                          graphics), Icon(graphics),
+        experiment(StopTime=1.2));
     end TestIntegerSamplerAndHolds;
 
     model TestBooleanSamplerAndHolds
 
       Modelica_Synchronous.BooleanSignals.SamplerAndHolds.AssignClock
                                                  assignClock1
-        annotation (Placement(transformation(extent={{-46,64},{-34,76}})));
+        annotation (Placement(transformation(extent={{-48,64},{-36,76}})));
       Clocks.PeriodicRealClock periodicRealClock(period=0.1)
         annotation (Placement(transformation(extent={{-88,-96},{-76,-84}})));
       Modelica_Synchronous.BooleanSignals.SamplerAndHolds.Hold
@@ -2032,8 +2254,8 @@ form of a PID controller by using the backward rectangular approximation (also c
       Modelica_Synchronous.BooleanSignals.SamplerAndHolds.ShiftSample
                                                  shiftSample1(shiftCounter=2, resolution=3)
         annotation (Placement(transformation(extent={{-16,-16},{-4,-4}})));
-      Modelica.Blocks.Sources.BooleanConstant booleanConstant
-        annotation (Placement(transformation(extent={{-80,60},{-60,80}})));
+      Modelica.Blocks.Sources.BooleanPulse    booleanConstant(period=0.2)
+        annotation (Placement(transformation(extent={{-96,60},{-76,80}})));
       Modelica.Blocks.Sources.BooleanConstant booleanConstant1[3]
         annotation (Placement(transformation(extent={{-80,20},{-60,40}})));
       Modelica.Blocks.Sources.BooleanConstant booleanConstant2
@@ -2043,9 +2265,22 @@ form of a PID controller by using the backward rectangular approximation (also c
       Modelica_Synchronous.BooleanSignals.SamplerAndHolds.Utilities.ClockedBooleanToBooleanSquareHold
         ClockedSignalToSquare
         annotation (Placement(transformation(extent={{20,-20},{40,0}})));
+      BooleanSignals.SamplerAndHolds.Sample sample3
+        annotation (Placement(transformation(extent={{-66,64},{-54,76}})));
+      BooleanSignals.SamplerAndHolds.Utilities.UpSample upSample1(inferFactor=
+            false, factor=2)
+        annotation (Placement(transformation(extent={{16,88},{28,100}})));
+      BooleanSignals.NonPeriodic.UnitDelay UnitDelay1
+        annotation (Placement(transformation(extent={{52,88},{72,108}})));
+      BooleanSignals.NonPeriodic.FractionalDelay fractionalDelay(shift=2,
+          resolution=3)
+        annotation (Placement(transformation(extent={{-14,100},{6,120}})));
+      BooleanSignals.SamplerAndHolds.BackSample backSample1(backCounter=2,
+          resolution=3)
+        annotation (Placement(transformation(extent={{16,-44},{28,-32}})));
     equation
       connect(periodicRealClock.y, assignClock1.clock) annotation (Line(
-          points={{-75.4,-90},{-28,-90},{-28,58},{-40,58},{-40,62.8}},
+          points={{-75.4,-90},{-28,-90},{-28,58},{-42,58},{-42,62.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
           thickness=0.5,
@@ -2068,10 +2303,6 @@ form of a PID controller by using the backward rectangular approximation (also c
           pattern=LinePattern.Dot,
           thickness=0.5,
           smooth=Smooth.None));
-      connect(booleanConstant.y, assignClock1.u) annotation (Line(
-          points={{-59,70},{-47.2,70}},
-          color={255,0,255},
-          smooth=Smooth.None));
       connect(assignClock2.u, booleanConstant1.y) annotation (Line(
           points={{-47.2,30},{-59,30}},
           color={255,0,255},
@@ -2089,11 +2320,11 @@ form of a PID controller by using the backward rectangular approximation (also c
           color={255,0,255},
           smooth=Smooth.None));
       connect(subSample1.u, assignClock1.y) annotation (Line(
-          points={{-21.2,48},{-24,48},{-24,70},{-33.4,70}},
+          points={{-21.2,48},{-24,48},{-24,70},{-35.4,70}},
           color={255,0,255},
           smooth=Smooth.None));
       connect(hold1.u, assignClock1.y) annotation (Line(
-          points={{-23.2,70},{-33.4,70}},
+          points={{-23.2,70},{-35.4,70}},
           color={255,0,255},
           smooth=Smooth.None));
       connect(superSample1.u, subSample1.y) annotation (Line(
@@ -2104,9 +2335,34 @@ form of a PID controller by using the backward rectangular approximation (also c
           points={{-3.4,-10},{18,-10}},
           color={255,0,255},
           smooth=Smooth.None));
+      connect(booleanConstant.y, sample3.u) annotation (Line(
+          points={{-75,70},{-67.2,70}},
+          color={255,0,255},
+          smooth=Smooth.None));
+      connect(sample3.y, assignClock1.u) annotation (Line(
+          points={{-53.4,70},{-49.2,70}},
+          color={255,0,255},
+          smooth=Smooth.None));
+      connect(assignClock1.y, upSample1.u) annotation (Line(
+          points={{-35.4,70},{-26,70},{-26,94},{14.8,94}},
+          color={255,0,255},
+          smooth=Smooth.None));
+      connect(upSample1.y, UnitDelay1.u) annotation (Line(
+          points={{28.6,94},{32,94},{32,98},{50,98}},
+          color={255,0,255},
+          smooth=Smooth.None));
+      connect(assignClock1.y, fractionalDelay.u) annotation (Line(
+          points={{-35.4,70},{-26,70},{-26,110},{-16,110}},
+          color={255,0,255},
+          smooth=Smooth.None));
+      connect(shiftSample1.y, backSample1.u) annotation (Line(
+          points={{-3.4,-10},{0,-10},{0,-38},{14.8,-38}},
+          color={255,0,255},
+          smooth=Smooth.None));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}),
-                          graphics), Icon(graphics));
+                          graphics), Icon(graphics),
+        experiment(StopTime=1.2));
     end TestBooleanSamplerAndHolds;
 
     model TestReplaceableSamplerHold
@@ -2241,8 +2497,8 @@ form of a PID controller by using the backward rectangular approximation (also c
 </HTML>"),
         experiment(
           StopTime=5,
-          fixedstepsize=0.001,
-          Algorithm="Dassl"),
+          __Dymola_fixedstepsize=0.001,
+          __Dymola_Algorithm="Dassl"),
         experimentSetupOutput);
     end TestReplaceableSamplerHold;
 
@@ -2288,7 +2544,7 @@ form of a PID controller by using the backward rectangular approximation (also c
           smooth=Smooth.None));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}),
-                          graphics));
+                          graphics), experiment(StopTime=1.2));
     end TestSimulatedADC;
 
     model TestCommunicationDelay
@@ -2329,16 +2585,15 @@ form of a PID controller by using the backward rectangular approximation (also c
           smooth=Smooth.None));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}),
-                          graphics));
+                          graphics), experiment(StopTime=1.2));
     end TestCommunicationDelay;
 
     model TestEventClockWithIntegrator
-     extends Modelica_Synchronous.WorkInProgress.Icons.OperatesOnlyPartially;
       Clocks.EventClock eventClock(useSolver=true, solverMethod="ExplicitEuler")
         annotation (Placement(transformation(extent={{-36,23},{-24,37}})));
       Modelica.Blocks.Sources.BooleanPulse booleanPulse(width=60, period=0.1)
         annotation (Placement(transformation(extent={{-80,20},{-60,40}})));
-      Modelica.Blocks.Continuous.FirstOrder firstOrder(T=0.1)
+      Modelica.Blocks.Continuous.FirstOrder firstOrder(T=0.1, initType=Modelica.Blocks.Types.Init.InitialState)
         annotation (Placement(transformation(extent={{20,60},{40,80}})));
       Modelica.Blocks.Sources.Sine sine(freqHz=2)
         annotation (Placement(transformation(extent={{-40,60},{-20,80}})));
@@ -2365,14 +2620,16 @@ form of a PID controller by using the backward rectangular approximation (also c
           thickness=0.5,
           smooth=Smooth.None));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-                -100},{100,100}}), graphics));
+                -100},{100,100}}), graphics), experiment(StopTime=1.2));
     end TestEventClockWithIntegrator;
 
     model TestExactClockWithIntegrator
-    extends Modelica_Synchronous.WorkInProgress.Icons.OperatesOnlyPartially;
-      Modelica.Blocks.Continuous.FirstOrder firstOrder(T=0.1)
+      Modelica.Blocks.Continuous.FirstOrder firstOrder(
+        initType=Modelica.Blocks.Types.Init.InitialState,
+        y_start=0,
+        T=1e-6)
         annotation (Placement(transformation(extent={{20,60},{40,80}})));
-      Modelica.Blocks.Sources.Sine sine(freqHz=2)
+      Modelica.Blocks.Sources.Sine sine(freqHz=2e5)
         annotation (Placement(transformation(extent={{-40,60},{-20,80}})));
       Modelica_Synchronous.RealSignals.SampleAndHolds.SampleClocked
                                                 sample1
@@ -2406,15 +2663,146 @@ form of a PID controller by using the backward rectangular approximation (also c
     end TestExactClockWithIntegrator;
 
     model TestSuperSampleClock
-      extends Modelica_Synchronous.WorkInProgress.Icons.OperatesOnlyPartially;
       parameter Integer factor=2 annotation(Evaluate=true);
       Clock c1;
       Clock c2;
     equation
       c1 = superSample(Clock(factor), 1000);
       c2 = superSample(Clock(factor), 1000*1000);
+      annotation (experiment(StopTime=5e-005));
     end TestSuperSampleClock;
 
+    block TriggeredBooleanSampler "Triggered sampling of continuous signals"
+      extends Modelica.Blocks.Interfaces.DiscreteBlockIcon;
+      parameter Boolean y_start=false "initial value of output signal";
+
+      Modelica.Blocks.Interfaces.BooleanInput u
+        "Connector with a Boolean input signal"             annotation (Placement(
+            transformation(extent={{-140,-20},{-100,20}}, rotation=0)));
+      Modelica.Blocks.Interfaces.BooleanOutput y
+        "Connector with a Boolean output signal"             annotation (Placement(
+            transformation(extent={{100,-10},{120,10}}, rotation=0)));
+      Modelica.Blocks.Interfaces.BooleanInput trigger annotation (Placement(
+            transformation(
+            origin={0,-118},
+            extent={{-20,-20},{20,20}},
+            rotation=90)));
+    equation
+      when trigger then
+        y = u;
+      end when;
+    initial equation
+      y = y_start;
+      annotation (
+        Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
+                100}}), graphics={
+            Ellipse(
+              extent={{-25,-10},{-45,10}},
+              lineColor={0,0,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{45,-10},{25,10}},
+              lineColor={0,0,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Line(points={{-100,0},{-45,0}}, color={0,0,127}),
+            Line(points={{45,0},{100,0}}, color={0,0,127}),
+            Line(points={{0,-100},{0,-26}}, color={255,0,255}),
+            Line(points={{-35,0},{28,-48}}, color={0,0,127})}),
+        Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
+                100,100}}), graphics={
+            Ellipse(
+              extent={{-25,-10},{-45,10}},
+              lineColor={0,0,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{45,-10},{25,10}},
+              lineColor={0,0,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Line(points={{-100,0},{-45,0}}, color={0,0,255}),
+            Line(points={{45,0},{100,0}}, color={0,0,255}),
+            Line(points={{-35,0},{28,-48}}, color={0,0,255}),
+            Line(points={{0,-100},{0,-26}}, color={255,0,255})}),
+        Documentation(info="<HTML>
+<p>
+Samples the continuous input signal whenever the trigger input
+signal is rising (i.e., trigger changes from <b>false</b> to
+<b>true</b>) and provides the sampled input signal as output.
+Before the first sampling, the output signal is equal to
+the initial value defined via parameter <b>y0</b>.
+</p>
+</HTML>
+"));
+    end TriggeredBooleanSampler;
+
+    block TriggeredIntegerSampler "Triggered sampling of continuous signals"
+      extends Modelica.Blocks.Interfaces.DiscreteBlockIcon;
+      parameter Integer y_start=0 "initial value of output signal";
+
+      Modelica.Blocks.Interfaces.IntegerInput u
+        "Connector with a Integer input signal"             annotation (Placement(
+            transformation(extent={{-140,-20},{-100,20}}, rotation=0)));
+      Modelica.Blocks.Interfaces.IntegerOutput y
+        "Connector with a Integer output signal"             annotation (Placement(
+            transformation(extent={{100,-10},{120,10}}, rotation=0)));
+      Modelica.Blocks.Interfaces.BooleanInput trigger annotation (Placement(
+            transformation(
+            origin={0,-118},
+            extent={{-20,-20},{20,20}},
+            rotation=90)));
+    equation
+      when trigger then
+        y = u;
+      end when;
+    initial equation
+      y = y_start;
+      annotation (
+        Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
+                100}}), graphics={
+            Ellipse(
+              extent={{-25,-10},{-45,10}},
+              lineColor={0,0,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{45,-10},{25,10}},
+              lineColor={0,0,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Line(points={{-100,0},{-45,0}}, color={0,0,127}),
+            Line(points={{45,0},{100,0}}, color={0,0,127}),
+            Line(points={{0,-100},{0,-26}}, color={255,0,255}),
+            Line(points={{-35,0},{28,-48}}, color={0,0,127})}),
+        Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
+                100,100}}), graphics={
+            Ellipse(
+              extent={{-25,-10},{-45,10}},
+              lineColor={0,0,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{45,-10},{25,10}},
+              lineColor={0,0,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Line(points={{-100,0},{-45,0}}, color={0,0,255}),
+            Line(points={{45,0},{100,0}}, color={0,0,255}),
+            Line(points={{-35,0},{28,-48}}, color={0,0,255}),
+            Line(points={{0,-100},{0,-26}}, color={255,0,255})}),
+        Documentation(info="<HTML>
+<p>
+Samples the continuous input signal whenever the trigger input
+signal is rising (i.e., trigger changes from <b>false</b> to
+<b>true</b>) and provides the sampled input signal as output.
+Before the first sampling, the output signal is equal to
+the initial value defined via parameter <b>y0</b>.
+</p>
+</HTML>
+"));
+    end TriggeredIntegerSampler;
   end Tests;
 
   package ForDocumentation
