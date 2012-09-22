@@ -61,7 +61,7 @@ is generated:
 
 <p>
 <img src=\"modelica://Modelica_Synchronous/Resources/Images/Clocks/subSampledClockExample.png\"><br>
-<img src=\"modelica://Modelica_Synchronous/Resources/Images/Clocks/subSampledClockResult.png\"><br>
+<img src=\"modelica://Modelica_Synchronous/Resources/Images/Clocks/subSampledClockResult.png\">
 </p>
 
 <p>
@@ -785,7 +785,7 @@ extends Modelica.Icons.Package;
     extends Modelica.Icons.ExamplesPackage;
 
     package SimpleControlledDrive
-    "Example of a simple controlled drive with different ways to define the sampling"
+    "Examples based on a simple controlled drive with different ways to define the sampling"
     extends Modelica.Icons.ExamplesPackage;
 
       model Continuous "Simple controlled drive with continuous controller"
@@ -1434,7 +1434,7 @@ extends Modelica.Icons.Package;
     end SimpleControlledDrive;
 
     package CascadeControlledDrive
-    "Example of a simple drive with cascade controller and different ways to define the sampling and super-sampling"
+    "Examples based on a simple drive with cascade controller and different ways to define the sampling and super-sampling"
       extends Modelica.Icons.ExamplesPackage;
 
       model Continuous "Drive with continuous-time cascade controller"
@@ -2116,7 +2116,7 @@ extends Modelica.Icons.Package;
       end SuperSampling;
     end Effects;
 
-    package Systems "Complete systems"
+    package Systems "Examples of complete systems"
       extends Modelica.Icons.ExamplesPackage;
 
       model ControlledMixingUnit
@@ -3202,21 +3202,291 @@ initial equation
       end Utilities;
     end Systems;
 
+    package ForDocumentation
+    "Examples that are used for the documentation of the blocks"
+      extends Modelica.Icons.ExamplesPackage;
+
+    annotation (Documentation(info="<html>
+<p>
+This package contains models that have been used to produce
+the figures in the documentation of the various blocks of
+the Modelica_Synchronous library.
+</p>
+</html>"));
+      package RealSignals
+      "Examples that are used for the documentation of the Modelica_Synchronous.RealSignals sub-library"
+        extends Modelica.Icons.ExamplesPackage;
+        model Sample1 "Example of a Sample block"
+           extends Modelica.Icons.Example;
+
+          Modelica.Blocks.Sources.Sine sine(freqHz=2,
+            offset=0.1,
+            startTime=0)
+            annotation (Placement(transformation(extent={{-80,20},{-60,40}})));
+          Modelica_Synchronous.RealSignals.Sampler.Sample sample
+            annotation (Placement(transformation(extent={{-46,24},{-34,36}})));
+          Modelica_Synchronous.RealSignals.Sampler.AssignClock assignClock
+            annotation (Placement(transformation(extent={{-22,24},{-10,36}})));
+          Modelica_Synchronous.ClockSignals.Clocks.PeriodicExactClock periodicClock(
+              factor=20, resolution=Modelica_Synchronous.Types.Resolution.ms)
+            annotation (Placement(transformation(extent={{-42,-2},{-30,10}})));
+        equation
+          connect(sine.y, sample.u) annotation (Line(
+              points={{-59,30},{-47.2,30}},
+              color={0,0,127},
+              smooth=Smooth.None));
+          connect(sample.y, assignClock.u) annotation (Line(
+              points={{-33.4,30},{-23.2,30}},
+              color={0,0,127},
+              smooth=Smooth.None));
+          connect(periodicClock.y, assignClock.clock) annotation (Line(
+              points={{-29.4,4},{-16,4},{-16,22.8}},
+              color={175,175,175},
+              pattern=LinePattern.Dot,
+              thickness=0.5,
+              smooth=Smooth.None));
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                    -100},{100,100}}), graphics), experiment(StopTime=0.2),
+          Documentation(info="<html>
+<p>
+Example used to generate a figure for the documentation of block
+<a href=\"Modelica_Synchronous.RealSignals.Sampler.Sample\">Modelica_Synchronous.RealSignals.Sampler.Sample</a>.
+</p>
+</html>"));
+        end Sample1;
+
+        model Sample2
+        "Example of a Sample block with discontinuous input signals"
+         extends Modelica.Icons.Example;
+          Modelica_Synchronous.RealSignals.Sampler.Sample sample
+            annotation (Placement(transformation(extent={{-46,24},{-34,36}})));
+          Modelica_Synchronous.RealSignals.Sampler.AssignClock assignClock
+            annotation (Placement(transformation(extent={{-22,24},{-10,36}})));
+          Modelica_Synchronous.ClockSignals.Clocks.PeriodicExactClock periodicClock(
+              factor=20, resolution=Modelica_Synchronous.Types.Resolution.ms)
+            annotation (Placement(transformation(extent={{-42,-2},{-30,10}})));
+        Modelica.Blocks.Sources.Step step(startTime=0.1)
+          annotation (Placement(transformation(extent={{-80,20},{-60,40}})));
+        equation
+          connect(sample.y, assignClock.u) annotation (Line(
+              points={{-33.4,30},{-23.2,30}},
+              color={0,0,127},
+              smooth=Smooth.None));
+          connect(periodicClock.y, assignClock.clock) annotation (Line(
+              points={{-29.4,4},{-16,4},{-16,22.8}},
+              color={175,175,175},
+              pattern=LinePattern.Dot,
+              thickness=0.5,
+              smooth=Smooth.None));
+        connect(step.y, sample.u) annotation (Line(
+            points={{-59,30},{-47.2,30}},
+            color={0,0,127},
+            smooth=Smooth.None));
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                  -100},{100,100}}),   graphics), experiment(StopTime=0.2),
+          Documentation(info="<html>
+<p>
+Example used to generate a figure for the documentation of block
+<a href=\"Modelica_Synchronous.RealSignals.Sampler.Sample\">Modelica_Synchronous.RealSignals.Sampler.Sample</a>.
+</p>
+</html>"));
+        end Sample2;
+
+        model SampleWithADeffects "Example of a SampleWithADeffects block"
+          import Modelica_Synchronous;
+           extends Modelica.Icons.Example;
+
+          Modelica.Blocks.Sources.Sine sine(freqHz=2,
+            startTime=0,
+            amplitude=0.95)
+            annotation (Placement(transformation(extent={{-80,20},{-60,40}})));
+          Modelica_Synchronous.RealSignals.Sampler.SampleWithADeffects
+                                                          sample(
+            noisy=true,
+            limited=true,
+            quantized=true,
+            yMax=0.8,
+            redeclare
+            Modelica_Synchronous.RealSignals.Sampler.Utilities.Internal.UniformNoise
+              noise(noiseMax=0.2))
+            annotation (Placement(transformation(extent={{-46,24},{-34,36}})));
+          Modelica_Synchronous.RealSignals.Sampler.AssignClock assignClock
+            annotation (Placement(transformation(extent={{-22,24},{-10,36}})));
+          Modelica_Synchronous.ClockSignals.Clocks.PeriodicExactClock periodicClock(
+              resolution=Modelica_Synchronous.Types.Resolution.ms, factor=20)
+            annotation (Placement(transformation(extent={{-42,-2},{-30,10}})));
+        equation
+          connect(sine.y, sample.u) annotation (Line(
+              points={{-59,30},{-47.2,30}},
+              color={0,0,127},
+              smooth=Smooth.None));
+          connect(sample.y, assignClock.u) annotation (Line(
+              points={{-33.4,30},{-23.2,30}},
+              color={0,0,127},
+              smooth=Smooth.None));
+          connect(periodicClock.y, assignClock.clock) annotation (Line(
+              points={{-29.4,4},{-16,4},{-16,22.8}},
+              color={175,175,175},
+              pattern=LinePattern.Dot,
+              thickness=0.5,
+              smooth=Smooth.None));
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                    -100},{100,100}}), graphics), experiment(StopTime=0.2),
+            Documentation(info="<html>
+<p>
+Example used to generate a figure for the documentation of block
+<a href=\"Modelica_Synchronous.RealSignals.Sampler.SampleWithADeffects\">Modelica_Synchronous.RealSignals.Sampler.SampleWithADeffects</a>.
+</p>
+</html>"));
+        end SampleWithADeffects;
+
+        model SampleClocked "Example of a SampleClocked block"
+        import Modelica_Synchronous;
+           extends Modelica.Icons.Example;
+
+          Modelica.Blocks.Sources.Sine sine(freqHz=2,
+            offset=0.1,
+            startTime=0)
+            annotation (Placement(transformation(extent={{-80,20},{-60,40}})));
+          Modelica_Synchronous.RealSignals.Sampler.SampleClocked
+                                                          sample
+            annotation (Placement(transformation(extent={{-46,24},{-34,36}})));
+          Modelica_Synchronous.ClockSignals.Clocks.PeriodicExactClock periodicClock(
+              factor=20, resolution=Modelica_Synchronous.Types.Resolution.ms)
+            annotation (Placement(transformation(extent={{-62,-6},{-50,6}})));
+        equation
+          connect(sine.y, sample.u) annotation (Line(
+              points={{-59,30},{-47.2,30}},
+              color={0,0,127},
+              smooth=Smooth.None));
+        connect(periodicClock.y, sample.clock) annotation (Line(
+            points={{-49.4,0},{-40,0},{-40,22.8}},
+            color={175,175,175},
+            pattern=LinePattern.Dot,
+            thickness=0.5,
+            smooth=Smooth.None));
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                  -100},{100,100}}),   graphics), experiment(StopTime=0.2),
+          Documentation(info="<html>
+<p>
+Example used to generate a figure for the documentation of block
+<a href=\"Modelica_Synchronous.RealSignals.Sampler.SampleClocked\">Modelica_Synchronous.RealSignals.Sampler.SampleClocked</a>.
+</p>
+</html>"));
+        end SampleClocked;
+
+        model SampleVectorizedAndClocked
+        "Example of a SampleVectorizedAndClocked block"
+        import Modelica_Synchronous;
+           extends Modelica.Icons.Example;
+
+          Modelica.Blocks.Sources.Sine sine2(
+          freqHz=2,
+          offset=0.1,
+          startTime=0)
+            annotation (Placement(transformation(extent={{-80,30},{-60,50}})));
+          Modelica_Synchronous.RealSignals.Sampler.SampleVectorizedAndClocked
+                                                          sample(n=2)
+            annotation (Placement(transformation(extent={{-14,24},{-2,36}})));
+          Modelica_Synchronous.ClockSignals.Clocks.PeriodicExactClock periodicClock(
+              factor=20, resolution=Modelica_Synchronous.Types.Resolution.ms)
+            annotation (Placement(transformation(extent={{-28,-6},{-16,6}})));
+          Modelica.Blocks.Sources.Sine sine1(startTime=0, freqHz=3)
+            annotation (Placement(transformation(extent={{-80,-2},{-60,18}})));
+        equation
+        connect(periodicClock.y, sample.clock) annotation (Line(
+            points={{-15.4,0},{-8,0},{-8,22.8}},
+            color={175,175,175},
+            pattern=LinePattern.Dot,
+            thickness=0.5,
+            smooth=Smooth.None));
+        connect(sine1.y, sample.u[1]) annotation (Line(
+            points={{-59,8},{-38,8},{-38,29.4},{-15.2,29.4}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(sine2.y, sample.u[2]) annotation (Line(
+            points={{-59,40},{-38,40},{-38,30.6},{-15.2,30.6}},
+            color={0,0,127},
+            smooth=Smooth.None));
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                  -100},{100,100}}),   graphics), experiment(StopTime=0.2),
+          Documentation(info="<html>
+<p>
+Example used to generate a figure for the documentation of block
+<a href=\"Modelica_Synchronous.RealSignals.Sampler.SampleVectorizedAndClocked\">Modelica_Synchronous.RealSignals.Sampler.SampleVectorizedAndClocked</a>.
+</p>
+</html>"));
+        end SampleVectorizedAndClocked;
+
+        model Hold "Example of a Hold block"
+        import Modelica_Synchronous;
+           extends Modelica.Icons.Example;
+
+          Modelica.Blocks.Sources.Sine sine(freqHz=2,
+            offset=0.1,
+            startTime=0)
+            annotation (Placement(transformation(extent={{-80,20},{-60,40}})));
+          Modelica_Synchronous.RealSignals.Sampler.SampleClocked
+                                                          sample
+            annotation (Placement(transformation(extent={{-52,24},{-40,36}})));
+          Modelica_Synchronous.ClockSignals.Clocks.PeriodicExactClock periodicClock(
+              factor=20, resolution=Modelica_Synchronous.Types.Resolution.ms)
+            annotation (Placement(transformation(extent={{-68,-6},{-56,6}})));
+        Modelica.Blocks.Math.Gain gain(k=2)
+          annotation (Placement(transformation(extent={{-14,20},{6,40}})));
+        Modelica_Synchronous.RealSignals.Sampler.Hold hold(y_start=-1.0)
+          annotation (Placement(transformation(extent={{12,24},{24,36}})));
+        Modelica_Synchronous.RealSignals.Sampler.ShiftSample shiftSample(
+            shiftCounter=2)
+          annotation (Placement(transformation(extent={{-34,24},{-22,36}})));
+        equation
+          connect(sine.y, sample.u) annotation (Line(
+              points={{-59,30},{-53.2,30}},
+              color={0,0,127},
+              smooth=Smooth.None));
+        connect(periodicClock.y, sample.clock) annotation (Line(
+            points={{-55.4,0},{-46,0},{-46,22.8}},
+            color={175,175,175},
+            pattern=LinePattern.Dot,
+            thickness=0.5,
+            smooth=Smooth.None));
+        connect(gain.y, hold.u) annotation (Line(
+            points={{7,30},{10.8,30}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(sample.y, shiftSample.u) annotation (Line(
+            points={{-39.4,30},{-35.2,30}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(shiftSample.y, gain.u) annotation (Line(
+            points={{-21.4,30},{-16,30}},
+            color={0,0,127},
+            smooth=Smooth.None));
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                  -100},{100,100}}),   graphics), experiment(StopTime=0.2),
+          Documentation(info="<html>
+<p>
+Example used to generate a figure for the documentation of block
+<a href=\"Modelica_Synchronous.RealSignals.Sampler.Hold\">Modelica_Synchronous.RealSignals.Sampler.Hold</a>.
+</p>
+</html>"));
+        end Hold;
+      annotation (Documentation(info="<html>
+<p>
+This package contains models that have been used to produce
+the figures in the documentation of the 
+<a href=\"modelica://Modelica_Synchronous.RealSignals\">Modelica_Synchronous.RealSignals</a>
+sub-library.
+</p>
+</html>"));
+      end RealSignals;
+    end ForDocumentation;
   end Examples;
 
 
 package ClockSignals "Library of blocks for clocked signals"
   extends Modelica.Icons.Package;
 
-
-  annotation (Documentation(info="<html>
-<p>
-This package contains blocks that transform a clock signal, by
-sub-, super-, and shift-sampling a clock. For an introduction
-to clocks see
-<a href=\"modelica://Modelica_Synchronous.UsersGuide.Clocks\">UsersGuide.Clocks</a>.
-</p>
-</html>"));
   package Clocks "Library of blocks that generate clocks"
     extends Modelica.Icons.SourcesPackage;
 
@@ -3904,90 +4174,47 @@ Connector with one output signal of type Boolean.
               fontSize=0)}));
     end ClockedBlockIcon;
   end Interfaces;
+  annotation (Documentation(info="<html>
+<p>
+This package contains blocks that transform a clock signal, by
+sub-, super-, and shift-sampling a clock. For an introduction
+to clocks see
+<a href=\"modelica://Modelica_Synchronous.UsersGuide.Clocks\">UsersGuide.Clocks</a>.
+</p>
+</html>"));
 end ClockSignals;
 
 
 package RealSignals "Library of clocked blocks for Real signals"
   extends Modelica.Icons.Package;
   package Sampler "Library of sampler and hold blocks for Real signals"
-    extends Modelica.Icons.Package;
-
-    block AssignClock "Assigns a clock to a signal"
+    block Sample
+      "Sample the continuous-time, Real input signal and provide it as clocked output signal (clock is infered)"
+      extends Modelica_Synchronous.RealSignals.Interfaces.PartialSISOSampler;
 
       Modelica.Blocks.Interfaces.RealInput u
-        "Connector of clocked, Real input signal"
+        "Connector of continuous-time, Real input signal"
         annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
             rotation=0)));
       Modelica.Blocks.Interfaces.RealOutput y
         "Connector of clocked, Real output signal"
         annotation (Placement(transformation(extent={{100,-10},{120,10}},
             rotation=0)));
-      Modelica_Synchronous.ClockSignals.Interfaces.ClockInput
-                                                 clock annotation (Placement(transformation(
-            extent={{-20,-20},{20,20}},
-            rotation=90,
-            origin={0,-120})));
     equation
-      when clock then
-        y = u;
-      end when;
+      y = sample(u);
 
       annotation (
-       defaultComponentName="assignClock1",
+       defaultComponentName="sample1",
        Icon(coordinateSystem(
-            preserveAspectRatio=false,
+            preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
             grid={2,2},
             initialScale=0.06),
                          graphics={
             Text(
-              extent={{-200,100},{200,160}},
+              extent={{-200,50},{200,115}},
               lineColor={0,0,255},
-              textString="%name"),
-            Rectangle(
-              extent={{-90,90},{88,-88}},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),
-                                   Line(points={{-80,-60},{-40,-60},{-40,0},{
-                  0,0},{0,0},{0,0},{0,80},{40,80},{40,40},{80,40},{80,0},{80,
-                  0},{80,0},{100,0}},color={0,0,127},
-              pattern=LinePattern.Dot),                Line(
-              points={{-80,-60},{-80,0},{-106,0}},
-              color={0,0,127},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dot),
-            Ellipse(
-              extent={{-90,-50},{-70,-70}},
-              lineColor={0,0,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{-50,10},{-30,-10}},
-              lineColor={0,0,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{-10,90},{10,70}},
-              lineColor={0,0,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{30,50},{50,30}},
-              lineColor={0,0,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{70,10},{90,-10}},
-              lineColor={0,0,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Line(visible=useClock,
-              points={{0,-100},{0,0}},
-              color={175,175,175},
-              pattern=LinePattern.Dot,
-              smooth=Smooth.None,
-              thickness=0.5)}),
+              textString="%name")}),
         Diagram(coordinateSystem(
             preserveAspectRatio=false,
             extent={{-100,-100},{100,100}},
@@ -3995,190 +4222,401 @@ package RealSignals "Library of clocked blocks for Real signals"
             initialScale=0.06),
                          graphics),
         Documentation(info="<html>
+<p>
+This block samples the continuous-time, Real input signal u and provides it as 
+clocked output signal y. The clock of the output signal is infered
+(that is, it needs to be defined somewhere else in the clocked partition).
+If this is not desired, use block
+<a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.SampleClocked\">SampleClocked</a>
+instead, to explicitly assign a clock to the output signal.
+</p>
 
-</html>",     revisions="<html>
-<table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
-    <tr>
-      <th>Date</th>
-      <th>Author</th>
-      <th>Company/Institute</th>
-      <th>Comment</th>
+<p>
+To be more precise: The input signal u(t) must be a continuous-time signal.
+The output signal y(ti) is associated to a clock (defined somewhere else).
+At a clock tick, the left limit of u is assigned to y:
+<code>y(ti) = u(ti-eps)</code> (= the value of u just before the clock
+becomes active). Since the operator returns the left limit of u, it introduces an
+infinitesimal small delay between the continuous-time and the clocked partition.
+This corresponds to the reality, where a sampled data system cannot act infinitely
+fast and even for a very idealized simulation, an infinitesimal small delay is present.
+As a result, an algebraic loop between a clocked and a continuous-time partition cannot
+occur.
+</p>
+
+<h4>Examples</h4>
+
+<p>
+The following 
+<a href=\"Modelica_Synchronous.Examples.ForDocumentation.RealSignals.Sample1\">example</a>
+samples a sine signal with a periodic clock of 20 ms period:<br>
+</p>
+
+<table border=0 cellspacing=0 cellpadding=2>
+<tr><td width=\"50\"></td>
+    <td valign=\"bottom\"><img src=\"modelica://Modelica_Synchronous/Resources/Images/RealSignals/Sample1_Model.png\"></td>
+    <td valign=\"bottom\">&nbsp;&nbsp;&nbsp;
+                        <img src=\"modelica://Modelica_Synchronous/Resources/Images/RealSignals/Sample1_Result.png\"></td>  
     </tr>
-    <tr>
-      <td valign=\"top\">2012-08-20</td>
-      <td valign=\"top\">Bernhard Thiele</td>
-      <td>DLR, Institute for System Dynamics and Control</td>
-      <td valign=\"top\">Initial version</td>
+<tr><td></td>
+    <td align=\"center\">model</td>
+    <td align=\"center\">simulation result</td>
+   </tr>
+</table>
+
+<p>
+<br>In the following
+<a href=\"Modelica_Synchronous.Examples.ForDocumentation.RealSignals.Sample2\">example</a>
+the continuous-time input signal contains a discontinuous value change at the 0.1 s
+clock tick. It can be seen that the Sample block samples the left limit of the
+step signal.<br>
+</p>
+
+<table border=0 cellspacing=0 cellpadding=2>
+<tr><td width=\"50\"></td>
+    <td valign=\"bottom\"><img src=\"modelica://Modelica_Synchronous/Resources/Images/RealSignals/Sample2_Model.png\"></td>
+    <td valign=\"bottom\">&nbsp;&nbsp;&nbsp;
+                        <img src=\"modelica://Modelica_Synchronous/Resources/Images/RealSignals/Sample2_Result.png\"></td>  
     </tr>
+<tr><td></td>
+    <td align=\"center\">model</td>
+    <td align=\"center\">simulation result</td>
+   </tr>
+</table>
+
+</html>"));
+    end Sample;
+    extends Modelica.Icons.Package;
+
+    block SampleWithADeffects
+      "Sample with (simulated) Analog-Digital converter effects including noise"
+      extends Modelica_Synchronous.RealSignals.Interfaces.PartialSISOSampler;
+
+      parameter Boolean noisy = false
+        "= true, if output should be superimposed with noise"
+        annotation(Evaluate=true,choices(__Dymola_checkBox=true),Dialog(enable=sampled,group="Sampling and noise"));
+
+      parameter Boolean limited = false "= true, if output is limited"
+        annotation(Evaluate=true,choices(__Dymola_checkBox=true),Dialog(group="Limiting and quantization"));
+      parameter Boolean quantized = false
+        "= true, if output quantization effects included"
+        annotation(Evaluate=true,Dialog(enable=limited,group="Limiting and quantization"));
+                                                                   // Dialog(enable=...) does not work with __Dymola_checkBox=... !?
+      parameter Real yMax=1 "Upper limit of output (if limited = true)" annotation(Dialog(enable=limited,group="Limiting and quantization"));
+      parameter Real yMin=-yMax "Lower limit of output (if limited = true)" annotation(Dialog(enable=limited,group="Limiting and quantization"));
+      parameter Integer bits(min=1)=8
+        "Number of bits of quantization (if quantized = true)" annotation(Dialog(enable=limited and quantized,group="Limiting and quantization"));
+
+      Sample sample1
+        annotation (Placement(transformation(extent={{-84,-6},{-72,6}})));
+
+      replaceable
+        Modelica_Synchronous.RealSignals.Sampler.Utilities.Internal.UniformNoise
+                                                                                 noise if noisy
+        constrainedby Modelica_Synchronous.RealSignals.Interfaces.PartialNoise
+        "Noise model"
+        annotation (__Dymola_choicesAllMatching=true, Dialog(enable=noisy,group="Sampling and noise"),Placement(transformation(extent={{-54,-6},
+                {-42,6}})));
+      Modelica_Synchronous.RealSignals.Sampler.Utilities.Internal.Limiter limiter(uMax=yMax,
+          uMin=yMin) if limited
+        annotation (Placement(transformation(extent={{-24,-8},{-8,8}})));
+      Modelica_Synchronous.RealSignals.Sampler.Utilities.Internal.Quantization quantization(
+        quantized=quantized,
+        yMax=yMax,
+        yMin=yMin,
+        bits=bits) if quantized and limited annotation (Placement(transformation(extent={{14,-8},
+                {30,8}})));
+    protected
+      Modelica.Blocks.Interfaces.RealInput uFeedthrough1 if not noisy
+        annotation (Placement(transformation(extent={{-58,12},{-42,28}})));
+      Modelica.Blocks.Interfaces.RealInput uFeedthrough2 if not limited
+        annotation (Placement(transformation(extent={{-26,12},{-10,28}})));
+      Modelica.Blocks.Interfaces.RealInput uFeedthrough3 if not quantized or not limited
+        annotation (Placement(transformation(extent={{12,12},{28,28}})));
+      Modelica.Blocks.Interfaces.RealOutput y1
+        "Connector with a Real output signal"
+        annotation (Placement(transformation(extent={{-61,-1},{-59,1}})));
+      Modelica.Blocks.Interfaces.RealOutput y2
+        annotation (Placement(transformation(extent={{-35,-1},{-33,1}})));
+      Modelica.Blocks.Interfaces.RealOutput y3
+        annotation (Placement(transformation(extent={{3,-1},{5,1}})));
+      Modelica.Blocks.Interfaces.RealOutput y4
+        annotation (Placement(transformation(extent={{41,-1},{43,1}})));
+
+    equation
+      connect(uFeedthrough1, y1) annotation (Line(
+          points={{-50,20},{-58,20},{-58,0},{-60,0}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(y1, noise.u) annotation (Line(
+          points={{-60,0},{-55.2,0}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(noise.y, y2) annotation (Line(
+          points={{-41.4,0},{-34,0}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(y2, limiter.u) annotation (Line(
+          points={{-34,0},{-25.6,0}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(uFeedthrough1, y2) annotation (Line(
+          points={{-50,20},{-38,20},{-38,0},{-34,0}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(y2, uFeedthrough2) annotation (Line(
+          points={{-34,0},{-30,0},{-30,20},{-18,20}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(limiter.y, y3) annotation (Line(
+          points={{-7.2,0},{4,0}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(y3, quantization.u) annotation (Line(
+          points={{4,0},{12.4,0}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(y3, uFeedthrough3) annotation (Line(
+          points={{4,0},{8,0},{8,20},{20,20}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(quantization.y, y4) annotation (Line(
+          points={{30.8,0},{42,0}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(uFeedthrough3, y4) annotation (Line(
+          points={{20,20},{38,20},{38,0},{42,0}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(uFeedthrough2, y3) annotation (Line(
+          points={{-18,20},{0,20},{0,0},{4,0}},
+          color={0,0,127},
+          smooth=Smooth.None));
+
+      connect(sample1.y, y1) annotation (Line(
+          points={{-71.4,0},{-60,0}},
+          color={0,0,127},
+          smooth=Smooth.None));
+
+      connect(u, sample1.u) annotation (Line(
+          points={{-120,0},{-85.2,0}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(y4, y) annotation (Line(
+          points={{42,0},{110,0}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      annotation (
+       defaultComponentName="sample1",
+       Icon(coordinateSystem(
+            preserveAspectRatio=true,
+            extent={{-100,-100},{100,100}},
+            grid={2,2},
+            initialScale=0.06),
+                         graphics={
+            Polygon(
+              points={{0,-22},{-6,-38},{6,-38},{0,-22}},
+              lineColor={192,192,192},
+              fillColor={192,192,192},
+              fillPattern=FillPattern.Solid),
+            Line(points={{0,-112},{0,-38}},color={192,192,192}),
+            Line(points={{-62,-72},{66,-72}}, color={192,192,192}),
+            Polygon(
+              points={{0,8},{-6,-8},{6,-8},{0,8}},
+              lineColor={192,192,192},
+              fillColor={192,192,192},
+              fillPattern=FillPattern.Solid,
+              origin={74,-72},
+              rotation=-90),
+            Line(
+              points={{-50,-112},{-30,-112},{-30,-92},{-10,-92},{-10,-72},{10,-72},{
+                  10,-52},{30,-52},{30,-32},{50,-32}},
+              color={0,0,127},
+              smooth=Smooth.None),
+            Text(
+              extent={{-200,40},{200,100}},
+              lineColor={0,0,255},
+              textString="%name")}),
+        Diagram(coordinateSystem(
+            preserveAspectRatio=false,
+            extent={{-100,-100},{100,100}},
+            grid={2,2},
+            initialScale=0.06),
+                         graphics),
+        Documentation(info="<html>
+This block is similar to the
+<a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.Sample\">Sample</a>
+block. The only difference is that after the sampling of the input signal,
+simulated real-world effects are applied on the sampled signal. In particular:
+</p>
+
+<ul>
+<li> The output is limited, if parameter <b>limited</b> = true.</li>
+<li> The output is value discretized in the form of an Analog-Digital converter
+     with a defineable number of bits,
+     if parameters <b>limited</b> = true, and <b>quantized</b> = true.</li>
+<li> Noise is added to the output if
+     parameter <b>noisy</b> = true.
+     A pseudo random number is used to generate uniformly distributed
+     random numbers in a given band.</li>
+</ul>
+
+<h4>Example</h4>
+
+<p>
+The following 
+<a href=\"Modelica_Synchronous.Examples.ForDocumentation.RealSignals.SampleWithADeffects\">example</a>
+samples a sine signal with a periodic clock of 20 ms period, and adds the following effects:
+</p>
+<ul>
+<li> Limits the output to +/- 0.8.</li>
+<li> Discretizes the output with an 8 bit AD converter.</li>
+<li> Adds large uniform noise with a band of +/- 0.2.</li>
+</ul>
+<table border=0 cellspacing=0 cellpadding=2>
+<tr><td width=\"50\"></td>
+    <td valign=\"bottom\"><img src=\"modelica://Modelica_Synchronous/Resources/Images/RealSignals/SampleWithADeffects_Model.png\"></td>
+    <td valign=\"bottom\">&nbsp;&nbsp;&nbsp;
+                        <img src=\"modelica://Modelica_Synchronous/Resources/Images/RealSignals/SampleWithADeffects_Result.png\"></td>  
+    </tr>
+<tr><td></td>
+    <td align=\"center\">model</td>
+    <td align=\"center\">simulation result</td>
+   </tr>
+</table>
+
+<p>
+<br>The output y is quite far away from the continuous-time input signal,
+    due to the strong discretization and large noise applied to the
+    sampled input.
+</p>
+</html>"));
+    end SampleWithADeffects;
+
+    block SampleClocked
+      "Sample the continuous-time, Real input signal and provide it as clocked output signal. The clock is provided as input signal"
+      extends Modelica_Synchronous.RealSignals.Interfaces.SamplerIcon;
+      Modelica.Blocks.Interfaces.RealInput u
+        "Connector of continuous-time, Real input signal"
+        annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
+      Modelica.Blocks.Interfaces.RealOutput y
+        "Connector of clocked, Real output signal"
+        annotation (Placement(transformation(extent={{100,-10},{120,10}})));
+      Modelica_Synchronous.ClockSignals.Interfaces.ClockInput clock
+        "Output signal y is associated with this clock input"                           annotation (Placement(transformation(
+            extent={{-20,-20},{20,20}},
+            rotation=90,
+            origin={0,-120})));
+
+    equation
+      y = sample(u,clock);
+
+      annotation (
+       defaultComponentName="sample1",
+       Icon(coordinateSystem(
+            preserveAspectRatio=true,
+            extent={{-100,-100},{100,100}},
+            grid={2,2},
+            initialScale=0.06),
+                         graphics={
+            Line(
+              points={{0,-100},{0,18}},
+              color={175,175,175},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dot,
+              thickness=0.5),
+            Text(
+              extent={{-200,50},{200,115}},
+              lineColor={0,0,255},
+              textString="%name")}),
+        Diagram(coordinateSystem(
+            preserveAspectRatio=false,
+            extent={{-100,-100},{100,100}},
+            grid={2,2},
+            initialScale=0.06),
+                         graphics),
+        Documentation(info="<html>
+This block is similar to the
+<a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.Sample\">Sample</a>
+block. The only difference is that a clock signal is provided via a second
+input and the output is associated to this clock.
+</p>
+
+<p>
+Note, it does not make much sense to vectorize this block, because then
+also the clock input is vectorized. Instead, if the input signal is a vector, use block
+<a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.SampleVectorizedAndClocked\">SampleVectorizedAndClocked</a>
+that has a <b>vector</b> Real input and output, as well as a <b>scalar</b> clock input.
+</p>
+
+<h4>Example</h4>
+
+<p>
+The following 
+<a href=\"Modelica_Synchronous.Examples.ForDocumentation.RealSignals.SampleClocked\">example</a>
+samples a sine signal with a periodic clock of 20 ms period:<br>
+</p>
+
+<table border=0 cellspacing=0 cellpadding=2>
+<tr><td width=\"50\"></td>
+    <td valign=\"bottom\"><img src=\"modelica://Modelica_Synchronous/Resources/Images/RealSignals/SampleClocked_Model.png\"></td>
+    <td valign=\"bottom\">&nbsp;&nbsp;&nbsp;
+                        <img src=\"modelica://Modelica_Synchronous/Resources/Images/RealSignals/SampleClocked_Result.png\"></td>  
+    </tr>
+<tr><td></td>
+    <td align=\"center\">model</td>
+    <td align=\"center\">simulation result<br></td>
+   </tr>
 </table>
 </html>"));
-    end AssignClock;
+    end SampleClocked;
 
-    block AssignClockVectorized "Assigns a clock to a signal vector"
-
+    block SampleVectorizedAndClocked
+      "Sample the continuous-time, Real input signal vector and provide it as clocked output signal vector. The clock is provided as input signal"
+      extends Modelica_Synchronous.RealSignals.Interfaces.SamplerIcon;
       parameter Integer n(min=1)=1
         "Size of input signal vector u (= size of output signal vector y)";
       Modelica.Blocks.Interfaces.RealInput u[n]
-        "Connector of clocked, Real input signal"
+        "Connector of continuous-time, Real input signal vector"
         annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
-            rotation=0)));
+            rotation=0), iconTransformation(extent={{-140,-20},{-100,20}})));
       Modelica.Blocks.Interfaces.RealOutput y[n]
-        "Connector of clocked, Real output signal"
+        "Connector of clocked, Real output signal vector"
         annotation (Placement(transformation(extent={{100,-10},{120,10}},
             rotation=0)));
        Modelica_Synchronous.ClockSignals.Interfaces.ClockInput
-                                                  clock annotation (Placement(transformation(
+                                                  clock
+        "Output signal vector y is associated with this clock input"                           annotation (Placement(transformation(
             extent={{-20,-20},{20,20}},
             rotation=90,
             origin={0,-120})));
     equation
-      when clock then
-        y = u;
-      end when;
+      y = sample(u,clock);
 
       annotation (
-       defaultComponentName="assignClock1",
+       defaultComponentName="sample1",
        Icon(coordinateSystem(
-            preserveAspectRatio=false,
+            preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
             grid={2,2},
             initialScale=0.06),
                          graphics={
-            Text(
-              extent={{-196,128},{204,188}},
-              lineColor={0,0,255},
-              textString="%name"),
-            Text(
-              extent={{0,-32},{180,-82}},
-              lineColor={0,0,0},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              textString="n=%n"),  Line(points={{-80,-60},{-40,-60},{-40,0},{
-                  0,0},{0,0},{0,0},{0,80},{40,80},{40,40},{80,40},{80,0},{80,
-                  0},{80,0},{100,0}},color={0,0,127},
-              pattern=LinePattern.Dot),                Line(
-              points={{-80,-60},{-80,0},{-106,0}},
-              color={0,0,127},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dot),
-            Ellipse(
-              extent={{-90,-50},{-70,-70}},
-              lineColor={0,0,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{-50,10},{-30,-10}},
-              lineColor={0,0,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{-10,90},{10,70}},
-              lineColor={0,0,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{30,50},{50,30}},
-              lineColor={0,0,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{70,10},{90,-10}},
-              lineColor={0,0,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Line(visible=useClock,
-              points={{0,-100},{0,70}},
+            Line(
+              points={{0,-100},{0,18}},
               color={175,175,175},
-              pattern=LinePattern.Dot,
               smooth=Smooth.None,
-              thickness=0.5)}),
-        Diagram(coordinateSystem(
-            preserveAspectRatio=false,
-            extent={{-100,-100},{100,100}},
-            grid={2,2},
-            initialScale=0.06),
-                         graphics),
-        Documentation(info="<html>
-
-</html>"));
-    end AssignClockVectorized;
-
-    block BackSample
-      "Shift clock of input backwards in time (and access the most recent value of the input at this new clock)"
-      parameter Integer backCounter(min=0)=0 "Numerator of shifting formula"
-            annotation(Dialog(group="Shift first clock activation backwards in time for 'shiftCounter/resolution*interval(u)' seconds"));
-      parameter Integer resolution(min=1)=1 "Denominator of shifting formula"
-            annotation(Dialog(group="Shift first clock activation backwards in time for 'shiftCounter/resolution*interval(u)' seconds"));
-      parameter Real y_start=0
-        "Value of output y before the first clock tick of the input u";
-
-      Modelica.Blocks.Interfaces.RealInput u(start=y_start)
-        "Connector of clocked, Real input signal"
-        annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
-            rotation=0)));
-      Modelica.Blocks.Interfaces.RealOutput y
-        "Connector of clocked, Real output signal (clock of y is faster als clock of u)"
-        annotation (Placement(transformation(extent={{100,-10},{120,10}},
-            rotation=0)));
-    equation
-      y = backSample(u,backCounter,resolution);
-
-      annotation (
-       defaultComponentName="backSample1",
-       Icon(coordinateSystem(
-            preserveAspectRatio=true,
-            extent={{-100,-100},{100,100}},
-            grid={2,2},
-            initialScale=0.06),
-                         graphics={
-            Rectangle(
-              extent={{-90,84},{88,-94}},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),
-                                   Line(points={{20,-50},{60,-50},{60,50}},
-                                     color={0,0,127},
-              pattern=LinePattern.Dot),
+              pattern=LinePattern.Dot,
+              thickness=0.5),
             Text(
-              extent={{-200,175},{200,110}},
+              extent={{-200,50},{200,115}},
               lineColor={0,0,255},
               textString="%name"),
             Text(
-              extent={{-200,-135},{200,-200}},
+              extent={{-160,-30},{20,-80}},
               lineColor={0,0,0},
-              textString="%backCounter/%resolution"),
-                                   Line(points={{-80,-50},{-40,-50},{-40,50}},
-                                     color={0,0,127},
-              pattern=LinePattern.Dot),
-            Ellipse(
-              extent={{-90,-40},{-70,-60}},
-              lineColor={0,0,127},
               fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{-50,60},{-30,40}},
-              lineColor={0,0,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Polygon(
-              points={{-16,0},{4,20},{4,10},{34,10},{34,-10},{4,-10},{4,-20},{-16,0}},
-              fillColor={95,95,95},
               fillPattern=FillPattern.Solid,
-              lineColor={95,95,95}),
-            Ellipse(
-              extent={{10,-40},{30,-60}},
-              lineColor={0,0,127},
-              fillColor={0,0,127},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{50,60},{70,40}},
-              lineColor={0,0,127},
-              fillColor={0,0,127},
-              fillPattern=FillPattern.Solid),
-            Text(
-              extent={{-200,-74},{200,-139}},
-              lineColor={0,0,0},
-              textString="y_start=%y_start")}),
+              textString="n=%n")}),
         Diagram(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
@@ -4186,9 +4624,35 @@ package RealSignals "Library of clocked blocks for Real signals"
             initialScale=0.06),
                          graphics),
         Documentation(info="<html>
+This block is similar to the
+<a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.SampleClocked\">SampleClocked</a>
+block. The only difference is that the continuous-time input signal is a vector: All input
+signals are sampled and are associated with the 
+scalar clock signal provided via a second input.
+</p>
 
+<h4>Example</h4>
+
+<p>
+The following 
+<a href=\"Modelica_Synchronous.Examples.ForDocumentation.RealSignals.SampleVectorizedAndClocked\">example</a>
+has a vector as input, consisting of two different sine signals. These
+signals are sampled with a periodic clock of 20 ms period:<br>
+</p>
+
+<table border=0 cellspacing=0 cellpadding=2>
+<tr><td width=\"50\"></td>
+    <td valign=\"bottom\"><img src=\"modelica://Modelica_Synchronous/Resources/Images/RealSignals/SampleVectorizedAndClocked_Model.png\"></td>
+    <td valign=\"bottom\">&nbsp;&nbsp;&nbsp;
+                        <img src=\"modelica://Modelica_Synchronous/Resources/Images/RealSignals/SampleVectorizedAndClocked_Result.png\"></td>  
+    </tr>
+<tr><td></td>
+    <td align=\"center\">model</td>
+    <td align=\"center\">simulation result<br></td>
+   </tr>
+</table>
 </html>"));
-    end BackSample;
+    end SampleVectorizedAndClocked;
 
     block Hold
       "Hold the clocked, Real input signal and provide it as continuous-time output signal (zero order hold)"
@@ -4225,10 +4689,45 @@ package RealSignals "Library of clocked blocks for Real signals"
               lineColor={0,0,127},
               fillColor={0,0,127},
               fillPattern=FillPattern.Solid)}),
-        Documentation(info="<HTML>
+        Documentation(info="<html>
+<p>
+This block holds the clocked Real input signal u with a zero order hold
+and provides it as continuous-time output signal y. 
+The clock of the input signal is infered
+(that is, it needs to be defined somewhere else in the clocked partition).
+</p>
 
-</HTML>
-"),     Diagram(coordinateSystem(
+<p>
+To be more precise: The input signal u(ti) must be a clocked signal.
+The output signal y(t) is a piecewise constant continuous-time signal.
+When the clock of u ticks, the operator returns u and otherwise returns the value of 
+u from the last clock activation. Before the first clock activation of u, 
+the operator returns the value of parameter <b>y_start</b>. The value of
+this parameter is displayed below the icon.
+</p>
+
+<h4>Example</h4>
+
+<p>
+The following 
+<a href=\"Modelica_Synchronous.Examples.ForDocumentation.RealSignals.Sample1\">example</a>
+samples a sine signal with a periodic clock of 20 ms period:<br>
+</p>
+
+<table border=0 cellspacing=0 cellpadding=2>
+<tr><td width=\"50\"></td>
+    <td valign=\"bottom\"><img src=\"modelica://Modelica_Synchronous/Resources/Images/RealSignals/Hold_Model.png\"></td>
+    <td valign=\"bottom\">&nbsp;&nbsp;&nbsp;
+                        <img src=\"modelica://Modelica_Synchronous/Resources/Images/RealSignals/Hold_Result.png\"></td>  
+    </tr>
+<tr><td></td>
+    <td align=\"center\">model</td>
+    <td align=\"center\">simulation result</td>
+   </tr>
+</table>
+
+</html>"),
+        Diagram(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
             initialScale=0.06)));
@@ -4387,392 +4886,6 @@ package RealSignals "Library of clocked blocks for Real signals"
             extent={{-100,-100},{100,100}},
             initialScale=0.06), graphics));
     end HoldWithDAeffects;
-
-    block Sample
-      "Sample the continuous-time, Real input signal and provide it as clocked output signal (clock is infered)"
-      extends Modelica_Synchronous.RealSignals.Interfaces.PartialSISOSampler;
-
-      Modelica.Blocks.Interfaces.RealInput u
-        "Connector of continuous-time, Real input signal"
-        annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
-            rotation=0)));
-      Modelica.Blocks.Interfaces.RealOutput y
-        "Connector of clocked, Real output signal"
-        annotation (Placement(transformation(extent={{100,-10},{120,10}},
-            rotation=0)));
-    equation
-      y = sample(u);
-
-      annotation (
-       defaultComponentName="sample1",
-       Icon(coordinateSystem(
-            preserveAspectRatio=true,
-            extent={{-100,-100},{100,100}},
-            grid={2,2},
-            initialScale=0.06),
-                         graphics={
-            Text(
-              extent={{-200,50},{200,115}},
-              lineColor={0,0,255},
-              textString="%name")}),
-        Diagram(coordinateSystem(
-            preserveAspectRatio=false,
-            extent={{-100,-100},{100,100}},
-            grid={2,2},
-            initialScale=0.06),
-                         graphics),
-        Documentation(info="<html>
-
-</html>"));
-    end Sample;
-
-    block SampleClocked
-      "Sample the continuous-time, Real input signal and provide it as clocked output signal. The clock is provided as input signal"
-      extends Modelica_Synchronous.RealSignals.Interfaces.SamplerIcon;
-       Modelica_Synchronous.ClockSignals.Interfaces.ClockInput
-                                                  clock
-        "Output signal y is associated with this clock input"                           annotation (Placement(transformation(
-            extent={{-20,-20},{20,20}},
-            rotation=90,
-            origin={0,-120})));
-      Modelica.Blocks.Interfaces.RealInput u
-        "Connector of continuous-time, Real input signal"
-        annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
-      Modelica.Blocks.Interfaces.RealOutput y
-        "Connector of clocked, Real output signal"
-        annotation (Placement(transformation(extent={{100,-10},{120,10}})));
-    equation
-      y = sample(u,clock);
-
-      annotation (
-       defaultComponentName="sample1",
-       Icon(coordinateSystem(
-            preserveAspectRatio=true,
-            extent={{-100,-100},{100,100}},
-            grid={2,2},
-            initialScale=0.06),
-                         graphics={
-            Line(
-              points={{0,-100},{0,18}},
-              color={175,175,175},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dot,
-              thickness=0.5),
-            Text(
-              extent={{-200,50},{200,115}},
-              lineColor={0,0,255},
-              textString="%name")}),
-        Diagram(coordinateSystem(
-            preserveAspectRatio=false,
-            extent={{-100,-100},{100,100}},
-            grid={2,2},
-            initialScale=0.06),
-                         graphics),
-        Documentation(info="<html>
-
-</html>"));
-    end SampleClocked;
-
-    block SampleVectorizedAndClocked
-      "Sample the continuous-time, Real input signal vector and provide it as clocked output signal vector. The clock is provided as input signal"
-      extends Modelica_Synchronous.RealSignals.Interfaces.SamplerIcon;
-      parameter Integer n(min=1)=1
-        "Size of input signal vector u (= size of output signal vector y)";
-      Modelica.Blocks.Interfaces.RealInput u[n]
-        "Connector of continuous-time, Real input signal vector"
-        annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
-            rotation=0), iconTransformation(extent={{-140,-20},{-100,20}})));
-      Modelica.Blocks.Interfaces.RealOutput y[n]
-        "Connector of clocked, Real output signal vector"
-        annotation (Placement(transformation(extent={{100,-10},{120,10}},
-            rotation=0)));
-       Modelica_Synchronous.ClockSignals.Interfaces.ClockInput
-                                                  clock
-        "Output signal vector y is associated with this clock input"                           annotation (Placement(transformation(
-            extent={{-20,-20},{20,20}},
-            rotation=90,
-            origin={0,-120})));
-    equation
-      y = sample(u,clock);
-
-      annotation (
-       defaultComponentName="sample1",
-       Icon(coordinateSystem(
-            preserveAspectRatio=true,
-            extent={{-100,-100},{100,100}},
-            grid={2,2},
-            initialScale=0.06),
-                         graphics={
-            Line(
-              points={{0,-100},{0,18}},
-              color={175,175,175},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dot,
-              thickness=0.5),
-            Text(
-              extent={{-200,50},{200,115}},
-              lineColor={0,0,255},
-              textString="%name"),
-            Text(
-              extent={{-160,-30},{20,-80}},
-              lineColor={0,0,0},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              textString="n=%n")}),
-        Diagram(coordinateSystem(
-            preserveAspectRatio=true,
-            extent={{-100,-100},{100,100}},
-            grid={2,2},
-            initialScale=0.06),
-                         graphics),
-        Documentation(info="<html>
-
-</html>"));
-    end SampleVectorizedAndClocked;
-
-    block SampleWithADeffects
-      "Sample with (simulated) Analog-Digital converter effects including noise"
-      extends Modelica_Synchronous.RealSignals.Interfaces.PartialSISOSampler;
-
-      parameter Boolean noisy = false
-        "= true, if output should be superimposed with noise"
-        annotation(Evaluate=true,choices(__Dymola_checkBox=true),Dialog(enable=sampled,group="Sampling and noise"));
-
-      parameter Boolean limited = false "= true, if output is limited"
-        annotation(Evaluate=true,choices(__Dymola_checkBox=true),Dialog(group="Limiting and quantization"));
-      parameter Boolean quantized = false
-        "= true, if output quantization effects included"
-        annotation(Evaluate=true,Dialog(enable=limited,group="Limiting and quantization"));
-                                                                   // Dialog(enable=...) does not work with __Dymola_checkBox=... !?
-      parameter Real yMax=1 "Upper limit of output (if limited = true)" annotation(Dialog(enable=limited,group="Limiting and quantization"));
-      parameter Real yMin=-yMax "Lower limit of output (if limited = true)" annotation(Dialog(enable=limited,group="Limiting and quantization"));
-      parameter Integer bits(min=1)=8
-        "Number of bits of quantization (if quantized = true)" annotation(Dialog(enable=limited and quantized,group="Limiting and quantization"));
-
-      Sample sample1
-        annotation (Placement(transformation(extent={{-84,-6},{-72,6}})));
-
-      replaceable
-        Modelica_Synchronous.RealSignals.Sampler.Utilities.Internal.UniformNoise
-                                                                                 noise if noisy
-        constrainedby Modelica_Synchronous.RealSignals.Interfaces.PartialNoise
-        "Noise model"
-        annotation (__Dymola_choicesAllMatching=true, Dialog(enable=noisy,group="Sampling and noise"),Placement(transformation(extent={{-54,-6},
-                {-42,6}})));
-      Modelica_Synchronous.RealSignals.Sampler.Utilities.Internal.Limiter limiter(uMax=yMax,
-          uMin=yMin) if limited
-        annotation (Placement(transformation(extent={{-24,-8},{-8,8}})));
-      Modelica_Synchronous.RealSignals.Sampler.Utilities.Internal.Quantization quantization(
-        quantized=quantized,
-        yMax=yMax,
-        yMin=yMin,
-        bits=bits) if quantized and limited annotation (Placement(transformation(extent={{14,-8},
-                {30,8}})));
-    protected
-      Modelica.Blocks.Interfaces.RealInput uFeedthrough1 if not noisy
-        annotation (Placement(transformation(extent={{-58,12},{-42,28}})));
-      Modelica.Blocks.Interfaces.RealInput uFeedthrough2 if not limited
-        annotation (Placement(transformation(extent={{-26,12},{-10,28}})));
-      Modelica.Blocks.Interfaces.RealInput uFeedthrough3 if not quantized or not limited
-        annotation (Placement(transformation(extent={{12,12},{28,28}})));
-      Modelica.Blocks.Interfaces.RealOutput y1
-        "Connector with a Real output signal"
-        annotation (Placement(transformation(extent={{-61,-1},{-59,1}})));
-      Modelica.Blocks.Interfaces.RealOutput y2
-        annotation (Placement(transformation(extent={{-35,-1},{-33,1}})));
-      Modelica.Blocks.Interfaces.RealOutput y3
-        annotation (Placement(transformation(extent={{3,-1},{5,1}})));
-      Modelica.Blocks.Interfaces.RealOutput y4
-        annotation (Placement(transformation(extent={{41,-1},{43,1}})));
-
-    equation
-      connect(uFeedthrough1, y1) annotation (Line(
-          points={{-50,20},{-58,20},{-58,0},{-60,0}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(y1, noise.u) annotation (Line(
-          points={{-60,0},{-55.2,0}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(noise.y, y2) annotation (Line(
-          points={{-41.4,0},{-34,0}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(y2, limiter.u) annotation (Line(
-          points={{-34,0},{-25.6,0}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(uFeedthrough1, y2) annotation (Line(
-          points={{-50,20},{-38,20},{-38,0},{-34,0}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(y2, uFeedthrough2) annotation (Line(
-          points={{-34,0},{-30,0},{-30,20},{-18,20}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(limiter.y, y3) annotation (Line(
-          points={{-7.2,0},{4,0}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(y3, quantization.u) annotation (Line(
-          points={{4,0},{12.4,0}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(y3, uFeedthrough3) annotation (Line(
-          points={{4,0},{8,0},{8,20},{20,20}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(quantization.y, y4) annotation (Line(
-          points={{30.8,0},{42,0}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(uFeedthrough3, y4) annotation (Line(
-          points={{20,20},{38,20},{38,0},{42,0}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(uFeedthrough2, y3) annotation (Line(
-          points={{-18,20},{0,20},{0,0},{4,0}},
-          color={0,0,127},
-          smooth=Smooth.None));
-
-      connect(sample1.y, y1) annotation (Line(
-          points={{-71.4,0},{-60,0}},
-          color={0,0,127},
-          smooth=Smooth.None));
-
-      connect(u, sample1.u) annotation (Line(
-          points={{-120,0},{-85.2,0}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(y4, y) annotation (Line(
-          points={{42,0},{110,0}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      annotation (
-       defaultComponentName="sample1",
-       Icon(coordinateSystem(
-            preserveAspectRatio=true,
-            extent={{-100,-100},{100,100}},
-            grid={2,2},
-            initialScale=0.06),
-                         graphics={
-            Polygon(
-              points={{0,-22},{-6,-38},{6,-38},{0,-22}},
-              lineColor={192,192,192},
-              fillColor={192,192,192},
-              fillPattern=FillPattern.Solid),
-            Line(points={{0,-112},{0,-38}},color={192,192,192}),
-            Line(points={{-62,-72},{66,-72}}, color={192,192,192}),
-            Polygon(
-              points={{0,8},{-6,-8},{6,-8},{0,8}},
-              lineColor={192,192,192},
-              fillColor={192,192,192},
-              fillPattern=FillPattern.Solid,
-              origin={74,-72},
-              rotation=-90),
-            Line(
-              points={{-50,-112},{-30,-112},{-30,-92},{-10,-92},{-10,-72},{10,-72},{
-                  10,-52},{30,-52},{30,-32},{50,-32}},
-              color={0,0,127},
-              smooth=Smooth.None),
-            Text(
-              extent={{-200,40},{200,100}},
-              lineColor={0,0,255},
-              textString="%name")}),
-        Diagram(coordinateSystem(
-            preserveAspectRatio=false,
-            extent={{-100,-100},{100,100}},
-            grid={2,2},
-            initialScale=0.06),
-                         graphics),
-        Documentation(info="<html>
-
-</html>"));
-    end SampleWithADeffects;
-
-    block ShiftSample "Shift (delay) input for some clock ticks"
-
-      parameter Integer shiftCounter(min=0)=0 "Numerator of shifting formula"
-            annotation(Dialog(group="Shift first clock activation for 'shiftCounter/resolution*interval(u)' seconds"));
-      parameter Integer resolution(min=1)=1 "Denominator of shifting formula"
-            annotation(Dialog(group="Shift first clock activation for 'shiftCounter/resolution*interval(u)' seconds"));
-
-      Modelica.Blocks.Interfaces.RealInput u
-        "Connector of clocked, Real input signal"
-        annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
-            rotation=0)));
-      Modelica.Blocks.Interfaces.RealOutput y
-        "Connector of clocked, Real output signal"
-        annotation (Placement(transformation(extent={{100,-10},{120,10}},
-            rotation=0)));
-    equation
-         y = shiftSample(u,shiftCounter,resolution);
-      annotation (
-       defaultComponentName="shiftSample1",
-       Icon(coordinateSystem(
-            preserveAspectRatio=true,
-            extent={{-100,-100},{100,100}},
-            grid={2,2},
-            initialScale=0.06),
-                         graphics={
-            Rectangle(
-              extent={{-94,86},{84,-92}},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),
-                                   Line(points={{20,-50},{60,-50},{60,50}},
-                                     color={0,0,127},
-              pattern=LinePattern.Dot),
-            Text(
-              extent={{-200,175},{200,110}},
-              lineColor={0,0,255},
-              textString="%name"),
-            Text(
-              extent={{-200,-85},{200,-150}},
-              lineColor={0,0,0},
-              textString="%shiftCounter/%resolution"),
-                                   Line(points={{-80,-50},{-40,-50},{-40,50}},
-                                     color={0,0,127},
-              pattern=LinePattern.Dot),
-            Ellipse(
-              extent={{10,-40},{30,-60}},
-              lineColor={0,0,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{50,60},{70,40}},
-              lineColor={0,0,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Polygon(
-              points={{34,0},{14,20},{14,10},{-16,10},{-16,-10},{14,-10},{14,-20},{34,
-                  0}},
-              fillColor={95,95,95},
-              fillPattern=FillPattern.Solid,
-              lineColor={95,95,95}),
-            Ellipse(
-              extent={{-90,-40},{-70,-60}},
-              lineColor={0,0,127},
-              fillColor={0,0,127},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{-50,60},{-30,40}},
-              lineColor={0,0,127},
-              fillColor={0,0,127},
-              fillPattern=FillPattern.Solid)}),
-        Diagram(coordinateSystem(
-            preserveAspectRatio=true,
-            extent={{-100,-100},{100,100}},
-            grid={2,2},
-            initialScale=0.06),
-                         graphics),
-        Documentation(info="<html>
-<p><i>The first activation of the clock of y = shiftSample(..) is shifted in time shiftCounter/resolution*interval(u) later than the first activation of the clock of u.</i></p>
-<p>Conceptually, the operator constructs a clock &ldquo;cBase&rdquo; <b>Clock</b> cBase = <b>subSample</b>(<b>superSample</b>(u, resolution), shiftCounter) and the clock of y = <b>shiftSample</b>(..) starts at the second clock tick of cBase. At every tick of the clock of y, the operator returns the value of u from the last tick of the clock of u.</p>
-<p>Note, due to the restriction of <b>superSample</b> on Boolean clocks, <b>shiftSample</b> can only shift the number of ticks of the Boolean clock, but cannot introduce new ticks.</p>
-<p>Also note that the operator does not simply shift the signal in time, since only the value of u from the last tick of the clock of u is available at the output.</p>
-</html>"));
-    end ShiftSample;
 
     block SubSample
       "Sub-sample the clocked Real input signal and provide it as clocked output signal"
@@ -5105,6 +5218,379 @@ package RealSignals "Library of clocked blocks for Real signals"
 
 </html>"));
     end SuperSampleInterpolated;
+
+    block ShiftSample "Shift (delay) input for some clock ticks"
+
+      parameter Integer shiftCounter(min=0)=0 "Numerator of shifting formula"
+            annotation(Dialog(group="Shift first clock activation for 'shiftCounter/resolution*interval(u)' seconds"));
+      parameter Integer resolution(min=1)=1 "Denominator of shifting formula"
+            annotation(Dialog(group="Shift first clock activation for 'shiftCounter/resolution*interval(u)' seconds"));
+
+      Modelica.Blocks.Interfaces.RealInput u
+        "Connector of clocked, Real input signal"
+        annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
+            rotation=0)));
+      Modelica.Blocks.Interfaces.RealOutput y
+        "Connector of clocked, Real output signal"
+        annotation (Placement(transformation(extent={{100,-10},{120,10}},
+            rotation=0)));
+    equation
+         y = shiftSample(u,shiftCounter,resolution);
+      annotation (
+       defaultComponentName="shiftSample1",
+       Icon(coordinateSystem(
+            preserveAspectRatio=true,
+            extent={{-100,-100},{100,100}},
+            grid={2,2},
+            initialScale=0.06),
+                         graphics={
+            Rectangle(
+              extent={{-94,86},{84,-92}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),
+                                   Line(points={{20,-50},{60,-50},{60,50}},
+                                     color={0,0,127},
+              pattern=LinePattern.Dot),
+            Text(
+              extent={{-200,175},{200,110}},
+              lineColor={0,0,255},
+              textString="%name"),
+            Text(
+              extent={{-200,-85},{200,-150}},
+              lineColor={0,0,0},
+              textString="%shiftCounter/%resolution"),
+                                   Line(points={{-80,-50},{-40,-50},{-40,50}},
+                                     color={0,0,127},
+              pattern=LinePattern.Dot),
+            Ellipse(
+              extent={{10,-40},{30,-60}},
+              lineColor={0,0,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{50,60},{70,40}},
+              lineColor={0,0,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Polygon(
+              points={{34,0},{14,20},{14,10},{-16,10},{-16,-10},{14,-10},{14,-20},{34,
+                  0}},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid,
+              lineColor={95,95,95}),
+            Ellipse(
+              extent={{-90,-40},{-70,-60}},
+              lineColor={0,0,127},
+              fillColor={0,0,127},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{-50,60},{-30,40}},
+              lineColor={0,0,127},
+              fillColor={0,0,127},
+              fillPattern=FillPattern.Solid)}),
+        Diagram(coordinateSystem(
+            preserveAspectRatio=true,
+            extent={{-100,-100},{100,100}},
+            grid={2,2},
+            initialScale=0.06),
+                         graphics),
+        Documentation(info="<html>
+<p><i>The first activation of the clock of y = shiftSample(..) is shifted in time shiftCounter/resolution*interval(u) later than the first activation of the clock of u.</i></p>
+<p>Conceptually, the operator constructs a clock &ldquo;cBase&rdquo; <b>Clock</b> cBase = <b>subSample</b>(<b>superSample</b>(u, resolution), shiftCounter) and the clock of y = <b>shiftSample</b>(..) starts at the second clock tick of cBase. At every tick of the clock of y, the operator returns the value of u from the last tick of the clock of u.</p>
+<p>Note, due to the restriction of <b>superSample</b> on Boolean clocks, <b>shiftSample</b> can only shift the number of ticks of the Boolean clock, but cannot introduce new ticks.</p>
+<p>Also note that the operator does not simply shift the signal in time, since only the value of u from the last tick of the clock of u is available at the output.</p>
+</html>"));
+    end ShiftSample;
+
+    block BackSample
+      "Shift clock of input backwards in time (and access the most recent value of the input at this new clock)"
+      parameter Integer backCounter(min=0)=0 "Numerator of shifting formula"
+            annotation(Dialog(group="Shift first clock activation backwards in time for 'shiftCounter/resolution*interval(u)' seconds"));
+      parameter Integer resolution(min=1)=1 "Denominator of shifting formula"
+            annotation(Dialog(group="Shift first clock activation backwards in time for 'shiftCounter/resolution*interval(u)' seconds"));
+      parameter Real y_start=0
+        "Value of output y before the first clock tick of the input u";
+
+      Modelica.Blocks.Interfaces.RealInput u(start=y_start)
+        "Connector of clocked, Real input signal"
+        annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
+            rotation=0)));
+      Modelica.Blocks.Interfaces.RealOutput y
+        "Connector of clocked, Real output signal (clock of y is faster als clock of u)"
+        annotation (Placement(transformation(extent={{100,-10},{120,10}},
+            rotation=0)));
+    equation
+      y = backSample(u,backCounter,resolution);
+
+      annotation (
+       defaultComponentName="backSample1",
+       Icon(coordinateSystem(
+            preserveAspectRatio=true,
+            extent={{-100,-100},{100,100}},
+            grid={2,2},
+            initialScale=0.06),
+                         graphics={
+            Rectangle(
+              extent={{-90,84},{88,-94}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),
+                                   Line(points={{20,-50},{60,-50},{60,50}},
+                                     color={0,0,127},
+              pattern=LinePattern.Dot),
+            Text(
+              extent={{-200,175},{200,110}},
+              lineColor={0,0,255},
+              textString="%name"),
+            Text(
+              extent={{-200,-135},{200,-200}},
+              lineColor={0,0,0},
+              textString="%backCounter/%resolution"),
+                                   Line(points={{-80,-50},{-40,-50},{-40,50}},
+                                     color={0,0,127},
+              pattern=LinePattern.Dot),
+            Ellipse(
+              extent={{-90,-40},{-70,-60}},
+              lineColor={0,0,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{-50,60},{-30,40}},
+              lineColor={0,0,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Polygon(
+              points={{-16,0},{4,20},{4,10},{34,10},{34,-10},{4,-10},{4,-20},{-16,0}},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid,
+              lineColor={95,95,95}),
+            Ellipse(
+              extent={{10,-40},{30,-60}},
+              lineColor={0,0,127},
+              fillColor={0,0,127},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{50,60},{70,40}},
+              lineColor={0,0,127},
+              fillColor={0,0,127},
+              fillPattern=FillPattern.Solid),
+            Text(
+              extent={{-200,-74},{200,-139}},
+              lineColor={0,0,0},
+              textString="y_start=%y_start")}),
+        Diagram(coordinateSystem(
+            preserveAspectRatio=true,
+            extent={{-100,-100},{100,100}},
+            grid={2,2},
+            initialScale=0.06),
+                         graphics),
+        Documentation(info="<html>
+
+</html>"));
+    end BackSample;
+
+    block AssignClock "Assigns a clock to a signal"
+
+      Modelica.Blocks.Interfaces.RealInput u
+        "Connector of clocked, Real input signal"
+        annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
+            rotation=0)));
+      Modelica.Blocks.Interfaces.RealOutput y
+        "Connector of clocked, Real output signal"
+        annotation (Placement(transformation(extent={{100,-10},{120,10}},
+            rotation=0)));
+      Modelica_Synchronous.ClockSignals.Interfaces.ClockInput
+                                                 clock annotation (Placement(transformation(
+            extent={{-20,-20},{20,20}},
+            rotation=90,
+            origin={0,-120})));
+    equation
+      when clock then
+        y = u;
+      end when;
+
+      annotation (
+       defaultComponentName="assignClock1",
+       Icon(coordinateSystem(
+            preserveAspectRatio=false,
+            extent={{-100,-100},{100,100}},
+            grid={2,2},
+            initialScale=0.06),
+                         graphics={
+            Text(
+              extent={{-200,100},{200,160}},
+              lineColor={0,0,255},
+              textString="%name"),
+            Rectangle(
+              extent={{-90,90},{88,-88}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),
+                                   Line(points={{-80,-60},{-40,-60},{-40,0},{
+                  0,0},{0,0},{0,0},{0,80},{40,80},{40,40},{80,40},{80,0},{80,
+                  0},{80,0},{100,0}},color={0,0,127},
+              pattern=LinePattern.Dot),                Line(
+              points={{-80,-60},{-80,0},{-106,0}},
+              color={0,0,127},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dot),
+            Ellipse(
+              extent={{-90,-50},{-70,-70}},
+              lineColor={0,0,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{-50,10},{-30,-10}},
+              lineColor={0,0,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{-10,90},{10,70}},
+              lineColor={0,0,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{30,50},{50,30}},
+              lineColor={0,0,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{70,10},{90,-10}},
+              lineColor={0,0,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Line(visible=useClock,
+              points={{0,-100},{0,0}},
+              color={175,175,175},
+              pattern=LinePattern.Dot,
+              smooth=Smooth.None,
+              thickness=0.5)}),
+        Diagram(coordinateSystem(
+            preserveAspectRatio=false,
+            extent={{-100,-100},{100,100}},
+            grid={2,2},
+            initialScale=0.06),
+                         graphics),
+        Documentation(info="<html>
+
+</html>",     revisions="<html>
+<table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
+    <tr>
+      <th>Date</th>
+      <th>Author</th>
+      <th>Company/Institute</th>
+      <th>Comment</th>
+    </tr>
+    <tr>
+      <td valign=\"top\">2012-08-20</td>
+      <td valign=\"top\">Bernhard Thiele</td>
+      <td>DLR, Institute for System Dynamics and Control</td>
+      <td valign=\"top\">Initial version</td>
+    </tr>
+</table>
+</html>"));
+    end AssignClock;
+
+    block AssignClockVectorized "Assigns a clock to a signal vector"
+
+      parameter Integer n(min=1)=1
+        "Size of input signal vector u (= size of output signal vector y)";
+      Modelica.Blocks.Interfaces.RealInput u[n]
+        "Connector of clocked, Real input signal"
+        annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
+            rotation=0)));
+      Modelica.Blocks.Interfaces.RealOutput y[n]
+        "Connector of clocked, Real output signal"
+        annotation (Placement(transformation(extent={{100,-10},{120,10}},
+            rotation=0)));
+       Modelica_Synchronous.ClockSignals.Interfaces.ClockInput
+                                                  clock annotation (Placement(transformation(
+            extent={{-20,-20},{20,20}},
+            rotation=90,
+            origin={0,-120})));
+    equation
+      when clock then
+        y = u;
+      end when;
+
+      annotation (
+       defaultComponentName="assignClock1",
+       Icon(coordinateSystem(
+            preserveAspectRatio=false,
+            extent={{-100,-100},{100,100}},
+            grid={2,2},
+            initialScale=0.06),
+                         graphics={
+            Text(
+              extent={{-196,128},{204,188}},
+              lineColor={0,0,255},
+              textString="%name"),
+            Text(
+              extent={{0,-32},{180,-82}},
+              lineColor={0,0,0},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              textString="n=%n"),  Line(points={{-80,-60},{-40,-60},{-40,0},{
+                  0,0},{0,0},{0,0},{0,80},{40,80},{40,40},{80,40},{80,0},{80,
+                  0},{80,0},{100,0}},color={0,0,127},
+              pattern=LinePattern.Dot),                Line(
+              points={{-80,-60},{-80,0},{-106,0}},
+              color={0,0,127},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dot),
+            Ellipse(
+              extent={{-90,-50},{-70,-70}},
+              lineColor={0,0,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{-50,10},{-30,-10}},
+              lineColor={0,0,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{-10,90},{10,70}},
+              lineColor={0,0,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{30,50},{50,30}},
+              lineColor={0,0,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{70,10},{90,-10}},
+              lineColor={0,0,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Line(visible=useClock,
+              points={{0,-100},{0,70}},
+              color={175,175,175},
+              pattern=LinePattern.Dot,
+              smooth=Smooth.None,
+              thickness=0.5)}),
+        Diagram(coordinateSystem(
+            preserveAspectRatio=false,
+            extent={{-100,-100},{100,100}},
+            grid={2,2},
+            initialScale=0.06),
+                         graphics),
+        Documentation(info="<html>
+
+</html>"));
+    end AssignClockVectorized;
+
+
+
+
+
+
+
+
+
+
+
 
     package Utilities "Utility components that are usually not directly used"
        extends Modelica.Icons.Package;
@@ -5587,6 +6073,91 @@ and the accompanying <b>disclaimer</b>
       end Internal;
     end Utilities;
 
+    annotation (Documentation(info="<html>
+<p>
+This package contains blocks that mark boundaries of a clocked partition
+and transform a <b>Real</b> signal from one partition to the next. Especially, 
+the following blocks are provided:<br>&nbsp;
+</p>
+
+<table border=1 cellspacing=0 cellpadding=3>
+<tr><th align=\"left\"><b>Boundary Type</b></th>
+    <th align=\"left\"><b>Block Name</b></th>
+    <th align=\"left\"><b>Description</b></th></tr>
+
+<tr><td valign=\"top\" rowspan=\"4\">continuous-time &rarr; clocked</td>
+      <td><a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.Sample\">Sample</a></td>
+      <td>Sample a continuous-time signal.</td>
+    </tr>
+    <tr>
+      <td><a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.SampleWithADeffects\">SampleWithADeffects</a></td>
+      <td>Sample with (simulated) Analog-Digital converter effects including noise.</td>
+    </tr>
+    <tr>
+      <td><a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.SampleClocked\">SampleClocked</a></td>
+      <td>Sample and associate a clock to the sampled <b>scalar</b> signal.</td>
+    </tr>
+    <tr>
+      <td><a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.SampleVectorizedAndClocked\">SampleVectorizedAndClocked</a></td>
+      <td>Sample an input vector and associate a clock to the sampled <b>vector</b> signal.</td>
+    </tr>
+
+<tr><td valign=\"top\" rowspan=\"2\">clocked &rarr; continuous-time</td>
+      <td><a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.Hold\">Hold</a></td>
+      <td>Hold a clocked signal with zero-order hold.</td>
+    </tr>
+    <tr>
+      <td><a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.HoldWithDAeffects\">HoldWithDAeffects</a></td>
+      <td>Hold with (simulated) Digital-Analog converter effects and computational delay.</td>
+    </tr>
+
+<tr><td valign=\"top\" rowspan=\"5\">clocked &rarr; clocked</td>
+      <td><a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.SubSample\">SubSample</a></td>
+      <td>Sub-sample a signal (output clock is slower as input clock). </td>
+    </tr>
+
+    <tr>
+      <td><a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.SuperSample\">SuperSample</a></td>
+      <td>Super-sample a signal (output clock is faster as input clock). </td>
+    </tr>
+
+    <tr>
+      <td><a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.SuperSampleInterpolated\">SuperSampleInterpolated</a></td>
+      <td>Super-sample a signal with linear interpolation (output clock is faster as input clock). </td>
+    </tr>
+
+    <tr>
+      <td><a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.ShiftSample\">ShiftSample</a></td>
+      <td>Shift a signal (output clock is delayed with respect to input clock).  </td>
+    </tr>
+
+    <tr>
+      <td><a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.BackSample\">BackSample</a></td>
+      <td>Shift a signal and start the output clock before the input clock with a start value.  </td>
+    </tr>
+
+
+<tr><td valign=\"top\" rowspan=\"2\">within clocked partition</td>
+      <td><a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.AssignClock\">AssignClock</a></td>
+      <td>Assign a clock to a clocked <b>scalar</b> signal.</td>
+    </tr>
+    <tr>
+      <td><a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.AssignClockVectorized\">AssignClockVectorized</a></td>
+      <td>Assign a clock to a clocked <b>vector</b> signal.</td>
+    </tr>
+</table>
+
+<p>
+Additionally, package 
+<a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.Utilities\">Utilities</a></td>
+contains utility blocks that are used as building blocks for user-relevant blocks.
+Especially, block 
+<a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.Utilities.UpSample\">UpSample</a>
+can be used in combination with a
+<a href=\"modelica://Modelica_Synchronous.RealSignals.Periodic.FIRbyCoefficients\">FIR filter</a>
+block to model super-sampling with interpolation and filtering.
+</p>
+</html>"));
   end Sampler;
 
   package NonPeriodic
@@ -6520,15 +7091,7 @@ The function is used to calculate the Kaiser-window via
 
     end Internal;
   end Periodic;
-  annotation (Documentation(info="<html>
-<p>
-This package contains blocks that operate on clocked Real signals.
-Especially blocks are provided to transform from continuous-time Real signals to
-clocked Real signals (with Sampler blocks) and vice versa
-(with Hold blocks), as well as to transform a clocked Real signal to
-another (time-synchronized) clock.
-</p>
-</html>"));
+
   package Interfaces
     "Library of partial blocks for components with clocked Real signals"
     extends Modelica.Icons.InterfacesPackage;
@@ -6676,6 +7239,15 @@ another (time-synchronized) clock.
                 -100},{100,100}}), graphics));
     end PartialNoise;
   end Interfaces;
+  annotation (Documentation(info="<html>
+<p>
+This package contains blocks that operate on clocked Real signals.
+Especially blocks are provided to transform from continuous-time Real signals to
+clocked Real signals (with Sampler blocks) and vice versa
+(with Hold blocks), as well as to transform a clocked Real signal to
+another (time-synchronized) clock.
+</p>
+</html>"));
 end RealSignals;
 
 
@@ -6683,355 +7255,6 @@ package BooleanSignals "Library of clocked blocks for Boolean signals"
   extends Modelica.Icons.Package;
   package Sampler "Library of sampler and hold blocks for Boolean signals"
     extends Modelica.Icons.Package;
-
-    block AssignClock "Assigns a clock to a signal"
-
-      Modelica.Blocks.Interfaces.BooleanInput
-                                           u
-        "Connector of clocked, Boolean input signal"
-        annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
-            rotation=0)));
-      Modelica.Blocks.Interfaces.BooleanOutput
-                                            y
-        "Connector of clocked, Boolean output signal"
-        annotation (Placement(transformation(extent={{100,-10},{120,10}},
-            rotation=0)));
-      Modelica_Synchronous.ClockSignals.Interfaces.ClockInput
-                                                 clock annotation (Placement(transformation(
-            extent={{-20,-20},{20,20}},
-            rotation=90,
-            origin={0,-120})));
-    equation
-      when clock then
-        y = u;
-      end when;
-
-      annotation (
-       defaultComponentName="assignClock1",
-       Icon(coordinateSystem(
-            preserveAspectRatio=false,
-            extent={{-100,-100},{100,100}},
-            grid={2,2},
-            initialScale=0.06),
-                         graphics={
-            Text(
-              extent={{-200,100},{200,160}},
-              lineColor={0,0,255},
-              textString="%name"),
-            Rectangle(
-              extent={{-90,90},{88,-88}},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),
-                                   Line(points={{-80,-60},{-40,-60},{-40,0},{
-                  0,0},{0,0},{0,0},{0,80},{40,80},{40,40},{80,40},{80,0},{80,
-                  0},{80,0},{100,0}},color={255,0,255},
-              pattern=LinePattern.Dot),                Line(
-              points={{-80,-60},{-80,0},{-106,0}},
-              color={255,0,255},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dot),
-            Ellipse(
-              extent={{-90,-50},{-70,-70}},
-              lineColor={255,0,255},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{-50,10},{-30,-10}},
-              lineColor={255,0,255},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{-10,90},{10,70}},
-              lineColor={255,0,255},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{30,50},{50,30}},
-              lineColor={255,0,255},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{70,10},{90,-10}},
-              lineColor={255,0,255},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Line(visible=useClock,
-              points={{0,-100},{0,70}},
-              color={175,175,175},
-              pattern=LinePattern.Dot,
-              smooth=Smooth.None,
-              thickness=0.5)}),
-        Diagram(coordinateSystem(
-            preserveAspectRatio=false,
-            extent={{-100,-100},{100,100}},
-            grid={2,2},
-            initialScale=0.06),
-                         graphics),
-        Documentation(info="<html>
-
-</html>"));
-    end AssignClock;
-
-    block AssignClockVectorized "Assigns a clock to a signal vector"
-
-      parameter Integer n(min=1)=1
-        "Size of input signal vector u (= size of output signal vector y)";
-      Modelica.Blocks.Interfaces.BooleanInput
-                                           u[n]
-        "Connector of clocked, Boolean input signal"
-        annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
-            rotation=0)));
-      Modelica.Blocks.Interfaces.BooleanOutput
-                                            y[n]
-        "Connector of clocked, Boolean output signal"
-        annotation (Placement(transformation(extent={{100,-10},{120,10}},
-            rotation=0)));
-      Modelica_Synchronous.ClockSignals.Interfaces.ClockInput
-                                                 clock annotation (Placement(transformation(
-            extent={{-20,-20},{20,20}},
-            rotation=90,
-            origin={0,-120})));
-    equation
-      when clock then
-        y = u;
-      end when;
-
-      annotation (
-       defaultComponentName="assignClock1",
-       Icon(coordinateSystem(
-            preserveAspectRatio=false,
-            extent={{-100,-100},{100,100}},
-            grid={2,2},
-            initialScale=0.06),
-                         graphics={
-            Text(
-              extent={{-196,128},{204,188}},
-              lineColor={0,0,255},
-              textString="%name"),
-            Text(
-              extent={{0,-32},{180,-82}},
-              lineColor={0,0,0},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              textString="n=%n"),  Line(points={{-80,-60},{-40,-60},{-40,0},{
-                  0,0},{0,0},{0,0},{0,80},{40,80},{40,40},{80,40},{80,0},{80,
-                  0},{80,0},{100,0}},color={255,0,255},
-              pattern=LinePattern.Dot),                Line(
-              points={{-80,-60},{-80,0},{-106,0}},
-              color={255,0,255},
-              smooth=Smooth.None,
-              pattern=LinePattern.Dot),
-            Ellipse(
-              extent={{-90,-50},{-70,-70}},
-              lineColor={255,0,255},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{-50,10},{-30,-10}},
-              lineColor={255,0,255},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{-10,90},{10,70}},
-              lineColor={255,0,255},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{30,50},{50,30}},
-              lineColor={255,0,255},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{70,10},{90,-10}},
-              lineColor={255,0,255},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Line(visible=useClock,
-              points={{0,-100},{0,70}},
-              color={175,175,175},
-              pattern=LinePattern.Dot,
-              smooth=Smooth.None,
-              thickness=0.5)}),
-        Diagram(coordinateSystem(
-            preserveAspectRatio=false,
-            extent={{-100,-100},{100,100}},
-            grid={2,2},
-            initialScale=0.06),
-                         graphics),
-        Documentation(info="<html>
-
-</html>"));
-    end AssignClockVectorized;
-
-    block BackSample
-      "Shift clock of input backwards in time (and access the most recent value of the input at this new clock)"
-      parameter Integer backCounter(min=0)=0 "Numerator of shifting formula"
-            annotation(Dialog(group="Shift first clock activation backwards in time for 'shiftCounter/resolution*interval(u)' seconds"));
-      parameter Integer resolution(min=1)=1 "Denominator of shifting formula"
-            annotation(Dialog(group="Shift first clock activation backwards in time for 'shiftCounter/resolution*interval(u)' seconds"));
-      parameter Boolean y_start=false
-        "Value of output y before the first clock tick of the input u";
-
-      Modelica.Blocks.Interfaces.BooleanInput
-                                           u(start=y_start)
-        "Connector of clocked, Boolean input signal"
-        annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
-            rotation=0)));
-      Modelica.Blocks.Interfaces.BooleanOutput
-                                            y
-        "Connector of clocked, Boolean output signal (clock of y is faster als clock of u)"
-        annotation (Placement(transformation(extent={{100,-10},{120,10}},
-            rotation=0)));
-    equation
-      y = backSample(u,backCounter,resolution);
-
-      annotation (
-       defaultComponentName="backSample1",
-       Icon(coordinateSystem(
-            preserveAspectRatio=true,
-            extent={{-100,-100},{100,100}},
-            grid={2,2},
-            initialScale=0.06),
-                         graphics={
-            Rectangle(
-              extent={{-90,84},{88,-94}},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),
-                                   Line(points={{20,-50},{60,-50},{60,50}},
-                                     color={255,0,255},
-              pattern=LinePattern.Dot),
-            Text(
-              extent={{-200,175},{200,110}},
-              lineColor={0,0,255},
-              textString="%name"),
-            Text(
-              extent={{-200,-135},{200,-200}},
-              lineColor={0,0,0},
-              textString="%backCounter/%resolution"),
-                                   Line(points={{-80,-50},{-40,-50},{-40,50}},
-                                     color={255,0,255},
-              pattern=LinePattern.Dot),
-            Ellipse(
-              extent={{-90,-40},{-70,-60}},
-              lineColor={255,0,255},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{-50,60},{-30,40}},
-              lineColor={255,0,255},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Polygon(
-              points={{-16,0},{4,20},{4,10},{34,10},{34,-10},{4,-10},{4,-20},{-16,0}},
-              fillColor={95,95,95},
-              fillPattern=FillPattern.Solid,
-              lineColor={95,95,95}),
-            Ellipse(
-              extent={{10,-40},{30,-60}},
-              lineColor={255,0,255},
-              fillColor={255,0,255},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{50,60},{70,40}},
-              lineColor={255,0,255},
-              fillColor={255,0,255},
-              fillPattern=FillPattern.Solid),
-            Text(
-              extent={{-200,-74},{200,-139}},
-              lineColor={0,0,0},
-              textString="y_start=%y_start")}),
-        Diagram(coordinateSystem(
-            preserveAspectRatio=false,
-            extent={{-100,-100},{100,100}},
-            grid={2,2},
-            initialScale=0.06),
-                         graphics),
-        Documentation(info="<html>
-
-</html>"));
-    end BackSample;
-
-    block Hold
-      "Hold the clocked, Boolean input signal and provide it as continuous-time output signal (zero order hold)"
-      parameter Boolean y_start = false
-        "Value of output y before the first tick of the clock associated to input u";
-
-      Modelica.Blocks.Interfaces.BooleanInput
-                                           u(final start=y_start)
-        "Connector of clocked, Boolean input signal"
-        annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
-            rotation=0)));
-      Modelica.Blocks.Interfaces.BooleanOutput
-                                            y
-        "Connector of continuous-time, Boolean output signal"
-        annotation (Placement(transformation(extent={{100,-10},{120,10}},
-            rotation=0)));
-    equation
-        y = hold(u);
-
-      annotation (
-        defaultComponentName="hold1",
-        Icon(coordinateSystem(
-            preserveAspectRatio=true,
-            extent={{-100,-100},{100,100}},
-            grid={2,2},
-            initialScale=0.06),
-                         graphics={
-            Rectangle(
-              extent={{-80,80},{80,-80}},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None),
-                                   Line(points={{-80,-60},{-40,-60},{-40,0},{0,0},{0,
-                  0},{0,0},{0,80},{40,80},{40,40},{80,40},{80,0},{80,0},{80,0},{100,
-                  0}},               color={255,0,255}),
-                                                       Line(
-              points={{-80,-60},{-80,0},{-106,0}},
-              color={255,0,255},
-              smooth=Smooth.None),
-            Ellipse(
-              extent={{-90,-50},{-70,-70}},
-              lineColor={255,0,255},
-              fillColor={255,0,255},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{-50,10},{-30,-10}},
-              lineColor={255,0,255},
-              fillColor={255,0,255},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{-10,90},{10,70}},
-              lineColor={255,0,255},
-              fillColor={255,0,255},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{30,50},{50,30}},
-              lineColor={255,0,255},
-              fillColor={255,0,255},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{70,10},{90,-10}},
-              lineColor={255,0,255},
-              fillColor={255,0,255},
-              fillPattern=FillPattern.Solid),
-            Text(
-              extent={{-200,-80},{200,-145}},
-              lineColor={0,0,0},
-              textString="%y_start"),
-            Text(
-              extent={{-200,165},{200,100}},
-              lineColor={0,0,255},
-              textString="%name")}),
-        Documentation(info="<HTML>
-
-</HTML>
-"),     Diagram(coordinateSystem(
-            preserveAspectRatio=false,
-            extent={{-100,-100},{100,100}},
-            initialScale=0.06), graphics));
-    end Hold;
 
     block Sample
       "Sample the continuous-time, Boolean input signal and provide it as clocked output signal (clock is infered)"
@@ -7173,92 +7396,85 @@ package BooleanSignals "Library of clocked blocks for Boolean signals"
 </html>"));
     end SampleVectorizedAndClocked;
 
-    block ShiftSample "Shift (delay) input for some clock ticks"
-      parameter Integer shiftCounter(min=0)=0 "Numerator of shifting formula"
-            annotation(Dialog(group="Shift first clock activation for 'shiftCounter/resolution*interval(u)' seconds"));
-      parameter Integer resolution(min=1)=1
-        "Denominator of shifting formula (ignored if inferShift=true)"
-            annotation(Dialog(group="Shift first clock activation for 'shiftCounter/resolution*interval(u)' seconds"));
+    block Hold
+      "Hold the clocked, Boolean input signal and provide it as continuous-time output signal (zero order hold)"
+      parameter Boolean y_start = false
+        "Value of output y before the first tick of the clock associated to input u";
 
       Modelica.Blocks.Interfaces.BooleanInput
-                                           u
+                                           u(final start=y_start)
         "Connector of clocked, Boolean input signal"
         annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
             rotation=0)));
       Modelica.Blocks.Interfaces.BooleanOutput
                                             y
-        "Connector of clocked, Boolean output signal (clock of y is faster als clock of u)"
+        "Connector of continuous-time, Boolean output signal"
         annotation (Placement(transformation(extent={{100,-10},{120,10}},
             rotation=0)));
     equation
-      y = shiftSample(u,shiftCounter,resolution);
+        y = hold(u);
 
       annotation (
-       defaultComponentName="shiftSample1",
-       Icon(coordinateSystem(
+        defaultComponentName="hold1",
+        Icon(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
             grid={2,2},
             initialScale=0.06),
                          graphics={
             Rectangle(
-              extent={{-94,86},{84,-92}},
+              extent={{-80,80},{80,-80}},
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid,
               pattern=LinePattern.None),
-                                   Line(points={{20,-50},{60,-50},{60,50}},
-                                     color={255,0,255},
-              pattern=LinePattern.Dot),
+                                   Line(points={{-80,-60},{-40,-60},{-40,0},{0,0},{0,
+                  0},{0,0},{0,80},{40,80},{40,40},{80,40},{80,0},{80,0},{80,0},{100,
+                  0}},               color={255,0,255}),
+                                                       Line(
+              points={{-80,-60},{-80,0},{-106,0}},
+              color={255,0,255},
+              smooth=Smooth.None),
+            Ellipse(
+              extent={{-90,-50},{-70,-70}},
+              lineColor={255,0,255},
+              fillColor={255,0,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{-50,10},{-30,-10}},
+              lineColor={255,0,255},
+              fillColor={255,0,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{-10,90},{10,70}},
+              lineColor={255,0,255},
+              fillColor={255,0,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{30,50},{50,30}},
+              lineColor={255,0,255},
+              fillColor={255,0,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{70,10},{90,-10}},
+              lineColor={255,0,255},
+              fillColor={255,0,255},
+              fillPattern=FillPattern.Solid),
             Text(
-              extent={{-200,175},{200,110}},
-              lineColor={0,0,255},
-              textString="%name"),
-            Text(
-              extent={{-200,-85},{200,-150}},
+              extent={{-200,-80},{200,-145}},
               lineColor={0,0,0},
-              textString="%shiftCounter/%resolution"),
-                                   Line(points={{-80,-50},{-40,-50},{-40,50}},
-                                     color={255,0,255},
-              pattern=LinePattern.Dot),
-            Ellipse(
-              extent={{10,-40},{30,-60}},
-              lineColor={255,0,255},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{50,60},{70,40}},
-              lineColor={255,0,255},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Polygon(
-              points={{34,0},{14,20},{14,10},{-16,10},{-16,-10},{14,-10},{14,-20},{34,
-                  0}},
-              fillColor={95,95,95},
-              fillPattern=FillPattern.Solid,
-              lineColor={95,95,95}),
-            Ellipse(
-              extent={{-90,-40},{-70,-60}},
-              lineColor={255,0,255},
-              fillColor={255,0,255},
-              fillPattern=FillPattern.Solid),
-            Ellipse(
-              extent={{-50,60},{-30,40}},
-              lineColor={255,128,0},
-              fillColor={255,0,255},
-              fillPattern=FillPattern.Solid)}),
-        Diagram(coordinateSystem(
+              textString="%y_start"),
+            Text(
+              extent={{-200,165},{200,100}},
+              lineColor={0,0,255},
+              textString="%name")}),
+        Documentation(info="<HTML>
+
+</HTML>
+"),     Diagram(coordinateSystem(
             preserveAspectRatio=false,
             extent={{-100,-100},{100,100}},
-            grid={2,2},
-            initialScale=0.06),
-                         graphics),
-        Documentation(info="<html>
-<p><i>The first activation of the clock of y = shiftSample(..) is shifted in time shiftCounter/resolution*interval(u) later than the first activation of the clock of u.</i></p>
-<p>Conceptually, the operator constructs a clock &ldquo;cBase&rdquo; <b>Clock</b> cBase = <b>subSample</b>(<b>superSample</b>(u, resolution), shiftCounter) and the clock of y = <b>shiftSample</b>(..) starts at the second clock tick of cBase. At every tick of the clock of y, the operator returns the value of u from the last tick of the clock of u.</p>
-<p>Note, due to the restriction of <b>superSample</b> on Boolean clocks, <b>shiftSample</b> can only shift the number of ticks of the Boolean clock, but cannot introduce new ticks.</p>
-<p>Also note that the operator does not simply shift the signal in time, since only the value of u from the last tick of the clock of u is available at the output.</p>
-</html>"));
-    end ShiftSample;
+            initialScale=0.06), graphics));
+    end Hold;
 
     block SubSample
       "Sub-sample the clocked Boolean input signal and provide it as clocked output signal"
@@ -7478,6 +7694,370 @@ package BooleanSignals "Library of clocked blocks for Boolean signals"
 
 </html>"));
     end SuperSample;
+
+    block ShiftSample "Shift (delay) input for some clock ticks"
+      parameter Integer shiftCounter(min=0)=0 "Numerator of shifting formula"
+            annotation(Dialog(group="Shift first clock activation for 'shiftCounter/resolution*interval(u)' seconds"));
+      parameter Integer resolution(min=1)=1
+        "Denominator of shifting formula (ignored if inferShift=true)"
+            annotation(Dialog(group="Shift first clock activation for 'shiftCounter/resolution*interval(u)' seconds"));
+
+      Modelica.Blocks.Interfaces.BooleanInput
+                                           u
+        "Connector of clocked, Boolean input signal"
+        annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
+            rotation=0)));
+      Modelica.Blocks.Interfaces.BooleanOutput
+                                            y
+        "Connector of clocked, Boolean output signal (clock of y is faster als clock of u)"
+        annotation (Placement(transformation(extent={{100,-10},{120,10}},
+            rotation=0)));
+    equation
+      y = shiftSample(u,shiftCounter,resolution);
+
+      annotation (
+       defaultComponentName="shiftSample1",
+       Icon(coordinateSystem(
+            preserveAspectRatio=true,
+            extent={{-100,-100},{100,100}},
+            grid={2,2},
+            initialScale=0.06),
+                         graphics={
+            Rectangle(
+              extent={{-94,86},{84,-92}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),
+                                   Line(points={{20,-50},{60,-50},{60,50}},
+                                     color={255,0,255},
+              pattern=LinePattern.Dot),
+            Text(
+              extent={{-200,175},{200,110}},
+              lineColor={0,0,255},
+              textString="%name"),
+            Text(
+              extent={{-200,-85},{200,-150}},
+              lineColor={0,0,0},
+              textString="%shiftCounter/%resolution"),
+                                   Line(points={{-80,-50},{-40,-50},{-40,50}},
+                                     color={255,0,255},
+              pattern=LinePattern.Dot),
+            Ellipse(
+              extent={{10,-40},{30,-60}},
+              lineColor={255,0,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{50,60},{70,40}},
+              lineColor={255,0,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Polygon(
+              points={{34,0},{14,20},{14,10},{-16,10},{-16,-10},{14,-10},{14,-20},{34,
+                  0}},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid,
+              lineColor={95,95,95}),
+            Ellipse(
+              extent={{-90,-40},{-70,-60}},
+              lineColor={255,0,255},
+              fillColor={255,0,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{-50,60},{-30,40}},
+              lineColor={255,128,0},
+              fillColor={255,0,255},
+              fillPattern=FillPattern.Solid)}),
+        Diagram(coordinateSystem(
+            preserveAspectRatio=false,
+            extent={{-100,-100},{100,100}},
+            grid={2,2},
+            initialScale=0.06),
+                         graphics),
+        Documentation(info="<html>
+<p><i>The first activation of the clock of y = shiftSample(..) is shifted in time shiftCounter/resolution*interval(u) later than the first activation of the clock of u.</i></p>
+<p>Conceptually, the operator constructs a clock &ldquo;cBase&rdquo; <b>Clock</b> cBase = <b>subSample</b>(<b>superSample</b>(u, resolution), shiftCounter) and the clock of y = <b>shiftSample</b>(..) starts at the second clock tick of cBase. At every tick of the clock of y, the operator returns the value of u from the last tick of the clock of u.</p>
+<p>Note, due to the restriction of <b>superSample</b> on Boolean clocks, <b>shiftSample</b> can only shift the number of ticks of the Boolean clock, but cannot introduce new ticks.</p>
+<p>Also note that the operator does not simply shift the signal in time, since only the value of u from the last tick of the clock of u is available at the output.</p>
+</html>"));
+    end ShiftSample;
+
+    block BackSample
+      "Shift clock of input backwards in time (and access the most recent value of the input at this new clock)"
+      parameter Integer backCounter(min=0)=0 "Numerator of shifting formula"
+            annotation(Dialog(group="Shift first clock activation backwards in time for 'shiftCounter/resolution*interval(u)' seconds"));
+      parameter Integer resolution(min=1)=1 "Denominator of shifting formula"
+            annotation(Dialog(group="Shift first clock activation backwards in time for 'shiftCounter/resolution*interval(u)' seconds"));
+      parameter Boolean y_start=false
+        "Value of output y before the first clock tick of the input u";
+
+      Modelica.Blocks.Interfaces.BooleanInput
+                                           u(start=y_start)
+        "Connector of clocked, Boolean input signal"
+        annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
+            rotation=0)));
+      Modelica.Blocks.Interfaces.BooleanOutput
+                                            y
+        "Connector of clocked, Boolean output signal (clock of y is faster als clock of u)"
+        annotation (Placement(transformation(extent={{100,-10},{120,10}},
+            rotation=0)));
+    equation
+      y = backSample(u,backCounter,resolution);
+
+      annotation (
+       defaultComponentName="backSample1",
+       Icon(coordinateSystem(
+            preserveAspectRatio=true,
+            extent={{-100,-100},{100,100}},
+            grid={2,2},
+            initialScale=0.06),
+                         graphics={
+            Rectangle(
+              extent={{-90,84},{88,-94}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),
+                                   Line(points={{20,-50},{60,-50},{60,50}},
+                                     color={255,0,255},
+              pattern=LinePattern.Dot),
+            Text(
+              extent={{-200,175},{200,110}},
+              lineColor={0,0,255},
+              textString="%name"),
+            Text(
+              extent={{-200,-135},{200,-200}},
+              lineColor={0,0,0},
+              textString="%backCounter/%resolution"),
+                                   Line(points={{-80,-50},{-40,-50},{-40,50}},
+                                     color={255,0,255},
+              pattern=LinePattern.Dot),
+            Ellipse(
+              extent={{-90,-40},{-70,-60}},
+              lineColor={255,0,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{-50,60},{-30,40}},
+              lineColor={255,0,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Polygon(
+              points={{-16,0},{4,20},{4,10},{34,10},{34,-10},{4,-10},{4,-20},{-16,0}},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid,
+              lineColor={95,95,95}),
+            Ellipse(
+              extent={{10,-40},{30,-60}},
+              lineColor={255,0,255},
+              fillColor={255,0,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{50,60},{70,40}},
+              lineColor={255,0,255},
+              fillColor={255,0,255},
+              fillPattern=FillPattern.Solid),
+            Text(
+              extent={{-200,-74},{200,-139}},
+              lineColor={0,0,0},
+              textString="y_start=%y_start")}),
+        Diagram(coordinateSystem(
+            preserveAspectRatio=false,
+            extent={{-100,-100},{100,100}},
+            grid={2,2},
+            initialScale=0.06),
+                         graphics),
+        Documentation(info="<html>
+
+</html>"));
+    end BackSample;
+
+    block AssignClock "Assigns a clock to a signal"
+
+      Modelica.Blocks.Interfaces.BooleanInput
+                                           u
+        "Connector of clocked, Boolean input signal"
+        annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
+            rotation=0)));
+      Modelica.Blocks.Interfaces.BooleanOutput
+                                            y
+        "Connector of clocked, Boolean output signal"
+        annotation (Placement(transformation(extent={{100,-10},{120,10}},
+            rotation=0)));
+      Modelica_Synchronous.ClockSignals.Interfaces.ClockInput
+                                                 clock annotation (Placement(transformation(
+            extent={{-20,-20},{20,20}},
+            rotation=90,
+            origin={0,-120})));
+    equation
+      when clock then
+        y = u;
+      end when;
+
+      annotation (
+       defaultComponentName="assignClock1",
+       Icon(coordinateSystem(
+            preserveAspectRatio=false,
+            extent={{-100,-100},{100,100}},
+            grid={2,2},
+            initialScale=0.06),
+                         graphics={
+            Text(
+              extent={{-200,100},{200,160}},
+              lineColor={0,0,255},
+              textString="%name"),
+            Rectangle(
+              extent={{-90,90},{88,-88}},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              pattern=LinePattern.None),
+                                   Line(points={{-80,-60},{-40,-60},{-40,0},{
+                  0,0},{0,0},{0,0},{0,80},{40,80},{40,40},{80,40},{80,0},{80,
+                  0},{80,0},{100,0}},color={255,0,255},
+              pattern=LinePattern.Dot),                Line(
+              points={{-80,-60},{-80,0},{-106,0}},
+              color={255,0,255},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dot),
+            Ellipse(
+              extent={{-90,-50},{-70,-70}},
+              lineColor={255,0,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{-50,10},{-30,-10}},
+              lineColor={255,0,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{-10,90},{10,70}},
+              lineColor={255,0,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{30,50},{50,30}},
+              lineColor={255,0,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{70,10},{90,-10}},
+              lineColor={255,0,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Line(visible=useClock,
+              points={{0,-100},{0,70}},
+              color={175,175,175},
+              pattern=LinePattern.Dot,
+              smooth=Smooth.None,
+              thickness=0.5)}),
+        Diagram(coordinateSystem(
+            preserveAspectRatio=false,
+            extent={{-100,-100},{100,100}},
+            grid={2,2},
+            initialScale=0.06),
+                         graphics),
+        Documentation(info="<html>
+
+</html>"));
+    end AssignClock;
+
+    block AssignClockVectorized "Assigns a clock to a signal vector"
+
+      parameter Integer n(min=1)=1
+        "Size of input signal vector u (= size of output signal vector y)";
+      Modelica.Blocks.Interfaces.BooleanInput
+                                           u[n]
+        "Connector of clocked, Boolean input signal"
+        annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
+            rotation=0)));
+      Modelica.Blocks.Interfaces.BooleanOutput
+                                            y[n]
+        "Connector of clocked, Boolean output signal"
+        annotation (Placement(transformation(extent={{100,-10},{120,10}},
+            rotation=0)));
+      Modelica_Synchronous.ClockSignals.Interfaces.ClockInput
+                                                 clock annotation (Placement(transformation(
+            extent={{-20,-20},{20,20}},
+            rotation=90,
+            origin={0,-120})));
+    equation
+      when clock then
+        y = u;
+      end when;
+
+      annotation (
+       defaultComponentName="assignClock1",
+       Icon(coordinateSystem(
+            preserveAspectRatio=false,
+            extent={{-100,-100},{100,100}},
+            grid={2,2},
+            initialScale=0.06),
+                         graphics={
+            Text(
+              extent={{-196,128},{204,188}},
+              lineColor={0,0,255},
+              textString="%name"),
+            Text(
+              extent={{0,-32},{180,-82}},
+              lineColor={0,0,0},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              textString="n=%n"),  Line(points={{-80,-60},{-40,-60},{-40,0},{
+                  0,0},{0,0},{0,0},{0,80},{40,80},{40,40},{80,40},{80,0},{80,
+                  0},{80,0},{100,0}},color={255,0,255},
+              pattern=LinePattern.Dot),                Line(
+              points={{-80,-60},{-80,0},{-106,0}},
+              color={255,0,255},
+              smooth=Smooth.None,
+              pattern=LinePattern.Dot),
+            Ellipse(
+              extent={{-90,-50},{-70,-70}},
+              lineColor={255,0,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{-50,10},{-30,-10}},
+              lineColor={255,0,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{-10,90},{10,70}},
+              lineColor={255,0,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{30,50},{50,30}},
+              lineColor={255,0,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{70,10},{90,-10}},
+              lineColor={255,0,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Line(visible=useClock,
+              points={{0,-100},{0,70}},
+              color={175,175,175},
+              pattern=LinePattern.Dot,
+              smooth=Smooth.None,
+              thickness=0.5)}),
+        Diagram(coordinateSystem(
+            preserveAspectRatio=false,
+            extent={{-100,-100},{100,100}},
+            grid={2,2},
+            initialScale=0.06),
+                         graphics),
+        Documentation(info="<html>
+
+</html>"));
+    end AssignClockVectorized;
+
+
+
+
+
+
+
+
 
     package Utilities "Utility components that are usually not directly used"
        extends Modelica.Icons.Package;
@@ -7706,6 +8286,73 @@ at sample times (defined by parameter <b>period</b>) and if input enable = <b>tr
 
     end Utilities;
 
+    annotation (Documentation(info="<html>
+<p>
+This package contains blocks that mark boundaries of a clocked partition
+and transform a <b>Boolean</b> signal from one partition to the next. Especially, 
+the following blocks are provided:<br>&nbsp;
+</p>
+
+<table border=1 cellspacing=0 cellpadding=3>
+<tr><th align=\"left\"><b>Boundary Type</b></th>
+    <th align=\"left\"><b>Block Name</b></th>
+    <th align=\"left\"><b>Description</b></th></tr>
+
+<tr><td valign=\"top\" rowspan=\"3\">continuous-time &rarr; clocked</td>
+      <td><a href=\"modelica://Modelica_Synchronous.BooleanSignals.Sampler.Sample\">Sample</a></td>
+      <td>Sample a continuous-time signal.</td>
+    </tr>
+    <tr>
+      <td><a href=\"modelica://Modelica_Synchronous.BooleanSignals.Sampler.SampleClocked\">SampleClocked</a></td>
+      <td>Sample and associate a clock to the sampled <b>scalar</b> signal.</td>
+    </tr>
+    <tr>
+      <td><a href=\"modelica://Modelica_Synchronous.BooleanSignals.Sampler.SampleVectorizedAndClocked\">SampleVectorizedAndClocked</a></td>
+      <td>Sample an input vector and associate a clock to the sampled <b>vector</b> signal.</td>
+    </tr>
+
+<tr><td valign=\"top\">clocked &rarr; continuous-time</td>
+      <td><a href=\"modelica://Modelica_Synchronous.BooleanSignals.Sampler.Hold\">Hold</a></td>
+      <td>Hold a clocked signal with zero-order hold.</td>
+    </tr>
+
+<tr><td valign=\"top\" rowspan=\"4\">clocked &rarr; clocked</td>
+      <td><a href=\"modelica://Modelica_Synchronous.BooleanSignals.Sampler.SubSample\">SubSample</a></td>
+      <td>Sub-sample a signal (output clock is slower as input clock). </td>
+    </tr>
+
+    <tr>
+      <td><a href=\"modelica://Modelica_Synchronous.BooleanSignals.Sampler.SuperSample\">SuperSample</a></td>
+      <td>Super-sample a signal (output clock is faster as input clock). </td>
+    </tr>
+
+    <tr>
+      <td><a href=\"modelica://Modelica_Synchronous.BooleanSignals.Sampler.ShiftSample\">ShiftSample</a></td>
+      <td>Shift a signal (output clock is delayed with respect to input clock).  </td>
+    </tr>
+
+    <tr>
+      <td><a href=\"modelica://Modelica_Synchronous.BooleanSignals.Sampler.BackSample\">BackSample</a></td>
+      <td>Shift a signal and start the output clock before the input clock with a start value.  </td>
+    </tr>
+
+
+<tr><td valign=\"top\" rowspan=\"2\">within clocked partition</td>
+      <td><a href=\"modelica://Modelica_Synchronous.BooleanSignals.Sampler.AssignClock\">AssignClock</a></td>
+      <td>Assign a clock to a clocked <b>scalar</b> signal.</td>
+    </tr>
+    <tr>
+      <td><a href=\"modelica://Modelica_Synchronous.BooleanSignals.Sampler.AssignClockVectorized\">AssignClockVectorized</a></td>
+      <td>Assign a clock to a clocked <b>vector</b> signal.</td>
+    </tr>
+</table>
+
+<p>
+Additionally, package 
+<a href=\"modelica://Modelica_Synchronous.BooleanSignals.Sampler.Utilities\">Utilities</a></td>
+contains utility blocks that are used as building blocks for user-relevant blocks.
+</p>
+</html>"));
   end Sampler;
 
   package NonPeriodic
@@ -7827,15 +8474,7 @@ y is set to parameter y_start.
     end FractionalDelay;
 
   end NonPeriodic;
-  annotation (Documentation(info="<html>
-<p>
-This package contains blocks that operate on clocked Boolean signals.
-Especially blocks are provided to transform from continuous-time Boolean signals to
-clocked Boolean signals (with Sampler blocks) and vice versa
-(with Hold blocks), as well as to transform a clocked Boolean signal to
-another (time-synchronized) clock.
-</p>
-</html>"));
+
   package Interfaces
     "Library of partial blocks for components with clocked Boolean signals"
     extends Modelica.Icons.InterfacesPackage;
@@ -7915,6 +8554,15 @@ another (time-synchronized) clock.
                 false, extent={{-100,-100},{100,100}}), graphics));
     end PartialClockedSISO;
   end Interfaces;
+  annotation (Documentation(info="<html>
+<p>
+This package contains blocks that operate on clocked Boolean signals.
+Especially blocks are provided to transform from continuous-time Boolean signals to
+clocked Boolean signals (with Sampler blocks) and vice versa
+(with Hold blocks), as well as to transform a clocked Boolean signal to
+another (time-synchronized) clock.
+</p>
+</html>"));
 end BooleanSignals;
 
 
@@ -8913,6 +9561,73 @@ at sample times (defined by parameter <b>period</b>) and if input enable = <b>tr
         end ClockedIntegerToBooleanSquareHold;
 
     end Utilities;
+    annotation (Documentation(info="<html>
+<p>
+This package contains blocks that mark boundaries of a clocked partition
+and transform an <b>Integer</b> signal from one partition to the next. Especially, 
+the following blocks are provided:<br>&nbsp;
+</p>
+
+<table border=1 cellspacing=0 cellpadding=3>
+<tr><th align=\"left\"><b>Boundary Type</b></th>
+    <th align=\"left\"><b>Block Name</b></th>
+    <th align=\"left\"><b>Description</b></th></tr>
+
+<tr><td valign=\"top\" rowspan=\"3\">continuous-time &rarr; clocked</td>
+      <td><a href=\"modelica://Modelica_Synchronous.IntegerSignals.Sampler.Sample\">Sample</a></td>
+      <td>Sample a continuous-time signal.</td>
+    </tr>
+    <tr>
+      <td><a href=\"modelica://Modelica_Synchronous.IntegerSignals.Sampler.SampleClocked\">SampleClocked</a></td>
+      <td>Sample and associate a clock to the sampled <b>scalar</b> signal.</td>
+    </tr>
+    <tr>
+      <td><a href=\"modelica://Modelica_Synchronous.IntegerSignals.Sampler.SampleVectorizedAndClocked\">SampleVectorizedAndClocked</a></td>
+      <td>Sample an input vector and associate a clock to the sampled <b>vector</b> signal.</td>
+    </tr>
+
+<tr><td valign=\"top\">clocked &rarr; continuous-time</td>
+      <td><a href=\"modelica://Modelica_Synchronous.IntegerSignals.Sampler.Hold\">Hold</a></td>
+      <td>Hold a clocked signal with zero-order hold.</td>
+    </tr>
+
+<tr><td valign=\"top\" rowspan=\"4\">clocked &rarr; clocked</td>
+      <td><a href=\"modelica://Modelica_Synchronous.IntegerSignals.Sampler.SubSample\">SubSample</a></td>
+      <td>Sub-sample a signal (output clock is slower as input clock). </td>
+    </tr>
+
+    <tr>
+      <td><a href=\"modelica://Modelica_Synchronous.IntegerSignals.Sampler.SuperSample\">SuperSample</a></td>
+      <td>Super-sample a signal (output clock is faster as input clock). </td>
+    </tr>
+
+    <tr>
+      <td><a href=\"modelica://Modelica_Synchronous.IntegerSignals.Sampler.ShiftSample\">ShiftSample</a></td>
+      <td>Shift a signal (output clock is delayed with respect to input clock).  </td>
+    </tr>
+
+    <tr>
+      <td><a href=\"modelica://Modelica_Synchronous.IntegerSignals.Sampler.BackSample\">BackSample</a></td>
+      <td>Shift a signal and start the output clock before the input clock with a start value.  </td>
+    </tr>
+
+
+<tr><td valign=\"top\" rowspan=\"2\">within clocked partition</td>
+      <td><a href=\"modelica://Modelica_Synchronous.IntegerSignals.Sampler.AssignClock\">AssignClock</a></td>
+      <td>Assign a clock to a clocked <b>scalar</b> signal.</td>
+    </tr>
+    <tr>
+      <td><a href=\"modelica://Modelica_Synchronous.IntegerSignals.Sampler.AssignClockVectorized\">AssignClockVectorized</a></td>
+      <td>Assign a clock to a clocked <b>vector</b> signal.</td>
+    </tr>
+</table>
+
+<p>
+Additionally, package 
+<a href=\"modelica://Modelica_Synchronous.IntegerSignals.Sampler.Utilities\">Utilities</a></td>
+contains utility blocks that are used as building blocks for user-relevant blocks.
+</p>
+</html>"));
   end Sampler;
 
   package NonPeriodic
@@ -9032,15 +9747,7 @@ y is set to parameter y_start.
     end FractionalDelay;
 
   end NonPeriodic;
-  annotation (Documentation(info="<html>
-<p>
-This package contains blocks that operate on clocked Integer signals.
-Especially blocks are provided to transform from continuous-time Integer signals to
-clocked Integer signals (with Sampler blocks) and vice versa
-(with Hold blocks), as well as to transform a clocked Integer signal to
-another (time-synchronized) clock.
-</p>
-</html>"));
+
   package Interfaces
     "Library of partial blocks for components with clocked Integer signals"
     extends Modelica.Icons.InterfacesPackage;
@@ -9172,6 +9879,15 @@ another (time-synchronized) clock.
                 false, extent={{-100,-100},{100,100}}), graphics));
     end PartialClockedSISO;
   end Interfaces;
+  annotation (Documentation(info="<html>
+<p>
+This package contains blocks that operate on clocked Integer signals.
+Especially blocks are provided to transform from continuous-time Integer signals to
+clocked Integer signals (with Sampler blocks) and vice versa
+(with Hold blocks), as well as to transform a clocked Integer signal to
+another (time-synchronized) clock.
+</p>
+</html>"));
 end IntegerSignals;
 
 

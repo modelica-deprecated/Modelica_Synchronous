@@ -2838,6 +2838,9 @@ the initial value defined via parameter <b>y0</b>.
   end Tests;
 
   package ForDocumentation
+    package RealSignals
+    end RealSignals;
+
     model TheDifferentClocks
       Modelica_Synchronous.ClockSignals.Clocks.PeriodicRealClock
                                periodicRealClock(period=0.01)
@@ -2884,7 +2887,7 @@ the initial value defined via parameter <b>y0</b>.
           thickness=0.5,
           smooth=Smooth.None));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
-                -100,-100},{100,100}}), graphics));
+                -100,-100},{100,100}}), graphics), experiment(StopTime=1.2));
     end TheDifferentClocks;
 
     model SubSampledClock
