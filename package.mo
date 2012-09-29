@@ -3285,7 +3285,6 @@ Example used to generate a figure for the documentation of block
 </html>"));
         end Sample2;
 
-
         model SampleClocked "Example of a SampleClocked block"
         import Modelica_Synchronous;
            extends Modelica.Icons.Example;
@@ -3570,6 +3569,135 @@ Example used to generate a figure for the documentation of block
 </p>
 </html>"));
         end HoldWithDAeffects2;
+
+        model SubSample "Example of a SubSample block"
+        import Modelica_Synchronous;
+           extends Modelica.Icons.Example;
+
+          Modelica.Blocks.Sources.Sine sine(freqHz=2,
+            offset=0.1,
+            startTime=0)
+            annotation (Placement(transformation(extent={{-80,20},{-60,40}})));
+          Modelica_Synchronous.RealSignals.Sampler.SampleClocked
+                                                          sample
+            annotation (Placement(transformation(extent={{-46,24},{-34,36}})));
+          Modelica_Synchronous.ClockSignals.Clocks.PeriodicExactClock periodicClock(
+              factor=20, resolution=Modelica_Synchronous.Types.Resolution.ms)
+            annotation (Placement(transformation(extent={{-62,-6},{-50,6}})));
+        Modelica_Synchronous.RealSignals.Sampler.SubSample subSample(
+            inferFactor=false, factor=3)
+          annotation (Placement(transformation(extent={{-22,24},{-10,36}})));
+        equation
+          connect(sine.y, sample.u) annotation (Line(
+              points={{-59,30},{-47.2,30}},
+              color={0,0,127},
+              smooth=Smooth.None));
+        connect(periodicClock.y, sample.clock) annotation (Line(
+            points={{-49.4,0},{-40,0},{-40,22.8}},
+            color={175,175,175},
+            pattern=LinePattern.Dot,
+            thickness=0.5,
+            smooth=Smooth.None));
+        connect(sample.y, subSample.u) annotation (Line(
+            points={{-33.4,30},{-23.2,30}},
+            color={0,0,127},
+            smooth=Smooth.None));
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                  -100},{100,100}}),   graphics), experiment(StopTime=0.2),
+          Documentation(info="<html>
+<p>
+Example used to generate a figure for the documentation of block
+<a href=\"Modelica_Synchronous.RealSignals.Sampler.SubSample\">Modelica_Synchronous.RealSignals.Sampler.SubSample</a>.
+</p>
+</html>"));
+        end SubSample;
+
+        model SuperSample "Example of a SuperSample block"
+        import Modelica_Synchronous;
+           extends Modelica.Icons.Example;
+
+          Modelica.Blocks.Sources.Sine sine(freqHz=2,
+            offset=0.1,
+            startTime=0)
+            annotation (Placement(transformation(extent={{-80,20},{-60,40}})));
+          Modelica_Synchronous.RealSignals.Sampler.SampleClocked
+                                                          sample
+            annotation (Placement(transformation(extent={{-46,24},{-34,36}})));
+          Modelica_Synchronous.ClockSignals.Clocks.PeriodicExactClock periodicClock(
+              factor=20, resolution=Modelica_Synchronous.Types.Resolution.ms)
+            annotation (Placement(transformation(extent={{-62,-6},{-50,6}})));
+        Modelica_Synchronous.RealSignals.Sampler.SuperSample superSample(inferFactor=false,
+              factor=3)
+          annotation (Placement(transformation(extent={{-22,24},{-10,36}})));
+        equation
+          connect(sine.y, sample.u) annotation (Line(
+              points={{-59,30},{-47.2,30}},
+              color={0,0,127},
+              smooth=Smooth.None));
+        connect(periodicClock.y, sample.clock) annotation (Line(
+            points={{-49.4,0},{-40,0},{-40,22.8}},
+            color={175,175,175},
+            pattern=LinePattern.Dot,
+            thickness=0.5,
+            smooth=Smooth.None));
+          connect(sample.y, superSample.u)
+                                       annotation (Line(
+            points={{-33.4,30},{-23.2,30}},
+            color={0,0,127},
+            smooth=Smooth.None));
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                  -100},{100,100}}),   graphics), experiment(StopTime=0.08),
+          Documentation(info="<html>
+<p>
+Example used to generate a figure for the documentation of block
+<a href=\"Modelica_Synchronous.RealSignals.Sampler.SuperSample\">Modelica_Synchronous.RealSignals.Sampler.SuperSample</a>.
+</p>
+</html>"));
+        end SuperSample;
+
+        model SuperSampleInterpolated
+        "Example of a SuperSampleInterpolated block"
+        import Modelica_Synchronous;
+           extends Modelica.Icons.Example;
+
+          Modelica.Blocks.Sources.Sine sine(freqHz=2,
+            offset=0.1,
+            startTime=0)
+            annotation (Placement(transformation(extent={{-80,20},{-60,40}})));
+          Modelica_Synchronous.RealSignals.Sampler.SampleClocked
+                                                          sample
+            annotation (Placement(transformation(extent={{-46,24},{-34,36}})));
+          Modelica_Synchronous.ClockSignals.Clocks.PeriodicExactClock periodicClock(
+              factor=20, resolution=Modelica_Synchronous.Types.Resolution.ms)
+            annotation (Placement(transformation(extent={{-62,-6},{-50,6}})));
+        Modelica_Synchronous.RealSignals.Sampler.SuperSampleInterpolated superSampleIpo(
+            inferFactor=false, factor=3)
+          annotation (Placement(transformation(extent={{-22,24},{-10,36}})));
+        equation
+          connect(sine.y, sample.u) annotation (Line(
+              points={{-59,30},{-47.2,30}},
+              color={0,0,127},
+              smooth=Smooth.None));
+        connect(periodicClock.y, sample.clock) annotation (Line(
+            points={{-49.4,0},{-40,0},{-40,22.8}},
+            color={175,175,175},
+            pattern=LinePattern.Dot,
+            thickness=0.5,
+            smooth=Smooth.None));
+        connect(sample.y, superSampleIpo.u)
+                                       annotation (Line(
+            points={{-33.4,30},{-23.2,30}},
+            color={0,0,127},
+            smooth=Smooth.None));
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                  -100},{100,100}}),   graphics), experiment(StopTime=0.06),
+          Documentation(info="<html>
+<p>
+Example used to generate a figure for the documentation of block
+<a href=\"Modelica_Synchronous.RealSignals.Sampler.SuperSampleInterpolated\">Modelica_Synchronous.RealSignals.Sampler.SuperSampleInterpolated</a>.
+</p>
+</html>"));
+        end SuperSampleInterpolated;
       annotation (Documentation(info="<html>
 <p>
 This package contains models that have been used to produce
@@ -3583,7 +3711,9 @@ sub-library.
 <p>
 This package contains models that have been used to produce
 the figures in the documentation of the various blocks of
-the Modelica_Synchronous library.
+the Modelica_Synchronous library. As a result, all the examples
+shown in the block documentations can be easily inspected and
+simulated.
 </p>
 </html>"));
     end ForDocumentation;
@@ -5183,7 +5313,44 @@ from above:<br>
             initialScale=0.06),
                          graphics),
         Documentation(info="<html>
+<p>
+This block sub-samples the clocked Real input signal u and provides it as 
+clocked output signal y. 
+</p>
 
+<p>
+To be more precise: 
+The clock of y is factor-times slower than the clock of u. At every factor ticks of the clock of u, the output y returns the value of u. The first activation of the clock of y coincides with the first activation of the clock of u. By default, the sub-sampling factor is inferred,
+that is, it must be defined somewhere else. If parameter <b>inferFactor</b> = false,
+then the sub-sampling factor is defined by Integer parameter <b>factor</b>.
+</p>
+
+<h4>Example</h4>
+
+<p>
+The following 
+<a href=\"Modelica_Synchronous.Examples.ForDocumentation.RealSignals.SubSample\">example</a>
+samples a sine signal with a periodic clock of 20 ms period, and 
+then sub-samples the resulting clocked signal with a factor of 3:<br>
+</p>
+
+<table border=0 cellspacing=0 cellpadding=2>
+<tr><td width=\"50\"></td>
+    <td valign=\"bottom\"><img src=\"modelica://Modelica_Synchronous/Resources/Images/RealSignals/SubSample_Model.png\"></td>
+    <td valign=\"bottom\">&nbsp;&nbsp;&nbsp;
+                        <img src=\"modelica://Modelica_Synchronous/Resources/Images/RealSignals/SubSample_Result.png\"></td>  
+    </tr>
+<tr><td></td>
+    <td align=\"center\">model</td>
+    <td align=\"center\">simulation result</td>
+   </tr>
+</table>
+<p>
+As can be seen, subSample.y picks every third-value of sample.y due to the
+sub-sampling, and the sub-sampling factor = 3 is displayed in the icon of the
+subSample block. Note the down-arrow in the icon of the subSample block indicates that the
+clock of subSample.y is slower as the clock of subSample.u.
+</p>
 </html>"));
     end SubSample;
 
@@ -5295,7 +5462,52 @@ from above:<br>
             initialScale=0.06),
                          graphics),
         Documentation(info="<html>
+<p>
+This block super-samples the clocked Real input signal u and provides it as 
+clocked output signal y. 
+</p>
 
+<p>
+To be more precise: 
+The clock of y is factor-times faster than the clock of u. At every tick of the clock of y, the value of y is set to 
+the value of u from the last tick of the clock of u. The first activation of the clock of y coincides with the first activation of the clock of u. By default, the super-sampling factor is inferred,
+that is, it must be defined somewhere else. If parameter <b>inferFactor</b> = false,
+then the super-sampling factor is defined by Integer parameter <b>factor</b>.
+</p>
+
+<p>
+For control applications, this block introduces unnecessary \"vibrations\".
+In such a case it is better to use block 
+<a href=\"Modelica_Synchronous.RealSignals.Sampler.SuperSampleInterpolated\">SuperSampleInterpolated</a>
+instead.
+</p>
+
+<h4>Example</h4>
+
+<p>
+The following 
+<a href=\"Modelica_Synchronous.Examples.ForDocumentation.RealSignals.SuperSample\">example</a>
+samples a sine signal with a periodic clock of 20 ms period, and 
+then super-samples the resulting clocked signal with a factor of 3:<br>
+</p>
+
+<table border=0 cellspacing=0 cellpadding=2>
+<tr><td width=\"50\"></td>
+    <td valign=\"bottom\"><img src=\"modelica://Modelica_Synchronous/Resources/Images/RealSignals/SuperSample_Model.png\"></td>
+    <td valign=\"bottom\">&nbsp;&nbsp;&nbsp;
+                        <img src=\"modelica://Modelica_Synchronous/Resources/Images/RealSignals/SuperSample_Result.png\"></td>  
+    </tr>
+<tr><td></td>
+    <td align=\"center\">model</td>
+    <td align=\"center\">simulation result</td>
+   </tr>
+</table>
+<p>
+As can be seen, superSample introduces factor-1 additional clock ticks for the
+output y. The super-sampling factor = 3 is displayed in the icon of the
+superSample block. Note the up-arrow in the icon of the superSample block indicates that the
+clock of superSample.y is faster as the clock of superSample.u.
+</p>
 </html>"));
     end SuperSample;
 
@@ -5408,7 +5620,56 @@ from above:<br>
             initialScale=0.06),
                          graphics),
         Documentation(info="<html>
+<p>
+This block super-samples the clocked Real input signal u and provides it
+linearly interpolated between the u-values as 
+clocked output signal y. 
+</p>
 
+<p>
+To be more precise: 
+The clock of y is factor-times faster than the clock of u. At every tick of the clock of y, the value of y is set to 
+the value of the lineraly interpolated value between the last available values of u. 
+The first activation of the clock of y coincides with the first activation of the clock of u. 
+By default, the super-sampling factor is inferred,
+that is, it must be defined somewhere else. If parameter <b>inferFactor</b> = false,
+then the super-sampling factor is defined by Integer parameter <b>factor</b>.
+</p>
+
+<p>
+For control applications, this block is better suited as block
+<a href=\"Modelica_Synchronous.RealSignals.Sampler.SuperSample\">SuperSample</a>
+since it does not induce \"vibrations\".
+</p>
+
+<h4>Example</h4>
+
+<p>
+The following 
+<a href=\"Modelica_Synchronous.Examples.ForDocumentation.RealSignals.SuperSampleInterpolated\">example</a>
+samples a sine signal with a periodic clock of 20 ms period, and 
+then super-samples the resulting clocked signal with a factor of 3
+and interpolates the result linearly:<br>
+</p>
+
+<table border=0 cellspacing=0 cellpadding=2>
+<tr><td width=\"50\"></td>
+    <td valign=\"bottom\"><img src=\"modelica://Modelica_Synchronous/Resources/Images/RealSignals/SuperSampleInterpolated_Model.png\"></td>
+    <td valign=\"bottom\">&nbsp;&nbsp;&nbsp;
+                        <img src=\"modelica://Modelica_Synchronous/Resources/Images/RealSignals/SuperSampleInterpolated_Result.png\"></td>  
+    </tr>
+<tr><td></td>
+    <td align=\"center\">model</td>
+    <td align=\"center\">simulation result</td>
+   </tr>
+</table>
+<p>
+As can be seen, block superSampleIpo introduces factor-1 additional clock ticks for the
+output y and determines the values at these clock ticks, so that the last two available
+values of the input u are linearly interpolated. The super-sampling factor = 3 is displayed in the icon of the
+superSampleIpo block. Note the up-arrow in the icon of the SuperSampleInterpolation block indicates that the
+clock of superSampleIpo.y is faster as the clock of superSampleIpo.u.
+</p>
 </html>"));
     end SuperSampleInterpolated;
 
@@ -6267,7 +6528,7 @@ and transform a <b>Real</b> signal from one partition to the next. Especially,
 the following blocks are provided:<br>&nbsp;
 </p>
 
-<table border=1 cellspacing=0 cellpadding=3>
+<table border=\"1\" cellspacing=\"0\" cellpadding=\"3\">
 <tr><th align=\"left\"><b>Boundary Type</b></th>
     <th align=\"left\"><b>Block Name</b></th>
     <th align=\"left\"><b>Description</b></th></tr>
@@ -6906,7 +7167,7 @@ contrary to a general FIR filter.
                   -14,-4},{-4,-46},{0,-64},{2,-82}},
                                              color={0,0,127}),
         Polygon(points={{-84,90},{-92,68},{-76,68},{-84,90},{-84,90}}, lineColor={192,192,192}, fillColor={192,192,192},
-                fillPattern=   FillPattern.Solid),
+                fillPattern =  FillPattern.Solid),
           Line(points={{2,-82},{4,-64},{8,-56},{12,-56},{16,-60},{18,-66},{20,-82}},
                                                                              color={0,0,127}),
           Line(points={{20,-80},{20,-78},{20,-72},{22,-66},{24,-64},{28,-64},{32,-66},
@@ -6915,7 +7176,7 @@ contrary to a general FIR filter.
                   {62,-72},{64,-76},{64,-78},{64,-80},{64,-82}},
                                                 color={0,0,127}),
         Polygon(points={{90,-82},{68,-74},{68,-90},{90,-82}}, lineColor={192,192,192}, fillColor={192,192,192},
-                fillPattern=  FillPattern.Solid),
+                fillPattern = FillPattern.Solid),
             Text(
               extent={{-26,88},{88,48}},
               lineColor={175,175,175},
@@ -8472,7 +8733,7 @@ and transform a <b>Boolean</b> signal from one partition to the next. Especially
 the following blocks are provided:<br>&nbsp;
 </p>
 
-<table border=1 cellspacing=0 cellpadding=3>
+<table border=\"1\" cellspacing=\"0\" cellpadding=\"3\">
 <tr><th align=\"left\"><b>Boundary Type</b></th>
     <th align=\"left\"><b>Block Name</b></th>
     <th align=\"left\"><b>Description</b></th></tr>
@@ -9747,7 +10008,7 @@ and transform an <b>Integer</b> signal from one partition to the next. Especiall
 the following blocks are provided:<br>&nbsp;
 </p>
 
-<table border=1 cellspacing=0 cellpadding=3>
+<table border=\"1\" cellspacing=\"0\" cellpadding=\"3\">
 <tr><th align=\"left\"><b>Boundary Type</b></th>
     <th align=\"left\"><b>Block Name</b></th>
     <th align=\"left\"><b>Description</b></th></tr>
