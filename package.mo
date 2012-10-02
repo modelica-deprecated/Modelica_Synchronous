@@ -3698,6 +3698,373 @@ Example used to generate a figure for the documentation of block
 </p>
 </html>"));
         end SuperSampleInterpolated;
+
+        model ShiftSample "Example of a ShiftSample block"
+          import Modelica_Synchronous;
+           extends Modelica.Icons.Example;
+
+          Modelica.Blocks.Sources.Sine sine(freqHz=2,
+            offset=0.1,
+            startTime=0)
+            annotation (Placement(transformation(extent={{-80,20},{-60,40}})));
+          Modelica_Synchronous.RealSignals.Sampler.SampleClocked
+                                                          sample
+            annotation (Placement(transformation(extent={{-46,24},{-34,36}})));
+          Modelica_Synchronous.ClockSignals.Clocks.PeriodicExactClock periodicClock(
+              factor=20, resolution=Modelica_Synchronous.Types.Resolution.ms)
+            annotation (Placement(transformation(extent={{-62,-6},{-50,6}})));
+          Modelica_Synchronous.RealSignals.Sampler.ShiftSample shiftSample1(
+              shiftCounter=4, resolution=3)
+            annotation (Placement(transformation(extent={{-22,24},{-10,36}})));
+        equation
+          connect(sine.y, sample.u) annotation (Line(
+              points={{-59,30},{-47.2,30}},
+              color={0,0,127},
+              smooth=Smooth.None));
+        connect(periodicClock.y, sample.clock) annotation (Line(
+            points={{-49.4,0},{-40,0},{-40,22.8}},
+            color={175,175,175},
+            pattern=LinePattern.Dot,
+            thickness=0.5,
+            smooth=Smooth.None));
+          connect(sample.y, shiftSample1.u) annotation (Line(
+              points={{-33.4,30},{-23.2,30}},
+              color={0,0,127},
+              smooth=Smooth.None));
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                    -100},{100,100}}), graphics), experiment(StopTime=0.09),
+          Documentation(info="<html>
+<p>
+Example used to generate a figure for the documentation of block
+<a href=\"Modelica_Synchronous.RealSignals.Sampler.ShiftSample\">Modelica_Synchronous.RealSignals.Sampler.ShiftSample</a>.
+</p>
+</html>"));
+        end ShiftSample;
+
+        model BackSample "Example of a BackSample block"
+        import Modelica_Synchronous;
+           extends Modelica.Icons.Example;
+
+          Modelica.Blocks.Sources.Sine sine(freqHz=2,
+            offset=0.1,
+            startTime=0)
+            annotation (Placement(transformation(extent={{-80,20},{-60,40}})));
+          Modelica_Synchronous.RealSignals.Sampler.SampleClocked
+                                                          sample
+            annotation (Placement(transformation(extent={{-46,24},{-34,36}})));
+          Modelica_Synchronous.ClockSignals.Clocks.PeriodicExactClock periodicClock(
+              factor=20, resolution=Modelica_Synchronous.Types.Resolution.ms)
+            annotation (Placement(transformation(extent={{-62,-6},{-50,6}})));
+          Modelica_Synchronous.RealSignals.Sampler.ShiftSample shiftSample1(
+              shiftCounter=4, resolution=3)
+            annotation (Placement(transformation(extent={{-26,24},{-14,36}})));
+        Modelica_Synchronous.RealSignals.Sampler.BackSample backSample1(
+          backCounter=4,
+          resolution=3,
+          y_start=0.5)
+          annotation (Placement(transformation(extent={{-4,24},{8,36}})));
+        equation
+          connect(sine.y, sample.u) annotation (Line(
+              points={{-59,30},{-47.2,30}},
+              color={0,0,127},
+              smooth=Smooth.None));
+        connect(periodicClock.y, sample.clock) annotation (Line(
+            points={{-49.4,0},{-40,0},{-40,22.8}},
+            color={175,175,175},
+            pattern=LinePattern.Dot,
+            thickness=0.5,
+            smooth=Smooth.None));
+          connect(sample.y, shiftSample1.u) annotation (Line(
+              points={{-33.4,30},{-27.2,30}},
+              color={0,0,127},
+              smooth=Smooth.None));
+        connect(shiftSample1.y, backSample1.u) annotation (Line(
+            points={{-13.4,30},{-5.2,30}},
+            color={0,0,127},
+            smooth=Smooth.None));
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                  -100},{100,100}}),   graphics), experiment(StopTime=0.09),
+          Documentation(info="<html>
+<p>
+Example used to generate a figure for the documentation of block
+<a href=\"Modelica_Synchronous.RealSignals.Sampler.BackSample\">Modelica_Synchronous.RealSignals.Sampler.BackSample</a>.
+</p>
+</html>"));
+        end BackSample;
+
+        model AssignClock "Example of a AssignClock block"
+        import Modelica_Synchronous;
+           extends Modelica.Icons.Example;
+
+          Modelica_Synchronous.ClockSignals.Clocks.PeriodicExactClock periodicClock(
+              factor=20, resolution=Modelica_Synchronous.Types.Resolution.ms)
+            annotation (Placement(transformation(extent={{-42,0},{-30,12}})));
+        Modelica_Synchronous.RealSignals.Sampler.AssignClock assignClock1
+          annotation (Placement(transformation(extent={{-26,22},{-14,34}})));
+        Modelica_Synchronous.RealSignals.NonPeriodic.UnitDelay unitDelay1
+          annotation (Placement(transformation(extent={{-38,48},{-58,68}})));
+        Modelica.Blocks.Math.Add add
+          annotation (Placement(transformation(extent={{-58,18},{-38,38}})));
+        Modelica.Blocks.Sources.Constant const(k=1)
+          annotation (Placement(transformation(extent={{-92,12},{-72,32}})));
+        equation
+        connect(periodicClock.y, assignClock1.clock) annotation (Line(
+            points={{-29.4,6},{-20,6},{-20,20.8}},
+            color={175,175,175},
+            pattern=LinePattern.Dot,
+            thickness=0.5,
+            smooth=Smooth.None));
+        connect(add.u2, const.y) annotation (Line(
+            points={{-60,22},{-71,22}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(assignClock1.y, unitDelay1.u) annotation (Line(
+            points={{-13.4,28},{-2,28},{-2,58},{-36,58}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(unitDelay1.y, add.u1) annotation (Line(
+            points={{-59,58},{-68,58},{-68,34},{-60,34}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(add.y, assignClock1.u) annotation (Line(
+            points={{-37,28},{-27.2,28}},
+            color={0,0,127},
+            smooth=Smooth.None));
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                  -100},{100,100}}),   graphics), experiment(StopTime=0.09),
+          Documentation(info="<html>
+<p>
+Example used to generate a figure for the documentation of block
+<a href=\"Modelica_Synchronous.RealSignals.Sampler.AssignClock\">Modelica_Synchronous.RealSignals.Sampler.AssignClock</a>.
+</p>
+</html>"));
+        end AssignClock;
+
+        model AssignClockVectorized "Example of a AssignClockVectorized block"
+        import Modelica_Synchronous;
+           extends Modelica.Icons.Example;
+
+          Modelica_Synchronous.ClockSignals.Clocks.PeriodicExactClock periodicClock(
+              factor=20, resolution=Modelica_Synchronous.Types.Resolution.ms)
+            annotation (Placement(transformation(extent={{-54,-50},{-42,-38}})));
+        Modelica_Synchronous.RealSignals.NonPeriodic.UnitDelay unitDelay1
+          annotation (Placement(transformation(extent={{-38,58},{-58,78}})));
+        Modelica.Blocks.Math.Add add
+          annotation (Placement(transformation(extent={{-58,28},{-38,48}})));
+        Modelica.Blocks.Sources.Constant const(k=1)
+          annotation (Placement(transformation(extent={{-92,22},{-72,42}})));
+        Modelica_Synchronous.RealSignals.Sampler.AssignClockVectorized
+          assignClock1(n=2)
+          annotation (Placement(transformation(extent={{-24,18},{-12,30}})));
+        Modelica.Blocks.Math.Add add1
+          annotation (Placement(transformation(extent={{-58,2},{-38,22}})));
+        Modelica.Blocks.Sources.Constant const1(k=2)
+          annotation (Placement(transformation(extent={{-92,-10},{-72,10}})));
+        Modelica_Synchronous.RealSignals.NonPeriodic.UnitDelay unitDelay2
+          annotation (Placement(transformation(extent={{-38,-28},{-58,-8}})));
+        equation
+        connect(add.u2, const.y) annotation (Line(
+            points={{-60,32},{-71,32}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(unitDelay1.y, add.u1) annotation (Line(
+            points={{-59,68},{-68,68},{-68,44},{-60,44}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(periodicClock.y, assignClock1.clock) annotation (Line(
+            points={{-41.4,-44},{-18,-44},{-18,16.8}},
+            color={175,175,175},
+            pattern=LinePattern.Dot,
+            thickness=0.5,
+            smooth=Smooth.None));
+        connect(const1.y, add1.u1) annotation (Line(
+            points={{-71,0},{-68,0},{-68,18},{-60,18}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(unitDelay2.y, add1.u2) annotation (Line(
+            points={{-59,-18},{-66,-18},{-66,6},{-60,6}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(add.y, assignClock1.u[1]) annotation (Line(
+            points={{-37,38},{-32,38},{-32,23.4},{-25.2,23.4}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(add1.y, assignClock1.u[2]) annotation (Line(
+            points={{-37,12},{-32,12},{-32,24.6},{-25.2,24.6}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(assignClock1.y[2], unitDelay2.u) annotation (Line(
+            points={{-11.4,24.3},{-6,24.3},{-6,-18},{-36,-18}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(assignClock1.y[1], unitDelay1.u) annotation (Line(
+            points={{-11.4,23.7},{-6,23.7},{-6,68},{-36,68}},
+            color={0,0,127},
+            smooth=Smooth.None));
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                  -100},{100,100}}),   graphics), experiment(StopTime=0.09),
+          Documentation(info="<html>
+<p>
+Example used to generate a figure for the documentation of block
+<a href=\"Modelica_Synchronous.RealSignals.Sampler.AssignClockVectorized\">Modelica_Synchronous.RealSignals.Sampler.AssignClockVectorized</a>.
+</p>
+</html>"));
+        end AssignClockVectorized;
+
+        model UpSample "Example of a UpSample block"
+          import Modelica_Synchronous;
+           extends Modelica.Icons.Example;
+
+          Modelica_Synchronous.ClockSignals.Clocks.PeriodicExactClock periodicClock(
+              factor=20, resolution=Modelica_Synchronous.Types.Resolution.ms)
+            annotation (Placement(transformation(extent={{-68,-6},{-56,6}})));
+          Modelica.Blocks.Sources.Sine sine(freqHz=2,
+            offset=0.1,
+            startTime=0)
+            annotation (Placement(transformation(extent={{-80,20},{-60,40}})));
+          Modelica_Synchronous.RealSignals.Sampler.SampleClocked
+                                                          sample
+            annotation (Placement(transformation(extent={{-48,24},{-36,36}})));
+        Modelica_Synchronous.RealSignals.Sampler.Utilities.UpSample upSample1
+          annotation (Placement(transformation(extent={{-26,34},{-14,46}})));
+        Modelica_Synchronous.RealSignals.Sampler.Utilities.UpSample upSample2(
+            inferFactor=false, factor=3)
+          annotation (Placement(transformation(extent={{-26,14},{-14,26}})));
+        Modelica.Blocks.Math.Add add
+          annotation (Placement(transformation(extent={{0,20},{20,40}})));
+        equation
+        connect(sine.y, sample.u) annotation (Line(
+            points={{-59,30},{-49.2,30}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(periodicClock.y, sample.clock) annotation (Line(
+            points={{-55.4,0},{-42,0},{-42,22.8}},
+            color={175,175,175},
+            pattern=LinePattern.Dot,
+            thickness=0.5,
+            smooth=Smooth.None));
+        connect(sample.y, upSample1.u) annotation (Line(
+            points={{-35.4,30},{-32,30},{-32,40},{-27.2,40}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(upSample2.u, sample.y) annotation (Line(
+            points={{-27.2,20},{-32,20},{-32,30},{-35.4,30}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(upSample2.y, add.u2) annotation (Line(
+            points={{-13.4,20},{-8,20},{-8,24},{-2,24}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(upSample1.y, add.u1) annotation (Line(
+            points={{-13.4,40},{-8,40},{-8,36},{-2,36}},
+            color={0,0,127},
+            smooth=Smooth.None));
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                  -100},{100,100}}),   graphics), experiment(StopTime=0.09),
+          Documentation(info="<html>
+<p>
+Example used to generate a figure for the documentation of block
+<a href=\"Modelica_Synchronous.RealSignals.Sampler.Utilities.UpSample\">Modelica_Synchronous.RealSignals.Sampler.Utilities.UpSample</a>.
+</p>
+</html>"));
+        end UpSample;
+
+        model ClockedRealToBooleanTriggerHold
+        "Example of a ClockedRealToBooleanTriggerHold block"
+        import Modelica_Synchronous;
+           extends Modelica.Icons.Example;
+
+          Modelica_Synchronous.ClockSignals.Clocks.PeriodicExactClock periodicClock(
+              factor=20, resolution=Modelica_Synchronous.Types.Resolution.ms)
+            annotation (Placement(transformation(extent={{-68,-6},{-56,6}})));
+          Modelica.Blocks.Sources.Sine sine(freqHz=2,
+            offset=0.1,
+            startTime=0)
+            annotation (Placement(transformation(extent={{-80,20},{-60,40}})));
+          Modelica_Synchronous.RealSignals.Sampler.SampleClocked
+                                                          sample
+            annotation (Placement(transformation(extent={{-48,24},{-36,36}})));
+        Modelica_Synchronous.RealSignals.Sampler.Utilities.ClockedRealToBooleanTriggerHold
+          ClockedSignalToTrigger
+          annotation (Placement(transformation(extent={{-20,20},{0,40}})));
+        Modelica.Blocks.Discrete.TriggeredSampler triggeredSampler
+          annotation (Placement(transformation(extent={{10,40},{30,60}})));
+        equation
+        connect(sine.y, sample.u) annotation (Line(
+            points={{-59,30},{-49.2,30}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(periodicClock.y, sample.clock) annotation (Line(
+            points={{-55.4,0},{-42,0},{-42,22.8}},
+            color={175,175,175},
+            pattern=LinePattern.Dot,
+            thickness=0.5,
+            smooth=Smooth.None));
+        connect(sample.y, ClockedSignalToTrigger.u) annotation (Line(
+            points={{-35.4,30},{-22,30}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(triggeredSampler.trigger, ClockedSignalToTrigger.y) annotation
+          (Line(
+            points={{20,38.2},{20,30},{1,30}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(triggeredSampler.u, sine.y) annotation (Line(
+            points={{8,50},{-54,50},{-54,30},{-59,30}},
+            color={0,0,127},
+            smooth=Smooth.None));
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                  -100},{100,100}}),   graphics), experiment(StopTime=0.09),
+          Documentation(info="<html>
+<p>
+Example used to generate a figure for the documentation of block
+<a href=\"Modelica_Synchronous.RealSignals.Sampler.Utilities.ClockedRealToBooleanTriggerHold\">Modelica_Synchronous.RealSignals.Sampler.Utilities.ClockedRealToBooleanTriggerHold</a>.
+</p>
+</html>"));
+        end ClockedRealToBooleanTriggerHold;
+
+        model ClockedRealToBooleanSquareHold
+        "Example of a ClockedRealToBooleanSquareHold block"
+        import Modelica_Synchronous;
+           extends Modelica.Icons.Example;
+
+          Modelica_Synchronous.ClockSignals.Clocks.PeriodicExactClock periodicClock(
+              factor=20, resolution=Modelica_Synchronous.Types.Resolution.ms)
+            annotation (Placement(transformation(extent={{-68,-6},{-56,6}})));
+          Modelica.Blocks.Sources.Sine sine(freqHz=2,
+            offset=0.1,
+            startTime=0)
+            annotation (Placement(transformation(extent={{-80,20},{-60,40}})));
+          Modelica_Synchronous.RealSignals.Sampler.SampleClocked
+                                                          sample
+            annotation (Placement(transformation(extent={{-48,24},{-36,36}})));
+        Modelica_Synchronous.RealSignals.Sampler.Utilities.ClockedRealToBooleanSquareHold
+          clockedSignalToSquare
+          annotation (Placement(transformation(extent={{-26,20},{-6,40}})));
+        equation
+        connect(sine.y, sample.u) annotation (Line(
+            points={{-59,30},{-49.2,30}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(periodicClock.y, sample.clock) annotation (Line(
+            points={{-55.4,0},{-42,0},{-42,22.8}},
+            color={175,175,175},
+            pattern=LinePattern.Dot,
+            thickness=0.5,
+            smooth=Smooth.None));
+        connect(sample.y, clockedSignalToSquare.u) annotation (Line(
+            points={{-35.4,30},{-28,30}},
+            color={0,0,127},
+            smooth=Smooth.None));
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                  -100},{100,100}}),   graphics), experiment(StopTime=0.09),
+          Documentation(info="<html>
+<p>
+Example used to generate a figure for the documentation of block
+<a href=\"Modelica_Synchronous.RealSignals.Sampler.Utilities.ClockedRealToBooleanTriggerHold\">Modelica_Synchronous.RealSignals.Sampler.Utilities.ClockedRealToBooleanTriggerHold</a>.
+</p>
+</html>"));
+        end ClockedRealToBooleanSquareHold;
       annotation (Documentation(info="<html>
 <p>
 This package contains models that have been used to produce
@@ -5664,7 +6031,7 @@ and interpolates the result linearly:<br>
    </tr>
 </table>
 <p>
-As can be seen, block superSampleIpo introduces factor-1 additional clock ticks for the
+As can be seen, block superSampleIpo introduces 3 additional clock ticks for the
 output y and determines the values at these clock ticks, so that the last two available
 values of the input u are linearly interpolated. The super-sampling factor = 3 is displayed in the icon of the
 superSampleIpo block. Note the up-arrow in the icon of the SuperSampleInterpolation block indicates that the
@@ -5754,6 +6121,31 @@ clock of superSampleIpo.y is faster as the clock of superSampleIpo.u.
 <p>Conceptually, the operator constructs a clock &ldquo;cBase&rdquo; <b>Clock</b> cBase = <b>subSample</b>(<b>superSample</b>(u, resolution), shiftCounter) and the clock of y = <b>shiftSample</b>(..) starts at the second clock tick of cBase. At every tick of the clock of y, the operator returns the value of u from the last tick of the clock of u.</p>
 <p>Note, due to the restriction of <b>superSample</b> on Boolean clocks, <b>shiftSample</b> can only shift the number of ticks of the Boolean clock, but cannot introduce new ticks.</p>
 <p>Also note that the operator does not simply shift the signal in time, since only the value of u from the last tick of the clock of u is available at the output.</p>
+
+<h4>Example</h4>
+
+<p>
+The following 
+<a href=\"Modelica_Synchronous.Examples.ForDocumentation.RealSignals.ShiftSample\">example</a>
+samples a sine signal with a periodic clock of 20 ms period, and 
+then shifts it with shiftCounter = 4 and resolution = 3:<br>
+</p>
+
+<table border=0 cellspacing=0 cellpadding=2>
+<tr><td width=\"50\"></td>
+    <td valign=\"bottom\"><img src=\"modelica://Modelica_Synchronous/Resources/Images/RealSignals/ShiftSample_Model.png\"></td>
+    <td valign=\"bottom\">&nbsp;&nbsp;&nbsp;
+                        <img src=\"modelica://Modelica_Synchronous/Resources/Images/RealSignals/ShiftSample_Result.png\"></td>  
+    </tr>
+<tr><td></td>
+    <td align=\"center\">model</td>
+    <td align=\"center\">simulation result</td>
+   </tr>
+</table>
+<p>
+The first activation of output y of block shiftSample1 is shifted in time (4/3*20ms). The parameter values <b>shiftCounter</b> = 4 and <b>resolution</b> = 3 are visible at the bottom of the icon. Also note that the signal is not simply shift in time. The output of a ShiftSample block will always be the value from the <i>last</i> tick of the clock of its inputs.
+</p>
+
 </html>"));
     end ShiftSample;
 
@@ -5840,7 +6232,35 @@ clock of superSampleIpo.y is faster as the clock of superSampleIpo.u.
             initialScale=0.06),
                          graphics),
         Documentation(info="<html>
+<p><i>The first activation of the clock of y = backSample(..) is shifted in time backCounter/resolution*interval(u) before the first activation of the clock of u.</i></p>
+<p>Conceptually, the operator constructs a clock &ldquo;cBase&rdquo; <b>Clock</b> cBase = <b>subSample</b>(<b>superSample</b>(u, resolution), backCounter) and the clock of y = <b>backSample</b>(..) 
+is shifted before u for a time duration of backCounter/resolution*interval(u). For the first clock tick the operator returns the value of the start value of u. After that the operator returns the value of u from the last clock of u at every tick of the clock of y.</p>
+<p>Note, due to the restriction of <b>superSample</b> on Boolean clocks, <b>backSample</b> can only shift the number of ticks of the Boolean clock, but cannot introduce new ticks.</p>
+<p>Also note that the operator does not simply shift the signal in time, since only the value of u from the last tick of the clock of u is available at the output. In particular, a <b>backSample</b> following a <b>shiftSample</b> can not be used to recover the input signal of shiftSample.</p>
 
+<h4>Example</h4>
+
+<p>
+The following 
+<a href=\"Modelica_Synchronous.Examples.ForDocumentation.RealSignals.BackSample\">example</a>
+samples a sine signal with a periodic clock of 20 ms period, 
+shift-samples it with shiftCounter = 4 and resolution = 3 and then back-samples it with backCounter=4 and resolution = 3:<br>
+</p>
+
+<table border=0 cellspacing=0 cellpadding=2>
+<tr><td width=\"50\"></td>
+    <td valign=\"bottom\"><img src=\"modelica://Modelica_Synchronous/Resources/Images/RealSignals/BackSample_Model.png\"></td>
+    <td valign=\"bottom\">&nbsp;&nbsp;&nbsp;
+                        <img src=\"modelica://Modelica_Synchronous/Resources/Images/RealSignals/BackSample_Result.png\"></td>  
+    </tr>
+<tr><td></td>
+    <td align=\"center\">model</td>
+    <td align=\"center\">simulation result</td>
+   </tr>
+</table>
+<p>
+The first activation of output y of block backSample1 is shifted (4/3*20ms) before the first activation of output y of block shiftSample1. As a consequence, the activation times of the output y are coincident with the input signal of the shiftSample1 block. However, as described above, the output of block backSample1 <b>does not</b> recover the original sampled sine signal! For the first two ticks the output holds the value of the parameter <b>y_start</b> = 0.5. After that the output at a clock tick of block backSample1 is the <i>last</i> value of the output of the shiftSample1 block. The parameter values <b>y_start</b> = 0.5, <b>shiftCounter</b> = 4 and <b>resolution</b> = 3 are visible at the bottom of the icon. 
+</p>
 </html>"));
     end BackSample;
 
@@ -5927,7 +6347,31 @@ clock of superSampleIpo.y is faster as the clock of superSampleIpo.u.
             initialScale=0.06),
                          graphics),
         Documentation(info="<html>
+<p>The AssignClock block assigns a clock to a signal</p>
 
+<h4>Example</h4>
+
+<p>
+The following 
+<a href=\"Modelica_Synchronous.Examples.ForDocumentation.RealSignals.AssignClock\">example</a>
+shows a discrete counter. In order to execute the counter with a sample period of 20ms an AssignClock block is used. Due to clock inference all equations within the blocks are deduced to be active at the clock ticks given by the periodicClock block.
+<br>
+</p>
+
+<table border=0 cellspacing=0 cellpadding=2>
+<tr><td width=\"50\"></td>
+    <td valign=\"bottom\"><img src=\"modelica://Modelica_Synchronous/Resources/Images/RealSignals/AssignClock_Model.png\"></td>
+    <td valign=\"bottom\">&nbsp;&nbsp;&nbsp;
+                        <img src=\"modelica://Modelica_Synchronous/Resources/Images/RealSignals/AssignClock_Result.png\"></td>  
+    </tr>
+<tr><td></td>
+    <td align=\"center\">model</td>
+    <td align=\"center\">simulation result</td>
+   </tr>
+</table>
+<p>
+At every clock tick (i.e., every 20ms) the output of the unitDelay1 block is incremented by one. 
+</p>
 </html>",     revisions="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
     <tr>
@@ -6031,7 +6475,31 @@ clock of superSampleIpo.y is faster as the clock of superSampleIpo.u.
             initialScale=0.06),
                          graphics),
         Documentation(info="<html>
+<p>The AssignClock block assigns a clock to a signal</p>
 
+<h4>Example</h4>
+
+<p>
+The following 
+<a href=\"Modelica_Synchronous.Examples.ForDocumentation.RealSignals.AssignClockVectorized\">example</a>
+shows a two discrete counters. In order to execute the counter with a sample period of 20ms an AssignClockVectorized block is used. Due to clock inference all equations within the blocks are deduced to be active at the clock ticks given by the periodicClock block.
+<br>
+</p>
+
+<table border=0 cellspacing=0 cellpadding=2>
+<tr><td width=\"50\"></td>
+    <td valign=\"bottom\"><img src=\"modelica://Modelica_Synchronous/Resources/Images/RealSignals/AssignClockVectorized_Model.png\"></td>
+    <td valign=\"bottom\">&nbsp;&nbsp;&nbsp;
+                        <img src=\"modelica://Modelica_Synchronous/Resources/Images/RealSignals/AssignClockVectorized_Result.png\"></td>  
+    </tr>
+<tr><td></td>
+    <td align=\"center\">model</td>
+    <td align=\"center\">simulation result</td>
+   </tr>
+</table>
+<p>
+At every clock tick (i.e., every 20ms) the output of the unitDelay1 block is incremented by one and that of the unitDelay2 block is incremented by two. The vector size of the input and output is provided by the parameter <b>n</b>=2 which is also shown in the icon.
+</p>
 </html>"));
     end AssignClockVectorized;
 
@@ -6160,7 +6628,46 @@ clock of superSampleIpo.y is faster as the clock of superSampleIpo.u.
               initialScale=0.06),
                            graphics),
           Documentation(info="<html>
+<p>
+This block upsamples the clocked Real input signal u and provides it as clocked output signal y. 
+</p>
 
+<p>
+To be more precise: 
+The clock of y is factor-times faster than the clock of u. At every tick of the clock of u, the value of y is set to 
+the value of u, at intermediate ticks of clock y, the value of y is set to zero. The first activation of the clock of y coincides with the first activation of the clock of u. By default, the upsampling factor is inferred,that is, it must be defined somewhere else. If parameter <b>inferFactor</b> = false, then the upsampling factor is defined by the Integer parameter <b>factor</b>.
+</p>
+
+<p>
+For signal interpolation an <i>upsample</i> should be followed by an appropriate filter (antiimaging).
+</p>
+
+<h4>Example</h4>
+
+<p>
+The following 
+<a href=\"Modelica_Synchronous.Examples.ForDocumentation.RealSignals.UpSample\">example</a>
+samples a sine signal with a periodic clock of 20 ms period, and 
+then upsamples the resulting clocked signal with a factor of 3:<br>
+</p>
+
+<table border=0 cellspacing=0 cellpadding=2>
+<tr><td width=\"50\"></td>
+    <td valign=\"bottom\"><img src=\"modelica://Modelica_Synchronous/Resources/Images/RealSignals/UpSample_Model.png\"></td>
+    <td valign=\"bottom\">&nbsp;&nbsp;&nbsp;
+                        <img src=\"modelica://Modelica_Synchronous/Resources/Images/RealSignals/UpSample_Result.png\"></td>  
+    </tr>
+<tr><td></td>
+    <td align=\"center\">model</td>
+    <td align=\"center\">simulation result</td>
+   </tr>
+</table>
+<p>
+The upsampling factor is explicitly given at the upSample2 block, which also makes the factor visible in the icon. For the upSample1 block the factor is infered.  
+As can be seen, upsample1 introduces 3 additional clock ticks for the
+output y. Note the up-arrow in the icon of the upSample blocks which indicates that the
+clock of their outputs is faster than the clock of their inputs.
+</p>
 </html>"));
       end UpSample;
 
@@ -6186,7 +6693,7 @@ clock of superSampleIpo.y is faster as the clock of superSampleIpo.u.
           y3 = hold(y2);
           y = change(y3);
           annotation (
-            defaultComponentName="ClockedSignalToTrigger",
+            defaultComponentName="clockedSignalToTrigger",
             Icon(coordinateSystem(
               preserveAspectRatio=true,
               extent={{-100,-100},{100,100}},
@@ -6205,11 +6712,35 @@ clock of superSampleIpo.y is faster as the clock of superSampleIpo.u.
               grid={1,1}), graphics),
             Documentation(info="<html>
 <p>
-The Boolean output y is a conditional trigger signal. The output y is <b>true</b>
-at sample times (defined by parameter <b>period</b>) and if input enable = <b>true</b>, otherwise it is
-<b>false</b>.
+This block creates boolean continuous time trigger output signals whenever the clock of the input signal is active.  
 </p>
 
+<p>
+A particular use-case in which that block might be useful is the combination of \"old-style\" sampled blocks (i.e., \"unclocked\" discrete control functions implemented using equations between \"when trigger then\" clauses) with clocked blocks.
+</p>
+
+<h4>Example</h4>
+
+<p>
+The following 
+<a href=\"Modelica_Synchronous.Examples.ForDocumentation.RealSignals.ClockedRealToBooleanTriggerHold\">example</a>
+samples a sine signal with a periodic clock of 20 ms period. After that a continuous time Boolean trigger signal is generated at every clock tick of that sampled signal. The generated signal is when used as trigger signal for an \"old-style\" <a href=\"Modelica.Blocks.Discrete.TriggeredSampler\">TriggeredSampler</a>  block from the Modelica.Blocks.Discrete package:<br>
+</p>
+
+<table border=0 cellspacing=0 cellpadding=2>
+<tr><td width=\"50\"></td>
+    <td valign=\"bottom\"><img src=\"modelica://Modelica_Synchronous/Resources/Images/RealSignals/ClockedRealToBooleanTriggerHold_Model.png\"></td>
+    <td valign=\"bottom\">&nbsp;&nbsp;&nbsp;
+                        <img src=\"modelica://Modelica_Synchronous/Resources/Images/RealSignals/ClockedRealToBooleanTriggerHold_Result.png\"></td>  
+    </tr>
+<tr><td></td>
+    <td align=\"center\">model</td>
+    <td align=\"center\">simulation result</td>
+   </tr>
+</table>
+<p>
+Note, that it is clearly visible in the plot that the \"old-style\" discrete signals have an implicit zero-order hold semantics, while the new clocked signals are only active whenever their associated clock ticks. Just compare signal sample.y (clocked) with triggeredSampler.y (unclocked) to observe the difference.
+</p>
 </html>"));
         end ClockedRealToBooleanTriggerHold;
 
@@ -6230,7 +6761,7 @@ at sample times (defined by parameter <b>period</b>) and if input enable = <b>tr
           y2 = if u > 0 then not previous(y2) else not previous(y2);
           y = hold(y2);
           annotation (
-            defaultComponentName="ClockedSignalToSquare",
+            defaultComponentName="clockedSignalToSquare",
             Icon(coordinateSystem(
               preserveAspectRatio=true,
               extent={{-100,-100},{100,100}},
@@ -6248,11 +6779,28 @@ at sample times (defined by parameter <b>period</b>) and if input enable = <b>tr
               grid={1,1}), graphics),
             Documentation(info="<html>
 <p>
-The Boolean output y is a conditional trigger signal. The output y is <b>true</b>
-at sample times (defined by parameter <b>period</b>) and if input enable = <b>true</b>, otherwise it is
-<b>false</b>.
+This block creates boolean continuous time square output signals whenever the clock of the input signal is active.  
 </p>
 
+<h4>Example</h4>
+
+<p>
+The following 
+<a href=\"Modelica_Synchronous.Examples.ForDocumentation.RealSignals.ClockedRealToBooleanSquareHold\">example</a>
+samples a sine signal with a periodic clock of 20 ms period. After that a continuous time Boolean square signal is generated at every clock tick of that sampled signal:<br>
+</p>
+
+<table border=0 cellspacing=0 cellpadding=2>
+<tr><td width=\"50\"></td>
+    <td valign=\"bottom\"><img src=\"modelica://Modelica_Synchronous/Resources/Images/RealSignals/ClockedRealToBooleanSquareHold_Model.png\"></td>
+    <td valign=\"bottom\">&nbsp;&nbsp;&nbsp;
+                        <img src=\"modelica://Modelica_Synchronous/Resources/Images/RealSignals/ClockedRealToBooleanSquareHold_Result.png\"></td>  
+    </tr>
+<tr><td></td>
+    <td align=\"center\">model</td>
+    <td align=\"center\">simulation result</td>
+   </tr>
+</table>
 </html>"));
         end ClockedRealToBooleanSquareHold;
 
@@ -6699,7 +7247,7 @@ will give still a similar performance.
       parameter Real y_start=0 "Value of output signal at first clock tick";
     equation
       y = previous(u);
-      annotation (defaultComponentName="UnitDelay1",
+      annotation (defaultComponentName="unitDelay1",
            Icon(graphics={
             Line(points={{-30,0},{30,0}}, color={0,0,127}),
             Text(
@@ -7232,7 +7780,7 @@ a[:] are the filter coefficients.
 </HTML>
 "),     Icon(graphics={
         Polygon(points={{-84,90},{-92,68},{-76,68},{-84,90},{-84,90}}, lineColor={192,192,192}, fillColor={192,192,192},
-                fillPattern=   FillPattern.Solid),
+                fillPattern =  FillPattern.Solid),
          Line(points={{-84,78},{-84,-90}}, color={192,192,192}),
         Line(points={{-84,30},{-72,30},{-52,28},{-32,20},{-26,16},{-22,12},{-18,6},{
                   -14,-4},{-4,-46},{0,-64},{2,-82}},
@@ -7248,7 +7796,7 @@ a[:] are the filter coefficients.
                   {62,-72},{64,-76},{64,-78},{64,-80},{64,-82}},
                                                 color={0,0,127}),
         Polygon(points={{90,-82},{68,-74},{68,-90},{90,-82}}, lineColor={192,192,192}, fillColor={192,192,192},
-                fillPattern=  FillPattern.Solid),
+                fillPattern = FillPattern.Solid),
         Line(points={{-90,-82},{82,-82}}, color={192,192,192}),
             Text(
               extent={{-26,86},{88,56}},
@@ -7307,10 +7855,10 @@ a[:] are the filter coefficients.
         graphics={
          Line(points={{-84,78},{-84,-90}}, color={192,192,192}),
         Polygon(points={{-84,90},{-92,68},{-76,68},{-84,90},{-84,90}}, lineColor={192,192,192}, fillColor={192,192,192},
-                fillPattern=   FillPattern.Solid),
+                fillPattern =  FillPattern.Solid),
         Line(points={{-90,-82},{82,-82}}, color={192,192,192}),
         Polygon(points={{90,-82},{68,-74},{68,-90},{90,-82}}, lineColor={192,192,192}, fillColor={192,192,192},
-                fillPattern=  FillPattern.Solid),
+                fillPattern = FillPattern.Solid),
         Line(points=[-84,30; -72,30; -52,28; -32,20; -26,16; -22,12; -18,6; -14,
                   -4; -4,-46; 0,-64; 2,-82], color={0,0,127}),
           Line(points=[2,-82; 4,-64; 8,-56; 12,-56; 16,-60; 18,-66; 20,-82], color={0,0,127}),
