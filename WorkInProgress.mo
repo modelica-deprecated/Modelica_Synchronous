@@ -1880,7 +1880,7 @@ form of a PID controller by using the backward rectangular approximation (also c
       Modelica_Synchronous.RealSignals.Sampler.SampleClocked
                                                 sample1
         annotation (Placement(transformation(extent={{-34,24},{-22,36}})));
-      Modelica_Synchronous.RealSignals.Sampler.Utilities.ClockedRealToBooleanTriggerHold
+      Modelica_Synchronous.RealSignals.Sampler.Utilities.AssignClockToTriggerHold
         ClockedRealToTrigger
         annotation (Placement(transformation(extent={{0,20},{20,40}})));
       Modelica.Blocks.Discrete.TriggeredSampler triggeredSampler
@@ -1921,7 +1921,7 @@ form of a PID controller by using the backward rectangular approximation (also c
       Modelica_Synchronous.BooleanSignals.Sampler.SampleClocked
                                                 sample1
         annotation (Placement(transformation(extent={{-34,24},{-22,36}})));
-      Modelica_Synchronous.BooleanSignals.Sampler.Utilities.ClockedBooleanToBooleanTriggerHold
+      Modelica_Synchronous.BooleanSignals.Sampler.Utilities.AssignClockToTriggerHold
         ClockedSignalToTrigger
         annotation (Placement(transformation(extent={{0,20},{20,40}})));
       Modelica.Blocks.Sources.BooleanPulse booleanPulse(period=0.2)
@@ -2080,7 +2080,7 @@ form of a PID controller by using the backward rectangular approximation (also c
       Modelica_Synchronous.RealSignals.Sampler.SampleClocked
                                                 sample1
         annotation (Placement(transformation(extent={{-34,44},{-22,56}})));
-      Modelica_Synchronous.RealSignals.Sampler.Utilities.ClockedRealToBooleanSquareHold
+      Modelica_Synchronous.RealSignals.Sampler.Utilities.AssignClockToSquareWaveHold
         ClockedRealToSquare
         annotation (Placement(transformation(extent={{-4,40},{16,60}})));
     equation
@@ -2289,7 +2289,7 @@ form of a PID controller by using the backward rectangular approximation (also c
         annotation (Placement(transformation(extent={{-80,-20},{-60,0}})));
       Modelica.Blocks.Sources.BooleanConstant booleanConstant3[3]
         annotation (Placement(transformation(extent={{-80,-60},{-60,-40}})));
-      Modelica_Synchronous.BooleanSignals.Sampler.Utilities.ClockedBooleanToBooleanSquareHold
+      Modelica_Synchronous.BooleanSignals.Sampler.Utilities.AssignClockToSquareWaveHold
         ClockedSignalToSquare
         annotation (Placement(transformation(extent={{20,-20},{40,0}})));
       Modelica_Synchronous.BooleanSignals.Sampler.Sample

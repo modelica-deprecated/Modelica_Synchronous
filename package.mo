@@ -3969,8 +3969,8 @@ Example used to generate a figure for the documentation of block
 </html>"));
         end UpSample;
 
-        model ClockedRealToBooleanTriggerHold
-        "Example of a ClockedRealToBooleanTriggerHold block"
+        model AssignClockToTriggerHold
+        "Example of an AssignClockToTriggerHold block"
         import Modelica_Synchronous;
            extends Modelica.Icons.Example;
 
@@ -3984,7 +3984,7 @@ Example used to generate a figure for the documentation of block
           Modelica_Synchronous.RealSignals.Sampler.SampleClocked
                                                           sample
             annotation (Placement(transformation(extent={{-48,24},{-36,36}})));
-        Modelica_Synchronous.RealSignals.Sampler.Utilities.ClockedRealToBooleanTriggerHold
+        Modelica_Synchronous.RealSignals.Sampler.Utilities.AssignClockToTriggerHold
           ClockedSignalToTrigger
           annotation (Placement(transformation(extent={{-20,20},{0,40}})));
         Modelica.Blocks.Discrete.TriggeredSampler triggeredSampler
@@ -4004,8 +4004,8 @@ Example used to generate a figure for the documentation of block
             points={{-35.4,30},{-22,30}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(triggeredSampler.trigger, ClockedSignalToTrigger.y) annotation
-          (Line(
+        connect(triggeredSampler.trigger, ClockedSignalToTrigger.y) annotation (
+           Line(
             points={{20,38.2},{20,30},{1,30}},
             color={255,0,255},
             smooth=Smooth.None));
@@ -4018,13 +4018,13 @@ Example used to generate a figure for the documentation of block
           Documentation(info="<html>
 <p>
 Example used to generate a figure for the documentation of block
-<a href=\"Modelica_Synchronous.RealSignals.Sampler.Utilities.ClockedRealToBooleanTriggerHold\">Modelica_Synchronous.RealSignals.Sampler.Utilities.ClockedRealToBooleanTriggerHold</a>.
+<a href=\"Modelica_Synchronous.RealSignals.Sampler.Utilities.AssignClockToTriggerHold\">Modelica_Synchronous.RealSignals.Sampler.Utilities.AssignClockToTriggerHold</a>.
 </p>
 </html>"));
-        end ClockedRealToBooleanTriggerHold;
+        end AssignClockToTriggerHold;
 
-        model ClockedRealToBooleanSquareHold
-        "Example of a ClockedRealToBooleanSquareHold block"
+        model AssignClockToSquareWaveHold
+        "Example of an AssignClockToSquareWaveHold block"
         import Modelica_Synchronous;
            extends Modelica.Icons.Example;
 
@@ -4038,7 +4038,7 @@ Example used to generate a figure for the documentation of block
           Modelica_Synchronous.RealSignals.Sampler.SampleClocked
                                                           sample
             annotation (Placement(transformation(extent={{-48,24},{-36,36}})));
-        Modelica_Synchronous.RealSignals.Sampler.Utilities.ClockedRealToBooleanSquareHold
+        Modelica_Synchronous.RealSignals.Sampler.Utilities.AssignClockToSquareWaveHold
           clockedSignalToSquare
           annotation (Placement(transformation(extent={{-26,20},{-6,40}})));
         equation
@@ -4061,10 +4061,10 @@ Example used to generate a figure for the documentation of block
           Documentation(info="<html>
 <p>
 Example used to generate a figure for the documentation of block
-<a href=\"Modelica_Synchronous.RealSignals.Sampler.Utilities.ClockedRealToBooleanTriggerHold\">Modelica_Synchronous.RealSignals.Sampler.Utilities.ClockedRealToBooleanTriggerHold</a>.
+<a href=\"Modelica_Synchronous.RealSignals.Sampler.Utilities.AssignClockToSquareWaveHold\">Modelica_Synchronous.RealSignals.Sampler.Utilities.AssignClockToSquareWaveHold</a>.
 </p>
 </html>"));
-        end ClockedRealToBooleanSquareHold;
+        end AssignClockToSquareWaveHold;
       annotation (Documentation(info="<html>
 <p>
 This package contains models that have been used to produce
@@ -6671,7 +6671,7 @@ clock of their outputs is faster than the clock of their inputs.
 </html>"));
       end UpSample;
 
-        block ClockedRealToBooleanTriggerHold
+        block AssignClockToTriggerHold
         "Generate a boolean continuous time trigger signal from a clocked real input"
           extends Modelica_Synchronous.ClockSignals.Interfaces.ClockedBlockIcon;
           parameter Boolean y_start=false "initial value of output signal";
@@ -6693,26 +6693,41 @@ clock of their outputs is faster than the clock of their inputs.
           y3 = hold(y2);
           y = change(y3);
           annotation (
-            defaultComponentName="clockedSignalToTrigger",
+            defaultComponentName="clockToTrigger",
             Icon(coordinateSystem(
               preserveAspectRatio=true,
               extent={{-100,-100},{100,100}},
-              grid={1,1}), graphics={            Ellipse(
-                  extent={{71,7},{85,-7}},
-                  lineColor={235,235,235},
-                  fillColor={235,235,235},
+              grid={1,1}), graphics={
+                Polygon(
+                  points={{-80,88},{-88,66},{-72,66},{-80,88}},
+                  lineColor={255,0,255},
+                  fillColor={255,0,255},
                   fillPattern=FillPattern.Solid),
-              Line(points={{-70,-70},{-70,70}}, color={0,0,0}),
-              Line(points={{-30,-70},{-30,70}}, color={0,0,0}),
-              Line(points={{10,-70},{10,70}}, color={0,0,0}),
-              Line(points={{50,-70},{50,70}}, color={0,0,0})}),
+                Line(points={{-80,66},{-80,-82}}, color={255,0,255}),
+                Line(points={{-90,-70},{72,-70}}, color={255,0,255}),
+                Polygon(
+                  points={{90,-70},{68,-62},{68,-78},{90,-70}},
+                  lineColor={255,0,255},
+                  fillColor={255,0,255},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{71,7},{85,-7}},
+                  lineColor=DynamicSelect({235,235,235}, if y > 0.5 then {0,255,0} else
+                            {235,235,235}),
+                  fillColor=DynamicSelect({235,235,235}, if y > 0.5 then {0,255,0} else
+                            {235,235,235}),
+                  fillPattern=FillPattern.Solid),
+              Line(points={{-60,-70},{-60,70}}, color={0,0,0}),
+              Line(points={{-20,-70},{-20,70}}, color={0,0,0}),
+              Line(points={{20,-70},{20,70}}, color={0,0,0}),
+              Line(points={{60,-70},{60,70}}, color={0,0,0})}),
             Diagram(coordinateSystem(
               preserveAspectRatio=true,
               extent={{-100,-100},{100,100}},
               grid={1,1}), graphics),
             Documentation(info="<html>
 <p>
-This block creates boolean continuous time trigger output signals whenever the clock of the input signal is active.  
+This block creates a Boolean, continuous time, trigger signal whenever the clock of the input signal is active.  
 </p>
 
 <p>
@@ -6723,15 +6738,15 @@ A particular use-case in which that block might be useful is the combination of 
 
 <p>
 The following 
-<a href=\"Modelica_Synchronous.Examples.ForDocumentation.RealSignals.ClockedRealToBooleanTriggerHold\">example</a>
-samples a sine signal with a periodic clock of 20 ms period. After that a continuous time Boolean trigger signal is generated at every clock tick of that sampled signal. The generated signal is when used as trigger signal for an \"old-style\" <a href=\"Modelica.Blocks.Discrete.TriggeredSampler\">TriggeredSampler</a>  block from the Modelica.Blocks.Discrete package:<br>
+<a href=\"Modelica_Synchronous.Examples.ForDocumentation.RealSignals.AssignClockToTriggerHold\">example</a>
+samples a sine signal with a periodic clock of 20 ms period. After that a continuous time Boolean trigger signal is generated at every clock tick of that sampled signal. The generated signal is used as trigger signal for an \"old-style\" <a href=\"Modelica.Blocks.Discrete.TriggeredSampler\">TriggeredSampler</a>  block from the Modelica.Blocks.Discrete package:<br>
 </p>
 
 <table border=0 cellspacing=0 cellpadding=2>
 <tr><td width=\"50\"></td>
-    <td valign=\"bottom\"><img src=\"modelica://Modelica_Synchronous/Resources/Images/RealSignals/ClockedRealToBooleanTriggerHold_Model.png\"></td>
+    <td valign=\"bottom\"><img src=\"modelica://Modelica_Synchronous/Resources/Images/RealSignals/AssignClockToTriggerHold_Model.png\"></td>
     <td valign=\"bottom\">&nbsp;&nbsp;&nbsp;
-                        <img src=\"modelica://Modelica_Synchronous/Resources/Images/RealSignals/ClockedRealToBooleanTriggerHold_Result.png\"></td>  
+                        <img src=\"modelica://Modelica_Synchronous/Resources/Images/RealSignals/AssignClockToTriggerHold_Result.png\"></td>  
     </tr>
 <tr><td></td>
     <td align=\"center\">model</td>
@@ -6739,13 +6754,13 @@ samples a sine signal with a periodic clock of 20 ms period. After that a contin
    </tr>
 </table>
 <p>
-Note, that it is clearly visible in the plot that the \"old-style\" discrete signals have an implicit zero-order hold semantics, while the new clocked signals are only active whenever their associated clock ticks. Just compare signal sample.y (clocked) with triggeredSampler.y (unclocked) to observe the difference.
+Note, that it is clearly visible in the plot that the \"old-style\" discrete variables have an implicit zero-order hold semantics, while the new clocked variables are only active whenever their associated clock ticks. Just compare variable sample.y (clocked) with triggeredSampler.y (unclocked) to observe the difference.
 </p>
 </html>"));
-        end ClockedRealToBooleanTriggerHold;
+        end AssignClockToTriggerHold;
 
-        block ClockedRealToBooleanSquareHold
-        "Generate a boolean continuous time square signal from a clocked real input"
+        block AssignClockToSquareWaveHold
+        "Generate a boolean continuous time square-wave output from a clocked real input"
           extends Modelica_Synchronous.ClockSignals.Interfaces.ClockedBlockIcon;
           parameter Boolean y_start=false "initial value of output signal";
           Modelica.Blocks.Interfaces.RealInput u
@@ -6761,40 +6776,55 @@ Note, that it is clearly visible in the plot that the \"old-style\" discrete sig
           y2 = if u > 0 then not previous(y2) else not previous(y2);
           y = hold(y2);
           annotation (
-            defaultComponentName="clockedSignalToSquare",
+            defaultComponentName="clockToSquareWave",
             Icon(coordinateSystem(
               preserveAspectRatio=true,
               extent={{-100,-100},{100,100}},
-              grid={1,1}), graphics={            Ellipse(
-                  extent={{71,7},{85,-7}},
-                  lineColor={235,235,235},
-                  fillColor={235,235,235},
+              grid={1,1}), graphics={
+                Polygon(
+                  points={{-80,88},{-88,66},{-72,66},{-80,88}},
+                  lineColor={255,0,255},
+                  fillColor={255,0,255},
                   fillPattern=FillPattern.Solid),
-                                       Line(points={{-80,-42},{-54,-42},{-54,0},{-28,0},
-                      {-28,24},{-8,24},{-8,64},{16,64},{16,20},{36,20},{36,0},{42,0},{42,
-                      0},{60,0}},        color={0,0,127})}),
+                Line(points={{-80,66},{-80,-82}}, color={255,0,255}),
+                Line(points={{-90,-70},{72,-70}}, color={255,0,255}),
+                Polygon(
+                  points={{90,-70},{68,-62},{68,-78},{90,-70}},
+                  lineColor={255,0,255},
+                  fillColor={255,0,255},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{71,7},{85,-7}},
+                  lineColor=DynamicSelect({235,235,235}, if y > 0.5 then {0,255,0} else
+                            {235,235,235}),
+                  fillColor=DynamicSelect({235,235,235}, if y > 0.5 then {0,255,0} else
+                            {235,235,235}),
+                  fillPattern=FillPattern.Solid),
+                                       Line(points={{-80,-70},{-40,-70},{-40,44},
+                    {0,44},{0,-70},{40,-70},{40,44},{79,44}},
+                                                           color={0,0,0})}),
             Diagram(coordinateSystem(
               preserveAspectRatio=true,
               extent={{-100,-100},{100,100}},
               grid={1,1}), graphics),
             Documentation(info="<html>
 <p>
-This block creates boolean continuous time square output signals whenever the clock of the input signal is active.  
+This block creates a Boolean, continuous time, square-wave output. Whenever the clock of the input signal is active the Boolean output value changes.  
 </p>
 
 <h4>Example</h4>
 
 <p>
 The following 
-<a href=\"Modelica_Synchronous.Examples.ForDocumentation.RealSignals.ClockedRealToBooleanSquareHold\">example</a>
-samples a sine signal with a periodic clock of 20 ms period. After that a continuous time Boolean square signal is generated at every clock tick of that sampled signal:<br>
+<a href=\"Modelica_Synchronous.Examples.ForDocumentation.RealSignals.AssignClockToSquareWaveHold\">example</a>
+samples a sine signal with a periodic clock of 20 ms period. After that a Boolean, continuous time, square-wave signal is generated that changes its value at every clock tick of the sampled signal:<br>
 </p>
 
 <table border=0 cellspacing=0 cellpadding=2>
 <tr><td width=\"50\"></td>
-    <td valign=\"bottom\"><img src=\"modelica://Modelica_Synchronous/Resources/Images/RealSignals/ClockedRealToBooleanSquareHold_Model.png\"></td>
+    <td valign=\"bottom\"><img src=\"modelica://Modelica_Synchronous/Resources/Images/RealSignals/AssignClockToSquareWaveHold_Model.png\"></td>
     <td valign=\"bottom\">&nbsp;&nbsp;&nbsp;
-                        <img src=\"modelica://Modelica_Synchronous/Resources/Images/RealSignals/ClockedRealToBooleanSquareHold_Result.png\"></td>  
+                        <img src=\"modelica://Modelica_Synchronous/Resources/Images/RealSignals/AssignClockToSquareWaveHold_Result.png\"></td>  
     </tr>
 <tr><td></td>
     <td align=\"center\">model</td>
@@ -6802,7 +6832,7 @@ samples a sine signal with a periodic clock of 20 ms period. After that a contin
    </tr>
 </table>
 </html>"));
-        end ClockedRealToBooleanSquareHold;
+        end AssignClockToSquareWaveHold;
 
       package Internal
         "Internal blocks and functions that are usually of no interest for the user"
@@ -7067,6 +7097,104 @@ and the accompanying <b>disclaimer</b>
 "));
         end random;
       end Internal;
+
+        block BooleanPulse "Generate pulse signal of type Boolean"
+
+          parameter Real width(
+            final min=Modelica.Constants.small,
+            final max=100) = 50 "Width of pulse in % of period";
+          parameter Modelica.SIunits.Time period(final min=Modelica.Constants.small,start=1)
+          "Time for one period";
+          parameter Modelica.SIunits.Time startTime=0
+          "Time instant of first pulse";
+          extends Modelica.Blocks.Interfaces.partialBooleanSource;
+
+      protected
+          parameter Modelica.SIunits.Time Twidth=period*width/100
+          "width of one pulse"                                              annotation(HideResult=true);
+          discrete Modelica.SIunits.Time pulsStart "Start time of pulse"
+                                                     annotation(HideResult=true);
+        initial equation
+          pulsStart = startTime;
+        equation
+            when sample(startTime, period) then
+              pulsStart = time;
+            end when;
+            y = time >= pulsStart and time < pulsStart + Twidth;
+          annotation (
+            Icon(coordinateSystem(
+              preserveAspectRatio=true,
+              extent={{-100,-100},{100,100}},
+              grid={1,1}), graphics={Text(
+                extent={{-150,-140},{150,-110}},
+                lineColor={0,0,0},
+                textString="%period"), Line(points={{-80,-70},{-40,-70},{-40,44},{0,
+                    44},{0,-70},{40,-70},{40,44},{79,44}}, color={0,0,0})}),
+            Diagram(coordinateSystem(
+              preserveAspectRatio=true,
+              extent={{-100,-100},{100,100}},
+              grid={1,1}), graphics={
+              Text(
+                extent={{-60,-74},{-19,-82}},
+                lineColor={0,0,0},
+                textString="startTime"),
+              Line(
+                points={{-78,-70},{-40,-70},{-40,20},{20,20},{20,-70},{50,-70},{50,
+                    20},{100,20}},
+                color={0,0,255},
+                thickness=0.5),
+              Line(points={{-40,61},{-40,21}}, color={95,95,95}),
+              Line(points={{20,44},{20,20}}, color={95,95,95}),
+              Line(points={{50,58},{50,20}}, color={95,95,95}),
+              Line(points={{-40,53},{50,53}}, color={95,95,95}),
+              Line(points={{-40,35},{20,35}}, color={95,95,95}),
+              Text(
+                extent={{-30,65},{16,55}},
+                lineColor={0,0,0},
+                textString="period"),
+              Text(
+                extent={{-33,47},{14,37}},
+                lineColor={0,0,0},
+                textString="width"),
+              Line(points={{-70,20},{-41,20}}, color={95,95,95}),
+              Polygon(
+                points={{-40,35},{-31,37},{-31,33},{-40,35}},
+                lineColor={95,95,95},
+                fillColor={95,95,95},
+                fillPattern=FillPattern.Solid),
+              Polygon(
+                points={{20,35},{12,37},{12,33},{20,35}},
+                lineColor={95,95,95},
+                fillColor={95,95,95},
+                fillPattern=FillPattern.Solid),
+              Polygon(
+                points={{-40,53},{-31,55},{-31,51},{-40,53}},
+                lineColor={95,95,95},
+                fillColor={95,95,95},
+                fillPattern=FillPattern.Solid),
+              Polygon(
+                points={{50,53},{42,55},{42,51},{50,53}},
+                lineColor={95,95,95},
+                fillColor={95,95,95},
+                fillPattern=FillPattern.Solid),
+              Text(
+                extent={{-95,26},{-66,17}},
+                lineColor={0,0,0},
+                textString="true"),
+              Text(
+                extent={{-96,-60},{-75,-69}},
+                lineColor={0,0,0},
+                textString="false")}),
+            Documentation(info="<html>
+<p>
+The Boolean output y is a pulse signal:
+</p>
+
+<p>
+<img src=\"modelica://Modelica/Resources/Images/Blocks/Sources/Pulse.png\">
+</p>
+</html>"));
+        end BooleanPulse;
     end Utilities;
 
     annotation (Documentation(info="<html>
@@ -7715,7 +7843,7 @@ contrary to a general FIR filter.
                   -14,-4},{-4,-46},{0,-64},{2,-82}},
                                              color={0,0,127}),
         Polygon(points={{-84,90},{-92,68},{-76,68},{-84,90},{-84,90}}, lineColor={192,192,192}, fillColor={192,192,192},
-                fillPattern =  FillPattern.Solid),
+                fillPattern=   FillPattern.Solid),
           Line(points={{2,-82},{4,-64},{8,-56},{12,-56},{16,-60},{18,-66},{20,-82}},
                                                                              color={0,0,127}),
           Line(points={{20,-80},{20,-78},{20,-72},{22,-66},{24,-64},{28,-64},{32,-66},
@@ -7724,7 +7852,7 @@ contrary to a general FIR filter.
                   {62,-72},{64,-76},{64,-78},{64,-80},{64,-82}},
                                                 color={0,0,127}),
         Polygon(points={{90,-82},{68,-74},{68,-90},{90,-82}}, lineColor={192,192,192}, fillColor={192,192,192},
-                fillPattern = FillPattern.Solid),
+                fillPattern=  FillPattern.Solid),
             Text(
               extent={{-26,88},{88,48}},
               lineColor={175,175,175},
@@ -7780,7 +7908,7 @@ a[:] are the filter coefficients.
 </HTML>
 "),     Icon(graphics={
         Polygon(points={{-84,90},{-92,68},{-76,68},{-84,90},{-84,90}}, lineColor={192,192,192}, fillColor={192,192,192},
-                fillPattern =  FillPattern.Solid),
+                fillPattern=   FillPattern.Solid),
          Line(points={{-84,78},{-84,-90}}, color={192,192,192}),
         Line(points={{-84,30},{-72,30},{-52,28},{-32,20},{-26,16},{-22,12},{-18,6},{
                   -14,-4},{-4,-46},{0,-64},{2,-82}},
@@ -7796,7 +7924,7 @@ a[:] are the filter coefficients.
                   {62,-72},{64,-76},{64,-78},{64,-80},{64,-82}},
                                                 color={0,0,127}),
         Polygon(points={{90,-82},{68,-74},{68,-90},{90,-82}}, lineColor={192,192,192}, fillColor={192,192,192},
-                fillPattern = FillPattern.Solid),
+                fillPattern=  FillPattern.Solid),
         Line(points={{-90,-82},{82,-82}}, color={192,192,192}),
             Text(
               extent={{-26,86},{88,56}},
@@ -7855,10 +7983,10 @@ a[:] are the filter coefficients.
         graphics={
          Line(points={{-84,78},{-84,-90}}, color={192,192,192}),
         Polygon(points={{-84,90},{-92,68},{-76,68},{-84,90},{-84,90}}, lineColor={192,192,192}, fillColor={192,192,192},
-                fillPattern =  FillPattern.Solid),
+                fillPattern=   FillPattern.Solid),
         Line(points={{-90,-82},{82,-82}}, color={192,192,192}),
         Polygon(points={{90,-82},{68,-74},{68,-90},{90,-82}}, lineColor={192,192,192}, fillColor={192,192,192},
-                fillPattern = FillPattern.Solid),
+                fillPattern=  FillPattern.Solid),
         Line(points=[-84,30; -72,30; -52,28; -32,20; -26,16; -22,12; -18,6; -14,
                   -4; -4,-46; 0,-64; 2,-82], color={0,0,127}),
           Line(points=[2,-82; 4,-64; 8,-56; 12,-56; 16,-60; 18,-66; 20,-82], color={0,0,127}),
@@ -8278,7 +8406,9 @@ package BooleanSignals "Library of clocked blocks for Boolean signals"
             initialScale=0.06),
                          graphics),
         Documentation(info="<html>
-
+<p>
+This block for Boolean signals works similar as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.Sample\">RealSignals.Sampler.Sample</a>).
+</p>
 </html>"));
     end Sample;
 
@@ -8329,7 +8459,9 @@ package BooleanSignals "Library of clocked blocks for Boolean signals"
             initialScale=0.06),
                          graphics),
         Documentation(info="<html>
-
+<p>
+This block for Boolean signals works similar as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.SampleClocked\">RealSignals.Sampler.SampleClocked</a>).
+</p>
 </html>"));
     end SampleClocked;
 
@@ -8388,7 +8520,9 @@ package BooleanSignals "Library of clocked blocks for Boolean signals"
             initialScale=0.06),
                          graphics),
         Documentation(info="<html>
-
+<p>
+This block for Boolean signals works similar as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.SampleVectorizedAndClocked\">RealSignals.Sampler.SampleVectorizedAndClocked</a>).
+</p>
 </html>"));
     end SampleVectorizedAndClocked;
 
@@ -8464,7 +8598,9 @@ package BooleanSignals "Library of clocked blocks for Boolean signals"
               lineColor={0,0,255},
               textString="%name")}),
         Documentation(info="<HTML>
-
+<p>
+This block for Boolean signals works similar as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.Hold\">RealSignals.Sampler.Hold</a>).
+</p>
 </HTML>
 "),     Diagram(coordinateSystem(
             preserveAspectRatio=false,
@@ -8573,7 +8709,9 @@ package BooleanSignals "Library of clocked blocks for Boolean signals"
             initialScale=0.06),
                          graphics),
         Documentation(info="<html>
-
+<p>
+This block for Boolean signals works similar as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.SubSample\">RealSignals.Sampler.SubSample</a>).
+</p>
 </html>"));
     end SubSample;
 
@@ -8687,7 +8825,9 @@ package BooleanSignals "Library of clocked blocks for Boolean signals"
             initialScale=0.06),
                          graphics),
         Documentation(info="<html>
-
+<p>
+This block for Boolean signals works similar as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.SuperSample\">RealSignals.Sampler.SuperSample</a>).
+</p>
 </html>"));
     end SuperSample;
 
@@ -8771,10 +8911,9 @@ package BooleanSignals "Library of clocked blocks for Boolean signals"
             initialScale=0.06),
                          graphics),
         Documentation(info="<html>
-<p><i>The first activation of the clock of y = shiftSample(..) is shifted in time shiftCounter/resolution*interval(u) later than the first activation of the clock of u.</i></p>
-<p>Conceptually, the operator constructs a clock &ldquo;cBase&rdquo; <b>Clock</b> cBase = <b>subSample</b>(<b>superSample</b>(u, resolution), shiftCounter) and the clock of y = <b>shiftSample</b>(..) starts at the second clock tick of cBase. At every tick of the clock of y, the operator returns the value of u from the last tick of the clock of u.</p>
-<p>Note, due to the restriction of <b>superSample</b> on Boolean clocks, <b>shiftSample</b> can only shift the number of ticks of the Boolean clock, but cannot introduce new ticks.</p>
-<p>Also note that the operator does not simply shift the signal in time, since only the value of u from the last tick of the clock of u is available at the output.</p>
+<p>
+This block for Boolean signals works similar as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.ShiftSample\">RealSignals.Sampler.ShiftSample</a>).
+</p>
 </html>"));
     end ShiftSample;
 
@@ -8863,7 +9002,9 @@ package BooleanSignals "Library of clocked blocks for Boolean signals"
             initialScale=0.06),
                          graphics),
         Documentation(info="<html>
-
+<p>
+This block for Boolean signals works similar as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.BackSample\">RealSignals.Sampler.BackSample</a>).
+</p>
 </html>"));
     end BackSample;
 
@@ -8952,7 +9093,9 @@ package BooleanSignals "Library of clocked blocks for Boolean signals"
             initialScale=0.06),
                          graphics),
         Documentation(info="<html>
-
+<p>
+This block for Boolean signals works similar as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.AssignClock\">RealSignals.Sampler.AssignClock</a>).
+</p>
 </html>"));
     end AssignClock;
 
@@ -9043,7 +9186,9 @@ package BooleanSignals "Library of clocked blocks for Boolean signals"
             initialScale=0.06),
                          graphics),
         Documentation(info="<html>
-
+<p>
+This block for Boolean signals works similar as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.AssignClockVectorized\">RealSignals.Sampler.AssignClockVectorized</a>).
+</p>
 </html>"));
     end AssignClockVectorized;
 
@@ -9174,11 +9319,14 @@ package BooleanSignals "Library of clocked blocks for Boolean signals"
               initialScale=0.06),
                            graphics),
           Documentation(info="<html>
-
+<p>
+This block for Boolean signals works similar as the corresponding block for Real signals (see 
+<a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.Utilities.UpSample\">RealSignals.Sampler.Utilities.UpSample</a>).
+</p>
 </html>"));
       end UpSample;
 
-        block ClockedBooleanToBooleanTriggerHold
+        block AssignClockToTriggerHold
         "Generate a boolean continuous time trigger signal from a clocked Boolean input"
           extends Modelica_Synchronous.ClockSignals.Interfaces.ClockedBlockIcon;
           parameter Boolean y_start=false "initial value of output signal";
@@ -9201,34 +9349,47 @@ package BooleanSignals "Library of clocked blocks for Boolean signals"
           y3 = hold(y2);
           y = change(y3);
           annotation (
-            defaultComponentName="ClockedSignalToTrigger",
+            defaultComponentName="clockToTrigger",
             Icon(coordinateSystem(
               preserveAspectRatio=true,
               extent={{-100,-100},{100,100}},
-              grid={1,1}), graphics={            Ellipse(
-                  extent={{71,7},{85,-7}},
-                  lineColor={235,235,235},
-                  fillColor={235,235,235},
+              grid={1,1}), graphics={
+                Polygon(
+                  points={{-80,88},{-88,66},{-72,66},{-80,88}},
+                  lineColor={255,0,255},
+                  fillColor={255,0,255},
                   fillPattern=FillPattern.Solid),
-              Line(points={{-70,-70},{-70,70}}, color={0,0,0}),
-              Line(points={{-30,-70},{-30,70}}, color={0,0,0}),
-              Line(points={{10,-70},{10,70}}, color={0,0,0}),
-              Line(points={{50,-70},{50,70}}, color={0,0,0})}),
+                Line(points={{-80,66},{-80,-82}}, color={255,0,255}),
+                Line(points={{-90,-70},{72,-70}}, color={255,0,255}),
+                Polygon(
+                  points={{90,-70},{68,-62},{68,-78},{90,-70}},
+                  lineColor={255,0,255},
+                  fillColor={255,0,255},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{71,7},{85,-7}},
+                  lineColor=DynamicSelect({235,235,235}, if y > 0.5 then {0,255,0} else
+                            {235,235,235}),
+                  fillColor=DynamicSelect({235,235,235}, if y > 0.5 then {0,255,0} else
+                            {235,235,235}),
+                  fillPattern=FillPattern.Solid),
+              Line(points={{-60,-70},{-60,70}}, color={0,0,0}),
+              Line(points={{-20,-70},{-20,70}}, color={0,0,0}),
+              Line(points={{20,-70},{20,70}}, color={0,0,0}),
+              Line(points={{60,-70},{60,70}}, color={0,0,0})}),
             Diagram(coordinateSystem(
               preserveAspectRatio=false,
               extent={{-100,-100},{100,100}},
               grid={1,1}), graphics),
             Documentation(info="<html>
 <p>
-The Boolean output y is a conditional trigger signal. The output y is <b>true</b>
-at sample times (defined by parameter <b>period</b>) and if input enable = <b>true</b>, otherwise it is
-<b>false</b>.
+This block for Boolean signals works similar as the corresponding block for Real signals (see 
+<a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.Utilities.AssignClockToTriggerHold\">RealSignals.Sampler.Utilities.AssignClockToTriggerHold</a>).
 </p>
-
 </html>"));
-        end ClockedBooleanToBooleanTriggerHold;
+        end AssignClockToTriggerHold;
 
-        block ClockedBooleanToBooleanSquareHold
+        block AssignClockToSquareWaveHold
         "Generate a boolean continuous time square signal from a clocked real input"
           extends Modelica_Synchronous.ClockSignals.Interfaces.ClockedBlockIcon;
           parameter Boolean y_start=false "initial value of output signal";
@@ -9246,31 +9407,45 @@ at sample times (defined by parameter <b>period</b>) and if input enable = <b>tr
           y2 = if u == false then not previous(y2) else not previous(y2);
           y = hold(y2);
           annotation (
-            defaultComponentName="ClockedSignalToSquare",
+            defaultComponentName="clockToSquareWave",
             Icon(coordinateSystem(
               preserveAspectRatio=false,
               extent={{-100,-100},{100,100}},
-              grid={1,1}), graphics={            Ellipse(
-                  extent={{71,7},{85,-7}},
-                  lineColor={235,235,235},
-                  fillColor={235,235,235},
+              grid={1,1}), graphics={
+                Polygon(
+                  points={{-80,88},{-88,66},{-72,66},{-80,88}},
+                  lineColor={255,0,255},
+                  fillColor={255,0,255},
                   fillPattern=FillPattern.Solid),
-                                       Line(points={{-80,-42},{-54,-42},{-54,0},{-28,0},
-                      {-28,24},{-8,24},{-8,64},{16,64},{16,20},{36,20},{36,0},{42,0},{42,
-                      0},{60,0}},        color={255,0,255})}),
+                Line(points={{-80,66},{-80,-82}}, color={255,0,255}),
+                Line(points={{-90,-70},{72,-70}}, color={255,0,255}),
+                Polygon(
+                  points={{90,-70},{68,-62},{68,-78},{90,-70}},
+                  lineColor={255,0,255},
+                  fillColor={255,0,255},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{71,7},{85,-7}},
+                  lineColor=DynamicSelect({235,235,235}, if y > 0.5 then {0,255,0} else
+                            {235,235,235}),
+                  fillColor=DynamicSelect({235,235,235}, if y > 0.5 then {0,255,0} else
+                            {235,235,235}),
+                  fillPattern=FillPattern.Solid),
+                                       Line(points={{-80,-70},{-40,-70},{-40,44},
+                    {0,44},{0,-70},{40,-70},{40,44},{79,44}},
+                                                           color={0,0,0})}),
             Diagram(coordinateSystem(
               preserveAspectRatio=true,
               extent={{-100,-100},{100,100}},
               grid={1,1}), graphics),
             Documentation(info="<html>
 <p>
-The Boolean output y is a conditional trigger signal. The output y is <b>true</b>
-at sample times (defined by parameter <b>period</b>) and if input enable = <b>true</b>, otherwise it is
-<b>false</b>.
+This block for Boolean signals works similar as the corresponding block for Real signals (see 
+<a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.Utilities.AssignClockToSquareWaveHold\">RealSignals.Sampler.Utilities.AssignClockToSquareWaveHold</a>).
 </p>
 
 </html>"));
-        end ClockedBooleanToBooleanSquareHold;
+        end AssignClockToSquareWaveHold;
 
     end Utilities;
 
