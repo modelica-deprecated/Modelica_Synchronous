@@ -4045,11 +4045,11 @@ Example used to generate a figure for the documentation of block
           Modelica_Synchronous.RealSignals.Sampler.SampleClocked
                                                           sample
             annotation (Placement(transformation(extent={{-48,24},{-36,36}})));
-        Modelica_Synchronous.RealSignals.Sampler.Utilities.AssignClockToTriggerHold
-          ClockedSignalToTrigger
-          annotation (Placement(transformation(extent={{-20,20},{0,40}})));
         Modelica.Blocks.Discrete.TriggeredSampler triggeredSampler
           annotation (Placement(transformation(extent={{10,40},{30,60}})));
+        Modelica_Synchronous.RealSignals.Sampler.Utilities.AssignClockToTriggerHold
+          clockToTrigger
+          annotation (Placement(transformation(extent={{-20,20},{0,40}})));
         equation
         connect(sine.y, sample.u) annotation (Line(
             points={{-59,30},{-49.2,30}},
@@ -4061,18 +4061,17 @@ Example used to generate a figure for the documentation of block
             pattern=LinePattern.Dot,
             thickness=0.5,
             smooth=Smooth.None));
-        connect(sample.y, ClockedSignalToTrigger.u) annotation (Line(
-            points={{-35.4,30},{-22,30}},
-            color={0,0,127},
-            smooth=Smooth.None));
-        connect(triggeredSampler.trigger, ClockedSignalToTrigger.y) annotation (
-           Line(
-            points={{20,38.2},{20,30},{1,30}},
-            color={255,0,255},
-            smooth=Smooth.None));
         connect(triggeredSampler.u, sine.y) annotation (Line(
             points={{8,50},{-54,50},{-54,30},{-59,30}},
             color={0,0,127},
+            smooth=Smooth.None));
+        connect(sample.y, clockToTrigger.u) annotation (Line(
+            points={{-35.4,30},{-22,30}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(triggeredSampler.trigger, clockToTrigger.y) annotation (Line(
+            points={{20,38.2},{20,30},{1,30}},
+            color={255,0,255},
             smooth=Smooth.None));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                   -100},{100,100}}),   graphics), experiment(StopTime=0.09),
@@ -4100,8 +4099,8 @@ Example used to generate a figure for the documentation of block
                                                           sample
             annotation (Placement(transformation(extent={{-48,24},{-36,36}})));
         Modelica_Synchronous.RealSignals.Sampler.Utilities.AssignClockToSquareWaveHold
-          clockedSignalToSquare
-          annotation (Placement(transformation(extent={{-26,20},{-6,40}})));
+          clockToSquareWave
+          annotation (Placement(transformation(extent={{-24,20},{-4,40}})));
         equation
         connect(sine.y, sample.u) annotation (Line(
             points={{-59,30},{-49.2,30}},
@@ -4113,8 +4112,8 @@ Example used to generate a figure for the documentation of block
             pattern=LinePattern.Dot,
             thickness=0.5,
             smooth=Smooth.None));
-        connect(sample.y, clockedSignalToSquare.u) annotation (Line(
-            points={{-35.4,30},{-28,30}},
+        connect(sample.y, clockToSquareWave.u) annotation (Line(
+            points={{-35.4,30},{-26,30}},
             color={0,0,127},
             smooth=Smooth.None));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
