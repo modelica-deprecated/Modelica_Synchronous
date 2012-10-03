@@ -2660,17 +2660,17 @@ form of a PID controller by using the backward rectangular approximation (also c
         y_start=0,
         T=1e-6)
         annotation (Placement(transformation(extent={{20,60},{40,80}})));
-      Modelica.Blocks.Sources.Sine sine(freqHz=2e5)
+      Modelica.Blocks.Sources.Sine sine(freqHz=2e4)
         annotation (Placement(transformation(extent={{-40,60},{-20,80}})));
       Modelica_Synchronous.RealSignals.Sampler.SampleClocked
                                                 sample1
         annotation (Placement(transformation(extent={{-6,64},{6,76}})));
       Modelica_Synchronous.ClockSignals.Clocks.PeriodicExactClock
                                 periodicExactClock(
-        factor=2,
         useSolver=true,
         solverMethod="ExplicitEuler",
-        resolution=Modelica_Synchronous.Types.Resolution.us)
+        resolution=Modelica_Synchronous.Types.Resolution.us,
+        factor=2)
         annotation (Placement(transformation(extent={{-34,26},{-22,38}})));
     equation
       connect(sine.y, sample1.u) annotation (Line(
@@ -2835,6 +2835,68 @@ the initial value defined via parameter <b>y0</b>.
 </HTML>
 "));
     end TriggeredIntegerSampler;
+
+    model TestExactClockWithSolver
+      Modelica.Blocks.Continuous.FirstOrder firstOrder(
+        initType=Modelica.Blocks.Types.Init.InitialState,
+        y_start=0,
+        T=1)
+        annotation (Placement(transformation(extent={{20,40},{40,60}})));
+      Modelica_Synchronous.RealSignals.Sampler.SampleClocked
+                                                sample1
+        annotation (Placement(transformation(extent={{-6,56},{6,44}})));
+      Modelica_Synchronous.ClockSignals.Clocks.PeriodicExactClock
+                                periodicExactClock(
+        useSolver=true,
+        resolution=Modelica_Synchronous.Types.Resolution.ms,
+        factor=200,
+        solverMethod="ImplicitEuler")
+        annotation (Placement(transformation(extent={{-36,64},{-24,76}})));
+      Modelica.Blocks.Sources.Step const(startTime=0.1)
+        annotation (Placement(transformation(extent={{-80,40},{-60,60}})));
+      Modelica_LinearSystems2.Controller.FirstOrder firstOrderCont(blockType=
+            Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.Continuous,
+          initType=Modelica_LinearSystems2.Controller.Types.InitWithGlobalDefault.InitialState)
+        annotation (Placement(transformation(extent={{20,0},{40,20}})));
+      Modelica_LinearSystems2.Controller.FirstOrder firstOrderDiscretized(
+          blockType=Modelica_LinearSystems2.Controller.Types.BlockTypeWithGlobalDefault.UseSampleClockOption)
+        annotation (Placement(transformation(extent={{20,-40},{40,-20}})));
+      inner Modelica_LinearSystems2.Controller.SampleClock sampleClock(
+        blockType=Modelica_LinearSystems2.Controller.Types.BlockType.Discrete,
+        sampleTime=0.2,
+        initType=Modelica_LinearSystems2.Controller.Types.Init.InitialState,
+        methodType=Modelica_LinearSystems2.Types.Method.ImplicitEuler)
+        annotation (Placement(transformation(extent={{60,-40},{80,-20}})));
+    equation
+      connect(sample1.y, firstOrder.u) annotation (Line(
+          points={{6.6,50},{18,50}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(periodicExactClock.y, sample1.clock) annotation (Line(
+          points={{-23.4,70},{0,70},{0,57.2}},
+          color={175,175,175},
+          pattern=LinePattern.Dot,
+          thickness=0.5,
+          smooth=Smooth.None));
+      connect(const.y, sample1.u) annotation (Line(
+          points={{-59,50},{-7.2,50}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(const.y, firstOrderCont.u) annotation (Line(
+          points={{-59,50},{-40,50},{-40,10},{18,10}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(const.y, firstOrderDiscretized.u) annotation (Line(
+          points={{-59,50},{-40,50},{-40,-30},{18,-30}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      annotation (
+        Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
+                {100,100}}),
+                        graphics),
+        experiment(StopTime=3),
+        __Dymola_experimentSetupOutput);
+    end TestExactClockWithSolver;
   end Tests;
 
   package ForDocumentation

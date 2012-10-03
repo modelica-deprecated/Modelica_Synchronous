@@ -3285,6 +3285,67 @@ Example used to generate a figure for the documentation of block
 </html>"));
         end Sample2;
 
+        model Sample3
+        "Example of a Sample block with direct feed-through in the continuous-time and the clocked partition"
+          import Modelica_Synchronous;
+         extends Modelica.Icons.Example;
+          Modelica_Synchronous.RealSignals.Sampler.SampleClocked sample1
+            annotation (Placement(transformation(extent={{-52,24},{-40,36}})));
+          Modelica_Synchronous.ClockSignals.Clocks.PeriodicExactClock periodicClock(
+              factor=20, resolution=Modelica_Synchronous.Types.Resolution.ms)
+            annotation (Placement(transformation(extent={{-76,-6},{-64,6}})));
+        Modelica.Blocks.Sources.Step step(startTime=0.04)
+          annotation (Placement(transformation(extent={{-80,20},{-60,40}})));
+          Modelica.Blocks.Math.Gain gain(k=1.2)
+            annotation (Placement(transformation(extent={{-8,20},{12,40}})));
+          Modelica_Synchronous.RealSignals.Sampler.Hold hold
+            annotation (Placement(transformation(extent={{20,24},{32,36}})));
+          Modelica.Blocks.Math.Feedback feedback
+            annotation (Placement(transformation(extent={{-36,20},{-16,40}})));
+          Modelica_Synchronous.RealSignals.Sampler.Sample sample2
+            annotation (Placement(transformation(extent={{6,-6},{-6,6}})));
+        equation
+          connect(step.y, sample1.u)
+                                  annotation (Line(
+            points={{-59,30},{-53.2,30}},
+            color={0,0,127},
+            smooth=Smooth.None));
+          connect(gain.y, hold.u) annotation (Line(
+              points={{13,30},{18.8,30}},
+              color={0,0,127},
+              smooth=Smooth.None));
+          connect(feedback.y, gain.u) annotation (Line(
+              points={{-17,30},{-10,30}},
+              color={0,0,127},
+              smooth=Smooth.None));
+          connect(sample2.y, feedback.u2) annotation (Line(
+              points={{-6.6,0},{-26,0},{-26,22}},
+              color={0,0,127},
+              smooth=Smooth.None));
+          connect(periodicClock.y, sample1.clock) annotation (Line(
+              points={{-63.4,0},{-46,0},{-46,22.8}},
+              color={175,175,175},
+              pattern=LinePattern.Dot,
+              thickness=0.5,
+              smooth=Smooth.None));
+          connect(sample1.y, feedback.u1) annotation (Line(
+              points={{-39.4,30},{-34,30}},
+              color={0,0,127},
+              smooth=Smooth.None));
+          connect(hold.y, sample2.u) annotation (Line(
+              points={{32.6,30},{38,30},{38,0},{7.2,0}},
+              color={0,0,127},
+              smooth=Smooth.None));
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                    -100},{100,100}}), graphics), experiment(StopTime=0.2),
+          Documentation(info="<html>
+<p>
+Example used to generate a figure for the documentation of block
+<a href=\"Modelica_Synchronous.RealSignals.Sampler.Sample\">Modelica_Synchronous.RealSignals.Sampler.Sample</a>.
+</p>
+</html>"));
+        end Sample3;
+
         model SampleClocked "Example of a SampleClocked block"
         import Modelica_Synchronous;
            extends Modelica.Icons.Example;
@@ -4839,11 +4900,11 @@ To be more precise: The input signal u(t) must be a continuous-time signal.
 The output signal y(ti) is associated to a clock (defined somewhere else).
 At a clock tick, the left limit of u is assigned to y:
 <code>y(ti) = u(ti-eps)</code> (= the value of u just before the clock
-becomes active). Since the operator returns the left limit of u, it introduces an
+became active). Since the operator returns the left limit of u, it introduces an
 infinitesimal small delay between the continuous-time and the clocked partition.
 This corresponds to the reality, where a sampled data system cannot act infinitely
 fast and even for a very idealized simulation, an infinitesimal small delay is present.
-As a result, an algebraic loop between a clocked and a continuous-time partition cannot
+As a result, algebraic loops between clocked and continuous-time partitions cannot
 occur.
 </p>
 
@@ -4872,7 +4933,7 @@ samples a sine signal with a periodic clock of 20 ms period:<br>
 <a href=\"Modelica_Synchronous.Examples.ForDocumentation.RealSignals.Sample2\">example</a>
 the continuous-time input signal contains a discontinuous value change at the 0.1 s
 clock tick. It can be seen that the Sample block samples the left limit of the
-step signal.<br>
+step signal:<br>
 </p>
 
 <table border=0 cellspacing=0 cellpadding=2>
@@ -4887,6 +4948,35 @@ step signal.<br>
    </tr>
 </table>
 
+<p>
+<br>In the following
+<a href=\"Modelica_Synchronous.Examples.ForDocumentation.RealSignals.Sample3\">example</a>
+a direct feedthrough in the continuous-time and in the clocked partition is present.
+Without a time-delay, this would result in an algebraic loop. However, since block
+Sample samples the left limit of a continuous-time signal, sampling introduces a 
+delay of one sample period that breaks the algebraic loop:
+<br>
+</p>
+
+<table border=0 cellspacing=0 cellpadding=2>
+<tr><td width=\"50\"></td>
+    <td valign=\"bottom\"><img src=\"modelica://Modelica_Synchronous/Resources/Images/RealSignals/Sample3_Model.png\"></td>
+    </tr>
+<tr><td></td>
+    <td align=\"center\">model<br></td>
+   </tr>
+<tr><td></td>
+    <td valign=\"bottom\"><img src=\"modelica://Modelica_Synchronous/Resources/Images/RealSignals/Sample3_Result.png\"></td>  
+    </tr>
+<tr><td></td>
+    <td align=\"center\">simulation result</td>
+   </tr>
+</table>
+
+<p>
+Note, the reason for the delay is that sample2.y (= the green, clocked signal)
+is the left limit of hold.y (= the red, continuous-time signal). 
+</p>
 </html>"));
     end Sample;
     extends Modelica.Icons.Package;
@@ -5026,7 +5116,7 @@ This block is similar to the
 <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.SampleClocked\">SampleClocked</a>
 block. The only difference is that the continuous-time input signal is a vector: All input
 signals are sampled and are associated with the 
-scalar clock signal provided via a second input.
+scalar clock signal provided via the second input.
 </p>
 
 <h4>Example</h4>
@@ -5843,7 +5933,7 @@ then the super-sampling factor is defined by Integer parameter <b>factor</b>.
 </p>
 
 <p>
-For control applications, this block introduces unnecessary \"vibrations\".
+For control applications this block introduces unnecessary \"vibrations\".
 In such a case it is better to use block 
 <a href=\"Modelica_Synchronous.RealSignals.Sampler.SuperSampleInterpolated\">SuperSampleInterpolated</a>
 instead.
@@ -5996,7 +6086,7 @@ clocked output signal y.
 <p>
 To be more precise: 
 The clock of y is factor-times faster than the clock of u. At every tick of the clock of y, the value of y is set to 
-the value of the lineraly interpolated value between the last available values of u. 
+the value of the linearly interpolated value between the last available values of u. 
 The first activation of the clock of y coincides with the first activation of the clock of u. 
 By default, the super-sampling factor is inferred,
 that is, it must be defined somewhere else. If parameter <b>inferFactor</b> = false,
@@ -6040,7 +6130,8 @@ clock of superSampleIpo.y is faster as the clock of superSampleIpo.u.
 </html>"));
     end SuperSampleInterpolated;
 
-    block ShiftSample "Shift (delay) input for some clock ticks"
+    block ShiftSample
+      "Shift (delay) the clocked Real input signal by a fraction of the last interval and and provide it as clocked output signal"
 
       parameter Integer shiftCounter(min=0)=0 "Numerator of shifting formula"
             annotation(Dialog(group="Shift first clock activation for 'shiftCounter/resolution*interval(u)' seconds"));
@@ -6117,10 +6208,45 @@ clock of superSampleIpo.y is faster as the clock of superSampleIpo.u.
             initialScale=0.06),
                          graphics),
         Documentation(info="<html>
-<p><i>The first activation of the clock of y = shiftSample(..) is shifted in time shiftCounter/resolution*interval(u) later than the first activation of the clock of u.</i></p>
-<p>Conceptually, the operator constructs a clock &ldquo;cBase&rdquo; <b>Clock</b> cBase = <b>subSample</b>(<b>superSample</b>(u, resolution), shiftCounter) and the clock of y = <b>shiftSample</b>(..) starts at the second clock tick of cBase. At every tick of the clock of y, the operator returns the value of u from the last tick of the clock of u.</p>
-<p>Note, due to the restriction of <b>superSample</b> on Boolean clocks, <b>shiftSample</b> can only shift the number of ticks of the Boolean clock, but cannot introduce new ticks.</p>
-<p>Also note that the operator does not simply shift the signal in time, since only the value of u from the last tick of the clock of u is available at the output.</p>
+<p>
+This block shifts the first activation of the clock of the output y by
+fraction shiftCounter/resolution of the period (or for a non-periodic signal by a fraction of the last interval)
+and the output y is set to the last available value of the input u.
+Here, <b>shiftCounter</b> and <b>resolution</b> are positive Integer parameters.
+</p>
+
+<p>
+To be more precise: 
+The block constructs (conceptually) a clock &ldquo;cBase&rdquo; 
+</p>
+
+<pre>
+   <b>Clock</b> cBase = <b>subSample</b>(<b>superSample</b>(u, resolution), shiftCounter)
+</pre>
+
+<p>
+and the clock of y starts at the second clock tick of cBase. At every tick of the clock of y,
+the operator returns the value of u from the last tick of the clock of u.
+</p>
+
+<p>
+Note, for 
+<a href=\"Modelica_Synchronous.ClockSignals.Clocks.EventClock\">EventClock</a>s
+there is the restriction that
+block <b>ShiftSample</b> can only shift the number of ticks of the EventClock clock,
+but cannot introduce new ticks, due to the restriction of operator <b>superSample</b> on
+EventClocks.
+</p>
+
+<p>
+Also note, that this block does not simply shift the signal in time,
+since only the value of u from the last tick of the clock of u is used for the output.
+If a time-delayed clock is desired, use instead block
+<a href=\"modelica://Modelica_Synchronous.RealSignals.NonPeriodic.FractionalDelay\">NonPeriodic.FractionalDelay</a>
+where the input signal is delayed by a time period and old values of u are stored in a buffer.
+If the time delay is less than one period, the two blocks, ShiftSample and FractionalDelay, 
+give the same result.
+</p>
 
 <h4>Example</h4>
 
@@ -6143,7 +6269,7 @@ then shifts it with shiftCounter = 4 and resolution = 3:<br>
    </tr>
 </table>
 <p>
-The first activation of output y of block shiftSample1 is shifted in time (4/3*20ms). The parameter values <b>shiftCounter</b> = 4 and <b>resolution</b> = 3 are visible at the bottom of the icon. Also note that the signal is not simply shift in time. The output of a ShiftSample block will always be the value from the <i>last</i> tick of the clock of its inputs.
+The first activation of output y of block shiftSample1 is shifted in time (4/3*20ms). The parameter values <b>shiftCounter</b> = 4 and <b>resolution</b> = 3 are visible at the bottom of the icon. Also note, that the signal is not simply a shift in time. The output of a ShiftSample block will always be the value from the <i>last</i> tick of the clock of its inputs.
 </p>
 
 </html>"));
@@ -6232,11 +6358,49 @@ The first activation of output y of block shiftSample1 is shifted in time (4/3*2
             initialScale=0.06),
                          graphics),
         Documentation(info="<html>
-<p><i>The first activation of the clock of y = backSample(..) is shifted in time backCounter/resolution*interval(u) before the first activation of the clock of u.</i></p>
-<p>Conceptually, the operator constructs a clock &ldquo;cBase&rdquo; <b>Clock</b> cBase = <b>subSample</b>(<b>superSample</b>(u, resolution), backCounter) and the clock of y = <b>backSample</b>(..) 
-is shifted before u for a time duration of backCounter/resolution*interval(u). For the first clock tick the operator returns the value of the start value of u. After that the operator returns the value of u from the last clock of u at every tick of the clock of y.</p>
-<p>Note, due to the restriction of <b>superSample</b> on Boolean clocks, <b>backSample</b> can only shift the number of ticks of the Boolean clock, but cannot introduce new ticks.</p>
-<p>Also note that the operator does not simply shift the signal in time, since only the value of u from the last tick of the clock of u is available at the output. In particular, a <b>backSample</b> following a <b>shiftSample</b> can not be used to recover the input signal of shiftSample.</p>
+<p>
+This block shifts the first activation of the clock of the output y by
+fraction backCounter/resolution of the period (or for a non-periodic signal by a fraction of the last interval)
+before the first activation of the clock of u.
+The output y is set to the last available value of the input u.
+Here, <b>backCounter</b> and <b>resolution</b> are positive Integer parameters.
+</p>
+
+<p>
+To be more precise: 
+The block constructs (conceptually) a clock &ldquo;cBase&rdquo; 
+</p>
+
+<pre>
+   <b>Clock</b> cBase = <b>subSample</b>(<b>superSample</b>(u, resolution), backCounter)
+</pre>
+
+<p>
+and the first clock tick of y is shifted before the first tick of the clock of u,
+such that this duration is identical to the duration
+between the first and second clock tick of cBase.
+Before the first tick of the clock of u, the block outputs
+the value of parameter <b>y_start</b>. After that, the block returns the last 
+available value of u.
+</p>
+
+<p>
+Note, for 
+<a href=\"Modelica_Synchronous.ClockSignals.Clocks.EventClock\">EventClock</a>s
+there is the restriction that
+block <b>BackSample</b> can only shift the number of ticks of the EventClock clock,
+but cannot introduce new ticks, due to the restriction of operator <b>superSample</b> on
+EventClocks.
+</p>
+
+<p>
+Also note, that this block does not simply shift the signal in time,
+since only the value of u from the last tick of the clock of u is used for the output.
+In particular, a <b>BackSample</b> block following a <b>ShiftSample</b>
+block cannot be used to recover the input signal of ShiftSample
+(for a causal system this is impossible).
+</p>
+
 
 <h4>Example</h4>
 
