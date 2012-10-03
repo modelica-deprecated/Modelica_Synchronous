@@ -1166,6 +1166,108 @@ form of a PID controller by using the backward rectangular approximation (also c
               textString="No direct comparison of PID blocks possible, since different discretization method used!
 => Hard to say whether clocked PID is \"correct\".")}));
     end TestPIDController;
+
+    block FIRbyWindow
+      "FIR filter defined by filter order, cut-off frequency and window-type"
+      import Modelica_Synchronous;
+
+      extends Modelica_Synchronous.RealSignals.Interfaces.PartialClockedSISO;
+
+      parameter Modelica_Synchronous.Types.FIR_FilterType
+                                                      filterType=
+          Modelica_Synchronous.Types.FIR_FilterType.LowPass "Type of filter";
+      parameter Integer order(min=1) = 2 "Order of filter";
+      parameter Modelica.SIunits.Frequency f_cut=1 "Cut-off frequency";
+      parameter Modelica_Synchronous.Types.FIR_Window
+                                                  window= Modelica_Synchronous.Types.FIR_Window.Kaiser
+        "Type of window";
+      parameter Real beta=2.12 "Beta-Parameter for Kaiser-window"
+          annotation(Dialog(enable = window == Modelica_Synchronous.Types.FIR_Window.Kaiser));
+
+      final output Real a[order+1]=Modelica_Synchronous.RealSignals.Periodic.Internal.FIR_coefficients(
+          filterType,
+          order,
+          f_cut,
+          interval(u),
+          window,
+          beta);
+
+      Modelica_Synchronous.RealSignals.Periodic.FIRbyCoefficients FIRbyCoefficients1(final a=a)
+        annotation (Placement(transformation(extent={{-20,-10},{0,10}})));
+
+    equation
+      connect(FIRbyCoefficients1.u, u)
+                                      annotation (Line(
+          points={{-22,0},{-120,0}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(FIRbyCoefficients1.y, y)
+                                      annotation (Line(
+          points={{1,0},{110,0}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      annotation (defaultComponentName="FIR1",
+        Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
+        graphics={
+         Line(points={{-84,78},{-84,-90}}, color={192,192,192}),
+        Polygon(points={{-84,90},{-92,68},{-76,68},{-84,90},{-84,90}}, lineColor={192,192,192}, fillColor={192,192,192},
+                fillPattern =  FillPattern.Solid),
+        Line(points={{-90,-82},{82,-82}}, color={192,192,192}),
+        Polygon(points={{90,-82},{68,-74},{68,-90},{90,-82}}, lineColor={192,192,192}, fillColor={192,192,192},
+                fillPattern = FillPattern.Solid),
+        Line(points=[-84,30; -72,30; -52,28; -32,20; -26,16; -22,12; -18,6; -14,
+                  -4; -4,-46; 0,-64; 2,-82], color={0,0,127}),
+          Line(points=[2,-82; 4,-64; 8,-56; 12,-56; 16,-60; 18,-66; 20,-82], color={0,0,127}),
+          Line(points=[20,-80; 20,-78; 20,-72; 22,-66; 24,-64; 28,-64; 32,-66; 34,
+                  -70; 36,-78; 36,-82; 36,-74; 38,-68; 40,-66; 44,-66; 46,-68; 48,
+                  -72; 50,-78; 50,-82; 50,-78; 52,-70; 54,-68; 58,-68; 62,-72; 64,
+                  -76; 64,-78; 64,-80; 64,-82], color={0,0,127}),
+          Rectangle(extent=[-84,-82; -18,4],
+                lineColor={192,192,192}, fillColor={255,255,255},
+                fillPattern=FillPattern.Backward),
+            Text(
+              extent={{-54,52},{100,14}},
+              lineColor={192,192,192},
+              textString="%order"),
+            Text(
+              extent={{-150,-110},{150,-150}},
+              lineColor={0,0,0},
+              fillColor={0,0,0},
+              fillPattern=FillPattern.Solid,
+              textString="f_cut=%f_cut"),
+            Text(
+              extent={{-32,92},{82,62}},
+              lineColor={175,175,175},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Backward,
+              textString="FIR")}),
+        Documentation(info="<HTML>
+<p>
+This block computes the output y as a linear combination of the input u
+and of its past values (= FIR filter):
+</p>
+<pre>
+ y(i) = a[1]*u(i) + a[2]*u(i-1) + a[3]*u(i-2) + ...
+</pre>
+<p>
+where y(i) and u(i) are the values of y and u at clock tick i and
+a[:] are the filter coefficients. Contrary to block
+<a href=\"modelica://Modelica_Synchronous.Periodic.FIRbyCoefficients\">FIRbyCoefficients</a>
+this block computes the filter coefficients a[:] by design parameters
+(filter order, cut-off frequency, filter window)
+</p>
+</HTML>
+"));
+    end FIRbyWindow;
+
+    type SolverMethodSpecification =
+                        String
+      "Enumeration defining the integration method to solve differential equations in a clocked discretized continuous-time partition"
+    annotation(choices(
+       choice=" "
+          "Do not use any solver (partition is forced to not contain differential equations)",
+       choice="ExplicitEuler" "Explicit Euler method (order 1)",
+       choice="ImplicitEuler" "Implicit Euler method (order 1)"));
     annotation (preferredView="info", Documentation(info="<html>
 </html>"));
   end Incubate;
@@ -1419,7 +1521,7 @@ form of a PID controller by using the backward rectangular approximation (also c
         window=Modelica_LinearSystems2.Controller.Types.Window.Rectangle,
         order=3)
         annotation (Placement(transformation(extent={{-20,-60},{0,-40}})));
-      Modelica_Synchronous.RealSignals.Periodic.FIRbyWindow
+      Modelica_Synchronous.WorkInProgress.Incubate.FIRbyWindow
                            FIR1(
         filterType=Modelica_Synchronous.Types.FIR_FilterType.LowPass,
         f_cut=2,
@@ -1464,7 +1566,7 @@ form of a PID controller by using the backward rectangular approximation (also c
       Modelica_Synchronous.ClockSignals.Clocks.PeriodicRealClock
                                periodicRealClock(period=0.1)
         annotation (Placement(transformation(extent={{-62,-6},{-50,6}})));
-      Modelica_Synchronous.RealSignals.Periodic.FIRbyWindow
+      Modelica_Synchronous.WorkInProgress.Incubate.FIRbyWindow
                            FIR1(
         filterType=Modelica_Synchronous.Types.FIR_FilterType.LowPass,
         f_cut=2,
@@ -2897,6 +2999,71 @@ the initial value defined via parameter <b>y0</b>.
         experiment(StopTime=3),
         __Dymola_experimentSetupOutput);
     end TestExactClockWithSolver;
+
+    package Effects "Examples demonstrating specific effects"
+        extends Modelica.Icons.ExamplesPackage;
+      model SuperSampling "Different ways to super sample a signal"
+      extends Modelica.Icons.Example;
+        parameter Integer factor=4 "Super sampling factor";
+
+        Modelica.Blocks.Sources.Sine sine(freqHz=2,
+          offset=0.1,
+          startTime=0.0)
+          annotation (Placement(transformation(extent={{-60,0},{-40,20}})));
+        Modelica_Synchronous.RealSignals.Sampler.SuperSample
+                                                superSample1(inferFactor=false, factor=
+              factor) annotation (Placement(transformation(extent={{24,34},{36,46}})));
+        Modelica_Synchronous.RealSignals.Sampler.SampleClocked
+                                                  sample1
+          annotation (Placement(transformation(extent={{-24,4},{-12,16}})));
+        Modelica_Synchronous.ClockSignals.Clocks.PeriodicRealClock
+                                 periodicRealClock(period=0.02)
+          annotation (Placement(transformation(extent={{-54,-34},{-42,-22}})));
+        Modelica_Synchronous.RealSignals.Sampler.Utilities.UpSample
+                                                       upSample1(
+            inferFactor=false, factor=factor)
+          annotation (Placement(transformation(extent={{22,4},{34,16}})));
+        Modelica_Synchronous.RealSignals.Sampler.SuperSampleInterpolated
+          superSampleIpo1(inferFactor=false, factor=factor)
+          annotation (Placement(transformation(extent={{24,-26},{36,-14}})));
+        Modelica_Synchronous.RealSignals.Periodic.MovingAverage
+                               movingAverage(n=factor)
+          annotation (Placement(transformation(extent={{58,-30},{78,-10}})));
+      equation
+        connect(sine.y, sample1.u) annotation (Line(
+            points={{-39,10},{-25.2,10}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(periodicRealClock.y, sample1.clock) annotation (Line(
+            points={{-41.4,-28},{-18,-28},{-18,2.8}},
+            color={175,175,175},
+            pattern=LinePattern.Dot,
+            thickness=0.5,
+            smooth=Smooth.None));
+        connect(sample1.y, superSample1.u) annotation (Line(
+            points={{-11.4,10},{0,10},{0,40},{22.8,40}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(sample1.y, upSample1.u)
+                                       annotation (Line(
+            points={{-11.4,10},{20.8,10}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(sample1.y, superSampleIpo1.u)
+                                           annotation (Line(
+            points={{-11.4,10},{0,10},{0,-20},{22.8,-20}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(superSampleIpo1.y, movingAverage.u) annotation (Line(
+            points={{36.6,-20},{56,-20}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                  -100},{100,100}}),
+                            graphics),
+          experiment(StopTime=0.15));
+      end SuperSampling;
+    end Effects;
   end Tests;
 
   package ForDocumentation
