@@ -1965,7 +1965,7 @@ form of a PID controller by using the backward rectangular approximation (also c
       Modelica_Synchronous.IntegerSignals.Sampler.SampleClocked
                                                 sample1
         annotation (Placement(transformation(extent={{-34,24},{-22,36}})));
-      Modelica_Synchronous.IntegerSignals.Sampler.Utilities.ClockedIntegerToBooleanTriggerHold
+      Modelica_Synchronous.IntegerSignals.Sampler.Utilities.AssignClockToTriggerHold
         ClockedSignalToTrigger
         annotation (Placement(transformation(extent={{0,20},{20,40}})));
       TriggeredIntegerSampler triggeredBooleanSampler
@@ -2159,7 +2159,7 @@ form of a PID controller by using the backward rectangular approximation (also c
       IntegerSignals.NonPeriodic.FractionalDelay fractionalDelay(shift=2,
           resolution=3)
         annotation (Placement(transformation(extent={{34,46},{54,66}})));
-      Modelica_Synchronous.IntegerSignals.Sampler.Utilities.ClockedIntegerToBooleanSquareHold
+      Modelica_Synchronous.IntegerSignals.Sampler.Utilities.AssignClockToSquareWaveHold
         ClockedSignalToSquare
         annotation (Placement(transformation(extent={{52,12},{72,32}})));
     equation
