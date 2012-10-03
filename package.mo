@@ -9826,7 +9826,9 @@ package IntegerSignals "Library of clocked blocks for Integer signals"
             initialScale=0.06),
                          graphics),
         Documentation(info="<html>
-
+<p>
+This block for Integer signals works similar as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.Sample\">RealSignals.Sampler.Sample</a>).
+</p>
 </html>"));
     end Sample;
 
@@ -9877,7 +9879,9 @@ package IntegerSignals "Library of clocked blocks for Integer signals"
             initialScale=0.06),
                          graphics),
         Documentation(info="<html>
-
+<p>
+This block for Integer signals works similar as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.SampleClocked\">RealSignals.Sampler.SampleClocked</a>).
+</p>
 </html>"));
     end SampleClocked;
 
@@ -9936,7 +9940,9 @@ package IntegerSignals "Library of clocked blocks for Integer signals"
             initialScale=0.06),
                          graphics),
         Documentation(info="<html>
-
+<p>
+This block for Integer signals works similar as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.SampleVectorizedAndClocked\">RealSignals.Sampler.SampleVectorizedAndClocked</a>).
+</p>
 </html>"));
     end SampleVectorizedAndClocked;
 
@@ -9981,9 +9987,11 @@ package IntegerSignals "Library of clocked blocks for Integer signals"
               extent={{-200,-80},{200,-145}},
               lineColor={0,0,0},
               textString="%y_start")}),
-        Documentation(info="<HTML>
-
-</HTML>
+        Documentation(info="<html>
+<p>
+This block for Integer signals works similar as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.Hold\">RealSignals.Sampler.Hold</a>).
+</p>
+</html>
 "),     Diagram(coordinateSystem(
             preserveAspectRatio=false,
             extent={{-100,-100},{100,100}},
@@ -10091,7 +10099,9 @@ package IntegerSignals "Library of clocked blocks for Integer signals"
             initialScale=0.06),
                          graphics),
         Documentation(info="<html>
-
+<p>
+This block for Integer signals works similar as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.SubSample\">RealSignals.Sampler.SubSample</a>).
+</p>
 </html>"));
     end SubSample;
 
@@ -10205,7 +10215,9 @@ package IntegerSignals "Library of clocked blocks for Integer signals"
             initialScale=0.06),
                          graphics),
         Documentation(info="<html>
-
+<p>
+This block for Integer signals works similar as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.SuperSample\">RealSignals.Sampler.SuperSample</a>).
+</p>
 </html>"));
     end SuperSample;
 
@@ -10288,10 +10300,9 @@ package IntegerSignals "Library of clocked blocks for Integer signals"
             initialScale=0.06),
                          graphics),
         Documentation(info="<html>
-<p><i>The first activation of the clock of y = shiftSample(..) is shifted in time shiftCounter/resolution*interval(u) later than the first activation of the clock of u.</i></p>
-<p>Conceptually, the operator constructs a clock &ldquo;cBase&rdquo; <b>Clock</b> cBase = <b>subSample</b>(<b>superSample</b>(u, resolution), shiftCounter) and the clock of y = <b>shiftSample</b>(..) starts at the second clock tick of cBase. At every tick of the clock of y, the operator returns the value of u from the last tick of the clock of u.</p>
-<p>Note, due to the restriction of <b>superSample</b> on Boolean clocks, <b>shiftSample</b> can only shift the number of ticks of the Boolean clock, but cannot introduce new ticks.</p>
-<p>Also note that the operator does not simply shift the signal in time, since only the value of u from the last tick of the clock of u is available at the output.</p>
+<p>
+This block for Integer signals works similar as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.ShiftSample\">RealSignals.Sampler.ShiftSample</a>).
+</p>
 </html>"));
     end ShiftSample;
 
@@ -10380,7 +10391,9 @@ package IntegerSignals "Library of clocked blocks for Integer signals"
             initialScale=0.06),
                          graphics),
         Documentation(info="<html>
-
+<p>
+This block for Integer signals works similar as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.BackSample\">RealSignals.Sampler.BackSample</a>).
+</p>
 </html>"));
     end BackSample;
 
@@ -10469,7 +10482,9 @@ package IntegerSignals "Library of clocked blocks for Integer signals"
             initialScale=0.06),
                          graphics),
         Documentation(info="<html>
-
+<p>
+This block for Integer signals works similar as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.AssignClock\">RealSignals.Sampler.AssignClock</a>).
+</p>
 </html>"));
     end AssignClock;
 
@@ -10560,7 +10575,9 @@ package IntegerSignals "Library of clocked blocks for Integer signals"
             initialScale=0.06),
                          graphics),
         Documentation(info="<html>
-
+<p>
+This block for Integer signals works similar as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.AssignClockVectorized\">RealSignals.Sampler.AssignClockVectorized</a>).
+</p>
 </html>"));
     end AssignClockVectorized;
 
@@ -10691,11 +10708,14 @@ package IntegerSignals "Library of clocked blocks for Integer signals"
               initialScale=0.06),
                            graphics),
           Documentation(info="<html>
-
+<p>
+This block for Integer signals works similar as the corresponding block for Real signals (see 
+<a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.Utilities.UpSample\">RealSignals.Sampler.Utilities.UpSample</a>).
+</p>
 </html>"));
       end UpSample;
 
-        block ClockedIntegerToBooleanTriggerHold
+        block AssignClockToTriggerHold
         "Generate a boolean continuous time trigger signal from a clocked Integer input"
           extends Modelica_Synchronous.ClockSignals.Interfaces.ClockedBlockIcon;
           parameter Boolean y_start=false "initial value of output signal";
@@ -10718,34 +10738,48 @@ package IntegerSignals "Library of clocked blocks for Integer signals"
           y3 = hold(y2);
           y = change(y3);
           annotation (
-            defaultComponentName="ClockedSignalToTrigger",
+            defaultComponentName="clockToTrigger",
             Icon(coordinateSystem(
               preserveAspectRatio=false,
               extent={{-100,-100},{100,100}},
-              grid={1,1}), graphics={            Ellipse(
-                  extent={{71,7},{85,-7}},
-                  lineColor= {235,235,235},
-                  fillColor= {235,235,235},
+              grid={1,1}), graphics={
+                Polygon(
+                  points={{-80,88},{-88,66},{-72,66},{-80,88}},
+                  lineColor={255,0,255},
+                  fillColor={255,0,255},
                   fillPattern=FillPattern.Solid),
-              Line(points={{-70,-70},{-70,70}}, color={0,0,0}),
-              Line(points={{-30,-70},{-30,70}}, color={0,0,0}),
-              Line(points={{10,-70},{10,70}}, color={0,0,0}),
-              Line(points={{50,-70},{50,70}}, color={0,0,0})}),
+                Line(points={{-80,66},{-80,-82}}, color={255,0,255}),
+                Line(points={{-90,-70},{72,-70}}, color={255,0,255}),
+                Polygon(
+                  points={{90,-70},{68,-62},{68,-78},{90,-70}},
+                  lineColor={255,0,255},
+                  fillColor={255,0,255},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{71,7},{85,-7}},
+                  lineColor=DynamicSelect({235,235,235}, if y > 0.5 then {0,255,0} else
+                            {235,235,235}),
+                  fillColor=DynamicSelect({235,235,235}, if y > 0.5 then {0,255,0} else
+                            {235,235,235}),
+                  fillPattern=FillPattern.Solid),
+              Line(points={{-60,-70},{-60,70}}, color={0,0,0}),
+              Line(points={{-20,-70},{-20,70}}, color={0,0,0}),
+              Line(points={{20,-70},{20,70}}, color={0,0,0}),
+              Line(points={{60,-70},{60,70}}, color={0,0,0})}),
             Diagram(coordinateSystem(
               preserveAspectRatio=false,
               extent={{-100,-100},{100,100}},
               grid={1,1}), graphics),
             Documentation(info="<html>
 <p>
-The Boolean output y is a conditional trigger signal. The output y is <b>true</b>
-at sample times (defined by parameter <b>period</b>) and if input enable = <b>true</b>, otherwise it is
-<b>false</b>.
+This block for Integer signals works similar as the corresponding block for Real signals (see 
+<a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.Utilities.AssignClockToTriggerHold\">RealSignals.Sampler.Utilities.AssignClockToTriggerHold</a>).
 </p>
 
 </html>"));
-        end ClockedIntegerToBooleanTriggerHold;
+        end AssignClockToTriggerHold;
 
-        block ClockedIntegerToBooleanSquareHold
+        block AssignClockToSquareWaveHold
         "Generate a boolean continuous time square signal from a clocked Integer input"
           extends Modelica_Synchronous.ClockSignals.Interfaces.ClockedBlockIcon;
           parameter Boolean y_start=false "initial value of output signal";
@@ -10763,31 +10797,44 @@ at sample times (defined by parameter <b>period</b>) and if input enable = <b>tr
           y2 = if u > 0 then not previous(y2) else not previous(y2);
           y = hold(y2);
           annotation (
-            defaultComponentName="ClockedSignalToSquare",
+            defaultComponentName="clockToSquareWave",
             Icon(coordinateSystem(
               preserveAspectRatio=true,
               extent={{-100,-100},{100,100}},
-              grid={1,1}), graphics={            Ellipse(
-                  extent={{71,7},{85,-7}},
-                  lineColor={235,235,235},
-                  fillColor={235,235,235},
+              grid={1,1}), graphics={
+                Polygon(
+                  points={{-80,88},{-88,66},{-72,66},{-80,88}},
+                  lineColor={255,0,255},
+                  fillColor={255,0,255},
                   fillPattern=FillPattern.Solid),
-                                       Line(points={{-80,-42},{-54,-42},{-54,0},{-28,0},
-                      {-28,24},{-8,24},{-8,64},{16,64},{16,20},{36,20},{36,0},{42,0},{42,
-                      0},{60,0}},        color={255,128,0})}),
+                Line(points={{-80,66},{-80,-82}}, color={255,0,255}),
+                Line(points={{-90,-70},{72,-70}}, color={255,0,255}),
+                Polygon(
+                  points={{90,-70},{68,-62},{68,-78},{90,-70}},
+                  lineColor={255,0,255},
+                  fillColor={255,0,255},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{71,7},{85,-7}},
+                  lineColor=DynamicSelect({235,235,235}, if y > 0.5 then {0,255,0} else
+                            {235,235,235}),
+                  fillColor=DynamicSelect({235,235,235}, if y > 0.5 then {0,255,0} else
+                            {235,235,235}),
+                  fillPattern=FillPattern.Solid),
+                                       Line(points={{-80,-70},{-40,-70},{-40,44},{0,44},
+                      {0,-70},{40,-70},{40,44},{79,44}},   color={0,0,0})}),
             Diagram(coordinateSystem(
               preserveAspectRatio=false,
               extent={{-100,-100},{100,100}},
               grid={1,1}), graphics),
             Documentation(info="<html>
 <p>
-The Boolean output y is a conditional trigger signal. The output y is <b>true</b>
-at sample times (defined by parameter <b>period</b>) and if input enable = <b>true</b>, otherwise it is
-<b>false</b>.
+This block for Integer signals works similar as the corresponding block for Real signals (see 
+<a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.Utilities.AssignClockToSquareWaveHold\">RealSignals.Sampler.Utilities.AssignClockToSquareWaveHold</a>).
 </p>
 
 </html>"));
-        end ClockedIntegerToBooleanSquareHold;
+        end AssignClockToSquareWaveHold;
 
     end Utilities;
     annotation (Documentation(info="<html>
