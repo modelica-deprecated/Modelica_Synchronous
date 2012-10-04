@@ -4823,6 +4823,603 @@ sub-library.
 </p>
 </html>"));
       end IntegerSignals;
+
+      package BooleanSignals
+      "Examples that are used for the documentation of the Modelica_Synchronous.BooleanSignals sub-library"
+        extends Modelica.Icons.ExamplesPackage;
+
+        model Sample1 "Example of a Sample block"
+          import Modelica_Synchronous;
+         extends Modelica.Icons.Example;
+          Modelica_Synchronous.BooleanSignals.Sampler.AssignClock
+                                                               assignClock
+            annotation (Placement(transformation(extent={{-22,24},{-10,36}})));
+          Modelica_Synchronous.ClockSignals.Clocks.PeriodicExactClock periodicClock(
+              factor=20, resolution=Modelica_Synchronous.Types.Resolution.ms)
+            annotation (Placement(transformation(extent={{-42,-2},{-30,10}})));
+        Modelica.Blocks.Sources.BooleanStep
+                                     step(startTime=0.1)
+          annotation (Placement(transformation(extent={{-80,20},{-60,40}})));
+        Modelica_Synchronous.BooleanSignals.Sampler.Sample sample
+          annotation (Placement(transformation(extent={{-48,24},{-36,36}})));
+        equation
+          connect(periodicClock.y, assignClock.clock) annotation (Line(
+              points={{-29.4,4},{-16,4},{-16,22.8}},
+              color={175,175,175},
+              pattern=LinePattern.Dot,
+              thickness=0.5,
+              smooth=Smooth.None));
+        connect(step.y, sample.u) annotation (Line(
+            points={{-59,30},{-49.2,30}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(sample.y, assignClock.u) annotation (Line(
+            points={{-35.4,30},{-23.2,30}},
+            color={255,0,255},
+            smooth=Smooth.None));
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                  -100},{100,100}}),   graphics), experiment(StopTime=0.2),
+          Documentation(info="<html>
+<p>
+Example used to generate a figure for the documentation of block
+<a href=\"Modelica_Synchronous.BooleanSignals.Sampler.Sample\">Modelica_Synchronous.BooleanSignals.Sampler.Sample</a>.
+</p>
+</html>"));
+        end Sample1;
+
+        model Sample2
+        "Example of a Sample block with direct feed-through in the continuous-time and the clocked partition"
+          import Modelica_Synchronous;
+         extends Modelica.Icons.Example;
+          Modelica_Synchronous.BooleanSignals.Sampler.SampleClocked
+                                                                 sample1
+            annotation (Placement(transformation(extent={{-60,24},{-48,36}})));
+          Modelica_Synchronous.ClockSignals.Clocks.PeriodicExactClock periodicClock(
+              factor=20, resolution=Modelica_Synchronous.Types.Resolution.ms)
+            annotation (Placement(transformation(extent={{-76,-6},{-64,6}})));
+        Modelica.Blocks.Sources.BooleanStep
+                                     step(startTime=0.04)
+          annotation (Placement(transformation(extent={{-96,20},{-76,40}})));
+          Modelica_Synchronous.BooleanSignals.Sampler.Hold
+                                                        hold
+            annotation (Placement(transformation(extent={{22,24},{34,36}})));
+          Modelica_Synchronous.BooleanSignals.Sampler.Sample
+                                                          sample2
+            annotation (Placement(transformation(extent={{6,-6},{-6,6}})));
+          Modelica.Blocks.Sources.BooleanConstant integerConstant(k=true)
+            annotation (Placement(transformation(extent={{-38,51},{-18,71}})));
+        Modelica.Blocks.Logical.Xor xor
+          annotation (Placement(transformation(extent={{-39,20},{-19,40}})));
+        Modelica.Blocks.Logical.Xor xor1
+          annotation (Placement(transformation(extent={{-6,21},{14,41}})));
+        equation
+          connect(periodicClock.y, sample1.clock) annotation (Line(
+              points={{-63.4,0},{-54,0},{-54,22.8}},
+              color={175,175,175},
+              pattern=LinePattern.Dot,
+              thickness=0.5,
+              smooth=Smooth.None));
+        connect(step.y, sample1.u) annotation (Line(
+            points={{-75,30},{-61.2,30}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(hold.y, sample2.u) annotation (Line(
+            points={{34.6,30},{39,30},{39,0},{7.2,0}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(sample2.y, xor.u2) annotation (Line(
+            points={{-6.6,0},{-47,0},{-47,22},{-41,22}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(xor.u1, sample1.y) annotation (Line(
+            points={{-41,30},{-47.4,30}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(hold.u, xor1.y) annotation (Line(
+            points={{20.8,30},{17.4,30},{17.4,31},{15,31}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(xor1.u1, integerConstant.y) annotation (Line(
+            points={{-8,31},{-8,45.5},{-17,45.5},{-17,61}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(xor1.u2, xor.y) annotation (Line(
+            points={{-8,23},{-13,23},{-13,30},{-18,30}},
+            color={255,0,255},
+            smooth=Smooth.None));
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                  -100},{100,100}},
+                grid={1,1}),           graphics), experiment(StopTime=0.2),
+          Documentation(info="<html>
+<p>
+Example used to generate a figure for the documentation of block
+<a href=\"Modelica_Synchronous.BooleanSignals.Sampler.Sample\">Modelica_Synchronous.BooleanSignals.Sampler.Sample</a>.
+</p>
+</html>"),  Icon(coordinateSystem(
+                preserveAspectRatio=false,
+                extent={{-100,-100},{100,100}},
+                grid={1,1})));
+        end Sample2;
+
+        model SampleClocked "Example of a SampleClocked block"
+          import Modelica_Synchronous;
+           extends Modelica.Icons.Example;
+
+          Modelica.Blocks.Sources.BooleanStep
+                                       step(startTime=0.1)
+            annotation (Placement(transformation(extent={{-80,20},{-60,40}})));
+          Modelica_Synchronous.BooleanSignals.Sampler.SampleClocked
+                                                          sample
+            annotation (Placement(transformation(extent={{-46,24},{-34,36}})));
+          Modelica_Synchronous.ClockSignals.Clocks.PeriodicExactClock periodicClock(
+              factor=20, resolution=Modelica_Synchronous.Types.Resolution.ms)
+            annotation (Placement(transformation(extent={{-62,-6},{-50,6}})));
+        equation
+        connect(periodicClock.y, sample.clock) annotation (Line(
+            points={{-49.4,0},{-40,0},{-40,22.8}},
+            color={175,175,175},
+            pattern=LinePattern.Dot,
+            thickness=0.5,
+            smooth=Smooth.None));
+        connect(sample.u, step.y) annotation (Line(
+            points={{-47.2,30},{-59,30}},
+            color={255,0,255},
+            smooth=Smooth.None));
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                  -100},{100,100}}),   graphics), experiment(StopTime=0.2),
+          Documentation(info="<html>
+<p>
+Example used to generate a figure for the documentation of block
+<a href=\"Modelica_Synchronous.BooleanSignals.Sampler.SampleClocked\">Modelica_Synchronous.BooleanSignals.Sampler.SampleClocked</a>.
+</p>
+</html>"));
+        end SampleClocked;
+
+        model SampleVectorizedAndClocked
+        "Example of a SampleVectorizedAndClocked block"
+          import Modelica_Synchronous;
+           extends Modelica.Icons.Example;
+
+          Modelica.Blocks.Sources.BooleanStep
+                                       step2(startTime=0.04)
+            annotation (Placement(transformation(extent={{-80,30},{-60,50}})));
+          Modelica_Synchronous.BooleanSignals.Sampler.SampleVectorizedAndClocked
+                                                          sample(n=2)
+            annotation (Placement(transformation(extent={{-14,24},{-2,36}})));
+          Modelica_Synchronous.ClockSignals.Clocks.PeriodicExactClock periodicClock(
+              factor=20, resolution=Modelica_Synchronous.Types.Resolution.ms)
+            annotation (Placement(transformation(extent={{-28,-6},{-16,6}})));
+          Modelica.Blocks.Sources.BooleanStep
+                                       step1(startTime=0.08)
+            annotation (Placement(transformation(extent={{-80,-2},{-60,18}})));
+        equation
+        connect(periodicClock.y, sample.clock) annotation (Line(
+            points={{-15.4,0},{-8,0},{-8,22.8}},
+            color={175,175,175},
+            pattern=LinePattern.Dot,
+            thickness=0.5,
+            smooth=Smooth.None));
+          connect(sample.u[1], step2.y) annotation (Line(
+              points={{-15.2,29.4},{-36,29.4},{-36,40},{-59,40}},
+              color={255,0,255},
+              smooth=Smooth.None));
+          connect(step1.y, sample.u[2]) annotation (Line(
+              points={{-59,8},{-38,8},{-38,30.6},{-15.2,30.6}},
+              color={255,0,255},
+              smooth=Smooth.None));
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                    -100},{100,100}}), graphics), experiment(StopTime=0.2),
+          Documentation(info="<html>
+<p>
+Example used to generate a figure for the documentation of block
+<a href=\"Modelica_Synchronous.BooleanSignals.Sampler.SampleVectorizedAndClocked\">Modelica_Synchronous.BooleanSignals.Sampler.SampleVectorizedAndClocked</a>.
+</p>
+</html>"));
+        end SampleVectorizedAndClocked;
+
+        model Hold "Example of a Hold block"
+          import Modelica_Synchronous;
+           extends Modelica.Icons.Example;
+
+          Modelica.Blocks.Sources.BooleanTable table(table={0.05,0.15})
+            annotation (Placement(transformation(extent={{-80,20},{-60,40}})));
+          Modelica_Synchronous.BooleanSignals.Sampler.SampleClocked
+                                                          sample
+            annotation (Placement(transformation(extent={{-52,24},{-40,36}})));
+          Modelica_Synchronous.ClockSignals.Clocks.PeriodicExactClock periodicClock(
+              factor=20, resolution=Modelica_Synchronous.Types.Resolution.ms)
+            annotation (Placement(transformation(extent={{-68,-6},{-56,6}})));
+        Modelica_Synchronous.BooleanSignals.Sampler.Hold
+                                                      hold(y_start=false)
+          annotation (Placement(transformation(extent={{-8,24},{4,36}})));
+        Modelica_Synchronous.BooleanSignals.Sampler.ShiftSample
+                                                             shiftSample(
+            shiftCounter=2)
+          annotation (Placement(transformation(extent={{-30,24},{-18,36}})));
+        equation
+        connect(periodicClock.y, sample.clock) annotation (Line(
+            points={{-55.4,0},{-46,0},{-46,22.8}},
+            color={175,175,175},
+            pattern=LinePattern.Dot,
+            thickness=0.5,
+            smooth=Smooth.None));
+          connect(table.y, sample.u) annotation (Line(
+              points={{-59,30},{-53.2,30}},
+              color={255,127,0},
+              smooth=Smooth.None));
+        connect(shiftSample.u, sample.y) annotation (Line(
+            points={{-31.2,30},{-39.4,30}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(hold.u, shiftSample.y) annotation (Line(
+            points={{-9.2,30},{-17.4,30}},
+            color={255,0,255},
+            smooth=Smooth.None));
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                  -100},{100,100}}),   graphics), experiment(StopTime=0.2),
+          Documentation(info="<html>
+<p>
+Example used to generate a figure for the documentation of block
+<a href=\"Modelica_Synchronous.BooleanSignals.Sampler.Hold\">Modelica_Synchronous.BooleanSignals.Sampler.Hold</a>.
+</p>
+</html>"));
+        end Hold;
+
+        model SubSample "Example of a SubSample block"
+          import Modelica_Synchronous;
+           extends Modelica.Icons.Example;
+
+          Modelica_Synchronous.BooleanSignals.Sampler.SampleClocked
+                                                          sample
+            annotation (Placement(transformation(extent={{-46,24},{-34,36}})));
+          Modelica_Synchronous.ClockSignals.Clocks.PeriodicExactClock periodicClock(
+              factor=20, resolution=Modelica_Synchronous.Types.Resolution.ms)
+            annotation (Placement(transformation(extent={{-62,-6},{-50,6}})));
+        Modelica_Synchronous.BooleanSignals.Sampler.SubSample
+                                                           subSample(
+            inferFactor=false, factor=3)
+          annotation (Placement(transformation(extent={{-22,24},{-10,36}})));
+          Modelica.Blocks.Sources.BooleanTable table(table={0.05,0.15})
+            annotation (Placement(transformation(extent={{-76,20},{-56,40}})));
+        equation
+        connect(periodicClock.y, sample.clock) annotation (Line(
+            points={{-49.4,0},{-40,0},{-40,22.8}},
+            color={175,175,175},
+            pattern=LinePattern.Dot,
+            thickness=0.5,
+            smooth=Smooth.None));
+        connect(sample.u, table.y) annotation (Line(
+            points={{-47.2,30},{-55,30}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(subSample.u, sample.y) annotation (Line(
+            points={{-23.2,30},{-33.4,30}},
+            color={255,0,255},
+            smooth=Smooth.None));
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                  -100},{100,100}}),   graphics), experiment(StopTime=0.2),
+          Documentation(info="<html>
+<p>
+Example used to generate a figure for the documentation of block
+<a href=\"Modelica_Synchronous.BooleanSignals.Sampler.SubSample\">Modelica_Synchronous.BooleanSignals.Sampler.SubSample</a>.
+</p>
+</html>"));
+        end SubSample;
+
+        model SuperSample "Example of a SuperSample block"
+          import Modelica_Synchronous;
+           extends Modelica.Icons.Example;
+
+          Modelica_Synchronous.BooleanSignals.Sampler.SampleClocked
+                                                          sample
+            annotation (Placement(transformation(extent={{-46,24},{-34,36}})));
+          Modelica_Synchronous.ClockSignals.Clocks.PeriodicExactClock periodicClock(
+              factor=20, resolution=Modelica_Synchronous.Types.Resolution.ms)
+            annotation (Placement(transformation(extent={{-62,-6},{-50,6}})));
+        Modelica_Synchronous.BooleanSignals.Sampler.SuperSample superSample(inferFactor=false,
+              factor=3)
+          annotation (Placement(transformation(extent={{-22,24},{-10,36}})));
+          Modelica.Blocks.Sources.BooleanTable table(table={0.05,0.15})
+            annotation (Placement(transformation(extent={{-78,20},{-58,40}})));
+        equation
+        connect(periodicClock.y, sample.clock) annotation (Line(
+            points={{-49.4,0},{-40,0},{-40,22.8}},
+            color={175,175,175},
+            pattern=LinePattern.Dot,
+            thickness=0.5,
+            smooth=Smooth.None));
+        connect(table.y, sample.u) annotation (Line(
+            points={{-57,30},{-47.2,30}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(superSample.u, sample.y) annotation (Line(
+            points={{-23.2,30},{-33.4,30}},
+            color={255,0,255},
+            smooth=Smooth.None));
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                  -100},{100,100}}),   graphics), experiment(StopTime=0.2),
+          Documentation(info="<html>
+<p>
+Example used to generate a figure for the documentation of block
+<a href=\"Modelica_Synchronous.BooleanSignals.Sampler.SuperSample\">Modelica_Synchronous.BooleanSignals.Sampler.SuperSample</a>.
+</p>
+</html>"));
+        end SuperSample;
+
+        model ShiftSample "Example of a ShiftSample block"
+          import Modelica_Synchronous;
+           extends Modelica.Icons.Example;
+
+          Modelica_Synchronous.BooleanSignals.Sampler.SampleClocked
+                                                          sample
+            annotation (Placement(transformation(extent={{-46,24},{-34,36}})));
+          Modelica_Synchronous.ClockSignals.Clocks.PeriodicExactClock periodicClock(
+              factor=20, resolution=Modelica_Synchronous.Types.Resolution.ms)
+            annotation (Placement(transformation(extent={{-62,-6},{-50,6}})));
+          Modelica_Synchronous.BooleanSignals.Sampler.ShiftSample shiftSample1(
+              shiftCounter=4, resolution=3)
+            annotation (Placement(transformation(extent={{-22,24},{-10,36}})));
+          Modelica.Blocks.Sources.BooleanTable table(table={0.05,0.15})
+            annotation (Placement(transformation(extent={{-78,20},{-58,40}})));
+        equation
+        connect(periodicClock.y, sample.clock) annotation (Line(
+            points={{-49.4,0},{-40,0},{-40,22.8}},
+            color={175,175,175},
+            pattern=LinePattern.Dot,
+            thickness=0.5,
+            smooth=Smooth.None));
+        connect(sample.u, table.y) annotation (Line(
+            points={{-47.2,30},{-57,30}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(shiftSample1.u, sample.y) annotation (Line(
+            points={{-23.2,30},{-33.4,30}},
+            color={255,0,255},
+            smooth=Smooth.None));
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                  -100},{100,100}}),   graphics), experiment(StopTime=0.09),
+          Documentation(info="<html>
+<p>
+Example used to generate a figure for the documentation of block
+<a href=\"Modelica_Synchronous.BooleanSignals.Sampler.ShiftSample\">Modelica_Synchronous.BooleanSignals.Sampler.ShiftSample</a>.
+</p>
+</html>"));
+        end ShiftSample;
+
+        model BackSample "Example of a BackSample block"
+          import Modelica_Synchronous;
+           extends Modelica.Icons.Example;
+
+          Modelica_Synchronous.BooleanSignals.Sampler.SampleClocked
+                                                          sample
+            annotation (Placement(transformation(extent={{-46,24},{-34,36}})));
+          Modelica_Synchronous.ClockSignals.Clocks.PeriodicExactClock periodicClock(
+              factor=20, resolution=Modelica_Synchronous.Types.Resolution.ms)
+            annotation (Placement(transformation(extent={{-62,-6},{-50,6}})));
+          Modelica_Synchronous.BooleanSignals.Sampler.ShiftSample shiftSample1(
+              shiftCounter=4, resolution=3)
+            annotation (Placement(transformation(extent={{-18,24},{-6,36}})));
+        Modelica_Synchronous.BooleanSignals.Sampler.BackSample backSample1(
+          backCounter=4,
+          resolution=3,
+          y_start=true)
+          annotation (Placement(transformation(extent={{14,24},{26,36}})));
+          Modelica.Blocks.Sources.BooleanTable table(table={0.05,0.15})
+            annotation (Placement(transformation(extent={{-80,20},{-60,40}})));
+        equation
+        connect(periodicClock.y, sample.clock) annotation (Line(
+            points={{-49.4,0},{-40,0},{-40,22.8}},
+            color={175,175,175},
+            pattern=LinePattern.Dot,
+            thickness=0.5,
+            smooth=Smooth.None));
+        connect(sample.u, table.y) annotation (Line(
+            points={{-47.2,30},{-59,30}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(shiftSample1.u, sample.y) annotation (Line(
+            points={{-19.2,30},{-33.4,30}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(backSample1.u, shiftSample1.y) annotation (Line(
+            points={{12.8,30},{-5.4,30}},
+            color={255,0,255},
+            smooth=Smooth.None));
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                  -100},{100,100}}),   graphics), experiment(StopTime=0.09),
+          Documentation(info="<html>
+<p>
+Example used to generate a figure for the documentation of block
+<a href=\"Modelica_Synchronous.BooleanSignals.Sampler.BackSample\">Modelica_Synchronous.BooleanSignals.Sampler.BackSample</a>.
+</p>
+</html>"));
+        end BackSample;
+
+        model AssignClock "Example of a AssignClock block"
+          import Modelica_Synchronous;
+           extends Modelica.Icons.Example;
+
+          Modelica_Synchronous.ClockSignals.Clocks.PeriodicExactClock periodicClock(
+              factor=20, resolution=Modelica_Synchronous.Types.Resolution.ms)
+            annotation (Placement(transformation(extent={{-42,0},{-30,12}})));
+        Modelica_Synchronous.BooleanSignals.Sampler.AssignClock assignClock1
+          annotation (Placement(transformation(extent={{-26,22},{-14,34}})));
+        Modelica_Synchronous.BooleanSignals.NonPeriodic.UnitDelay unitDelay1
+          annotation (Placement(transformation(extent={{-38,48},{-58,68}})));
+        Modelica.Blocks.Logical.Xor xor
+          annotation (Placement(transformation(extent={{-59,18},{-39,38}})));
+          Modelica.Blocks.Sources.BooleanConstant integerConstant(k=true)
+            annotation (Placement(transformation(extent={{-96,3},{-76,23}})));
+        equation
+        connect(periodicClock.y, assignClock1.clock) annotation (Line(
+            points={{-29.4,6},{-20,6},{-20,20.8}},
+            color={175,175,175},
+            pattern=LinePattern.Dot,
+            thickness=0.5,
+            smooth=Smooth.None));
+        connect(assignClock1.y, unitDelay1.u) annotation (Line(
+            points={{-13.4,28},{-2,28},{-2,58},{-36,58}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(assignClock1.u, xor.y) annotation (Line(
+            points={{-27.2,28},{-38,28}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(integerConstant.y, xor.u2) annotation (Line(
+            points={{-75,13},{-68.5,13},{-68.5,20},{-61,20}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(unitDelay1.y, xor.u1) annotation (Line(
+            points={{-59,58},{-70,58},{-70,28},{-61,28}},
+            color={255,0,255},
+            smooth=Smooth.None));
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                  -100},{100,100}}),   graphics), experiment(StopTime=0.09),
+          Documentation(info="<html>
+<p>
+Example used to generate a figure for the documentation of block
+<a href=\"Modelica_Synchronous.BooleanSignals.Sampler.AssignClock\">Modelica_Synchronous.BooleanSignals.Sampler.AssignClock</a>.
+</p>
+</html>"));
+        end AssignClock;
+
+        model AssignClockVectorized "Example of a AssignClockVectorized block"
+          import Modelica_Synchronous;
+           extends Modelica.Icons.Example;
+
+          Modelica_Synchronous.ClockSignals.Clocks.PeriodicExactClock periodicClock(
+              factor=20, resolution=Modelica_Synchronous.Types.Resolution.ms)
+            annotation (Placement(transformation(extent={{-54,-50},{-42,-38}})));
+        Modelica_Synchronous.BooleanSignals.NonPeriodic.UnitDelay unitDelay1
+          annotation (Placement(transformation(extent={{-38,58},{-58,78}})));
+        Modelica_Synchronous.BooleanSignals.Sampler.AssignClockVectorized
+          assignClock1(n=2)
+          annotation (Placement(transformation(extent={{-24,18},{-12,30}})));
+        Modelica_Synchronous.BooleanSignals.NonPeriodic.UnitDelay unitDelay2(y_start=
+              true)
+          annotation (Placement(transformation(extent={{-38,-28},{-58,-8}})));
+        Modelica.Blocks.Logical.Xor xor
+          annotation (Placement(transformation(extent={{-57,28},{-37,48}})));
+          Modelica.Blocks.Sources.BooleanConstant integerConstant(k=true)
+            annotation (Placement(transformation(extent={{-92,21},{-72,41}})));
+        Modelica.Blocks.Logical.Xor xor1
+          annotation (Placement(transformation(extent={{-57,2},{-37,22}})));
+          Modelica.Blocks.Sources.BooleanConstant integerConstant1(k=true)
+            annotation (Placement(transformation(extent={{-92,-9},{-72,11}})));
+        equation
+        connect(periodicClock.y, assignClock1.clock) annotation (Line(
+            points={{-41.4,-44},{-18,-44},{-18,16.8}},
+            color={175,175,175},
+            pattern=LinePattern.Dot,
+            thickness=0.5,
+            smooth=Smooth.None));
+        connect(xor.u1, unitDelay1.y) annotation (Line(
+            points={{-59,38},{-64,38},{-64,68},{-59,68}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(xor.u2, integerConstant.y) annotation (Line(
+            points={{-59,30},{-65,30},{-65,31},{-71,31}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(xor1.u1, integerConstant1.y) annotation (Line(
+            points={{-59,12},{-66,12},{-66,1},{-71,1}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(unitDelay2.y, xor1.u2) annotation (Line(
+            points={{-59,-18},{-64,-18},{-64,4},{-59,4}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(xor.y, assignClock1.u[1]) annotation (Line(
+            points={{-36,38},{-32,38},{-32,23.4},{-25.2,23.4}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(xor1.y, assignClock1.u[2]) annotation (Line(
+            points={{-36,12},{-32,12},{-32,24.6},{-25.2,24.6}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(assignClock1.y[1], unitDelay1.u) annotation (Line(
+            points={{-11.4,23.7},{-2,23.7},{-2,68},{-36,68}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(assignClock1.y[2], unitDelay2.u) annotation (Line(
+            points={{-11.4,24.3},{-2,24.3},{-2,-18},{-36,-18}},
+            color={255,0,255},
+            smooth=Smooth.None));
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                  -100},{100,100}}),   graphics), experiment(StopTime=0.09),
+          Documentation(info="<html>
+<p>
+Example used to generate a figure for the documentation of block
+<a href=\"Modelica_Synchronous.BooleanSignals.Sampler.AssignClockVectorized\">Modelica_Synchronous.BooleanSignals.Sampler.AssignClockVectorized</a>.
+</p>
+</html>"));
+        end AssignClockVectorized;
+
+        model UpSample "Example of an UpSample block"
+        import Modelica_Synchronous;
+           extends Modelica.Icons.Example;
+
+          Modelica_Synchronous.ClockSignals.Clocks.PeriodicExactClock periodicClock(
+              factor=20, resolution=Modelica_Synchronous.Types.Resolution.ms)
+            annotation (Placement(transformation(extent={{-68,-6},{-56,6}})));
+          Modelica_Synchronous.BooleanSignals.Sampler.SampleClocked
+                                                          sample
+            annotation (Placement(transformation(extent={{-48,24},{-36,36}})));
+        Modelica_Synchronous.BooleanSignals.Sampler.Utilities.UpSample upSample1
+          annotation (Placement(transformation(extent={{-26,34},{-14,46}})));
+        Modelica_Synchronous.BooleanSignals.Sampler.Utilities.UpSample upSample2(
+            inferFactor=false, factor=3)
+          annotation (Placement(transformation(extent={{-26,14},{-14,26}})));
+          Modelica.Blocks.Sources.BooleanTable table1(table={0.05,0.15})
+            annotation (Placement(transformation(extent={{-82,20},{-62,40}})));
+        Modelica.Blocks.Logical.And and1
+          annotation (Placement(transformation(extent={{0,20},{20,40}})));
+        equation
+        connect(periodicClock.y, sample.clock) annotation (Line(
+            points={{-55.4,0},{-42,0},{-42,22.8}},
+            color={175,175,175},
+            pattern=LinePattern.Dot,
+            thickness=0.5,
+            smooth=Smooth.None));
+        connect(table1.y, sample.u) annotation (Line(
+            points={{-61,30},{-49.2,30}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(upSample1.u, sample.y) annotation (Line(
+            points={{-27.2,40},{-30,40},{-30,30},{-35.4,30}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(upSample2.u, sample.y) annotation (Line(
+            points={{-27.2,20},{-30,20},{-30,30},{-35.4,30}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(upSample1.y, and1.u1) annotation (Line(
+            points={{-13.4,40},{-8,40},{-8,30},{-2,30}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(upSample2.y, and1.u2) annotation (Line(
+            points={{-13.4,20},{-8,20},{-8,22},{-2,22}},
+            color={255,0,255},
+            smooth=Smooth.None));
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                  -100},{100,100}}),   graphics), experiment(StopTime=0.09),
+          Documentation(info="<html>
+<p>
+Example used to generate a figure for the documentation of block
+<a href=\"Modelica_Synchronous.BooleanSignals.Sampler.Utilities.UpSample\">Modelica_Synchronous.BooleanSignals.Sampler.Utilities.UpSample</a>.
+</p>
+</html>"));
+        end UpSample;
+
+      annotation (Documentation(info="<html>
+<p>
+This package contains models that have been used to produce
+the figures in the documentation of the
+<a href=\"modelica://Modelica_Synchronous.BooleanSignals\">Modelica_Synchronous.BooleanSignals</a>
+sub-library.
+</p>
+</html>"));
+      end BooleanSignals;
     annotation (Documentation(info="<html>
 <p>
 This package contains models that have been used to produce
@@ -9870,7 +10467,7 @@ This block for Boolean signals works similar as the corresponding block for Real
               fillPattern=FillPattern.Solid),
             Ellipse(
               extent={{-50,60},{-30,40}},
-              lineColor={255,128,0},
+              lineColor={255,0,255},
               fillColor={255,0,255},
               fillPattern=FillPattern.Solid)}),
         Diagram(coordinateSystem(
