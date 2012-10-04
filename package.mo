@@ -3137,7 +3137,7 @@ initial equation
       end Utilities;
     end Systems;
 
-    package ForDocumentation
+    package Elementary
     "Examples that are used for the documentation of the blocks"
       extends Modelica.Icons.ExamplesPackage;
 
@@ -3222,7 +3222,7 @@ Example used to generate a figure for the documentation of block
 
         model Sample3
         "Example of a Sample block with direct feed-through in the continuous-time and the clocked partition"
-          import Modelica_Synchronous;
+        import Modelica_Synchronous;
          extends Modelica.Icons.Example;
           Modelica_Synchronous.RealSignals.Sampler.SampleClocked sample1
             annotation (Placement(transformation(extent={{-52,24},{-40,36}})));
@@ -3360,7 +3360,7 @@ Example used to generate a figure for the documentation of block
         end SampleVectorizedAndClocked;
 
         model SampleWithADeffects "Example of a SampleWithADeffects block"
-          import Modelica_Synchronous;
+        import Modelica_Synchronous;
            extends Modelica.Icons.Example;
 
           Modelica.Blocks.Sources.Sine sine(freqHz=2,
@@ -3696,7 +3696,7 @@ Example used to generate a figure for the documentation of block
         end SuperSampleInterpolated;
 
         model ShiftSample "Example of a ShiftSample block"
-          import Modelica_Synchronous;
+        import Modelica_Synchronous;
            extends Modelica.Icons.Example;
 
           Modelica.Blocks.Sources.Sine sine(freqHz=2,
@@ -3967,7 +3967,7 @@ Example used to generate a figure for the documentation of block
 
         model UpSample2
         "Example of an UpSample block combined with a FIR filter blocks"
-          import Modelica_Synchronous;
+        import Modelica_Synchronous;
            extends Modelica.Icons.Example;
 
           Modelica_Synchronous.ClockSignals.Clocks.PeriodicExactClock periodicClock(
@@ -4829,7 +4829,7 @@ sub-library.
         extends Modelica.Icons.ExamplesPackage;
 
         model Sample1 "Example of a Sample block"
-          import Modelica_Synchronous;
+        import Modelica_Synchronous;
          extends Modelica.Icons.Example;
           Modelica_Synchronous.BooleanSignals.Sampler.AssignClock
                                                                assignClock
@@ -4869,7 +4869,7 @@ Example used to generate a figure for the documentation of block
 
         model Sample2
         "Example of a Sample block with direct feed-through in the continuous-time and the clocked partition"
-          import Modelica_Synchronous;
+        import Modelica_Synchronous;
          extends Modelica.Icons.Example;
           Modelica_Synchronous.BooleanSignals.Sampler.SampleClocked
                                                                  sample1
@@ -4942,7 +4942,7 @@ Example used to generate a figure for the documentation of block
         end Sample2;
 
         model SampleClocked "Example of a SampleClocked block"
-          import Modelica_Synchronous;
+        import Modelica_Synchronous;
            extends Modelica.Icons.Example;
 
           Modelica.Blocks.Sources.BooleanStep
@@ -4977,7 +4977,7 @@ Example used to generate a figure for the documentation of block
 
         model SampleVectorizedAndClocked
         "Example of a SampleVectorizedAndClocked block"
-          import Modelica_Synchronous;
+        import Modelica_Synchronous;
            extends Modelica.Icons.Example;
 
           Modelica.Blocks.Sources.BooleanStep
@@ -5018,7 +5018,7 @@ Example used to generate a figure for the documentation of block
         end SampleVectorizedAndClocked;
 
         model Hold "Example of a Hold block"
-          import Modelica_Synchronous;
+        import Modelica_Synchronous;
            extends Modelica.Icons.Example;
 
           Modelica.Blocks.Sources.BooleanTable table(table={0.05,0.15})
@@ -5066,7 +5066,7 @@ Example used to generate a figure for the documentation of block
         end Hold;
 
         model SubSample "Example of a SubSample block"
-          import Modelica_Synchronous;
+        import Modelica_Synchronous;
            extends Modelica.Icons.Example;
 
           Modelica_Synchronous.BooleanSignals.Sampler.SampleClocked
@@ -5107,7 +5107,7 @@ Example used to generate a figure for the documentation of block
         end SubSample;
 
         model SuperSample "Example of a SuperSample block"
-          import Modelica_Synchronous;
+        import Modelica_Synchronous;
            extends Modelica.Icons.Example;
 
           Modelica_Synchronous.BooleanSignals.Sampler.SampleClocked
@@ -5147,7 +5147,7 @@ Example used to generate a figure for the documentation of block
         end SuperSample;
 
         model ShiftSample "Example of a ShiftSample block"
-          import Modelica_Synchronous;
+        import Modelica_Synchronous;
            extends Modelica.Icons.Example;
 
           Modelica_Synchronous.BooleanSignals.Sampler.SampleClocked
@@ -5187,7 +5187,7 @@ Example used to generate a figure for the documentation of block
         end ShiftSample;
 
         model BackSample "Example of a BackSample block"
-          import Modelica_Synchronous;
+        import Modelica_Synchronous;
            extends Modelica.Icons.Example;
 
           Modelica_Synchronous.BooleanSignals.Sampler.SampleClocked
@@ -5236,7 +5236,7 @@ Example used to generate a figure for the documentation of block
         end BackSample;
 
         model AssignClock "Example of a AssignClock block"
-          import Modelica_Synchronous;
+        import Modelica_Synchronous;
            extends Modelica.Icons.Example;
 
           Modelica_Synchronous.ClockSignals.Clocks.PeriodicExactClock periodicClock(
@@ -5284,7 +5284,7 @@ Example used to generate a figure for the documentation of block
         end AssignClock;
 
         model AssignClockVectorized "Example of a AssignClockVectorized block"
-          import Modelica_Synchronous;
+        import Modelica_Synchronous;
            extends Modelica.Icons.Example;
 
           Modelica_Synchronous.ClockSignals.Clocks.PeriodicExactClock periodicClock(
@@ -5429,7 +5429,7 @@ shown in the block documentations can be easily inspected and
 simulated.
 </p>
 </html>"));
-    end ForDocumentation;
+    end Elementary;
   end Examples;
 
 
@@ -6197,7 +6197,7 @@ occur.
 
 <p>
 The following
-<a href=\"Modelica_Synchronous.Examples.ForDocumentation.RealSignals.Sample1\">example</a>
+<a href=\"Modelica_Synchronous.Examples.Elementary.RealSignals.Sample1\">example</a>
 samples a sine signal with a periodic clock of 20 ms period:<br>
 </p>
 
@@ -6215,7 +6215,7 @@ samples a sine signal with a periodic clock of 20 ms period:<br>
 
 <p>
 <br>In the following
-<a href=\"Modelica_Synchronous.Examples.ForDocumentation.RealSignals.Sample2\">example</a>
+<a href=\"Modelica_Synchronous.Examples.Elementary.RealSignals.Sample2\">example</a>
 the continuous-time input signal contains a discontinuous value change at the 0.1 s
 clock tick. It can be seen that the Sample block samples the left limit of the
 step signal:<br>
@@ -6235,7 +6235,7 @@ step signal:<br>
 
 <p>
 <br>In the following
-<a href=\"Modelica_Synchronous.Examples.ForDocumentation.RealSignals.Sample3\">example</a>
+<a href=\"Modelica_Synchronous.Examples.Elementary.RealSignals.Sample3\">example</a>
 a direct feedthrough in the continuous-time and in the clocked partition is present.
 Without a time-delay, this would result in an algebraic loop. However, since block
 Sample samples the left limit of a continuous-time signal, sampling introduces a
@@ -6326,7 +6326,7 @@ that has a <b>vector</b> Real input and output, as well as a <b>scalar</b> clock
 
 <p>
 The following
-<a href=\"Modelica_Synchronous.Examples.ForDocumentation.RealSignals.SampleClocked\">example</a>
+<a href=\"Modelica_Synchronous.Examples.Elementary.RealSignals.SampleClocked\">example</a>
 samples a sine signal with a periodic clock of 20 ms period:<br>
 </p>
 
@@ -6409,7 +6409,7 @@ scalar clock signal provided via the second input.
 
 <p>
 The following
-<a href=\"Modelica_Synchronous.Examples.ForDocumentation.RealSignals.SampleVectorizedAndClocked\">example</a>
+<a href=\"Modelica_Synchronous.Examples.Elementary.RealSignals.SampleVectorizedAndClocked\">example</a>
 has a vector as input, consisting of two different sine signals. These
 signals are sampled with a periodic clock of 20 ms period:<br>
 </p>
@@ -6605,7 +6605,7 @@ simulated real-world effects are applied on the sampled signal. In particular:
 
 <p>
 The following
-<a href=\"Modelica_Synchronous.Examples.ForDocumentation.RealSignals.SampleWithADeffects\">example</a>
+<a href=\"Modelica_Synchronous.Examples.Elementary.RealSignals.SampleWithADeffects\">example</a>
 samples a sine signal with a periodic clock of 20 ms period, and adds the following effects:
 </p>
 <ul>
@@ -6689,7 +6689,7 @@ this parameter is displayed below the icon.
 
 <p>
 The following
-<a href=\"modelica://Modelica_Synchronous.Examples.ForDocumentation.RealSignals.Hold\">example</a>
+<a href=\"modelica://Modelica_Synchronous.Examples.Elementary.RealSignals.Hold\">example</a>
 samples a sine signal with a periodic clock of 20 ms period and delays it for 2 sample periods.
 The resulting signal is hold with the Hold block. As a result, the clock of hold.u starts
 ticking at 40 ms. The output hold.y of the block is a continuous-time signal that is present
@@ -6892,7 +6892,7 @@ with a zero-order hold. In particular:
 
 <p>
 The following
-<a href=\"Modelica_Synchronous.Examples.ForDocumentation.RealSignals.HoldWithDAeffects1\">example</a>
+<a href=\"Modelica_Synchronous.Examples.Elementary.RealSignals.HoldWithDAeffects1\">example</a>
 samples a sine signal with an amplitude of 2.0 with a periodic clock of 20 ms period
 and delays it for 2 sample periods.
 The resulting signal is hold with the HoldWithDAeffects block. As a result, the clock of hold.u starts
@@ -6926,7 +6926,7 @@ the following effects are added to the hold block:</p>
 If the hold output is delayed by one sample period, then the <b>previous</b>(..) value of the
 input is output, and the first tick is delayed by one sample period,
 as shown by the
-<a href=\"Modelica_Synchronous.Examples.ForDocumentation.RealSignals.HoldWithDAeffects2\">modified example</a>
+<a href=\"Modelica_Synchronous.Examples.Elementary.RealSignals.HoldWithDAeffects2\">modified example</a>
 from above:<br>
 </p>
 
@@ -7072,7 +7072,7 @@ then the sub-sampling factor is defined by Integer parameter <b>factor</b>.
 
 <p>
 The following
-<a href=\"Modelica_Synchronous.Examples.ForDocumentation.RealSignals.SubSample\">example</a>
+<a href=\"Modelica_Synchronous.Examples.Elementary.RealSignals.SubSample\">example</a>
 samples a sine signal with a periodic clock of 20 ms period, and
 then sub-samples the resulting clocked signal with a factor of 3:<br>
 </p>
@@ -7229,7 +7229,7 @@ instead.
 
 <p>
 The following
-<a href=\"Modelica_Synchronous.Examples.ForDocumentation.RealSignals.SuperSample\">example</a>
+<a href=\"Modelica_Synchronous.Examples.Elementary.RealSignals.SuperSample\">example</a>
 samples a sine signal with a periodic clock of 20 ms period, and
 then super-samples the resulting clocked signal with a factor of 3:<br>
 </p>
@@ -7389,7 +7389,7 @@ since it does not induce \"vibrations\".
 
 <p>
 The following
-<a href=\"Modelica_Synchronous.Examples.ForDocumentation.RealSignals.SuperSampleInterpolated\">example</a>
+<a href=\"Modelica_Synchronous.Examples.Elementary.RealSignals.SuperSampleInterpolated\">example</a>
 samples a sine signal with a periodic clock of 20 ms period, and
 then super-samples the resulting clocked signal with a factor of 3
 and interpolates the result linearly:<br>
@@ -7538,7 +7538,7 @@ give the same result.
 
 <p>
 The following
-<a href=\"Modelica_Synchronous.Examples.ForDocumentation.RealSignals.ShiftSample\">example</a>
+<a href=\"Modelica_Synchronous.Examples.Elementary.RealSignals.ShiftSample\">example</a>
 samples a sine signal with a periodic clock of 20 ms period, and
 then shifts it with shiftCounter = 4 and resolution = 3:<br>
 </p>
@@ -7692,7 +7692,7 @@ block cannot be used to recover the input signal of ShiftSample
 
 <p>
 The following
-<a href=\"Modelica_Synchronous.Examples.ForDocumentation.RealSignals.BackSample\">example</a>
+<a href=\"Modelica_Synchronous.Examples.Elementary.RealSignals.BackSample\">example</a>
 samples a sine signal with a periodic clock of 20 ms period,
 shift-samples it with shiftCounter = 4 and resolution = 3 and then back-samples it with backCounter=4 and resolution = 3:<br>
 </p>
@@ -7806,7 +7806,7 @@ and provides u as output signal y.
 
 <p>
 The following
-<a href=\"Modelica_Synchronous.Examples.ForDocumentation.RealSignals.AssignClock\">example</a>
+<a href=\"Modelica_Synchronous.Examples.Elementary.RealSignals.AssignClock\">example</a>
 shows a discrete counter. In order to execute the counter with a sample period of 20ms an AssignClock block is used. Due to clock inference all equations within the blocks are deduced to be active at the clock ticks given by the periodicClock block.
 <br>
 </p>
@@ -7939,7 +7939,7 @@ and provides u as vector output signal y.
 
 <p>
 The following
-<a href=\"Modelica_Synchronous.Examples.ForDocumentation.RealSignals.AssignClockVectorized\">example</a>
+<a href=\"Modelica_Synchronous.Examples.Elementary.RealSignals.AssignClockVectorized\">example</a>
 shows two discrete counters. In order to execute the counters with a sample period of 20ms an AssignClockVectorized block is used. Due to clock inference all equations within the blocks are deduced to be active at the clock ticks given by the periodicClock block.
 <br>
 </p>
@@ -9089,7 +9089,7 @@ This block delays a signal. Similar to the <a href=\"Modelica_Synchronous.RealSi
 
 <p>
 The following
-<a href=\"Modelica_Synchronous.Examples.ForDocumentation.RealSignals.FractionalDelay\">example</a>
+<a href=\"Modelica_Synchronous.Examples.Elementary.RealSignals.FractionalDelay\">example</a>
 shows how a sample sine signal is delayed.
 <br>
 </p>
@@ -12767,9 +12767,9 @@ in blocks of the Modelica_Synchronous package.
   annotation (preferredView="info",
   uses(Modelica(version="3.2")),
     version="0.91",
-    versionBuild=0,
-    versionDate="2012-09-20",
-    dateModified = "2012-09-20 09:27:58Z",
+    versionBuild=1,
+    versionDate="2012-11-04",
+    dateModified = "$Date$",
     revisionId="$Id::                                       $",
   Documentation(info="<html>
 <p>
