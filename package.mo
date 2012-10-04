@@ -2051,7 +2051,6 @@ extends Modelica.Icons.Package;
 
     end CascadeControlledDrive;
 
-
     package Systems "Examples of complete systems"
       extends Modelica.Icons.ExamplesPackage;
 
@@ -4166,6 +4165,48 @@ Example used to generate a figure for the documentation of block
 </p>
 </html>"));
         end UniformNoise;
+
+        model FractionalDelay "Example of a FractionalDelay block"
+        import Modelica_Synchronous;
+           extends Modelica.Icons.Example;
+
+          Modelica_Synchronous.ClockSignals.Clocks.PeriodicExactClock periodicClock(
+              factor=20, resolution=Modelica_Synchronous.Types.Resolution.ms)
+            annotation (Placement(transformation(extent={{-68,-6},{-56,6}})));
+          Modelica.Blocks.Sources.Sine sine(freqHz=2,
+            offset=0.1,
+            startTime=0)
+            annotation (Placement(transformation(extent={{-80,20},{-60,40}})));
+          Modelica_Synchronous.RealSignals.Sampler.SampleClocked
+                                                          sample
+            annotation (Placement(transformation(extent={{-48,24},{-36,36}})));
+        Modelica_Synchronous.RealSignals.NonPeriodic.FractionalDelay
+          fractionalDelay(shift=3, resolution=2)
+          annotation (Placement(transformation(extent={{-26,20},{-6,40}})));
+        equation
+        connect(sine.y, sample.u) annotation (Line(
+            points={{-59,30},{-49.2,30}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(periodicClock.y, sample.clock) annotation (Line(
+            points={{-55.4,0},{-42,0},{-42,22.8}},
+            color={175,175,175},
+            pattern=LinePattern.Dot,
+            thickness=0.5,
+            smooth=Smooth.None));
+        connect(fractionalDelay.u, sample.y) annotation (Line(
+            points={{-28,30},{-35.4,30}},
+            color={0,0,127},
+            smooth=Smooth.None));
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                  -100},{100,100}}),   graphics), experiment(StopTime=0.09),
+          Documentation(info="<html>
+<p>
+Example used to generate a figure for the documentation of block
+<a href=\"Modelica_Synchronous.RealSignals.NonPeriodic.FractionalDelay\">Modelica_Synchronous.RealSignals.NonPeriodic.FractionalDelay</a>.
+</p>
+</html>"));
+        end FractionalDelay;
       annotation (Documentation(info="<html>
 <p>
 This package contains models that have been used to produce
@@ -4503,7 +4544,6 @@ Example used to generate a figure for the documentation of block
 </html>"));
         end SuperSample;
 
-
         model ShiftSample "Example of a ShiftSample block"
         import Modelica_Synchronous;
            extends Modelica.Icons.Example;
@@ -4773,9 +4813,6 @@ Example used to generate a figure for the documentation of block
 </p>
 </html>"));
         end UpSample;
-
-
-
 
       annotation (Documentation(info="<html>
 <p>
@@ -8445,7 +8482,36 @@ y is set to parameter y_start.
               extent={{60,10},{80,-10}},
               lineColor={0,0,127},
               fillColor={255,255,255},
-              fillPattern=FillPattern.Solid)}));
+              fillPattern=FillPattern.Solid)}),
+        Documentation(info="<html>
+<p>
+This block delays a signal. Similar to the <a href=\"Modelica_Synchronous.RealSignals.Sampler.ShiftSample\">ShiftSample</a> block the first activation of the clock of the output y is delayed by <b>shiftCounter</b>/<b>resolution</b>*interval(u) relative to the input u (interval(u) is the sample period of the clock associated to input u). However, in contrast to ShiftSample, the block provides a buffer for the input values and truly delays the input signal.
+</p>
+
+<h4>Example</h4>
+
+<p>
+The following
+<a href=\"Modelica_Synchronous.Examples.ForDocumentation.RealSignals.FractionalDelay\">example</a>
+shows how a sample sine signal is delayed.
+<br>
+</p>
+
+<table border=0 cellspacing=0 cellpadding=2>
+<tr><td width=\"50\"></td>
+    <td valign=\"bottom\"><img src=\"modelica://Modelica_Synchronous/Resources/Images/RealSignals/FractionalDelay_Model.png\"></td>
+    <td valign=\"bottom\">&nbsp;&nbsp;&nbsp;
+                        <img src=\"modelica://Modelica_Synchronous/Resources/Images/RealSignals/FractionalDelay_Result.png\"></td>
+    </tr>
+<tr><td></td>
+    <td align=\"center\">model</td>
+    <td align=\"center\">simulation result</td>
+   </tr>
+</table>
+<p>
+The parameter values <b>shiftCounter</b>=3 and <b>resolution</b>=2 are visible at the bottom of the fractionalDelay block.
+</p>
+</html>"));
     end FractionalDelay;
 
     annotation (Documentation(info="<html>
@@ -8820,7 +8886,7 @@ contrary to a general FIR filter.
                   -14,-4},{-4,-46},{0,-64},{2,-82}},
                                              color={0,0,127}),
         Polygon(points={{-84,90},{-92,68},{-76,68},{-84,90},{-84,90}}, lineColor={192,192,192}, fillColor={192,192,192},
-                fillPattern=   FillPattern.Solid),
+                fillPattern =  FillPattern.Solid),
           Line(points={{2,-82},{4,-64},{8,-56},{12,-56},{16,-60},{18,-66},{20,-82}},
                                                                              color={0,0,127}),
           Line(points={{20,-80},{20,-78},{20,-72},{22,-66},{24,-64},{28,-64},{32,-66},
@@ -8829,7 +8895,7 @@ contrary to a general FIR filter.
                   {62,-72},{64,-76},{64,-78},{64,-80},{64,-82}},
                                                 color={0,0,127}),
         Polygon(points={{90,-82},{68,-74},{68,-90},{90,-82}}, lineColor={192,192,192}, fillColor={192,192,192},
-                fillPattern=  FillPattern.Solid),
+                fillPattern = FillPattern.Solid),
             Text(
               extent={{-26,88},{88,48}},
               lineColor={175,175,175},
