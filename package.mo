@@ -35,10 +35,10 @@ A <b>Clock</b> type is a base data type (introduced in Modelica 3.3, additionall
 
 <p>
 Similarly to RealInput, RealOutput etc., clock input and output connectors, called ClockInput and ClockOutput, are defined in sublibrary
-<a href=\"modelica://Modelica_Synchronous.Interfaces\">Interfaces</a>
+<a href=\"modelica://Modelica_Synchronous.ClockSignals.Interfaces\">ClockSignal.Interfaces</a>
 in order to propagate clocks via connections. A clock signal can be generated with
 one of the blocks of sublibrary
-<a href=\"modelica://Modelica_Synchronous.Clocks\">Clocks</a>:
+<a href=\"modelica://Modelica_Synchronous.ClockSignals.Clocks\">ClockSignals.Clocks</a>:
 </p>
 
 <p>
@@ -52,7 +52,7 @@ by default visualized with dotted grey lines.
 
 <p>
 With the blocks of sublibrary
-<a href=\"modelica://Modelica_Synchronous.ClockSignals\">ClockSignals</a>
+<a href=\"modelica://Modelica_Synchronous.ClockSignals.Sampler\">ClockSignals.Sampler</a>
 a clock signal can be sub-sampled, super-sampled, or shift-sampled to generate
 a new clock signal. For example, with the following model, a periodic clock signal of 0.1 s
 is sub-sampled with a factor 3 and therefore a clock signal with a period of 0.3 s
@@ -111,7 +111,7 @@ triggering operators will trigger an event.
       extends Modelica.Icons.Information;
       annotation (Documentation(info="<html>
 <p>
-This library is based on the following references:
+<i>This library is based on the following references:</i>
 </p>
 
 <dl>
@@ -135,20 +135,109 @@ This library is based on the following references:
      Informationstechnik, supervised by Prof. M&uuml;ller (HTWK)
      and Prof. Martin Otter (DLR), 12 Nov. 2002.<br>&nbsp;</dd>
 </dl>
+
+<p>
+<i>
+The synchronous Modelica language elements allow for the first
+time to utilize a continuous-time, nonlinear, inverse model in
+a Modelica sampled-data system, by automatically discretizing
+this model and providing it as a clocked partition. This allows
+a convenient definition of certain nonlinear control systems,
+see example
+<a href=\"modelica://Modelica_Synchronous.Examples.Systems.ControlledMixingUnit\">Examples.Systems.ControlledMixingUnit</a>.
+Several practical details to use nonlinear inverse plant models in
+a control system are discussed in the following reference:</i>
+</p>
+
+<dl>
+<dt>Looye G., Thümmel M., Kurze M., Otter M., and Bals J. (2005):</dt>
+<dd> <b>Nonlinear Inverse Models for Control</b>.
+     Proceedings of 4th International Modelica Conference, ed. G. Schmitz,
+     Hamburg, March 7-8.
+     <a href=\"https://www.modelica.org/events/Conference2005/online_proceedings/Session3/Session3c3.pdf\">Download</a>.
+     <br>&nbsp;</dd>
+</dl>
+
+<p>
+<i>
+The synchronous Modelica language elements used in this library
+are based on the clock calculus and inference system proposed by (Colaco and
+Pouzet 2003) and implemented in Lucid Synchrone version 2 and 3 (Pouzet 2006).
+However, the Modelica approach also uses multi-rate periodic clocks based on
+rational arithmetic introduced by (Forget et. al. 2008), as an extension of
+the Lucid Synchrone semantics. These approaches belong to the class of
+synchronous languages (Benveniste et. al. 2002):</i>
+</p>
+
+<dl>
+<dt>Benveniste A., Caspi P., Edwards S.A., Halbwachs N., Le Guernic P., and Simone R. (2003):</dt>
+<dd> <b>The Synchronous Languages Twelve Years Later</b>.
+     Proceedings of the IEEE, Vol., 91, No. 1.
+     <a href=\"http://www.irisa.fr/distribcom/benveniste/pub/synch_ProcIEEE_2002.pdf\">Download</a>.
+     <br>&nbsp;</dd>
+
+<dt>Colaco J.-L., and Pouzet M. (2003):</dt>
+<dd><b>Clocks as First Class Abstract Types.</b>
+    In Third International Conference on
+    Embedded Software (EMSOFT'03), Philadelphia, Pennsylvania, USA, October 2003.
+     <a href=\"http://www.di.ens.fr/~pouzet/lucid-synchrone/papers/emsoft03.ps.gz\">Download</a>.
+    <br>&nbsp;</dd>
+
+<dt>Forget J., F. Boniol, D. Lesens, C. Pagetti (2008):</dt>
+<dd> <b>A Multi-Periodic Synchronous Data-Flow Language.</b>
+     In 11th IEEE High Assurance Systems Engineering Symposium (HASE'08),
+     Dec. 3-5 2008, Nanjing, China, pp. 251-260.
+     <a href=\"http://ieeexplore.ieee.org/xpl/articleDetails.jsp?reload=true&arnumber=4708883&contentType=Conference+Publications\">Download</a>.
+     <br>&nbsp;</dd>
+
+<dt>Pouzet M. (2006):</dt>
+<dd> <b>Lucid Synchrone, Version 3.0, Tutorial and Reference Manual</b>.
+     <a href=\"http://www.di.ens.fr/~pouzet/lucid-synchrone/\">Download</a>.
+    <br>&nbsp;</dd>
+</dl>
 </html>"));
     end Literature;
 
     package ReleaseNotes "Release notes"
       extends Modelica.Icons.Information;
+
+      class Version_0_91 "Version 0.91 (Sept. 20, 2012)"
+        extends Modelica.Icons.Information;
+        annotation (Documentation(info="<html>
+<p>
+First version of the library provided on the Modelica web page.
+Changes with respect to version 0.9:
+</p>
+
+<ul>
+<li> The library has been slightly restructured. </li>
+<li> Documentation has been significantly enhanced
+     (nearly all elements of the library are documented now).</li>
+<li> Simple examples have been added for many
+     blocks of the library in the new package
+     <a href=\"modelica://Modelica_Synchronous.Examples.Elementary\">Examples.Elementary</a>.
+     These blocks have been used to generate the figures in the documentation of
+     many blocks. Furthermore, they are used for testing these blocks.</li>
+</ul>
+</html>"));
+      end Version_0_91;
+
       class Version_0_9 "Version 0.9 (Aug. 28, 2012)"
         extends Modelica.Icons.Information;
         annotation (Documentation(info="<html>
 <p>
-First public version of the library.
+This library version has been used
+by the participants of a tutorial at the 9th
+Modelica Conference 2012.
 </p>
 </html>"));
       end Version_0_9;
       annotation (Documentation(info="<html>
+<p>
+This section summarizes the changes that have been performed
+on the Modelica_Synchronous library.
+</p>
+</html>"),        Documentation(info="<html>
 <p>
 This section summarizes the changes that have been performed
 on the Modelica_Synchronous library.
@@ -862,8 +951,12 @@ extends Modelica.Icons.Package;
               preserveAspectRatio=true,
               extent={{-100,-100},{100,100}},
               grid={2,2})),
-          Documentation(info="<HTML>
-</HTML>"),experiment(
+          Documentation(info="<html>
+<p>
+Original simple controlled drive with a
+<b>continuous-time</b> controller.
+</p>
+</html>"),experiment(
             StopTime=5));
       end Continuous;
 
@@ -970,8 +1063,13 @@ extends Modelica.Icons.Package;
               preserveAspectRatio=true,
               extent={{-100,-100},{100,100}},
               grid={2,2})),
-          Documentation(info="<HTML>
-</HTML>"),experiment(
+          Documentation(info="<html>
+<p>
+Simple controlled drive with discrete-time textbook controller
+modelled as a clocked partition
+(period is not used in the controller)
+</p>
+</html>"),experiment(
             StopTime=5));
       end ClockedWithDiscreteTextbookController;
 
@@ -1078,8 +1176,16 @@ extends Modelica.Icons.Package;
               preserveAspectRatio=true,
               extent={{-100,-100},{100,100}},
               grid={2,2})),
-          Documentation(info="<HTML>
-</HTML>"),experiment(
+          Documentation(info="<html>
+<p>
+Simple controlled drive with discrete-timer controller
+modelled as a clocked partition.
+The discrete-time PI controller is parameterized
+with the parameters of the continuous-time version and the
+discrete-time version is derived from this parameterization
+taken into account the actual sample period.
+</p>
+</html>"),experiment(
             StopTime=3));
       end ClockedWithDiscreteController;
 
@@ -1187,8 +1293,14 @@ extends Modelica.Icons.Package;
               preserveAspectRatio=true,
               extent={{-100,-100},{100,100}},
               grid={2,2})),
-          Documentation(info="<HTML>
-</HTML>"),experiment(StopTime=5));
+          Documentation(info="<html>
+<p>
+This is the same model as
+<a href=\"modelica://Modelica_Synchronous.Examples.SimpleControlledDrive.ClockedWithDiscreteController\">ClockedWithDiscreteController</a>.
+The only difference is that the clock is defined with an exact periodic clock and not with
+a Real periodic clock.
+</p>
+</html>"),experiment(StopTime=5));
       end ExactlyClockedWithDiscreteController;
 
       model ClockedWithDiscretizedContinuousController
@@ -1297,8 +1409,18 @@ extends Modelica.Icons.Package;
               preserveAspectRatio=true,
               extent={{-100,-100},{100,100}},
               grid={2,2})),
-          Documentation(info="<HTML>
-</HTML>"),experiment(
+          Documentation(info="<html>
+<p>
+Simple controlled drive with discrete-time controller
+modelled as a clocked partition.
+The PI controller is defined with a continuous-time block.
+The clocked partition is automatically discretized with an
+implicit Euler method by setting parameter 
+<b>useSolver</b> = true in the <b>Advanced</b> menu
+of block <b>periodicClock</b> and then selecting
+<b>ImplicitEuler</b> as <b>SolverMethod</b> for the partition.
+</p>
+</html>"),experiment(
             StopTime=5));
       end ClockedWithDiscretizedContinuousController;
 
@@ -1400,7 +1522,7 @@ extends Modelica.Icons.Package;
             color={0,0,127},
             smooth=Smooth.None));
       connect(periodicClock.y, assignClock1.clock) annotation (Line(
-          points={{-41.4,-68},{-22,-68},{-22,-68},{2,-68},{2,-37.2}},
+          points={{-41.4,-68},{2,-68},{2,-37.2}},
           color={175,175,175},
           pattern=LinePattern.Dot,
           thickness=0.5,
@@ -1427,10 +1549,36 @@ extends Modelica.Icons.Package;
               preserveAspectRatio=true,
               extent={{-100,-100},{100,100}},
               grid={2,2})),
-          Documentation(info="<HTML>
-</HTML>"),experiment(
+          Documentation(info="<html>
+<p>
+This is the same model as
+<a href=\"modelica://Modelica_Synchronous.Examples.SimpleControlledDrive.ClockedWithDiscreteController\">ClockedWithDiscreteController</a>.
+The only difference is that real world effects like limitation, value discretization, noise
+and computing time are taken into account.
+</p>
+</html>"),experiment(
             StopTime=5));
       end ClockedWith_AD_DA_Effects;
+    annotation (Documentation(info="<html>
+<p>
+This package shows the same example in different variants.
+</p>
+
+<p>
+Model <a href=\"modelica://Modelica_Synchronous.Examples.SimpleControlledDrive.Continuous\">SimpleControlledDrive.Continuous</a>
+is the <b>continuous-time</b> model from which the sampled-data versions are derived.
+The model consists of a reference controller (\"ramp\"), a feedback controller 
+(\"feedback\" and \"PI\") and a plant (\"torque\", \"load\" and \"speed\").
+The task of the controller is to control the speed of the load inertia
+using a simple PI controller.
+</p>
+
+<p>
+The other example models under this package show different variants how
+the continuous-time model from above can be transformed to a periodic sampled-data
+system with one sample period.
+</p>
+</html>"));
     end SimpleControlledDrive;
 
     package CascadeControlledDrive
@@ -1545,8 +1693,12 @@ extends Modelica.Icons.Package;
               preserveAspectRatio=true,
               extent={{-100,-100},{100,100}},
               grid={2,2})),
-          Documentation(info="<HTML>
-</HTML>"),experiment(StopTime=4));
+          Documentation(info="<html>
+<p>
+Original cascade controlled drive with a
+<b>continuous-time</b> controller.
+</p>
+</html>"),experiment(StopTime=4));
       end Continuous;
 
       model SubClocked
@@ -1601,9 +1753,8 @@ extends Modelica.Icons.Package;
         Modelica_Synchronous.RealSignals.Sampler.SampleClocked
                                            sample3
           annotation (Placement(transformation(extent={{-104,4},{-92,16}})));
-        Modelica_Synchronous.RealSignals.Sampler.SuperSample
-                                                super1(
-            inferFactor=true)
+        Modelica_Synchronous.RealSignals.Sampler.SuperSample super(inferFactor=
+            true)
           annotation (Placement(transformation(extent={{-28,4},{-16,16}})));
         Modelica_Synchronous.ClockSignals.Sampler.SubSample
                                                subSample1(factor=5)
@@ -1665,11 +1816,11 @@ extends Modelica.Icons.Package;
             points={{-115,10},{-105.2,10}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(gain.y, super1.u) annotation (Line(
+      connect(gain.y, super.u)    annotation (Line(
             points={{-35,10},{-29.2,10}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(super1.y, feedback2.u1) annotation (Line(
+      connect(super.y, feedback2.u1)    annotation (Line(
             points={{-15.4,10},{-10.4,10}},
             color={0,0,127},
             smooth=Smooth.None));
@@ -1718,8 +1869,16 @@ extends Modelica.Icons.Package;
               preserveAspectRatio=true,
               extent={{-100,-100},{100,100}},
               grid={2,2})),
-          Documentation(info="<HTML>
-</HTML>"),experiment(StopTime=4));
+          Documentation(info="<html>
+<p>
+Cascade control drive with discrete-time controller where one
+periodic clock is defined, the second periodic clock is derived by
+sub-sampling of the first clock, and both clocks are associated to
+the corresponding controller partitions.
+The super-sampling factor of block \"super\" is derived by
+clock inference.
+</p>
+</html>"),experiment(StopTime=4));
       end SubClocked;
 
       model SuperSampled
@@ -1775,8 +1934,8 @@ extends Modelica.Icons.Package;
         Modelica_Synchronous.RealSignals.Sampler.Sample
                                                     sample3
           annotation (Placement(transformation(extent={{-100,4},{-88,16}})));
-        Modelica_Synchronous.RealSignals.Sampler.SuperSample
-                                                super1(factor=5, inferFactor=false)
+        Modelica_Synchronous.RealSignals.Sampler.SuperSample super(factor=5,
+          inferFactor=false)
           annotation (Placement(transformation(extent={{-28,4},{-16,16}})));
         Modelica_Synchronous.ClockSignals.Clocks.PeriodicRealClock
                                  periodicRealClock(period=0.02)
@@ -1835,11 +1994,11 @@ extends Modelica.Icons.Package;
             points={{-113,18},{-106,18},{-106,10},{-101.2,10}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(gain.y, super1.u) annotation (Line(
+      connect(gain.y, super.u)    annotation (Line(
             points={{-35,10},{-29.2,10}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(super1.y, feedback2.u1) annotation (Line(
+      connect(super.y, feedback2.u1)    annotation (Line(
             points={{-15.4,10},{-10.4,10}},
             color={0,0,127},
             smooth=Smooth.None));
@@ -1876,8 +2035,14 @@ extends Modelica.Icons.Package;
               preserveAspectRatio=true,
               extent={{-100,-100},{100,100}},
               grid={2,2})),
-          Documentation(info="<HTML>
-</HTML>"),experiment(StopTime=4));
+          Documentation(info="<html>
+<p>
+Cascade control drive with discrete-time controller where one
+periodic clock is defined for the fastest control loop,
+and the periodic clock of the slower control loop is implicitly
+defined by the super-sampling factor defined at the \"super\" block.
+</p>
+</html>"),experiment(StopTime=4));
       end SuperSampled;
 
       model AbsoluteClocks
@@ -1933,8 +2098,8 @@ extends Modelica.Icons.Package;
         Modelica_Synchronous.RealSignals.Sampler.SampleClocked
                                            sample3
           annotation (Placement(transformation(extent={{-100,4},{-88,16}})));
-        Modelica_Synchronous.RealSignals.Sampler.SuperSample
-                                                super1(inferFactor=true)
+        Modelica_Synchronous.RealSignals.Sampler.SuperSample super(inferFactor=
+            true)
           annotation (Placement(transformation(extent={{-28,4},{-16,16}})));
         Modelica_Synchronous.ClockSignals.Clocks.PeriodicExactClock
                                   slowClock(factor=100, resolution=
@@ -1998,11 +2163,11 @@ extends Modelica.Icons.Package;
             points={{-113,18},{-106,18},{-106,10},{-101.2,10}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(gain.y, super1.u) annotation (Line(
+      connect(gain.y, super.u)    annotation (Line(
             points={{-35,10},{-29.2,10}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(super1.y, feedback2.u1) annotation (Line(
+      connect(super.y, feedback2.u1)    annotation (Line(
             points={{-15.4,10},{-10.4,10}},
             color={0,0,127},
             smooth=Smooth.None));
@@ -2045,16 +2210,46 @@ extends Modelica.Icons.Package;
               preserveAspectRatio=true,
               extent={{-100,-100},{100,100}},
               grid={2,2})),
-          Documentation(info="<HTML>
-</HTML>"),experiment(StopTime=4));
+          Documentation(info="<html>
+<p>
+Cascade control drive with discrete-time controller where two
+periodic clock with absolute periods are defined and
+are associated to
+the corresponding controller partitions.
+The super-sampling factor of block \"super\" is derived by
+clock inference.
+</p>
+</html>"),experiment(StopTime=4));
       end AbsoluteClocks;
 
+    annotation (Documentation(info="<html>
+<p>
+This package shows the same example in different variants.
+</p>
+
+<p>
+Model <a href=\"modelica://Modelica_Synchronous.Examples.CascadeControlledDrive.Continuous\">CascadeControlledDrive.Continuous</a>
+is the <b>continuous-time</b> model from which the sampled-data versions are derived.
+The \"CascadeControlledDrive\" example adds another position control cascade to the 
+<a href=\"modelica://Modelica_Synchronous.Examples.SimpleControlledDrive\">SimpleControlledDrive</a>
+example. This model demonstrates a control system with two cascaded control loops.
+The goal is to control the angle of the load inertia.
+</p>
+
+<p>
+The other example models under this package show different variants how
+the continuous-time model from above can be transformed to a periodic sampled-data
+system with two sample periods, where the two discrete-time controllers are
+precisely time-synchronized to each other.
+</p>
+</html>"));
     end CascadeControlledDrive;
 
     package Systems "Examples of complete systems"
       extends Modelica.Icons.ExamplesPackage;
 
       model ControlledMixingUnit
+      "Simple example of a mixing unit where a (discretized) nonlinear inverse plant model is used as feedforward controller"
          extends Modelica.Icons.Example;
       import SI = Modelica.SIunits;
 
@@ -2131,7 +2326,7 @@ extends Modelica.Icons.Package;
                 extent={{4,-20},{24,0}},  rotation=0)));
         Modelica_Synchronous.RealSignals.Sampler.Sample
                                            sample1
-          annotation (Placement(transformation(extent={{54,-46},{42,-34}})));
+          annotation (Placement(transformation(extent={{76,-46},{64,-34}})));
         Modelica_Synchronous.RealSignals.Sampler.Hold
                                          hold1
           annotation (Placement(transformation(extent={{64,-16},{76,-4}})));
@@ -2144,11 +2339,10 @@ extends Modelica.Icons.Package;
           init=Modelica.Blocks.Types.Init.NoInit,
           analogFilter=Modelica.Blocks.Types.AnalogFilter.CriticalDamping)
           annotation (Placement(transformation(extent={{-86,14},{-66,34}})));
-        Modelica_Synchronous.ClockSignals.Clocks.PeriodicRealClock
-                                 periodicRealClock(
-          period=1,
-          solverMethod="ExplicitEuler",
-          useSolver=true)
+        Modelica_Synchronous.ClockSignals.Clocks.PeriodicRealClock periodicClock(
+        period=1,
+        solverMethod="ExplicitEuler",
+        useSolver=true)
           annotation (Placement(transformation(extent={{-134,-16},{-122,-4}})));
       initial equation
         filter.x[1]=0.497522;
@@ -2171,11 +2365,11 @@ extends Modelica.Icons.Package;
             color={0,0,127},
             smooth=Smooth.None));
         connect(mixingUnit.T, sample1.u) annotation (Line(
-            points={{110,-16},{116,-16},{116,-40},{55.2,-40}},
+            points={{110,-16},{116,-16},{116,-40},{77.2,-40}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(sample1.y, feedback.u2) annotation (Line(
-            points={{41.4,-40},{-14,-40},{-14,-18}},
+            points={{63.4,-40},{-14,-40},{-14,-18}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(add.y, hold1.u) annotation (Line(
@@ -2206,26 +2400,183 @@ extends Modelica.Icons.Package;
             points={{-65,24},{-56.6,24}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(periodicRealClock.y, sample2.clock) annotation (Line(
+      connect(periodicClock.y, sample2.clock)       annotation (Line(
             points={{-121.4,-10},{-102,-10},{-102,16.8}},
             color={175,175,175},
             pattern=LinePattern.Dot,
             thickness=0.5,
             smooth=Smooth.None));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-140,
-                  -100},{120,100}}),      graphics),
+                -100},{120,100}}),        graphics={Rectangle(extent={{-90,44},
+                  {60,-44}}, lineColor={255,0,0}), Text(
+              extent={{12,42},{58,34}},
+              lineColor={255,0,0},
+              fillColor={0,0,255},
+              fillPattern=FillPattern.Solid,
+              textString="controller")}),
           experiment(StopTime=300),
           Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
-                  100,100}})));
+                  100,100}})),
+          Documentation(info="<html>
+<p>
+Since a long time, Modelica is used to model advanced nonlinear control systems.
+Especially, Modelica allows a semi-automatic treatment of inverse nonlinear
+plant models. In the fundamental article (Looye et.al. 2005, see
+<a href=\"modelica://Modelica_Synchronous.UsersGuide.Literature\">Literature</a> or
+<a href=\"https://www.modelica.org/events/Conference2005/online_proceedings/Session3/Session3c3.pdf\">Download</a>) 
+this approach is described and several controller structures are presented to
+utilize an inverse plant model in the controller. This approach is attractive
+because it results in a systematic procedure to design a controller for the
+whole operating range of a plant. This is in contrast to standard controller
+design techniques that usually design a linear controller for a plant model
+that is linearized at a specific operating point. Therefore the operating range of such controllers is inherently limited.
+</p>
+
+<p>
+Up to Modelica 3.2, controllers with inverse plant models can only be
+defined as continuous-time systems. Via the export mechanism of a Modelica tool
+they could be exported with solvers embedded in the code and then used as
+sampled data system in other environments. However, it is not possible
+to re-import the sampled data system to Modelica.
+</p>
+
+<p>
+The synchronous features of Modelica 3.3 together with the
+Modelica_Synchronous library offer now completely new possibilities,
+so that the inverse model can be designed and evaluated as sampled data
+system within Modelica and a Modelica simulation environment. 
+This approach is shown at hand of a simple example using
+a nonlinear plant model of a
+mixing unit (Föllinger O. (1998): Nichtlineare Regelungen I,
+Oldenbourg Verlag, 8. Auflage, page 279) and utilizing this plant
+model as nonlinear feed-forward controller according to (Looye et.al. 2005):
+</p>
+
+<p>
+A substance A is flowing continuously into a mixing reactor.
+Due to a catalyst, the substance reacts and splits into several base
+substances that are continuously removed. The reaction generates
+energy and therefore the reactor is cooled with a cooling medium.
+The cooling temperature T_c(t) in [K] is the primary actuation signal.
+Substance A is described by its concentration c(t) in [mol/l] and
+its temperature T(t) in [K].
+The concentration c(t) is the signal to be primarily controlled
+and the temperature T(t) is the signal that is measured.
+These equations are collected together in input/output block
+<a href=\"modelica://Modelica_Synchronous.Examples.Systems.Utilities.ComponentsMixingUnit.MixingUnit\">Utilities.ComponentsMixingUnit.MixingUnit</a>.
+</p>
+
+<p>
+<img src=\"modelica://Modelica_Synchronous/Resources/Images/Examples/ControlledMixingUnit_PlantModel.png\">
+</p>
+
+<p>
+The design of the control system proceeds now in the following steps:
+</p>
+
+<h4>Pre-Filter</h4>
+<p>
+Inverting a model usually means that equations need to be symbolically
+differentiated and that higher derivatives of the inputs are needed
+(that are usually not available). One approach is to filter the inputs,
+so that a Modelica tool can determine the derivatives of the filtered
+input from the filter states. The minimum needed filter order is determined
+by first inverting the continuous-time plant model from the variable
+to be primarily controlled (here: \"c\") to the actuator input
+(here: \"T_c\"). This is performed with the help of block
+<a href=\"modelica://Modelica.Blocks.Math.InverseBlockConstraints\">Modelica.Blocks.Math.InverseBlockConstraints</a>
+that allows connecting an external input to an output 
+in the pre-filter design block
+<a href=\"modelica://Modelica_Synchronous.Examples.Systems.Utilities.ComponentsMixingUnit.FilterOrder\">Utilities.ComponentsMixingUnit.FilterOrder</a>:
+</p>
+
+<p>
+<img src=\"modelica://Modelica_Synchronous/Resources/Images/Examples/ControlledMixingUnit_FilterDesign.png\">
+</p>
+
+
+<p>
+Translating this
+model will generate the continuous-time inverse plant model.
+However, a Modelica tool will give an error message that it
+has to differentiate the model, but this requires the
+<b>second derivative</b> of the external input c_ref and this derivative
+is not available. The conclusion is that a low pass filter of at
+least second order has to be connected between c_ref and c, for example
+<a href=\"modelica:Modelica.Blocks.Continuous.Filter\">Modelica.Blocks.Continuous.Filter</a>. Only filter types should be used that do not have \"vibrations\" in the time domain for
+a step input. Therefore, parameter <b>analogFilter</b> of the component should be
+selected as <b>CriticalDamping</b> (= only real poles), or 
+<b>Bessel</b> (= nearly no vibrations, but steeper frequency response as
+CriticalDamping). The cut-off frequency <b>f_cut</b> is manually
+selected by simulations of the closed loop system. In the example, 
+a CriticalDamping filter of third order (the third order is selected to
+get smoother signals) and a cut-off frequency of 1/300 Hz is used.
+</p>
+
+<h4>Design of Controller</h4>
+<p>
+The controller for the mixing unit is shown in the diagram layer of block
+at hand, as
+well as in the following figure:
+</p>
+
+<p>
+<img src=\"modelica://Modelica_Synchronous/Resources/Images/Examples/ControlledMixingUnit_Controller.png\">
+</p>
+
+It consists of the filter discussed above. The input to the filter is the reference
+concentration which is filtered by the low pass filter. The output of the filter
+is used as input to the concentration c in the inverse plant model.
+This model computes the desired cooling temperature T_c (which is used
+as desired cooling temperature at the output of the controller)
+and the desired temperature T (which is used as desired value for
+the feedback controller). This part of the control system is the
+\"feed-forward\" part that computes the desired actuator signal.
+As feedback controller a simple P-Controller with one gain is used.
+</p>
+
+<p>
+This controller could be defined as continuous-time system in previous Modelica
+versions. However, with Modelica 3.3 it is now also possible to define the
+controller as sampled data system. For this, the two inputs are sampled
+(sample1 and sample2) and the actuator output is hold (hold1).
+The controller partition is then associated with a periodic clock
+(via sample2) that has a sample period of 1 s and a
+solverMethod = \"ExplicitEuler\". Since the controller partition is a
+continuous-time system, it is discretized and solved with an explicit
+Euler method at every clock tick (by integrating from the previous to
+the actual time instant of the clock).
+</p>
+
+<h4>Simulation Results</h4>
+<p>
+The controller works perfectly if the same parameters for the plant
+and the inverse plant model are used (follows perfectly the filtered reference
+concentration). Changing all parameters of the inverse plant model by 50 %
+(with exception of parameter <b>e</b> since the plant is very sensitive to it)
+still results in a reasonable control behavior as shown in the next two figures:
+</p>
+
+<p>
+<img src=\"modelica://Modelica_Synchronous/Resources/Images/Examples/ControlledMixingUnit_Result.png\">
+</p>
+
+<p>
+The green curve in the upper window is the (clocked) output of the filter,
+that is, it is the desired concentration. The red curve in the upper window is the
+concentration of model mixingUnit, which is the concentration in the plant.
+Obviously, the concentration follows reasonably well the desired one. By using a more involved feedback controller, the control error could be substantially reduced.
+</p>
+</html>"));
       end ControlledMixingUnit;
 
       model EngineThrottleControl
        extends Modelica.Icons.Example;
 
-        Modelica.Blocks.Sources.Step crankshaftSpeedRef(
-          startTime=5,
-          offset=207.34,
-          height=103.67)
+        Modelica.Blocks.Sources.Step speedRef(
+        startTime=5,
+        offset=207.34,
+        height=103.67)
           annotation (Placement(transformation(extent={{-90,-4},{-70,16}})));
         Modelica_Synchronous.Examples.Systems.Utilities.ComponentsThrottleControl.SpeedControl
           speedControl
@@ -2264,8 +2615,8 @@ extends Modelica.Icons.Package;
               rotation=-90,
               origin={64,-32})));
       equation
-        connect(crankshaftSpeedRef.y, sample1.u) annotation (Line(
-            points={{-69,6},{-65.2,6},{-65.2,6},{-61.4,6}},
+      connect(speedRef.y, sample1.u)             annotation (Line(
+            points={{-69,6},{-61.4,6}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(sample1.y, speedControl.N_des) annotation (Line(
@@ -2319,7 +2670,56 @@ extends Modelica.Icons.Package;
                                        Icon(coordinateSystem(preserveAspectRatio=true,
                         extent={{-100,-100},{100,100}}),
                                             graphics),
-        experiment(StopTime=1.1));
+        experiment(StopTime=1.1),
+        Documentation(info="<html>
+<p>
+This example shows how to model a non-periodic synchronous sampled data systems
+with the Modelica_Synchronous library.
+This is demonstrated at hand of a closed-loop throttle control synchronized
+to the crankshaft angle of an internal combustion engine.
+This system has the following properties:
+</p>
+
+<ul>
+<li> Engine speed is regulated with a throttle actuator.</li>
+<li> Controller execution is synchronized with the engine crankshaft angle.</li>
+<li> The influence of disturbances, such as a change in load torque, is reduced.</li>
+</ul>
+
+<p>
+The complete system is shown in the diagram layer and in the figure below: 
+</p>
+
+<p>
+<img src=\"modelica://Modelica_Synchronous/Resources/Images/Examples/EngineThrottleControl_Model.png\">
+</p>
+
+<p>
+Block speedControl is the discrete control system. The boundaries of this controller
+are defined by sample1 and hold1. A special element triggeredSpeed
+has the crankshaft angle as input and provides the sampled crankshaft
+speed as output. Additionally, the clock associated with the output
+(and therefore also to component speedControl) ticks, at every 180 degree
+rotation of the crankshaft angle. This special application is implemented
+in the text layer of component 
+<a href=\"modelica://Modelica_Synchronous.Examples.Systems.Utilities.ComponentsThrottleControl.CrankshaftPositionEvent\">triggeredSpeed</a> as:
+</p>
+
+<pre>
+ N = der(angle);
+ when Clock(angle >= hold(offset)+Modelica.Constants.pi) then
+      offset = sample(angle);
+     N_clocked = sample(N);
+ end when;
+</pre>
+
+<p>
+Here, N is the derivative of the crankshaft angle. Whenever this angle becomes
+larger as 180 degree an event clock is activated due to Clock(..). 
+In such a case the when-clause becomes active, and the speed N is sampled,
+and the new offset for the next event is computed.
+</p>
+</html>"));
       end EngineThrottleControl;
 
       package Utilities
@@ -3109,7 +3509,8 @@ initial equation
                       100,100}})));
           end MixingUnitWithContinuousControl;
 
-          model FilterOrder
+          model FilterOrder "Block to determine the minimum filter order"
+             extends Modelica.Icons.Example;
             MixingUnit mixingUnit
               annotation (Placement(transformation(extent={{-20,-2},{0,18}})));
             Modelica.Blocks.Math.InverseBlockConstraints
@@ -3135,16 +3536,108 @@ initial equation
           end FilterOrder;
         end ComponentsMixingUnit;
       end Utilities;
+    annotation (Documentation(info="<html>
+<p>
+This package contains complete <b>system models</b> of
+simplified realistic applications.
+</p>
+</html>"));
     end Systems;
 
     package Elementary
     "Examples that are used for the documentation of the blocks"
       extends Modelica.Icons.ExamplesPackage;
 
+      package ClockSignals
+      "Examples that are used for the documentation of the Modelica_Synchronous.ClockSignals sub-library"
+        extends Modelica.Icons.ExamplesPackage;
+
+        model SubSample "Example of a SubSample block for Clock signals"
+        import Modelica_Synchronous;
+           extends Modelica.Icons.Example;
+
+          Modelica_Synchronous.ClockSignals.Clocks.PeriodicExactClock periodicClock(
+              factor=20, resolution=Modelica_Synchronous.Types.Resolution.ms)
+            annotation (Placement(transformation(extent={{-56,24},{-44,36}})));
+        Modelica_Synchronous.ClockSignals.Sampler.SubSample subSample(
+                               factor=3)
+          annotation (Placement(transformation(extent={{-22,24},{-10,36}})));
+        equation
+        connect(periodicClock.y, subSample.u) annotation (Line(
+            points={{-43.4,30},{-23.2,30}},
+            color={175,175,175},
+            pattern=LinePattern.Dot,
+            thickness=0.5,
+            smooth=Smooth.None));
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                  -100},{100,100}}),   graphics), experiment(StopTime=0.2),
+          Documentation(info="<html>
+<p>
+Example used to generate a figure for the documentation of block
+<a href=\"Modelica_Synchronous.ClockSignals.Sampler.SubSample\">Modelica_Synchronous.ClockSignals.Sampler.SubSample</a>.
+</p>
+</html>"));
+        end SubSample;
+
+        model SuperSample "Example of a SuperSample block for Clock signals"
+        import Modelica_Synchronous;
+           extends Modelica.Icons.Example;
+
+          Modelica_Synchronous.ClockSignals.Clocks.PeriodicExactClock periodicClock(
+              factor=20, resolution=Modelica_Synchronous.Types.Resolution.ms)
+            annotation (Placement(transformation(extent={{-56,24},{-44,36}})));
+        Modelica_Synchronous.ClockSignals.Sampler.SuperSample superSample(
+              factor=3)
+          annotation (Placement(transformation(extent={{-26,24},{-14,36}})));
+        equation
+        connect(periodicClock.y, superSample.u) annotation (Line(
+            points={{-43.4,30},{-27.2,30}},
+            color={175,175,175},
+            pattern=LinePattern.Dot,
+            thickness=0.5,
+            smooth=Smooth.None));
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                  -100},{100,100}}),   graphics), experiment(StopTime=0.08),
+          Documentation(info="<html>
+<p>
+Example used to generate a figure for the documentation of block
+<a href=\"Modelica_Synchronous.ClockSignals.Sampler.SuperSample\">Modelica_Synchronous.ClockSignals.Sampler.SuperSample</a>.
+</p>
+</html>"));
+        end SuperSample;
+
+        model ShiftSample "Example of a ShiftSample block for Clock signals"
+        import Modelica_Synchronous;
+           extends Modelica.Icons.Example;
+
+          Modelica_Synchronous.ClockSignals.Clocks.PeriodicExactClock periodicClock(
+              factor=20, resolution=Modelica_Synchronous.Types.Resolution.ms)
+            annotation (Placement(transformation(extent={{-56,24},{-44,36}})));
+          Modelica_Synchronous.ClockSignals.Sampler.ShiftSample shiftSample(
+            shiftCounter=4, resolution=3)
+            annotation (Placement(transformation(extent={{-22,24},{-10,36}})));
+        equation
+        connect(periodicClock.y, shiftSample.u) annotation (Line(
+            points={{-43.4,30},{-23.2,30}},
+            color={175,175,175},
+            pattern=LinePattern.Dot,
+            thickness=0.5,
+            smooth=Smooth.None));
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                  -100},{100,100}}),   graphics), experiment(StopTime=0.09),
+          Documentation(info="<html>
+<p>
+Example used to generate a figure for the documentation of block
+<a href=\"Modelica_Synchronous.ClockSignals.Sampler.ShiftSample\">Modelica_Synchronous.ClockSignals.Sampler.ShiftSample</a>.
+</p>
+</html>"));
+        end ShiftSample;
+      end ClockSignals;
+
       package RealSignals
       "Examples that are used for the documentation of the Modelica_Synchronous.RealSignals sub-library"
         extends Modelica.Icons.ExamplesPackage;
-        model Sample1 "Example of a Sample block"
+        model Sample1 "Example of a Sample block for Real signals"
            extends Modelica.Icons.Example;
 
           Modelica.Blocks.Sources.Sine sine(freqHz=2,
@@ -3184,7 +3677,7 @@ Example used to generate a figure for the documentation of block
         end Sample1;
 
         model Sample2
-        "Example of a Sample block with discontinuous input signals"
+        "Example of a Sample block with discontinuous Real input signals"
          extends Modelica.Icons.Example;
           Modelica_Synchronous.RealSignals.Sampler.Sample sample
             annotation (Placement(transformation(extent={{-46,24},{-34,36}})));
@@ -3221,8 +3714,8 @@ Example used to generate a figure for the documentation of block
         end Sample2;
 
         model Sample3
-        "Example of a Sample block with direct feed-through in the continuous-time and the clocked partition"
-        import Modelica_Synchronous;
+        "Example of a Sample block for Real signals with direct feed-through in the continuous-time and the clocked partition"
+          import Modelica_Synchronous;
          extends Modelica.Icons.Example;
           Modelica_Synchronous.RealSignals.Sampler.SampleClocked sample1
             annotation (Placement(transformation(extent={{-52,24},{-40,36}})));
@@ -3281,8 +3774,8 @@ Example used to generate a figure for the documentation of block
 </html>"));
         end Sample3;
 
-        model SampleClocked "Example of a SampleClocked block"
-        import Modelica_Synchronous;
+        model SampleClocked "Example of a SampleClocked block for Real signals"
+          import Modelica_Synchronous;
            extends Modelica.Icons.Example;
 
           Modelica.Blocks.Sources.Sine sine(freqHz=2,
@@ -3317,8 +3810,8 @@ Example used to generate a figure for the documentation of block
         end SampleClocked;
 
         model SampleVectorizedAndClocked
-        "Example of a SampleVectorizedAndClocked block"
-        import Modelica_Synchronous;
+        "Example of a SampleVectorizedAndClocked block for Real signals"
+          import Modelica_Synchronous;
            extends Modelica.Icons.Example;
 
           Modelica.Blocks.Sources.Sine sine2(
@@ -3359,8 +3852,9 @@ Example used to generate a figure for the documentation of block
 </html>"));
         end SampleVectorizedAndClocked;
 
-        model SampleWithADeffects "Example of a SampleWithADeffects block"
-        import Modelica_Synchronous;
+        model SampleWithADeffects
+        "Example of a SampleWithADeffects block for Real signals"
+          import Modelica_Synchronous;
            extends Modelica.Icons.Example;
 
           Modelica.Blocks.Sources.Sine sine(freqHz=2,
@@ -3407,8 +3901,8 @@ Example used to generate a figure for the documentation of block
 </html>"));
         end SampleWithADeffects;
 
-        model Hold "Example of a Hold block"
-        import Modelica_Synchronous;
+        model Hold "Example of a Hold block for Real signals"
+          import Modelica_Synchronous;
            extends Modelica.Icons.Example;
 
           Modelica.Blocks.Sources.Sine sine(freqHz=2,
@@ -3455,8 +3949,9 @@ Example used to generate a figure for the documentation of block
 </html>"));
         end Hold;
 
-        model HoldWithDAeffects1 "Example of a HoldWithDAeffects block"
-        import Modelica_Synchronous;
+        model HoldWithDAeffects1
+        "Example of a HoldWithDAeffects block for Real signals"
+          import Modelica_Synchronous;
            extends Modelica.Icons.Example;
 
           Modelica.Blocks.Sources.Sine sine(freqHz=2,
@@ -3511,8 +4006,8 @@ Example used to generate a figure for the documentation of block
         end HoldWithDAeffects1;
 
         model HoldWithDAeffects2
-        "Example of a HoldWithDAeffects block (with a computational delay of one sample period)"
-        import Modelica_Synchronous;
+        "Example of a HoldWithDAeffects block for Real signals (with a computational delay of one sample period)"
+          import Modelica_Synchronous;
            extends Modelica.Icons.Example;
 
           Modelica.Blocks.Sources.Sine sine(freqHz=2,
@@ -3566,8 +4061,8 @@ Example used to generate a figure for the documentation of block
 </html>"));
         end HoldWithDAeffects2;
 
-        model SubSample "Example of a SubSample block"
-        import Modelica_Synchronous;
+        model SubSample "Example of a SubSample block for Real signals"
+          import Modelica_Synchronous;
            extends Modelica.Icons.Example;
 
           Modelica.Blocks.Sources.Sine sine(freqHz=2,
@@ -3608,8 +4103,8 @@ Example used to generate a figure for the documentation of block
 </html>"));
         end SubSample;
 
-        model SuperSample "Example of a SuperSample block"
-        import Modelica_Synchronous;
+        model SuperSample "Example of a SuperSample block for Real signals"
+          import Modelica_Synchronous;
            extends Modelica.Icons.Example;
 
           Modelica.Blocks.Sources.Sine sine(freqHz=2,
@@ -3652,8 +4147,8 @@ Example used to generate a figure for the documentation of block
         end SuperSample;
 
         model SuperSampleInterpolated
-        "Example of a SuperSampleInterpolated block"
-        import Modelica_Synchronous;
+        "Example of a SuperSampleInterpolated block for Real signals"
+          import Modelica_Synchronous;
            extends Modelica.Icons.Example;
 
           Modelica.Blocks.Sources.Sine sine(freqHz=2,
@@ -3695,8 +4190,8 @@ Example used to generate a figure for the documentation of block
 </html>"));
         end SuperSampleInterpolated;
 
-        model ShiftSample "Example of a ShiftSample block"
-        import Modelica_Synchronous;
+        model ShiftSample "Example of a ShiftSample block for Real signals"
+          import Modelica_Synchronous;
            extends Modelica.Icons.Example;
 
           Modelica.Blocks.Sources.Sine sine(freqHz=2,
@@ -3737,8 +4232,8 @@ Example used to generate a figure for the documentation of block
 </html>"));
         end ShiftSample;
 
-        model BackSample "Example of a BackSample block"
-        import Modelica_Synchronous;
+        model BackSample "Example of a BackSample block for Real signals"
+          import Modelica_Synchronous;
            extends Modelica.Icons.Example;
 
           Modelica.Blocks.Sources.Sine sine(freqHz=2,
@@ -3788,8 +4283,8 @@ Example used to generate a figure for the documentation of block
 </html>"));
         end BackSample;
 
-        model AssignClock "Example of a AssignClock block"
-        import Modelica_Synchronous;
+        model AssignClock "Example of a AssignClock block for Real signals"
+          import Modelica_Synchronous;
            extends Modelica.Icons.Example;
 
           Modelica_Synchronous.ClockSignals.Clocks.PeriodicExactClock periodicClock(
@@ -3836,8 +4331,9 @@ Example used to generate a figure for the documentation of block
 </html>"));
         end AssignClock;
 
-        model AssignClockVectorized "Example of a AssignClockVectorized block"
-        import Modelica_Synchronous;
+        model AssignClockVectorized
+        "Example of a AssignClockVectorized block for Real signals"
+          import Modelica_Synchronous;
            extends Modelica.Icons.Example;
 
           Modelica_Synchronous.ClockSignals.Clocks.PeriodicExactClock periodicClock(
@@ -3907,8 +4403,8 @@ Example used to generate a figure for the documentation of block
 </html>"));
         end AssignClockVectorized;
 
-        model UpSample1 "Example of an UpSample block"
-        import Modelica_Synchronous;
+        model UpSample1 "Example of an UpSample block for Real signals"
+          import Modelica_Synchronous;
            extends Modelica.Icons.Example;
 
           Modelica_Synchronous.ClockSignals.Clocks.PeriodicExactClock periodicClock(
@@ -3966,8 +4462,8 @@ Example used to generate a figure for the documentation of block
         end UpSample1;
 
         model UpSample2
-        "Example of an UpSample block combined with a FIR filter blocks"
-        import Modelica_Synchronous;
+        "Example of an UpSample block for Real signals combined with FIR filter blocks"
+          import Modelica_Synchronous;
            extends Modelica.Icons.Example;
 
           Modelica_Synchronous.ClockSignals.Clocks.PeriodicExactClock periodicClock(
@@ -4031,8 +4527,8 @@ Example used to generate a figure for the documentation of block
         end UpSample2;
 
         model AssignClockToTriggerHold
-        "Example of an AssignClockToTriggerHold block"
-        import Modelica_Synchronous;
+        "Example of an AssignClockToTriggerHold block for Real signals"
+          import Modelica_Synchronous;
            extends Modelica.Icons.Example;
 
           Modelica_Synchronous.ClockSignals.Clocks.PeriodicExactClock periodicClock(
@@ -4084,8 +4580,8 @@ Example used to generate a figure for the documentation of block
         end AssignClockToTriggerHold;
 
         model AssignClockToSquareWaveHold
-        "Example of an AssignClockToSquareWaveHold block"
-        import Modelica_Synchronous;
+        "Example of an AssignClockToSquareWaveHold block for Real signals"
+          import Modelica_Synchronous;
            extends Modelica.Icons.Example;
 
           Modelica_Synchronous.ClockSignals.Clocks.PeriodicExactClock periodicClock(
@@ -4126,8 +4622,8 @@ Example used to generate a figure for the documentation of block
 </html>"));
         end AssignClockToSquareWaveHold;
 
-        model UniformNoise "Example of a UniformNoise block"
-        import Modelica_Synchronous;
+        model UniformNoise "Example of a UniformNoise block for Real signals"
+          import Modelica_Synchronous;
            extends Modelica.Icons.Example;
 
           Modelica_Synchronous.RealSignals.Sampler.SampleClocked
@@ -4166,8 +4662,9 @@ Example used to generate a figure for the documentation of block
 </html>"));
         end UniformNoise;
 
-        model FractionalDelay "Example of a FractionalDelay block"
-        import Modelica_Synchronous;
+        model FractionalDelay
+        "Example of a FractionalDelay block for Real signals"
+          import Modelica_Synchronous;
            extends Modelica.Icons.Example;
 
           Modelica_Synchronous.ClockSignals.Clocks.PeriodicExactClock periodicClock(
@@ -4221,8 +4718,8 @@ sub-library.
       "Examples that are used for the documentation of the Modelica_Synchronous.IntegerSignals sub-library"
         extends Modelica.Icons.ExamplesPackage;
 
-        model Sample1 "Example of a Sample block"
-        import Modelica_Synchronous;
+        model Sample1 "Example of a Sample block for Integer signals"
+          import Modelica_Synchronous;
          extends Modelica.Icons.Example;
           Modelica_Synchronous.IntegerSignals.Sampler.AssignClock
                                                                assignClock
@@ -4261,8 +4758,8 @@ Elementary example for the documentation of block
         end Sample1;
 
         model Sample2
-        "Example of a Sample block with direct feed-through in the continuous-time and the clocked partition"
-        import Modelica_Synchronous;
+        "Example of a Sample block for Integer signals with direct feed-through in the continuous-time and the clocked partition"
+          import Modelica_Synchronous;
          extends Modelica.Icons.Example;
           Modelica_Synchronous.IntegerSignals.Sampler.SampleClocked
                                                                  sample1
@@ -4336,8 +4833,9 @@ Elementary example for the documentation of block
                 grid={1,1})));
         end Sample2;
 
-        model SampleClocked "Example of a SampleClocked block"
-        import Modelica_Synchronous;
+        model SampleClocked
+        "Example of a SampleClocked block for Integer signals"
+          import Modelica_Synchronous;
            extends Modelica.Icons.Example;
 
           Modelica.Blocks.Sources.IntegerStep
@@ -4371,8 +4869,8 @@ Elementary example for the documentation of block
         end SampleClocked;
 
         model SampleVectorizedAndClocked
-        "Example of a SampleVectorizedAndClocked block"
-        import Modelica_Synchronous;
+        "Example of a SampleVectorizedAndClocked block for Integer signals"
+          import Modelica_Synchronous;
            extends Modelica.Icons.Example;
 
           Modelica.Blocks.Sources.IntegerStep
@@ -4412,8 +4910,8 @@ Elementary example for the documentation of block
 </html>"));
         end SampleVectorizedAndClocked;
 
-        model Hold "Example of a Hold block"
-        import Modelica_Synchronous;
+        model Hold "Example of a Hold block for Integer signals"
+          import Modelica_Synchronous;
            extends Modelica.Icons.Example;
 
           Modelica.Blocks.Sources.IntegerTable table(table=[0,1; 0.05,2; 0.1,0; 0.15,-1;
@@ -4461,8 +4959,8 @@ Elementary example for the documentation of block
 </html>"));
         end Hold;
 
-        model SubSample "Example of a SubSample block"
-        import Modelica_Synchronous;
+        model SubSample "Example of a SubSample block for Integer signals"
+          import Modelica_Synchronous;
            extends Modelica.Icons.Example;
 
           Modelica_Synchronous.IntegerSignals.Sampler.SampleClocked
@@ -4503,8 +5001,8 @@ Elementary example for the documentation of block
 </html>"));
         end SubSample;
 
-        model SuperSample "Example of a SuperSample block"
-        import Modelica_Synchronous;
+        model SuperSample "Example of a SuperSample block for Integer signals"
+          import Modelica_Synchronous;
            extends Modelica.Icons.Example;
 
           Modelica_Synchronous.IntegerSignals.Sampler.SampleClocked
@@ -4544,8 +5042,8 @@ Elementary example for the documentation of block
 </html>"));
         end SuperSample;
 
-        model ShiftSample "Example of a ShiftSample block"
-        import Modelica_Synchronous;
+        model ShiftSample "Example of a ShiftSample block for Integer signals"
+          import Modelica_Synchronous;
            extends Modelica.Icons.Example;
 
           Modelica_Synchronous.IntegerSignals.Sampler.SampleClocked
@@ -4585,8 +5083,8 @@ Elementary example for the documentation of block
 </html>"));
         end ShiftSample;
 
-        model BackSample "Example of a BackSample block"
-        import Modelica_Synchronous;
+        model BackSample "Example of a BackSample block for Integer signals"
+          import Modelica_Synchronous;
            extends Modelica.Icons.Example;
 
           Modelica_Synchronous.IntegerSignals.Sampler.SampleClocked
@@ -4635,8 +5133,8 @@ Elementary example for the documentation of block
 </html>"));
         end BackSample;
 
-        model AssignClock "Example of a AssignClock block"
-        import Modelica_Synchronous;
+        model AssignClock "Example of an AssignClock block for Integer signals"
+          import Modelica_Synchronous;
            extends Modelica.Icons.Example;
 
           Modelica_Synchronous.ClockSignals.Clocks.PeriodicExactClock periodicClock(
@@ -4684,8 +5182,9 @@ Elementary example for the documentation of block
 </html>"));
         end AssignClock;
 
-        model AssignClockVectorized "Example of a AssignClockVectorized block"
-        import Modelica_Synchronous;
+        model AssignClockVectorized
+        "Example of an AssignClockVectorized block for Integer signals"
+          import Modelica_Synchronous;
            extends Modelica.Icons.Example;
 
           Modelica_Synchronous.ClockSignals.Clocks.PeriodicExactClock periodicClock(
@@ -4757,8 +5256,8 @@ Elementary example for the documentation of block
 </html>"));
         end AssignClockVectorized;
 
-        model UpSample "Example of an UpSample block"
-        import Modelica_Synchronous;
+        model UpSample "Example of an UpSample block for Integer signals"
+          import Modelica_Synchronous;
            extends Modelica.Icons.Example;
 
           Modelica_Synchronous.ClockSignals.Clocks.PeriodicExactClock periodicClock(
@@ -4828,8 +5327,8 @@ sub-library.
       "Examples that are used for the documentation of the Modelica_Synchronous.BooleanSignals sub-library"
         extends Modelica.Icons.ExamplesPackage;
 
-        model Sample1 "Example of a Sample block"
-        import Modelica_Synchronous;
+        model Sample1 "Example of a Sample block for Boolean signals"
+          import Modelica_Synchronous;
          extends Modelica.Icons.Example;
           Modelica_Synchronous.BooleanSignals.Sampler.AssignClock
                                                                assignClock
@@ -4868,8 +5367,8 @@ Elementary example for the documentation of block
         end Sample1;
 
         model Sample2
-        "Example of a Sample block with direct feed-through in the continuous-time and the clocked partition"
-        import Modelica_Synchronous;
+        "Example of a Sample block for Boolean signals with direct feed-through in the continuous-time and the clocked partition"
+          import Modelica_Synchronous;
          extends Modelica.Icons.Example;
           Modelica_Synchronous.BooleanSignals.Sampler.SampleClocked
                                                                  sample1
@@ -4941,8 +5440,9 @@ Elementary example for the documentation of block
                 grid={1,1})));
         end Sample2;
 
-        model SampleClocked "Example of a SampleClocked block"
-        import Modelica_Synchronous;
+        model SampleClocked
+        "Example of a SampleClocked block for Boolean signals"
+          import Modelica_Synchronous;
            extends Modelica.Icons.Example;
 
           Modelica.Blocks.Sources.BooleanStep
@@ -4976,8 +5476,8 @@ Elementary example for the documentation of block
         end SampleClocked;
 
         model SampleVectorizedAndClocked
-        "Example of a SampleVectorizedAndClocked block"
-        import Modelica_Synchronous;
+        "Example of a SampleVectorizedAndClocked block for Boolean signals"
+          import Modelica_Synchronous;
            extends Modelica.Icons.Example;
 
           Modelica.Blocks.Sources.BooleanStep
@@ -5017,8 +5517,8 @@ Elementary example for the documentation of block
 </html>"));
         end SampleVectorizedAndClocked;
 
-        model Hold "Example of a Hold block"
-        import Modelica_Synchronous;
+        model Hold "Example of a Hold block for Boolean signals"
+          import Modelica_Synchronous;
            extends Modelica.Icons.Example;
 
           Modelica.Blocks.Sources.BooleanTable table(table={0.05,0.15})
@@ -5065,8 +5565,8 @@ Elementary example for the documentation of block
 </html>"));
         end Hold;
 
-        model SubSample "Example of a SubSample block"
-        import Modelica_Synchronous;
+        model SubSample "Example of a SubSample block for Boolean signals"
+          import Modelica_Synchronous;
            extends Modelica.Icons.Example;
 
           Modelica_Synchronous.BooleanSignals.Sampler.SampleClocked
@@ -5106,8 +5606,8 @@ Elementary example for the documentation of block
 </html>"));
         end SubSample;
 
-        model SuperSample "Example of a SuperSample block"
-        import Modelica_Synchronous;
+        model SuperSample "Example of a SuperSample block for Boolean signals"
+          import Modelica_Synchronous;
            extends Modelica.Icons.Example;
 
           Modelica_Synchronous.BooleanSignals.Sampler.SampleClocked
@@ -5146,8 +5646,8 @@ Elementary example for the documentation of block
 </html>"));
         end SuperSample;
 
-        model ShiftSample "Example of a ShiftSample block"
-        import Modelica_Synchronous;
+        model ShiftSample "Example of a ShiftSample block for Boolean signals"
+          import Modelica_Synchronous;
            extends Modelica.Icons.Example;
 
           Modelica_Synchronous.BooleanSignals.Sampler.SampleClocked
@@ -5186,8 +5686,8 @@ Elementary example for the documentation of block
 </html>"));
         end ShiftSample;
 
-        model BackSample "Example of a BackSample block"
-        import Modelica_Synchronous;
+        model BackSample "Example of a BackSample block for Boolean signals"
+          import Modelica_Synchronous;
            extends Modelica.Icons.Example;
 
           Modelica_Synchronous.BooleanSignals.Sampler.SampleClocked
@@ -5235,8 +5735,8 @@ Elementary example for the documentation of block
 </html>"));
         end BackSample;
 
-        model AssignClock "Example of a AssignClock block"
-        import Modelica_Synchronous;
+        model AssignClock "Example of an AssignClock block for Boolean signals"
+          import Modelica_Synchronous;
            extends Modelica.Icons.Example;
 
           Modelica_Synchronous.ClockSignals.Clocks.PeriodicExactClock periodicClock(
@@ -5283,8 +5783,9 @@ Elementary example for the documentation of block
 </html>"));
         end AssignClock;
 
-        model AssignClockVectorized "Example of a AssignClockVectorized block"
-        import Modelica_Synchronous;
+        model AssignClockVectorized
+        "Example of an AssignClockVectorized block for Boolean signals"
+          import Modelica_Synchronous;
            extends Modelica.Icons.Example;
 
           Modelica_Synchronous.ClockSignals.Clocks.PeriodicExactClock periodicClock(
@@ -5355,8 +5856,8 @@ Elementary example for the documentation of block
 </html>"));
         end AssignClockVectorized;
 
-        model UpSample "Example of an UpSample block"
-        import Modelica_Synchronous;
+        model UpSample "Example of an UpSample block for Boolean signals"
+          import Modelica_Synchronous;
            extends Modelica.Icons.Example;
 
           Modelica_Synchronous.ClockSignals.Clocks.PeriodicExactClock periodicClock(
@@ -5430,6 +5931,11 @@ simulated.
 </p>
 </html>"));
     end Elementary;
+  annotation (Documentation(info="<html>
+<p>
+This package contains examples to demonstrate the usage of package Modelica_Synchronous.
+</p>
+</html>"));
   end Examples;
 
 
@@ -5758,7 +6264,42 @@ to clocks see
             initialScale=0.06),
                          graphics),
         Documentation(info="<html>
+<p>
+This block sub-samples the input clock u and provides it as
+output clock y.
+</p>
 
+<p>
+To be more precise:
+The clock y is factor-times slower than the clock u. The first activation of clock y coincides with the first activation of clock u. The sub-sampling factor is defined by Integer parameter <b>factor</b>.
+</p>
+
+<h4>Example</h4>
+
+<p>
+The following
+<a href=\"Modelica_Synchronous.Examples.Elementary.ClockSignals.SubSample\">example</a>
+generates a periodic clock of 20 ms period, and
+then sub-samples the resulting clock signal with a factor of 3:<br>
+</p>
+
+<table border=0 cellspacing=0 cellpadding=2>
+<tr><td width=\"50\"></td>
+    <td valign=\"bottom\"><img src=\"modelica://Modelica_Synchronous/Resources/Images/ClockSignals/SubSample_Model.png\"></td>
+    <td valign=\"bottom\">&nbsp;&nbsp;&nbsp;
+                        <img src=\"modelica://Modelica_Synchronous/Resources/Images/ClockSignals/SubSample_Result.png\"></td>
+    </tr>
+<tr><td></td>
+    <td align=\"center\">model</td>
+    <td align=\"center\">simulation result</td>
+   </tr>
+</table>
+<p>
+As can be seen, subSample.y picks every third-value of periodicClock.y due to the
+sub-sampling, and the sub-sampling factor = 3 is displayed in the icon of the
+subSample block. Note the down-arrow in the icon of the subSample block indicates that 
+clock subSample.y is slower as clock subSample.u.
+</p>
 </html>"));
     end SubSample;
 
@@ -5868,7 +6409,42 @@ to clocks see
             initialScale=0.06),
                          graphics),
         Documentation(info="<html>
+<p>
+This block super-samples the clock input signal u and provides it as
+clock output signal y.
+</p>
 
+<p>
+To be more precise:
+Clock y is factor-times faster than clock u. The first activation of clock y coincides with the first activation of clock u. The super-sampling factor is defined by Integer parameter <b>factor</b>.
+</p>
+
+<h4>Example</h4>
+
+<p>
+The following
+<a href=\"Modelica_Synchronous.Examples.Elementary.ClockSignals.SuperSample\">example</a>
+generates a periodic clock of 20 ms period, and
+then super-samples the resulting clock with a factor of 3:<br>
+</p>
+
+<table border=0 cellspacing=0 cellpadding=2>
+<tr><td width=\"50\"></td>
+    <td valign=\"bottom\"><img src=\"modelica://Modelica_Synchronous/Resources/Images/ClockSignals/SuperSample_Model.png\"></td>
+    <td valign=\"bottom\">&nbsp;&nbsp;&nbsp;
+                        <img src=\"modelica://Modelica_Synchronous/Resources/Images/ClockSignals/SuperSample_Result.png\"></td>
+    </tr>
+<tr><td></td>
+    <td align=\"center\">model</td>
+    <td align=\"center\">simulation result</td>
+   </tr>
+</table>
+<p>
+As can be seen, superSample introduces factor-1 additional clock ticks for the
+output clock y. The super-sampling factor = 3 is displayed in the icon of the
+superSample block. Note the up-arrow in the icon of the superSample block indicates that 
+clock superSample.y is faster as clock superSample.u.
+</p>
 </html>"));
     end SuperSample;
 
@@ -5949,8 +6525,58 @@ to clocks see
             initialScale=0.06),
                          graphics),
         Documentation(info="<html>
+<p>
+This block shifts the first activation of clock output y by
+fraction shiftCounter/resolution of the period (or for a non-periodic signal by a fraction of the last interval).
+Here, <b>shiftCounter</b> and <b>resolution</b> are positive Integer parameters.
+</p>
+
+<p>
+To be more precise:
+The block constructs (conceptually) a clock &ldquo;cBase&rdquo;
+</p>
+
+<pre>
+   <b>Clock</b> cBase = <b>subSample</b>(<b>superSample</b>(u, resolution), shiftCounter)
+</pre>
+
+<p>
+and clock y starts at the second clock tick of cBase. 
+</p>
+
+
+<h4>Example</h4>
+
+<p>
+The following
+<a href=\"Modelica_Synchronous.Examples.Elementary.ClockSignals.ShiftSample\">example</a>
+generates a periodic clock of 20 ms period, and
+then shifts it with shiftCounter = 4 and resolution = 3:<br>
+</p>
+
+<table border=0 cellspacing=0 cellpadding=2>
+<tr><td width=\"50\"></td>
+    <td valign=\"bottom\"><img src=\"modelica://Modelica_Synchronous/Resources/Images/ClockSignals/ShiftSample_Model.png\"></td>
+    <td valign=\"bottom\">&nbsp;&nbsp;&nbsp;
+                        <img src=\"modelica://Modelica_Synchronous/Resources/Images/ClockSignals/ShiftSample_Result.png\"></td>
+    </tr>
+<tr><td></td>
+    <td align=\"center\">model</td>
+    <td align=\"center\">simulation result</td>
+   </tr>
+</table>
+<p>
+The first activation of clock output y of block shiftSample1 is shifted in time (4/3*20ms). The parameter values <b>shiftCounter</b> = 4 and <b>resolution</b> = 3 are visible at the bottom of the icon. 
+</p>
+
 </html>"));
     end ShiftSample;
+    annotation (Documentation(info="<html>
+<p>
+This package contains blocks that sub-sample, super-sample, and shift-sample
+a clock signal.
+</p>
+</html>"));
   end Sampler;
 
   package Interfaces
@@ -6122,6 +6748,12 @@ Connector with one output signal of type Boolean.
               lineColor={0,0,255},
               fontSize=0)}));
     end ClockedBlockIcon;
+    annotation (Documentation(info="<html>
+<p>
+This package contains clock connectors, as well as partial blocks that are used to
+construct clock blocks.
+</p>
+</html>"));
   end Interfaces;
   annotation (Documentation(info="<html>
 <p>
@@ -8163,7 +8795,7 @@ When filtering the upsampled signal with filter block FIR1
 using FIR coefficients {1,1,1}, then the result is identical to a super-sampled
 signal (see signal FIR1.y in figure \"simulation result 1\").
 On the other hand, when filtering the upsampled signal with filter
-block FIR2 using FIR coefficients {1/3, 2/3, 1, 2/3, 1/3}, then the
+block FIR2 using FIR coefficients {1/3, 2/3, 1, 2/3, 1/3}, then
 the result is a linearly interpolated super-sampled signal
 (see signal FIR2.y in figure \"simulation result 2\").
 The same result can be achieved with block
@@ -8176,7 +8808,7 @@ initialized a bit differently.
       end UpSample;
 
         block AssignClockToTriggerHold
-        "Generate a boolean continuous time trigger signal from a clocked real input"
+        "Generate a Boolean continuous-time trigger signal from a clocked Real input"
           extends Modelica_Synchronous.ClockSignals.Interfaces.ClockedBlockIcon;
           parameter Boolean y_start=false "initial value of output signal";
           Modelica.Blocks.Interfaces.RealInput u
@@ -8264,7 +8896,7 @@ Note, that it is clearly visible in the plot that the \"old-style\" discrete var
         end AssignClockToTriggerHold;
 
         block AssignClockToSquareWaveHold
-        "Generate a boolean continuous time square-wave output from a clocked real input"
+        "Generate a Boolean continuous-time square-wave output from a clocked Real input"
           extends Modelica_Synchronous.ClockSignals.Interfaces.ClockedBlockIcon;
           parameter Boolean y_start=false "initial value of output signal";
           Modelica.Blocks.Interfaces.RealInput u
@@ -9531,7 +10163,7 @@ contrary to a general FIR filter.
       end when;
 
       annotation (defaultComponentName="FIR1",
-        Documentation(info="<HTML>
+        Documentation(info="<html>
 <p>
 This block computes the output y as a linear combination of the input u
 and of its past values (= FIR filter):
@@ -9543,8 +10175,8 @@ and of its past values (= FIR filter):
 where y(i) and u(i) are the values of y and u at clock tick i and
 a[:] are the filter coefficients.
 </p>
-</HTML>
-"),     Icon(graphics={
+</html>"),
+        Icon(graphics={
         Polygon(points={{-84,90},{-92,68},{-76,68},{-84,90},{-84,90}}, lineColor={192,192,192}, fillColor={192,192,192},
                 fillPattern=   FillPattern.Solid),
          Line(points={{-84,78},{-84,-90}}, color={192,192,192}),
@@ -9583,14 +10215,15 @@ a[:] are the filter coefficients.
     extends Modelica.Icons.Package;
       function FIR_coefficients
         "Calculates the FIR-filter coefficient vector from filter design parameters"
-        import FilterType = Modelica_Synchronous.Types.FIR_FilterType;
-        input Modelica_Synchronous.Types.FIR_FilterType
+        import FilterType =
+          Modelica_Synchronous.WorkInProgress.Incubate.Types.FIR_FilterType;
+        input Modelica_Synchronous.WorkInProgress.Incubate.Types.FIR_FilterType
                                                     filterType=
             Modelica_Synchronous.Types.FIR_FilterType.LowPass "Type of filter";
         input Integer order(min=1) = 2 "Order of filter";
         input Modelica.SIunits.Frequency f_cut=1 "Cut-off frequency";
         input Modelica.SIunits.Time Ts(min=0) "Sampling period";
-        input Modelica_Synchronous.Types.FIR_Window
+        input Modelica_Synchronous.WorkInProgress.Incubate.Types.FIR_Window
                                                 window= Modelica_Synchronous.Types.FIR_Window.Rectangle
           "Type of window";
         input Real beta=2.12 "Beta-Parameter for Kaiser-window"
@@ -9655,9 +10288,10 @@ The beta parameter is only needed by the Kaiser window.
       function FIR_window
         "Calculation of n-point weighting window for FIR filter"
 
-        import Window = Modelica_Synchronous.Types.FIR_Window;
+        import Window =
+          Modelica_Synchronous.WorkInProgress.Incubate.Types.FIR_Window;
         input Integer na "Number of points of weighting window vector";
-        input Modelica_Synchronous.Types.FIR_Window
+        input Modelica_Synchronous.WorkInProgress.Incubate.Types.FIR_Window
                      window=Window.Kaiser "Type of window";
         input Real beta=2.12 "Beta-Parameter for Kaiser-window";
         output Real a[na] "Weighting window vector a[na]";
@@ -9934,8 +10568,8 @@ construct blocks operating on clocked Real signals.
 This package contains blocks that operate on clocked Real signals.
 Especially blocks are provided to transform from continuous-time Real signals to
 clocked Real signals (with Sampler blocks) and vice versa
-(with Hold blocks), as well as to transform a clocked Real signal to
-another (time-synchronized) clock.
+(with Hold blocks), as well as to transform a clocked Real signal from
+one clock to a different clock in a time-synchronized way.
 </p>
 </html>"));
 end RealSignals;
@@ -9973,11 +10607,13 @@ package IntegerSignals "Library of clocked blocks for Integer signals"
                          graphics),
         Documentation(info="<html>
 <p>
-This block for Integer signals works similar as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.Sample\">RealSignals.Sampler.Sample</a>).
+This block for Integer signals works similarly as the corresponding block for Real signals
+(see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.Sample\">RealSignals.Sampler.Sample</a>).
 </p>
 <p>
-Analog to the corresponding Real signal block examples there exist two elementary examples, <a href=\"Modelica_Synchronous.Examples.Elementary.IntegerSignals.Sample1\">Sample1</a> and 
-<a href=\"Modelica_Synchronous.Examples.Elementary.IntegerSignals.Sample2\">Sample2</a>, for the Integer block.
+Analog to the corresponding Real signal block examples there exist two elementary examples,
+<a href=\"modelica://Modelica_Synchronous.Examples.Elementary.IntegerSignals.Sample1\">Sample1</a> and
+<a href=\"modelica://Modelica_Synchronous.Examples.Elementary.IntegerSignals.Sample2\">Sample2</a>, for this Integer block.
 </p>
 </html>"));
     end Sample;
@@ -10030,10 +10666,10 @@ Analog to the corresponding Real signal block examples there exist two elementar
                          graphics),
         Documentation(info="<html>
 <p>
-This block for Integer signals works similar as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.SampleClocked\">RealSignals.Sampler.SampleClocked</a>).
+This block for Integer signals works similarly as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.SampleClocked\">RealSignals.Sampler.SampleClocked</a>).
 </p>
 <p>
-Analog to the corresponding Real signal block example there exists an elementary <a href=\"Modelica_Synchronous.Examples.Elementary.IntegerSignals.SampleClocked\">example</a> for the Integer block.
+Analog to the corresponding Real signal block example there exists an elementary <a href=\"modelica://Modelica_Synchronous.Examples.Elementary.IntegerSignals.SampleClocked\">example</a> for this Integer block.
 </p>
 </html>"));
     end SampleClocked;
@@ -10094,10 +10730,10 @@ Analog to the corresponding Real signal block example there exists an elementary
                          graphics),
         Documentation(info="<html>
 <p>
-This block for Integer signals works similar as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.SampleVectorizedAndClocked\">RealSignals.Sampler.SampleVectorizedAndClocked</a>).
+This block for Integer signals works similarly as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.SampleVectorizedAndClocked\">RealSignals.Sampler.SampleVectorizedAndClocked</a>).
 </p>
 <p>
-Analog to the corresponding Real signal block example there exists an elementary <a href=\"Modelica_Synchronous.Examples.Elementary.IntegerSignals.SampleVectorizedAndClocked\">example</a> for the Integer block.
+Analog to the corresponding Real signal block example there exists an elementary <a href=\"modelica://Modelica_Synchronous.Examples.Elementary.IntegerSignals.SampleVectorizedAndClocked\">example</a> for this Integer block.
 </p>
 </html>"));
     end SampleVectorizedAndClocked;
@@ -10145,13 +10781,15 @@ Analog to the corresponding Real signal block example there exists an elementary
               textString="%y_start")}),
         Documentation(info="<html>
 <p>
-This block for Integer signals works similar as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.Hold\">RealSignals.Sampler.Hold</a>).
+This block for Integer signals works similarly as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.Hold\">RealSignals.Sampler.Hold</a>).
 </p>
+
 <p>
-Analog to the corresponding Real signal block example there exists an elementary <a href=\"Modelica_Synchronous.Examples.Elementary.IntegerSignals.Hold\">example</a> for the Integer block.
+Analog to the corresponding Real signal block example there exists an elementary
+<a href=\"modelica://Modelica_Synchronous.Examples.Elementary.IntegerSignals.Hold\">example</a> for this Integer block.
 </p>
-</html>
-"),     Diagram(coordinateSystem(
+</html>"),
+        Diagram(coordinateSystem(
             preserveAspectRatio=false,
             extent={{-100,-100},{100,100}},
             initialScale=0.06), graphics));
@@ -10259,10 +10897,10 @@ Analog to the corresponding Real signal block example there exists an elementary
                          graphics),
         Documentation(info="<html>
 <p>
-This block for Integer signals works similar as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.SubSample\">RealSignals.Sampler.SubSample</a>).
+This block for Integer signals works similarly as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.SubSample\">RealSignals.Sampler.SubSample</a>).
 </p>
 <p>
-Analog to the corresponding Real signal block example there exists an elementary <a href=\"Modelica_Synchronous.Examples.Elementary.IntegerSignals.SubSample\">example</a> for the Integer block.
+Analog to the corresponding Real signal block example there exists an elementary <a href=\"modelica://Modelica_Synchronous.Examples.Elementary.IntegerSignals.SubSample\">example</a> for this Integer block.
 </p>
 </html>"));
     end SubSample;
@@ -10378,15 +11016,17 @@ Analog to the corresponding Real signal block example there exists an elementary
                          graphics),
         Documentation(info="<html>
 <p>
-This block for Integer signals works similar as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.SuperSample\">RealSignals.Sampler.SuperSample</a>).
+This block for Integer signals works similarly as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.SuperSample\">RealSignals.Sampler.SuperSample</a>).
 </p>
 <p>
-Analog to the corresponding Real signal block example there exists an elementary <a href=\"Modelica_Synchronous.Examples.Elementary.IntegerSignals.SuperSample\">example</a> for the Integer block.
+Analog to the corresponding Real signal block example there exists an elementary <a href=\"modelica://Modelica_Synchronous.Examples.Elementary.IntegerSignals.SuperSample\">example</a> for this Integer block.
 </p>
 </html>"));
     end SuperSample;
 
-    block ShiftSample "Shift (delay) input for some clock ticks"
+    block ShiftSample
+      "Shift the clocked Integer input signal by a fraction of the last interval and and provide it as clocked output signal"
+
       parameter Integer shiftCounter(min=0)=0 "Numerator of shifting formula"
             annotation(Dialog(group="Shift first clock activation for 'shiftCounter/resolution*interval(u)' seconds"));
       parameter Integer resolution(min=1)=1 "Denominator of shifting formula"
@@ -10466,16 +11106,16 @@ Analog to the corresponding Real signal block example there exists an elementary
                          graphics),
         Documentation(info="<html>
 <p>
-This block for Integer signals works similar as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.ShiftSample\">RealSignals.Sampler.ShiftSample</a>).
+This block for Integer signals works similarly as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.ShiftSample\">RealSignals.Sampler.ShiftSample</a>).
 </p>
 <p>
-Analog to the corresponding Real signal block example there exists an elementary <a href=\"Modelica_Synchronous.Examples.Elementary.IntegerSignals.ShiftSample\">example</a> for the Integer block.
+Analog to the corresponding Real signal block example there exists an elementary <a href=\"modelica://Modelica_Synchronous.Examples.Elementary.IntegerSignals.ShiftSample\">example</a> for this Integer block.
 </p>
 </html>"));
     end ShiftSample;
 
     block BackSample
-      "Shift clock of input backwards in time (and access the most recent value of the input at this new clock)"
+      "Shift clock of Integer input signal backwards in time (and access the most recent value of the input at this new clock)"
       parameter Integer backCounter(min=0)=0 "Numerator of shifting formula"
             annotation(Dialog(group="Shift first clock activation backwards in time for 'shiftCounter/resolution*interval(u)' seconds"));
       parameter Integer resolution(min=1)=1 "Denominator of shifting formula"
@@ -10560,15 +11200,15 @@ Analog to the corresponding Real signal block example there exists an elementary
                          graphics),
         Documentation(info="<html>
 <p>
-This block for Integer signals works similar as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.BackSample\">RealSignals.Sampler.BackSample</a>).
+This block for Integer signals works similarly as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.BackSample\">RealSignals.Sampler.BackSample</a>).
 </p>
 <p>
-Analog to the corresponding Real signal block example there exists an elementary <a href=\"Modelica_Synchronous.Examples.Elementary.IntegerSignals.BackSample\">example</a> for the Integer block.
+Analog to the corresponding Real signal block example there exists an elementary <a href=\"modelica://Modelica_Synchronous.Examples.Elementary.IntegerSignals.BackSample\">example</a> for this Integer block.
 </p>
 </html>"));
     end BackSample;
 
-    block AssignClock "Assigns a clock to a signal"
+    block AssignClock "Assigns a clock to a clocked Integer signal"
 
       Modelica.Blocks.Interfaces.IntegerInput
                                            u
@@ -10654,15 +11294,16 @@ Analog to the corresponding Real signal block example there exists an elementary
                          graphics),
         Documentation(info="<html>
 <p>
-This block for Integer signals works similar as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.AssignClock\">RealSignals.Sampler.AssignClock</a>).
+This block for Integer signals works similarly as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.AssignClock\">RealSignals.Sampler.AssignClock</a>).
 </p>
 <p>
-Analog to the corresponding Real signal block example there exists an elementary <a href=\"Modelica_Synchronous.Examples.Elementary.IntegerSignals.AssignClock\">example</a> for the Integer block.
+Analog to the corresponding Real signal block example there exists an elementary <a href=\"modelica://Modelica_Synchronous.Examples.Elementary.IntegerSignals.AssignClock\">example</a> for this Integer block.
 </p>
 </html>"));
     end AssignClock;
 
-    block AssignClockVectorized "Assigns a clock to a signal vector"
+    block AssignClockVectorized
+      "Assigns a clock to a clocked Integer signal vector"
 
       parameter Integer n(min=1)=1
         "Size of input signal vector u (= size of output signal vector y)";
@@ -10750,10 +11391,10 @@ Analog to the corresponding Real signal block example there exists an elementary
                          graphics),
         Documentation(info="<html>
 <p>
-This block for Integer signals works similar as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.AssignClockVectorized\">RealSignals.Sampler.AssignClockVectorized</a>).
+This block for Integer signals works similarly as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.AssignClockVectorized\">RealSignals.Sampler.AssignClockVectorized</a>).
 </p>
 <p>
-Analog to the corresponding Real signal block example there exists an elementary <a href=\"Modelica_Synchronous.Examples.Elementary.IntegerSignals.AssignClockVectorized\">example</a> for the Integer block.
+Analog to the corresponding Real signal block example there exists an elementary <a href=\"modelica://Modelica_Synchronous.Examples.Elementary.IntegerSignals.AssignClockVectorized\">example</a> for this Integer block.
 </p>
 </html>"));
     end AssignClockVectorized;
@@ -10886,14 +11527,18 @@ Analog to the corresponding Real signal block example there exists an elementary
                            graphics),
           Documentation(info="<html>
 <p>
-This block for Integer signals works similar as the corresponding block for Real signals (see
+This block for Integer signals works similarly as the corresponding block for Real signals (see
 <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.Utilities.UpSample\">RealSignals.Sampler.Utilities.UpSample</a>).
 </p>
+<p>
+Analog to the corresponding Real signal block example there exists an elementary <a href=\"modelica://Modelica_Synchronous.Examples.Elementary.IntegerSignals.UpSample\">example</a> for this Integer block.
+</p>
+
 </html>"));
       end UpSample;
 
         block AssignClockToTriggerHold
-        "Generate a boolean continuous time trigger signal from a clocked Integer input"
+        "Generate a Boolean continuous-time trigger signal from a clocked Integer input"
           extends Modelica_Synchronous.ClockSignals.Interfaces.ClockedBlockIcon;
           parameter Boolean y_start=false "initial value of output signal";
           Modelica.Blocks.Interfaces.IntegerInput
@@ -10952,12 +11597,11 @@ This block for Integer signals works similar as the corresponding block for Real
 This block for Integer signals works similar as the corresponding block for Real signals (see
 <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.Utilities.AssignClockToTriggerHold\">RealSignals.Sampler.Utilities.AssignClockToTriggerHold</a>).
 </p>
-
 </html>"));
         end AssignClockToTriggerHold;
 
         block AssignClockToSquareWaveHold
-        "Generate a boolean continuous time square signal from a clocked Integer input"
+        "Generate a Boolean continuous-time square signal from a clocked Integer input"
           extends Modelica_Synchronous.ClockSignals.Interfaces.ClockedBlockIcon;
           parameter Boolean y_start=false "initial value of output signal";
           Modelica.Blocks.Interfaces.IntegerInput
@@ -11009,10 +11653,15 @@ This block for Integer signals works similar as the corresponding block for Real
 This block for Integer signals works similar as the corresponding block for Real signals (see
 <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.Utilities.AssignClockToSquareWaveHold\">RealSignals.Sampler.Utilities.AssignClockToSquareWaveHold</a>).
 </p>
-
 </html>"));
         end AssignClockToSquareWaveHold;
 
+      annotation (Documentation(info="<html>
+<p>
+This package contains utility blocks that are usually not directly utilized
+but are used as building blocks for \"higher level\" blocks.
+</p>
+</html>"));
     end Utilities;
     annotation (Documentation(info="<html>
 <p>
@@ -11343,11 +11992,12 @@ construct blocks operating on clocked Integer signals.
 This package contains blocks that operate on clocked Integer signals.
 Especially blocks are provided to transform from continuous-time Integer signals to
 clocked Integer signals (with Sampler blocks) and vice versa
-(with Hold blocks), as well as to transform a clocked Integer signal to
-another (time-synchronized) clock.
+(with Hold blocks), as well as to transform a clocked Integer signal from
+one clock to a different clock in a time-synchronized way.
 </p>
 </html>"));
 end IntegerSignals;
+
 
 package BooleanSignals "Library of clocked blocks for Boolean signals"
   extends Modelica.Icons.Package;
@@ -11381,11 +12031,11 @@ package BooleanSignals "Library of clocked blocks for Boolean signals"
                          graphics),
         Documentation(info="<html>
 <p>
-This block for Boolean signals works similar as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.Sample\">RealSignals.Sampler.Sample</a>).
+This block for Boolean signals works similarly as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.Sample\">RealSignals.Sampler.Sample</a>).
 </p>
 <p>
-Analog to the corresponding Real signal block examples there exist two elementary examples, <a href=\"Modelica_Synchronous.Examples.Elementary.BooleanSignals.Sample1\">Sample1</a> and 
-<a href=\"Modelica_Synchronous.Examples.Elementary.BooleanSignals.Sample2\">Sample2</a>, for the Boolean block.
+Analog to the corresponding Real signal block examples there exist two elementary examples, <a href=\"modelica://Modelica_Synchronous.Examples.Elementary.BooleanSignals.Sample1\">Sample1</a> and
+<a href=\"modelica://Modelica_Synchronous.Examples.Elementary.BooleanSignals.Sample2\">Sample2</a>, for this Boolean block.
 </p>
 </html>"));
     end Sample;
@@ -11438,10 +12088,10 @@ Analog to the corresponding Real signal block examples there exist two elementar
                          graphics),
         Documentation(info="<html>
 <p>
-This block for Boolean signals works similar as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.SampleClocked\">RealSignals.Sampler.SampleClocked</a>).
+This block for Boolean signals works similarly as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.SampleClocked\">RealSignals.Sampler.SampleClocked</a>).
 </p>
 <p>
-Analog to the corresponding Real signal block example there exists an elementary <a href=\"Modelica_Synchronous.Examples.Elementary.BooleanSignals.SampleClocked\">example</a> for the Boolean block.
+Analog to the corresponding Real signal block example there exists an elementary <a href=\"modelica://Modelica_Synchronous.Examples.Elementary.BooleanSignals.SampleClocked\">example</a> for this Boolean block.
 </p>
 </html>"));
     end SampleClocked;
@@ -11502,10 +12152,10 @@ Analog to the corresponding Real signal block example there exists an elementary
                          graphics),
         Documentation(info="<html>
 <p>
-This block for Boolean signals works similar as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.SampleVectorizedAndClocked\">RealSignals.Sampler.SampleVectorizedAndClocked</a>).
+This block for Boolean signals works similarly as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.SampleVectorizedAndClocked\">RealSignals.Sampler.SampleVectorizedAndClocked</a>).
 </p>
 <p>
-Analog to the corresponding Real signal block example there exists an elementary <a href=\"Modelica_Synchronous.Examples.Elementary.BooleanSignals.SampleVectorizedAndClocked\">example</a> for the Boolean block.
+Analog to the corresponding Real signal block example there exists an elementary <a href=\"modelica://Modelica_Synchronous.Examples.Elementary.BooleanSignals.SampleVectorizedAndClocked\">example</a> for this Boolean block.
 </p>
 </html>"));
     end SampleVectorizedAndClocked;
@@ -11583,11 +12233,15 @@ Analog to the corresponding Real signal block example there exists an elementary
               textString="%name")}),
         Documentation(info="<html>
 <p>
-This block for Boolean signals works similar as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.Hold\">RealSignals.Sampler.Hold</a>).
+This block for Boolean signals works similarly as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.Hold\">RealSignals.Sampler.Hold</a>).
 </p>
+
 <p>
-Analog to the corresponding Real signal block example there exists an elementary <a href=\"Modelica_Synchronous.Examples.Elementary.BooleanSignals.Hold\">example</a> for the Boolean block.
+Analog to the corresponding Real signal block example there exists an elementary
+<a href=\"modelica://Modelica_Synchronous.Examples.Elementary.BooleanSignals.Hold\">example</a> for this Boolean block.
 </p>
+
+
 </html>
 "),     Diagram(coordinateSystem(
             preserveAspectRatio=false,
@@ -11697,10 +12351,10 @@ Analog to the corresponding Real signal block example there exists an elementary
                          graphics),
         Documentation(info="<html>
 <p>
-This block for Boolean signals works similar as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.SubSample\">RealSignals.Sampler.SubSample</a>).
-</p>
+This block for Boolean signals works similarly as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.SubSample\">RealSignals.Sampler.SubSample</a>).
+/p>
 <p>
-Analog to the corresponding Real signal block example there exists an elementary <a href=\"Modelica_Synchronous.Examples.Elementary.BooleanSignals.SubSample\">example</a> for the Boolean block.
+Analog to the corresponding Real signal block example there exists an elementary <a href=\"modelica://Modelica_Synchronous.Examples.Elementary.BooleanSignals.SubSample\">example</a> for this Boolean block.
 </p>
 </html>"));
     end SubSample;
@@ -11816,15 +12470,17 @@ Analog to the corresponding Real signal block example there exists an elementary
                          graphics),
         Documentation(info="<html>
 <p>
-This block for Boolean signals works similar as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.SuperSample\">RealSignals.Sampler.SuperSample</a>).
+This block for Boolean signals works similarly as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.SuperSample\">RealSignals.Sampler.SuperSample</a>).
 </p>
 <p>
-Analog to the corresponding Real signal block example there exists an elementary <a href=\"Modelica_Synchronous.Examples.Elementary.BooleanSignals.SuperSample\">example</a> for the Boolean block.
+Analog to the corresponding Real signal block example there exists an elementary <a href=\"modelica://Modelica_Synchronous.Examples.Elementary.BooleanSignals.SuperSample\">example</a> for this Boolean block.
 </p>
 </html>"));
     end SuperSample;
 
-    block ShiftSample "Shift (delay) input for some clock ticks"
+    block ShiftSample
+      "Shift the clocked Boolean input signal by a fraction of the last interval and and provide it as clocked output signal"
+
       parameter Integer shiftCounter(min=0)=0 "Numerator of shifting formula"
             annotation(Dialog(group="Shift first clock activation for 'shiftCounter/resolution*interval(u)' seconds"));
       parameter Integer resolution(min=1)=1
@@ -11905,16 +12561,16 @@ Analog to the corresponding Real signal block example there exists an elementary
                          graphics),
         Documentation(info="<html>
 <p>
-This block for Boolean signals works similar as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.ShiftSample\">RealSignals.Sampler.ShiftSample</a>).
+This block for Boolean signals works similarly as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.ShiftSample\">RealSignals.Sampler.ShiftSample</a>).
 </p>
 <p>
-Analog to the corresponding Real signal block example there exists an elementary <a href=\"Modelica_Synchronous.Examples.Elementary.BooleanSignals.ShiftSample\">example</a> for the Boolean block.
+Analog to the corresponding Real signal block example there exists an elementary <a href=\"modelica://Modelica_Synchronous.Examples.Elementary.BooleanSignals.ShiftSample\">example</a> for this Boolean block.
 </p>
 </html>"));
     end ShiftSample;
 
     block BackSample
-      "Shift clock of input backwards in time (and access the most recent value of the input at this new clock)"
+      "Shift clock of Boolean input signal backwards in time (and access the most recent value of the input at this new clock)"
       parameter Integer backCounter(min=0)=0 "Numerator of shifting formula"
             annotation(Dialog(group="Shift first clock activation backwards in time for 'shiftCounter/resolution*interval(u)' seconds"));
       parameter Integer resolution(min=1)=1 "Denominator of shifting formula"
@@ -11999,15 +12655,15 @@ Analog to the corresponding Real signal block example there exists an elementary
                          graphics),
         Documentation(info="<html>
 <p>
-This block for Boolean signals works similar as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.BackSample\">RealSignals.Sampler.BackSample</a>).
+This block for Boolean signals works similarly as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.BackSample\">RealSignals.Sampler.BackSample</a>).
 </p>
 <p>
-Analog to the corresponding Real signal block example there exists an elementary <a href=\"Modelica_Synchronous.Examples.Elementary.BooleanSignals.BackSample\">example</a> for the Boolean block.
+Analog to the corresponding Real signal block example there exists an elementary <a href=\"modelica://Modelica_Synchronous.Examples.Elementary.BooleanSignals.BackSample\">example</a> for this Boolean block.
 </p>
 </html>"));
     end BackSample;
 
-    block AssignClock "Assigns a clock to a signal"
+    block AssignClock "Assigns a clock to a clocked Boolean signal"
 
       Modelica.Blocks.Interfaces.BooleanInput
                                            u
@@ -12093,15 +12749,16 @@ Analog to the corresponding Real signal block example there exists an elementary
                          graphics),
         Documentation(info="<html>
 <p>
-This block for Boolean signals works similar as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.AssignClock\">RealSignals.Sampler.AssignClock</a>).
+This block for Boolean signals works similarly as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.AssignClock\">RealSignals.Sampler.AssignClock</a>).
 </p>
 <p>
-Analog to the corresponding Real signal block example there exists an elementary <a href=\"Modelica_Synchronous.Examples.Elementary.BooleanSignals.AssignClock\">example</a> for the Boolean block.
+Analog to the corresponding Real signal block example there exists an elementary <a href=\"modelica://Modelica_Synchronous.Examples.Elementary.BooleanSignals.AssignClock\">example</a> for this Boolean block.
 </p>
 </html>"));
     end AssignClock;
 
-    block AssignClockVectorized "Assigns a clock to a signal vector"
+    block AssignClockVectorized
+      "Assigns a clock to a clocked Boolean signal vector"
 
       parameter Integer n(min=1)=1
         "Size of input signal vector u (= size of output signal vector y)";
@@ -12189,10 +12846,10 @@ Analog to the corresponding Real signal block example there exists an elementary
                          graphics),
         Documentation(info="<html>
 <p>
-This block for Boolean signals works similar as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.AssignClockVectorized\">RealSignals.Sampler.AssignClockVectorized</a>).
+This block for Boolean signals works similarly as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.AssignClockVectorized\">RealSignals.Sampler.AssignClockVectorized</a>).
 </p>
 <p>
-Analog to the corresponding Real signal block example there exists an elementary <a href=\"Modelica_Synchronous.Examples.Elementary.BooleanSignals.AssignClockVectorized\">example</a> for the Boolean block.
+Analog to the corresponding Real signal block example there exists an elementary <a href=\"modelica://Modelica_Synchronous.Examples.Elementary.BooleanSignals.AssignClockVectorized\">example</a> for this Boolean block.
 </p>
 </html>"));
     end AssignClockVectorized;
@@ -12325,14 +12982,17 @@ Analog to the corresponding Real signal block example there exists an elementary
                            graphics),
           Documentation(info="<html>
 <p>
-This block for Boolean signals works similar as the corresponding block for Real signals (see
+This block for Boolean signals works similarly as the corresponding block for Real signals (see
 <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.Utilities.UpSample\">RealSignals.Sampler.Utilities.UpSample</a>).
+</p>
+<p>
+Analog to the corresponding Real signal block example there exists an elementary <a href=\"modelica://Modelica_Synchronous.Examples.Elementary.BooleanSignals.UpSample\">example</a> for this Boolean block.
 </p>
 </html>"));
       end UpSample;
 
         block AssignClockToTriggerHold
-        "Generate a boolean continuous time trigger signal from a clocked Boolean input"
+        "Generate a Boolean continuous-time trigger signal from a clocked Boolean input"
           extends Modelica_Synchronous.ClockSignals.Interfaces.ClockedBlockIcon;
           parameter Boolean y_start=false "initial value of output signal";
           Modelica.Blocks.Interfaces.BooleanInput
@@ -12388,14 +13048,14 @@ This block for Boolean signals works similar as the corresponding block for Real
               grid={1,1}), graphics),
             Documentation(info="<html>
 <p>
-This block for Boolean signals works similar as the corresponding block for Real signals (see
+This block for Boolean signals works similarly as the corresponding block for Real signals (see
 <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.Utilities.AssignClockToTriggerHold\">RealSignals.Sampler.Utilities.AssignClockToTriggerHold</a>).
 </p>
 </html>"));
         end AssignClockToTriggerHold;
 
         block AssignClockToSquareWaveHold
-        "Generate a boolean continuous time square signal from a clocked real input"
+        "Generate a Boolean continuous-time square signal from a clocked Real input"
           extends Modelica_Synchronous.ClockSignals.Interfaces.ClockedBlockIcon;
           parameter Boolean y_start=false "initial value of output signal";
           Modelica.Blocks.Interfaces.BooleanInput
@@ -12445,13 +13105,18 @@ This block for Boolean signals works similar as the corresponding block for Real
               grid={1,1}), graphics),
             Documentation(info="<html>
 <p>
-This block for Boolean signals works similar as the corresponding block for Real signals (see
+This block for Boolean signals works similarly as the corresponding block for Real signals (see
 <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.Utilities.AssignClockToSquareWaveHold\">RealSignals.Sampler.Utilities.AssignClockToSquareWaveHold</a>).
 </p>
-
 </html>"));
         end AssignClockToSquareWaveHold;
 
+      annotation (Documentation(info="<html>
+<p>
+This package contains utility blocks that are usually not directly utilized
+but are used as building blocks for \"higher level\" blocks.
+</p>
+</html>"));
     end Utilities;
 
     annotation (Documentation(info="<html>
@@ -12733,12 +13398,11 @@ construct blocks operating on clocked Boolean signals.
 This package contains blocks that operate on clocked Boolean signals.
 Especially blocks are provided to transform from continuous-time Boolean signals to
 clocked Boolean signals (with Sampler blocks) and vice versa
-(with Hold blocks), as well as to transform a clocked Boolean signal to
-another (time-synchronized) clock.
+(with Hold blocks), as well as to transform a clocked Boolean signal from
+one clock to a different clock in a time-synchronized way.
 </p>
 </html>"));
 end BooleanSignals;
-
 
 
   package Types "Library of types with choices, especially to build menus"
@@ -12748,7 +13412,41 @@ end BooleanSignals;
     "Enumeration defining the integration method to solve differential equations in a clocked discretized continuous-time partition"
     annotation(choices(
        choice="ExplicitEuler" "Explicit Euler method (order 1)",
-       choice="ImplicitEuler" "Implicit Euler method (order 1)"));
+       choice="ImplicitEuler" "Implicit Euler method (order 1)"), Documentation(
+        info="<html>
+<p>
+Type <b>SolverMethod</b> is a String type with menu choices to select the
+integration method to solve differential equations in a clocked discretized
+continuous-time partition. The choices are tool dependent.
+For details, see chapter 16.8.2 \"Solver Method\" in the Modelica Language
+Specification (version &ge; 3.3). This type is used in the Advanced menu of
+<a href=\"modelica://Modelica_Synchronous.ClockSignals.Clocks\">clocks</a>,
+in order to select the solver method for a clocked partition.
+</p>
+
+<p>
+It is planned to move this type definition in version 1.0 of this
+library to the (tool specific) ModelicaServices
+library, in order that different tools can adapt the choices menu
+to their supported integration methods.
+</p>
+
+<p>
+This first version of the type definition contains
+the integration methods supported by Dymola 2013 FD01:
+</p>
+
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th><b>Types.SolverMethod.</b></th><th><b>Meaning</b></th></tr>
+<tr><td valign=\"top\">\"ExplicitEuler\"</td>
+    <td valign=\"top\">Explicit Euler method</td></tr>
+
+<tr><td valign=\"top\">\"ImplicitEuler\"</td>
+    <td valign=\"top\">Implicit Euler method</td></tr>
+</table>
+
+
+</html>"));
     type Resolution = enumeration(
       y "y (year)",
       d "d (day)",
@@ -12800,26 +13498,9 @@ The following values are possible:
 
 </html>"));
 
-    type FIR_FilterType = enumeration(
-      LowPass "Low pass filter",
-      HighPass "High pass filter")
-    "Enumeration defining the type of a FIR filter (high pass or low pass filter)"
-        annotation (Evaluate=true, Documentation(info="<html>
-</html>"));
-
-    type FIR_Window = enumeration(
-      Rectangle,
-      Bartlett,
-      Hann,
-      Hamming,
-      Blackman,
-      Kaiser) "Enumeration defining the window type for a FIR filter"
-        annotation (Evaluate=true, Documentation(info="<html>
-
-</html>"));
   annotation (Documentation(info="<html>
 <p>
-This package contains enumeration definitions utilized
+This package contains type definitions utilized
 in blocks of the Modelica_Synchronous package.
 </p>
 </html>"));
@@ -12829,9 +13510,9 @@ in blocks of the Modelica_Synchronous package.
   annotation (preferredView="info",
   uses(Modelica(version="3.2")),
     version="0.91",
-    versionBuild=1,
+    versionBuild=2,
     versionDate="2012-09-20",
-    dateModified = "2012-10-04 11:35:09Z",
+    dateModified = "2012-10-10 17:35:09Z",
     revisionId="$Id::                                       $",
   Documentation(info="<html>
 <p>
@@ -12839,11 +13520,13 @@ Library <b>Modelica_Synchronous</b> is a Modelica package
 to precisely define and synchronize sampled data systems with different sampling rates.
 The library has elements to define periodic clocks and event clocks that trigger elements to sample, sub-sample, super-sample, or shift-sample partitions synchronously. Optionally, quantization effects, computational delay or noise can be simulated. Continuous-time equations can be automatically discretized and utilized in a sampled data system. The sample rate of
 a partition need to be defined only at one location. All Modelica libraries designed so far for sampled systems, such as Modelica.Blocks.Discrete or Modelica_LinearSystems2.Controller
-are becoming obsolete and instead Modelica_Synchronous should be utilized instead.
+are becoming obsolete and instead Modelica_Synchronous should be utilized.
 </p>
 
 <p>
-In the following figure a simple sampled data system is show, where the borders of the
+In the following
+<a href=\"modelica://Modelica_Synchronous.Examples.SimpleControlledDrive.ClockedWithDiscreteController\">example</a>
+a simple sampled data system is shown, where the borders of the
 discrete-time partition are marked by the sample and hold operators, a clocked PI
 controller is used in the partition and the sample
 rate is defined at one location with a clock:

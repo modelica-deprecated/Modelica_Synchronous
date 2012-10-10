@@ -1012,6 +1012,25 @@ equation
       end realDelay2shiftSampleParameters;
     end RealSignals;
 
+    package Types
+      type FIR_FilterType = enumeration(
+          LowPass "Low pass filter",
+          HighPass "High pass filter")
+        "Enumeration defining the type of a FIR filter (high pass or low pass filter)"
+          annotation (Evaluate=true, Documentation(info="<html>
+</html>"));
+      type FIR_Window = enumeration(
+          Rectangle,
+          Bartlett,
+          Hann,
+          Hamming,
+          Blackman,
+          Kaiser) "Enumeration defining the window type for a FIR filter"
+          annotation (Evaluate=true, Documentation(info="<html>
+
+</html>"));
+    end Types;
+
     block PID "Discrete-time PID controller"
       extends Modelica_Synchronous.RealSignals.Interfaces.PartialClockedSISO;
       parameter Real k = 1 "Gain of PID controller";
@@ -1173,12 +1192,13 @@ form of a PID controller by using the backward rectangular approximation (also c
 
       extends Modelica_Synchronous.RealSignals.Interfaces.PartialClockedSISO;
 
-      parameter Modelica_Synchronous.Types.FIR_FilterType
+      parameter
+        Modelica_Synchronous.WorkInProgress.Incubate.Types.FIR_FilterType
                                                       filterType=
           Modelica_Synchronous.Types.FIR_FilterType.LowPass "Type of filter";
       parameter Integer order(min=1) = 2 "Order of filter";
       parameter Modelica.SIunits.Frequency f_cut=1 "Cut-off frequency";
-      parameter Modelica_Synchronous.Types.FIR_Window
+      parameter Modelica_Synchronous.WorkInProgress.Incubate.Types.FIR_Window
                                                   window= Modelica_Synchronous.Types.FIR_Window.Kaiser
         "Type of window";
       parameter Real beta=2.12 "Beta-Parameter for Kaiser-window"
