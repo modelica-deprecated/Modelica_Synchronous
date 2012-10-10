@@ -13540,6 +13540,11 @@ rate is defined at one location with a clock:
 For an introduction, have especially a look at:
 </p>
 <ul>
+<li> <a href=\"modelica://Modelica_Synchronous/Resources/Documentation/Modelica_Synchronous.pdf\">Modelica_Synchronous.pdf</a>
+     is a slide set that provides an overview of the Library
+     (the pdf file was generated from the 
+      <a href=\"modelica://Modelica_Synchronous/Resources/Documentation/Modelica_Synchronous.pptx\">PowerPoint presentation</a>).
+      </li>
 <li> <a href=\"modelica://Modelica_Synchronous.UsersGuide.GettingStarted\">Getting started</a>
      provides an overview of the Library
      inside the <a href=\"modelica://Modelica_Synchronous.UsersGuide\">User's Guide</a>.</li>
