@@ -1195,16 +1195,17 @@ form of a PID controller by using the backward rectangular approximation (also c
       parameter
         Modelica_Synchronous.WorkInProgress.Incubate.Types.FIR_FilterType
                                                       filterType=
-          Modelica_Synchronous.Types.FIR_FilterType.LowPass "Type of filter";
+          Modelica_Synchronous.WorkInProgress.Incubate.Types.FIR_FilterType.LowPass
+        "Type of filter";
       parameter Integer order(min=1) = 2 "Order of filter";
       parameter Modelica.SIunits.Frequency f_cut=1 "Cut-off frequency";
       parameter Modelica_Synchronous.WorkInProgress.Incubate.Types.FIR_Window
-                                                  window= Modelica_Synchronous.Types.FIR_Window.Kaiser
+                                                  window= Modelica_Synchronous.WorkInProgress.Incubate.Types.FIR_Window.Kaiser
         "Type of window";
       parameter Real beta=2.12 "Beta-Parameter for Kaiser-window"
           annotation(Dialog(enable = window == Modelica_Synchronous.Types.FIR_Window.Kaiser));
 
-      final output Real a[order+1]=Modelica_Synchronous.RealSignals.Periodic.Internal.FIR_coefficients(
+      final output Real a[order+1]=Modelica_Synchronous.WorkInProgress.Incubate.Internal.FIR_coefficients(
           filterType,
           order,
           f_cut,
@@ -1288,6 +1289,200 @@ this block computes the filter coefficients a[:] by design parameters
           "Do not use any solver (partition is forced to not contain differential equations)",
        choice="ExplicitEuler" "Explicit Euler method (order 1)",
        choice="ImplicitEuler" "Implicit Euler method (order 1)"));
+    package Internal
+      "Internal blocks and functions that are usually of no interest for the user"
+    extends Modelica.Icons.Package;
+      function FIR_coefficients
+        "Calculates the FIR-filter coefficient vector from filter design parameters"
+        import FilterType =
+          Modelica_Synchronous.WorkInProgress.Incubate.Types.FIR_FilterType;
+        input Modelica_Synchronous.WorkInProgress.Incubate.Types.FIR_FilterType
+                                                    filterType=
+            Modelica_Synchronous.WorkInProgress.Incubate.Types.FIR_FilterType.LowPass
+          "Type of filter";
+        input Integer order(min=1) = 2 "Order of filter";
+        input Modelica.SIunits.Frequency f_cut=1 "Cut-off frequency";
+        input Modelica.SIunits.Time Ts(min=0) "Sampling period";
+        input Modelica_Synchronous.WorkInProgress.Incubate.Types.FIR_Window
+                                                window= Modelica_Synchronous.WorkInProgress.Incubate.Types.FIR_Window.Rectangle
+          "Type of window";
+        input Real beta=2.12 "Beta-Parameter for Kaiser-window"
+            annotation(Dialog(enable = window == Modelica_Synchronous.Types.Window.Kaiser));
+        output Real a[order+1] "Filter coefficient vector";
+
+      protected
+        constant Real pi=Modelica.Constants.pi;
+        Boolean isEven=mod(order,2)==0;
+        Real Wc=2*pi*f_cut*Ts;
+        Integer i;
+        Real w[order + 1];
+        Real k;
+
+      algorithm
+        assert(filterType == FilterType.LowPass or filterType == FilterType.HighPass and isEven,
+               "High pass FIR filters must have an even order");
+        assert(f_cut<=1/(2*Ts),"The cut-off frequency f_cut cannot be greater than half the sample frequency (Nyquist frequency),\n" +
+                               "i.e. f_cut <= " + String(1/(2*Ts)) + " but is "+String(f_cut));
+        w := FIR_window(
+          order + 1,
+          window,
+          beta);
+        for i in 1:order + 1 loop
+           k := i - 1 - order/2;
+           if i - 1 == order/2 then
+              a[i] := if filterType == FilterType.LowPass then Wc*w[i]/pi else
+                      w[i] - Wc*w[i]/pi;
+           else
+              a[i] := if filterType == FilterType.LowPass then sin(k*Wc)*
+                      w[i]/(k*pi) else w[i]*(sin(k*pi) - sin(k*Wc))/(k*pi);
+           end if;
+        end for;
+
+        // Scale coefficients, so that the sum is one
+        a := a/sum(a);
+
+        annotation (
+          Documentation(info="<HTML>
+<p>
+The FIR-filter synthesis based on the window method. The coefficients are
+calculated through a fourier series approximation of the desired amplitude
+characteristic. Due to the fact that the Fourier series is truncated, there
+will be discontinuities in the magnitude of the filter. Especial at the edge
+of the filter the ripple is concentrated (Gibbs-effect). To counteract this,
+the filter coefficients are convolved in the frequency domain with the spectrum
+of a window function, thus smoothing the edge transitions at any discontinuity.
+This convolution in the frequency domain is equivalent to multiplying the filter
+coefficients with the window coefficients in the time domain.
+</p>
+<p>
+The filter equation
+<pre>
+     y(k) = a0*u(k) + a1*u(k-1) + a2*u(k-2) + ... + an*u(k-n)
+</pre>
+implies that the function outputs n+1 coefficients for a n-th order filter. The
+coefficients can be weightened with different kind of windows: Rectangle, Bartlett,
+Hann, Hamming, Blackman, Kaiser <br>
+The beta parameter is only needed by the Kaiser window.
+</p>
+</HTML>
+"));
+      end FIR_coefficients;
+
+      function FIR_window
+        "Calculation of n-point weighting window for FIR filter"
+
+        import Window =
+          Modelica_Synchronous.WorkInProgress.Incubate.Types.FIR_Window;
+        input Integer na "Number of points of weighting window vector";
+        input Modelica_Synchronous.WorkInProgress.Incubate.Types.FIR_Window
+                     window=Window.Kaiser "Type of window";
+        input Real beta=2.12 "Beta-Parameter for Kaiser-window";
+        output Real a[na] "Weighting window vector a[na]";
+      protected
+        constant Real pi=Modelica.Constants.pi;
+        Integer i=0;
+        Real k;
+      algorithm
+        if window <> Window.Rectangle then
+          for i in 1:na loop
+            k := i - 1 - (na - 1)/2;
+            if window == Window.Bartlett then
+              a[i] := 1 - 2*abs(k)/(na - 1);
+            elseif window == Window.Hann then
+              a[i] := 0.5 + 0.5*cos(2*pi*k/(na - 1));
+            elseif window == Window.Hamming then
+              a[i] := 0.54 + 0.46*cos(2*pi*k/(na - 1));
+            elseif window == Window.Blackman then
+              a[i] := 0.42 + 0.5*cos(2*pi*k/(na - 1)) + 0.08*cos(4*pi*k/(na - 1));
+            elseif window == Window.Kaiser then
+              k := 2*beta*sqrt((i - 1)*(na - i))/(na - 1);
+              a[i] := bessel0(k)/bessel0(beta);
+            else
+              Modelica.Utilities.Streams.error("window = " + String(window) + " not known");
+            end if;
+          end for;
+        else
+          a := ones(na);
+        end if;
+
+        annotation (
+          Documentation(info="<HTML>
+<p>
+Weighting windows are used for digital filter design or spectrum estimation (e.g. DFT)
+to increase the quality. In designing FIR-Filter the main role of windowing is to remove
+non-ideal effects caused by the endless number of filter coefficients (Gibbs phenomenon).
+Multiplying the coefficients with a window damps the coefficients at the beginning and at
+the end.
+</p>
+<p>
+The function outputs a L-point vector for a given kind of window. The parameter \"beta\" is
+only needed by the Kaiser window. The types of windows are:
+</p>
+<OL>
+<LI>Rectangle</LI>
+<LI>Bartlett</LI>
+<LI>Hann</LI>
+<LI>Hamming</LI>
+<LI>Blackman</LI>
+<LI>Kaiser</LI>
+</OL>
+</HTML>
+"));
+      end FIR_window;
+
+      function bessel0
+        "Polynomial approximation of the zeroth order modified Bessel function"
+
+        input Real x;
+        output Real y;
+      protected
+        Real ax;
+        Real a;
+      algorithm
+
+        ax := abs(x);
+        if ax < 3.75 then
+          a := (x/3.75)^2;
+          y := 1 + a*(3.5156229 + a*(3.0899424 + a*(1.2067492 + a*(0.2659732 + a*
+            (0.0360768 + a*0.0045813)))));
+        else
+          a := 3.75/ax;
+          y := exp(ax)/sqrt(ax)*(0.39894228 + a*(0.01328592 + a*(0.00225319 + a*(
+            -0.00157565 + a*(0.00916281 + a*(-0.02057706 + a*(0.02635537 + a*(-0.01647633
+             + a*0.00392377))))))));
+        end if;
+        annotation (
+          Documentation(info="<HTML>
+<p>
+Polynomial approximation of the zeroth order modified Bessel function.
+The algorithm is taken from
+</p>
+<dl>
+<dt>H. W. Press, S.A. Teukolsky, W. Vetterling:
+<dd><b>Numerical Reciepes in C: The Art of Scientific Computing</b><br>
+       Cambridge UP, 1988
+</dl>
+<p>
+The function is used to calculate the Kaiser-window via
+<i>calcWindow</i>.
+</p>
+<p><b>Release Notes:</b></p>
+<ul>
+<li><i>July 10, 2002</i>
+       by Nico Walther<br>
+       Realized.</li>
+</ul>
+</HTML>
+"));
+      end bessel0;
+
+      annotation (Documentation(info="<html>
+<p>
+This package contains functions that are usually not directly be utilized
+by a user.
+</p>
+</html>"));
+    end Internal;
     annotation (preferredView="info", Documentation(info="<html>
 </html>"));
   end Incubate;
@@ -1543,9 +1738,9 @@ this block computes the filter coefficients a[:] by design parameters
         annotation (Placement(transformation(extent={{-20,-60},{0,-40}})));
       Modelica_Synchronous.WorkInProgress.Incubate.FIRbyWindow
                            FIR1(
-        filterType=Modelica_Synchronous.Types.FIR_FilterType.LowPass,
+        filterType=Modelica_Synchronous.WorkInProgress.Incubate.Types.FIR_FilterType.LowPass,
         f_cut=2,
-        window=Modelica_Synchronous.Types.FIR_Window.Rectangle,
+        window=Modelica_Synchronous.WorkInProgress.Incubate.Types.FIR_Window.Rectangle,
         order=3)
         annotation (Placement(transformation(extent={{-20,40},{0,60}})));
     equation
@@ -1588,9 +1783,9 @@ this block computes the filter coefficients a[:] by design parameters
         annotation (Placement(transformation(extent={{-62,-6},{-50,6}})));
       Modelica_Synchronous.WorkInProgress.Incubate.FIRbyWindow
                            FIR1(
-        filterType=Modelica_Synchronous.Types.FIR_FilterType.LowPass,
+        filterType=Modelica_Synchronous.WorkInProgress.Incubate.Types.FIR_FilterType.LowPass,
         f_cut=2,
-        window=Modelica_Synchronous.Types.FIR_Window.Rectangle,
+        window=Modelica_Synchronous.WorkInProgress.Incubate.Types.FIR_Window.Rectangle,
         order=3)
         annotation (Placement(transformation(extent={{-20,40},{0,60}})));
     equation
@@ -2661,7 +2856,13 @@ this block computes the filter coefficients a[:] by design parameters
                                periodicRealClock(period=0.1)
         annotation (Placement(transformation(extent={{-58,22},{-46,34}})));
       Modelica_Synchronous.RealSignals.Sampler.SampleWithADeffects
-                                                      sample1
+                                                      sample1(
+        noisy=true,
+        limited=true,
+        quantized=true,
+        redeclare
+          Modelica_Synchronous.RealSignals.Sampler.Utilities.Internal.UniformNoise
+          noise)
         annotation (Placement(transformation(extent={{-44,44},{-32,56}})));
       Modelica_Synchronous.RealSignals.Sampler.AssignClock
                                               assignClock1
@@ -2674,6 +2875,12 @@ this block computes the filter coefficients a[:] by design parameters
         limited=true,
         quantized=true)
         annotation (Placement(transformation(extent={{10,44},{22,56}})));
+      Modelica_Synchronous.RealSignals.Sampler.SampleWithADeffects
+                                                      sample2
+        annotation (Placement(transformation(extent={{-44,68},{-32,80}})));
+      Modelica_Synchronous.RealSignals.Sampler.AssignClock
+                                              assignClock2
+        annotation (Placement(transformation(extent={{-18,68},{-6,80}})));
     equation
       connect(sine.y, sample1.u) annotation (Line(
           points={{-71,50},{-45.2,50}},
@@ -2692,6 +2899,20 @@ this block computes the filter coefficients a[:] by design parameters
       connect(assignClock1.y, hold1.u) annotation (Line(
           points={{-3.4,50},{8.8,50}},
           color={0,0,127},
+          smooth=Smooth.None));
+      connect(sine.y, sample2.u) annotation (Line(
+          points={{-71,50},{-52,50},{-52,74},{-45.2,74}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(sample2.y, assignClock2.u) annotation (Line(
+          points={{-31.4,74},{-19.2,74}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(periodicRealClock.y, assignClock2.clock) annotation (Line(
+          points={{-45.4,28},{44,28},{44,62},{-12,62},{-12,66.8}},
+          color={175,175,175},
+          pattern=LinePattern.Dot,
+          thickness=0.5,
           smooth=Smooth.None));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}),
@@ -3101,7 +3322,7 @@ the initial value defined via parameter <b>y0</b>.
       Modelica_Synchronous.ClockSignals.Clocks.EventClock
                         eventClock
         annotation (Placement(transformation(extent={{-36,-16},{-24,-4}})));
-      Modelica.Blocks.Sources.BooleanPulse booleanPulse
+      Modelica.Blocks.Sources.BooleanPulse booleanPulse(period=0.1)
         annotation (Placement(transformation(extent={{-96,-20},{-76,0}})));
       Modelica_Synchronous.ClockSignals.Interfaces.ClockOutput
                              y1
@@ -3139,23 +3360,6 @@ the initial value defined via parameter <b>y0</b>.
                 -100,-100},{100,100}}), graphics), experiment(StopTime=1.2));
     end TheDifferentClocks;
 
-    model SubSampledClock
-      Modelica_Synchronous.ClockSignals.Clocks.PeriodicRealClock
-                               periodicRealClock(period=0.1)
-        annotation (Placement(transformation(extent={{-76,44},{-64,56}})));
-      Modelica_Synchronous.ClockSignals.Sampler.SubSample
-                             subSample(factor=3)
-        annotation (Placement(transformation(extent={{-44,44},{-32,56}})));
-    equation
-      connect(periodicRealClock.y, subSample.u) annotation (Line(
-          points={{-63.4,50},{-45.2,50}},
-          color={175,175,175},
-          pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
-      annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
-                -100,-100},{100,100}}), graphics));
-    end SubSampledClock;
   end ForDocumentation;
 
   block Interpolator

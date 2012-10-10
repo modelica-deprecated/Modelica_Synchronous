@@ -219,6 +219,28 @@ Changes with respect to version 0.9:
      These blocks have been used to generate the figures in the documentation of
      many blocks. Furthermore, they are used for testing these blocks.</li>
 </ul>
+
+<p>
+The library has been tested with Dymola 2013 FD01:
+</p>
+
+<ul>
+<li> \"Check\" with \"Pedantic = true\" is successful (so the library should be completly compatible
+     to the Modelica 3.3 specification).</li>
+<li> \"Check with Simulation\" is successful.</li>
+<li> The tests have a class coverage of 100 %
+     (that is every class of the library is utilized in at least
+     one test).</li>
+<li> The results of the test models have been either manually checked,
+     or compared with results of the Modelica_LinearSystems.Controller or
+     the Modelica.Blocks.Discrete library.</li>
+</ul>
+
+<p>
+The library has also been tested with the MapleSim Standalone Modelica parser
+(so also another Modelica tool deduces that the library is fully conformant to
+Modelica).
+</p>
 </html>"));
       end Version_0_91;
 
@@ -233,11 +255,6 @@ Modelica Conference 2012.
 </html>"));
       end Version_0_9;
       annotation (Documentation(info="<html>
-<p>
-This section summarizes the changes that have been performed
-on the Modelica_Synchronous library.
-</p>
-</html>"),        Documentation(info="<html>
 <p>
 This section summarizes the changes that have been performed
 on the Modelica_Synchronous library.
@@ -1415,7 +1432,7 @@ Simple controlled drive with discrete-time controller
 modelled as a clocked partition.
 The PI controller is defined with a continuous-time block.
 The clocked partition is automatically discretized with an
-implicit Euler method by setting parameter 
+implicit Euler method by setting parameter
 <b>useSolver</b> = true in the <b>Advanced</b> menu
 of block <b>periodicClock</b> and then selecting
 <b>ImplicitEuler</b> as <b>SolverMethod</b> for the partition.
@@ -1567,7 +1584,7 @@ This package shows the same example in different variants.
 <p>
 Model <a href=\"modelica://Modelica_Synchronous.Examples.SimpleControlledDrive.Continuous\">SimpleControlledDrive.Continuous</a>
 is the <b>continuous-time</b> model from which the sampled-data versions are derived.
-The model consists of a reference controller (\"ramp\"), a feedback controller 
+The model consists of a reference controller (\"ramp\"), a feedback controller
 (\"feedback\" and \"PI\") and a plant (\"torque\", \"load\" and \"speed\").
 The task of the controller is to control the speed of the load inertia
 using a simple PI controller.
@@ -2230,7 +2247,7 @@ This package shows the same example in different variants.
 <p>
 Model <a href=\"modelica://Modelica_Synchronous.Examples.CascadeControlledDrive.Continuous\">CascadeControlledDrive.Continuous</a>
 is the <b>continuous-time</b> model from which the sampled-data versions are derived.
-The \"CascadeControlledDrive\" example adds another position control cascade to the 
+The \"CascadeControlledDrive\" example adds another position control cascade to the
 <a href=\"modelica://Modelica_Synchronous.Examples.SimpleControlledDrive\">SimpleControlledDrive</a>
 example. This model demonstrates a control system with two cascaded control loops.
 The goal is to control the angle of the load inertia.
@@ -2423,7 +2440,7 @@ Since a long time, Modelica is used to model advanced nonlinear control systems.
 Especially, Modelica allows a semi-automatic treatment of inverse nonlinear
 plant models. In the fundamental article (Looye et.al. 2005, see
 <a href=\"modelica://Modelica_Synchronous.UsersGuide.Literature\">Literature</a> or
-<a href=\"https://www.modelica.org/events/Conference2005/online_proceedings/Session3/Session3c3.pdf\">Download</a>) 
+<a href=\"https://www.modelica.org/events/Conference2005/online_proceedings/Session3/Session3c3.pdf\">Download</a>)
 this approach is described and several controller structures are presented to
 utilize an inverse plant model in the controller. This approach is attractive
 because it results in a systematic procedure to design a controller for the
@@ -2444,7 +2461,7 @@ to re-import the sampled data system to Modelica.
 The synchronous features of Modelica 3.3 together with the
 Modelica_Synchronous library offer now completely new possibilities,
 so that the inverse model can be designed and evaluated as sampled data
-system within Modelica and a Modelica simulation environment. 
+system within Modelica and a Modelica simulation environment.
 This approach is shown at hand of a simple example using
 a nonlinear plant model of a
 mixing unit (Föllinger O. (1998): Nichtlineare Regelungen I,
@@ -2485,7 +2502,7 @@ by first inverting the continuous-time plant model from the variable
 to be primarily controlled (here: \"c\") to the actuator input
 (here: \"T_c\"). This is performed with the help of block
 <a href=\"modelica://Modelica.Blocks.Math.InverseBlockConstraints\">Modelica.Blocks.Math.InverseBlockConstraints</a>
-that allows connecting an external input to an output 
+that allows connecting an external input to an output
 in the pre-filter design block
 <a href=\"modelica://Modelica_Synchronous.Examples.Systems.Utilities.ComponentsMixingUnit.FilterOrder\">Utilities.ComponentsMixingUnit.FilterOrder</a>:
 </p>
@@ -2505,10 +2522,10 @@ is not available. The conclusion is that a low pass filter of at
 least second order has to be connected between c_ref and c, for example
 <a href=\"modelica:Modelica.Blocks.Continuous.Filter\">Modelica.Blocks.Continuous.Filter</a>. Only filter types should be used that do not have \"vibrations\" in the time domain for
 a step input. Therefore, parameter <b>analogFilter</b> of the component should be
-selected as <b>CriticalDamping</b> (= only real poles), or 
+selected as <b>CriticalDamping</b> (= only real poles), or
 <b>Bessel</b> (= nearly no vibrations, but steeper frequency response as
 CriticalDamping). The cut-off frequency <b>f_cut</b> is manually
-selected by simulations of the closed loop system. In the example, 
+selected by simulations of the closed loop system. In the example,
 a CriticalDamping filter of third order (the third order is selected to
 get smoother signals) and a cut-off frequency of 1/300 Hz is used.
 </p>
@@ -2687,7 +2704,7 @@ This system has the following properties:
 </ul>
 
 <p>
-The complete system is shown in the diagram layer and in the figure below: 
+The complete system is shown in the diagram layer and in the figure below:
 </p>
 
 <p>
@@ -2701,7 +2718,7 @@ has the crankshaft angle as input and provides the sampled crankshaft
 speed as output. Additionally, the clock associated with the output
 (and therefore also to component speedControl) ticks, at every 180 degree
 rotation of the crankshaft angle. This special application is implemented
-in the text layer of component 
+in the text layer of component
 <a href=\"modelica://Modelica_Synchronous.Examples.Systems.Utilities.ComponentsThrottleControl.CrankshaftPositionEvent\">triggeredSpeed</a> as:
 </p>
 
@@ -2715,7 +2732,7 @@ in the text layer of component
 
 <p>
 Here, N is the derivative of the crankshaft angle. Whenever this angle becomes
-larger as 180 degree an event clock is activated due to Clock(..). 
+larger as 180 degree an event clock is activated due to Clock(..).
 In such a case the when-clause becomes active, and the speed N is sampled,
 and the new offset for the next event is computed.
 </p>
@@ -3632,6 +3649,14 @@ Example used to generate a figure for the documentation of block
 </p>
 </html>"));
         end ShiftSample;
+      annotation (Documentation(info="<html>
+<p>
+This package contains models that have been used to produce
+the figures in the documentation of the
+<a href=\"modelica://Modelica_Synchronous.ClockSignals\">Modelica_Synchronous.ClockSignals</a>
+sub-library.
+</p>
+</html>"));
       end ClockSignals;
 
       package RealSignals
@@ -4653,7 +4678,7 @@ Example used to generate a figure for the documentation of block
             color={0,0,127},
             smooth=Smooth.None));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-                  -100},{100,100}}),   graphics), experiment,
+                  -100},{100,100}}),   graphics), experiment(StopTime=1.1),
           Documentation(info="<html>
 <p>
 Example used to generate a figure for the documentation of block
@@ -6297,7 +6322,7 @@ then sub-samples the resulting clock signal with a factor of 3:<br>
 <p>
 As can be seen, subSample.y picks every third-value of periodicClock.y due to the
 sub-sampling, and the sub-sampling factor = 3 is displayed in the icon of the
-subSample block. Note the down-arrow in the icon of the subSample block indicates that 
+subSample block. Note the down-arrow in the icon of the subSample block indicates that
 clock subSample.y is slower as clock subSample.u.
 </p>
 </html>"));
@@ -6442,7 +6467,7 @@ then super-samples the resulting clock with a factor of 3:<br>
 <p>
 As can be seen, superSample introduces factor-1 additional clock ticks for the
 output clock y. The super-sampling factor = 3 is displayed in the icon of the
-superSample block. Note the up-arrow in the icon of the superSample block indicates that 
+superSample block. Note the up-arrow in the icon of the superSample block indicates that
 clock superSample.y is faster as clock superSample.u.
 </p>
 </html>"));
@@ -6541,7 +6566,7 @@ The block constructs (conceptually) a clock &ldquo;cBase&rdquo;
 </pre>
 
 <p>
-and clock y starts at the second clock tick of cBase. 
+and clock y starts at the second clock tick of cBase.
 </p>
 
 
@@ -6566,7 +6591,7 @@ then shifts it with shiftCounter = 4 and resolution = 3:<br>
    </tr>
 </table>
 <p>
-The first activation of clock output y of block shiftSample1 is shifted in time (4/3*20ms). The parameter values <b>shiftCounter</b> = 4 and <b>resolution</b> = 3 are visible at the bottom of the icon. 
+The first activation of clock output y of block shiftSample1 is shifted in time (4/3*20ms). The parameter values <b>shiftCounter</b> = 4 and <b>resolution</b> = 3 are visible at the bottom of the icon.
 </p>
 
 </html>"));
@@ -8810,7 +8835,7 @@ initialized a bit differently.
         block AssignClockToTriggerHold
         "Generate a Boolean continuous-time trigger signal from a clocked Real input"
           extends Modelica_Synchronous.ClockSignals.Interfaces.ClockedBlockIcon;
-          parameter Boolean y_start=false "initial value of output signal";
+          parameter Boolean y_start=false "Initial value of output signal";
           Modelica.Blocks.Interfaces.RealInput u
             annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
           Modelica.Blocks.Interfaces.BooleanOutput y
@@ -8898,7 +8923,7 @@ Note, that it is clearly visible in the plot that the \"old-style\" discrete var
         block AssignClockToSquareWaveHold
         "Generate a Boolean continuous-time square-wave output from a clocked Real input"
           extends Modelica_Synchronous.ClockSignals.Interfaces.ClockedBlockIcon;
-          parameter Boolean y_start=false "initial value of output signal";
+          parameter Boolean y_start=false "Initial value of output signal";
           Modelica.Blocks.Interfaces.RealInput u
             annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
           Modelica.Blocks.Interfaces.BooleanOutput y
@@ -9006,7 +9031,7 @@ There is the restriction that shiftCounter/resolution &le; 1.
 </html>"));
         end ComputationalDelay;
 
-        block UniformNoise
+        block UniformNoise "Add band-limited uniform noise to a clocked signal"
           extends Modelica_Synchronous.RealSignals.Interfaces.PartialNoise;
           parameter Real noiseMax=0.1 "Upper limit of noise band";
           parameter Real noiseMin=-noiseMax "Lower limit of noise band";
@@ -10115,7 +10140,7 @@ contrary to a general FIR filter.
                   -14,-4},{-4,-46},{0,-64},{2,-82}},
                                              color={0,0,127}),
         Polygon(points={{-84,90},{-92,68},{-76,68},{-84,90},{-84,90}}, lineColor={192,192,192}, fillColor={192,192,192},
-                fillPattern=   FillPattern.Solid),
+                fillPattern =  FillPattern.Solid),
           Line(points={{2,-82},{4,-64},{8,-56},{12,-56},{16,-60},{18,-66},{20,-82}},
                                                                              color={0,0,127}),
           Line(points={{20,-80},{20,-78},{20,-72},{22,-66},{24,-64},{28,-64},{32,-66},
@@ -10124,7 +10149,7 @@ contrary to a general FIR filter.
                   {62,-72},{64,-76},{64,-78},{64,-80},{64,-82}},
                                                 color={0,0,127}),
         Polygon(points={{90,-82},{68,-74},{68,-90},{90,-82}}, lineColor={192,192,192}, fillColor={192,192,192},
-                fillPattern=  FillPattern.Solid),
+                fillPattern = FillPattern.Solid),
             Text(
               extent={{-26,88},{88,48}},
               lineColor={175,175,175},
@@ -10178,7 +10203,7 @@ a[:] are the filter coefficients.
 </html>"),
         Icon(graphics={
         Polygon(points={{-84,90},{-92,68},{-76,68},{-84,90},{-84,90}}, lineColor={192,192,192}, fillColor={192,192,192},
-                fillPattern=   FillPattern.Solid),
+                fillPattern =  FillPattern.Solid),
          Line(points={{-84,78},{-84,-90}}, color={192,192,192}),
         Line(points={{-84,30},{-72,30},{-52,28},{-32,20},{-26,16},{-22,12},{-18,6},{
                   -14,-4},{-4,-46},{0,-64},{2,-82}},
@@ -10194,7 +10219,7 @@ a[:] are the filter coefficients.
                   {62,-72},{64,-76},{64,-78},{64,-80},{64,-82}},
                                                 color={0,0,127}),
         Polygon(points={{90,-82},{68,-74},{68,-90},{90,-82}}, lineColor={192,192,192}, fillColor={192,192,192},
-                fillPattern=  FillPattern.Solid),
+                fillPattern = FillPattern.Solid),
         Line(points={{-90,-82},{82,-82}}, color={192,192,192}),
             Text(
               extent={{-26,86},{88,56}},
@@ -10210,196 +10235,6 @@ a[:] are the filter coefficients.
               textString="a=%a")}));
     end FIRbyCoefficients;
 
-    package Internal
-      "Internal blocks and functions that are usually of no interest for the user"
-    extends Modelica.Icons.Package;
-      function FIR_coefficients
-        "Calculates the FIR-filter coefficient vector from filter design parameters"
-        import FilterType =
-          Modelica_Synchronous.WorkInProgress.Incubate.Types.FIR_FilterType;
-        input Modelica_Synchronous.WorkInProgress.Incubate.Types.FIR_FilterType
-                                                    filterType=
-            Modelica_Synchronous.Types.FIR_FilterType.LowPass "Type of filter";
-        input Integer order(min=1) = 2 "Order of filter";
-        input Modelica.SIunits.Frequency f_cut=1 "Cut-off frequency";
-        input Modelica.SIunits.Time Ts(min=0) "Sampling period";
-        input Modelica_Synchronous.WorkInProgress.Incubate.Types.FIR_Window
-                                                window= Modelica_Synchronous.Types.FIR_Window.Rectangle
-          "Type of window";
-        input Real beta=2.12 "Beta-Parameter for Kaiser-window"
-            annotation(Dialog(enable = window == Modelica_Synchronous.Types.Window.Kaiser));
-        output Real a[order+1] "Filter coefficient vector";
-
-      protected
-        constant Real pi=Modelica.Constants.pi;
-        Boolean isEven=mod(order,2)==0;
-        Real Wc=2*pi*f_cut*Ts;
-        Integer i;
-        Real w[order + 1];
-        Real k;
-
-      algorithm
-        assert(filterType == FilterType.LowPass or filterType == FilterType.HighPass and isEven,
-               "High pass FIR filters must have an even order");
-        assert(f_cut<=1/(2*Ts),"The cut-off frequency f_cut cannot be greater than half the sample frequency (Nyquist frequency),\n" +
-                               "i.e. f_cut <= " + String(1/(2*Ts)) + " but is "+String(f_cut));
-        w := Internal.FIR_window(order+1, window, beta);
-        for i in 1:order + 1 loop
-           k := i - 1 - order/2;
-           if i - 1 == order/2 then
-              a[i] := if filterType == FilterType.LowPass then Wc*w[i]/pi else
-                      w[i] - Wc*w[i]/pi;
-           else
-              a[i] := if filterType == FilterType.LowPass then sin(k*Wc)*
-                      w[i]/(k*pi) else w[i]*(sin(k*pi) - sin(k*Wc))/(k*pi);
-           end if;
-        end for;
-
-        // Scale coefficients, so that the sum is one
-        a := a/sum(a);
-
-        annotation (
-          Documentation(info="<HTML>
-<p>
-The FIR-filter synthesis based on the window method. The coefficients are
-calculated through a fourier series approximation of the desired amplitude
-characteristic. Due to the fact that the Fourier series is truncated, there
-will be discontinuities in the magnitude of the filter. Especial at the edge
-of the filter the ripple is concentrated (Gibbs-effect). To counteract this,
-the filter coefficients are convolved in the frequency domain with the spectrum
-of a window function, thus smoothing the edge transitions at any discontinuity.
-This convolution in the frequency domain is equivalent to multiplying the filter
-coefficients with the window coefficients in the time domain.
-</p>
-<p>
-The filter equation
-<pre>
-     y(k) = a0*u(k) + a1*u(k-1) + a2*u(k-2) + ... + an*u(k-n)
-</pre>
-implies that the function outputs n+1 coefficients for a n-th order filter. The
-coefficients can be weightened with different kind of windows: Rectangle, Bartlett,
-Hann, Hamming, Blackman, Kaiser <br>
-The beta parameter is only needed by the Kaiser window.
-</p>
-</HTML>
-"));
-      end FIR_coefficients;
-
-      function FIR_window
-        "Calculation of n-point weighting window for FIR filter"
-
-        import Window =
-          Modelica_Synchronous.WorkInProgress.Incubate.Types.FIR_Window;
-        input Integer na "Number of points of weighting window vector";
-        input Modelica_Synchronous.WorkInProgress.Incubate.Types.FIR_Window
-                     window=Window.Kaiser "Type of window";
-        input Real beta=2.12 "Beta-Parameter for Kaiser-window";
-        output Real a[na] "Weighting window vector a[na]";
-      protected
-        constant Real pi=Modelica.Constants.pi;
-        Integer i=0;
-        Real k;
-      algorithm
-        if window <> Window.Rectangle then
-          for i in 1:na loop
-            k := i - 1 - (na - 1)/2;
-            if window == Window.Bartlett then
-              a[i] := 1 - 2*abs(k)/(na - 1);
-            elseif window == Window.Hann then
-              a[i] := 0.5 + 0.5*cos(2*pi*k/(na - 1));
-            elseif window == Window.Hamming then
-              a[i] := 0.54 + 0.46*cos(2*pi*k/(na - 1));
-            elseif window == Window.Blackman then
-              a[i] := 0.42 + 0.5*cos(2*pi*k/(na - 1)) + 0.08*cos(4*pi*k/(na - 1));
-            elseif window == Window.Kaiser then
-              k := 2*beta*sqrt((i - 1)*(na - i))/(na - 1);
-              a[i] := Internal.bessel0(k)/Internal.bessel0(beta);
-            else
-              Modelica.Utilities.Streams.error("window = " + String(window) + " not known");
-            end if;
-          end for;
-        else
-          a := ones(na);
-        end if;
-
-        annotation (
-          Documentation(info="<HTML>
-<p>
-Weighting windows are used for digital filter design or spectrum estimation (e.g. DFT)
-to increase the quality. In designing FIR-Filter the main role of windowing is to remove
-non-ideal effects caused by the endless number of filter coefficients (Gibbs phenomenon).
-Multiplying the coefficients with a window damps the coefficients at the beginning and at
-the end.
-</p>
-<p>
-The function outputs a L-point vector for a given kind of window. The parameter \"beta\" is
-only needed by the Kaiser window. The types of windows are:
-</p>
-<OL>
-<LI>Rectangle</LI>
-<LI>Bartlett</LI>
-<LI>Hann</LI>
-<LI>Hamming</LI>
-<LI>Blackman</LI>
-<LI>Kaiser</LI>
-</OL>
-</HTML>
-"));
-      end FIR_window;
-
-      function bessel0
-        "Polynomial approximation of the zeroth order modified Bessel function"
-
-        input Real x;
-        output Real y;
-      protected
-        Real ax;
-        Real a;
-      algorithm
-
-        ax := abs(x);
-        if ax < 3.75 then
-          a := (x/3.75)^2;
-          y := 1 + a*(3.5156229 + a*(3.0899424 + a*(1.2067492 + a*(0.2659732 + a*
-            (0.0360768 + a*0.0045813)))));
-        else
-          a := 3.75/ax;
-          y := exp(ax)/sqrt(ax)*(0.39894228 + a*(0.01328592 + a*(0.00225319 + a*(
-            -0.00157565 + a*(0.00916281 + a*(-0.02057706 + a*(0.02635537 + a*(-0.01647633
-             + a*0.00392377))))))));
-        end if;
-        annotation (
-          Documentation(info="<HTML>
-<p>
-Polynomial approximation of the zeroth order modified Bessel function.
-The algorithm is taken from
-</p>
-<dl>
-<dt>H. W. Press, S.A. Teukolsky, W. Vetterling:
-<dd><b>Numerical Reciepes in C: The Art of Scientific Computing</b><br>
-       Cambridge UP, 1988
-</dl>
-<p>
-The function is used to calculate the Kaiser-window via
-<i>calcWindow</i>.
-</p>
-<p><b>Release Notes:</b></p>
-<ul>
-<li><i>July 10, 2002</i>
-       by Nico Walther<br>
-       Realized.</li>
-</ul>
-</HTML>
-"));
-      end bessel0;
-
-      annotation (Documentation(info="<html>
-<p>
-This package contains functions that are usually not directly be utilized
-by a user.
-</p>
-</html>"));
-    end Internal;
     annotation (Documentation(info="<html>
 <p>
 This package contains blocks that are designed for periodically clocked
@@ -11540,7 +11375,7 @@ Analog to the corresponding Real signal block example there exists an elementary
         block AssignClockToTriggerHold
         "Generate a Boolean continuous-time trigger signal from a clocked Integer input"
           extends Modelica_Synchronous.ClockSignals.Interfaces.ClockedBlockIcon;
-          parameter Boolean y_start=false "initial value of output signal";
+          parameter Boolean y_start=false "Initial value of output signal";
           Modelica.Blocks.Interfaces.IntegerInput
                                                u
             annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
@@ -11603,7 +11438,7 @@ This block for Integer signals works similar as the corresponding block for Real
         block AssignClockToSquareWaveHold
         "Generate a Boolean continuous-time square signal from a clocked Integer input"
           extends Modelica_Synchronous.ClockSignals.Interfaces.ClockedBlockIcon;
-          parameter Boolean y_start=false "initial value of output signal";
+          parameter Boolean y_start=false "Initial value of output signal";
           Modelica.Blocks.Interfaces.IntegerInput
                                                u
             annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
@@ -12994,7 +12829,7 @@ Analog to the corresponding Real signal block example there exists an elementary
         block AssignClockToTriggerHold
         "Generate a Boolean continuous-time trigger signal from a clocked Boolean input"
           extends Modelica_Synchronous.ClockSignals.Interfaces.ClockedBlockIcon;
-          parameter Boolean y_start=false "initial value of output signal";
+          parameter Boolean y_start=false "Initial value of output signal";
           Modelica.Blocks.Interfaces.BooleanInput
                                                u
             annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
@@ -13057,7 +12892,7 @@ This block for Boolean signals works similarly as the corresponding block for Re
         block AssignClockToSquareWaveHold
         "Generate a Boolean continuous-time square signal from a clocked Real input"
           extends Modelica_Synchronous.ClockSignals.Interfaces.ClockedBlockIcon;
-          parameter Boolean y_start=false "initial value of output signal";
+          parameter Boolean y_start=false "Initial value of output signal";
           Modelica.Blocks.Interfaces.BooleanInput
                                                u
             annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
@@ -13542,7 +13377,7 @@ For an introduction, have especially a look at:
 <ul>
 <li> <a href=\"modelica://Modelica_Synchronous/Resources/Documentation/Modelica_Synchronous.pdf\">Modelica_Synchronous.pdf</a>
      is a slide set that provides an overview of the Library
-     (the pdf file was generated from the 
+     (the pdf file was generated from the
       <a href=\"modelica://Modelica_Synchronous/Resources/Documentation/Modelica_Synchronous.pptx\">PowerPoint presentation</a>).
       </li>
 <li> <a href=\"modelica://Modelica_Synchronous.UsersGuide.GettingStarted\">Getting started</a>
