@@ -2358,8 +2358,8 @@ precisely time-synchronized to each other.
           annotation (Placement(transformation(extent={{-86,14},{-66,34}})));
         Modelica_Synchronous.ClockSignals.Clocks.PeriodicRealClock periodicClock(
         period=1,
-        solverMethod="ExplicitEuler",
-        useSolver=true)
+        useSolver=true,
+        solverMethod="ExplicitEuler")
           annotation (Placement(transformation(extent={{-134,-16},{-122,-4}})));
       initial equation
         filter.x[1]=0.497522;
@@ -10140,7 +10140,7 @@ contrary to a general FIR filter.
                   -14,-4},{-4,-46},{0,-64},{2,-82}},
                                              color={0,0,127}),
         Polygon(points={{-84,90},{-92,68},{-76,68},{-84,90},{-84,90}}, lineColor={192,192,192}, fillColor={192,192,192},
-                fillPattern =  FillPattern.Solid),
+                fillPattern=   FillPattern.Solid),
           Line(points={{2,-82},{4,-64},{8,-56},{12,-56},{16,-60},{18,-66},{20,-82}},
                                                                              color={0,0,127}),
           Line(points={{20,-80},{20,-78},{20,-72},{22,-66},{24,-64},{28,-64},{32,-66},
@@ -10149,7 +10149,7 @@ contrary to a general FIR filter.
                   {62,-72},{64,-76},{64,-78},{64,-80},{64,-82}},
                                                 color={0,0,127}),
         Polygon(points={{90,-82},{68,-74},{68,-90},{90,-82}}, lineColor={192,192,192}, fillColor={192,192,192},
-                fillPattern = FillPattern.Solid),
+                fillPattern=  FillPattern.Solid),
             Text(
               extent={{-26,88},{88,48}},
               lineColor={175,175,175},
@@ -10203,7 +10203,7 @@ a[:] are the filter coefficients.
 </html>"),
         Icon(graphics={
         Polygon(points={{-84,90},{-92,68},{-76,68},{-84,90},{-84,90}}, lineColor={192,192,192}, fillColor={192,192,192},
-                fillPattern =  FillPattern.Solid),
+                fillPattern=   FillPattern.Solid),
          Line(points={{-84,78},{-84,-90}}, color={192,192,192}),
         Line(points={{-84,30},{-72,30},{-52,28},{-32,20},{-26,16},{-22,12},{-18,6},{
                   -14,-4},{-4,-46},{0,-64},{2,-82}},
@@ -10219,7 +10219,7 @@ a[:] are the filter coefficients.
                   {62,-72},{64,-76},{64,-78},{64,-80},{64,-82}},
                                                 color={0,0,127}),
         Polygon(points={{90,-82},{68,-74},{68,-90},{90,-82}}, lineColor={192,192,192}, fillColor={192,192,192},
-                fillPattern = FillPattern.Solid),
+                fillPattern=  FillPattern.Solid),
         Line(points={{-90,-82},{82,-82}}, color={192,192,192}),
             Text(
               extent={{-26,86},{88,56}},
@@ -13246,8 +13246,12 @@ end BooleanSignals;
     type SolverMethod = String
     "Enumeration defining the integration method to solve differential equations in a clocked discretized continuous-time partition"
     annotation(choices(
+       choice="External" "Solver specified externally",
        choice="ExplicitEuler" "Explicit Euler method (order 1)",
-       choice="ImplicitEuler" "Implicit Euler method (order 1)"), Documentation(
+       choice="ExplicitMidPoint2" "Explicit mid point rule (order 2)",
+       choice="ExplicitRungeKutta4" "Explicit Runge-Kutta method (order 4)",
+       choice="ImplicitEuler" "Implicit Euler method (order 1)",
+          choice="ImplicitTrapezoid" "Implicit trapezoid rule (order 2)"), Documentation(
         info="<html>
 <p>
 Type <b>SolverMethod</b> is a String type with menu choices to select the
@@ -13267,17 +13271,29 @@ to their supported integration methods.
 </p>
 
 <p>
-This first version of the type definition contains
-the integration methods supported by Dymola 2013 FD01:
+The following solver methods are standardized in chapter 16.8.2 \"Solver Method\" in the Modelica Language
+Specification (version &ge; 3.3):
 </p>
 
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th><b>Types.SolverMethod.</b></th><th><b>Meaning</b></th></tr>
+<tr><td valign=\"top\">\"External\"</td>
+    <td valign=\"top\">Solver specified externally</td></tr>
+    
 <tr><td valign=\"top\">\"ExplicitEuler\"</td>
     <td valign=\"top\">Explicit Euler method</td></tr>
+    
+<tr><td valign=\"top\">\"ExplicitMidPoint2\"</td>
+    <td valign=\"top\">Explicit mid point rule (order 2)</td></tr>
+        
+<tr><td valign=\"top\">\"ExplicitRungeKutta4\"</td>
+    <td valign=\"top\">Explicit Runge-Kutta method (order 4)</td></tr>        
 
 <tr><td valign=\"top\">\"ImplicitEuler\"</td>
     <td valign=\"top\">Implicit Euler method</td></tr>
+    
+<tr><td valign=\"top\">\"ImplicitTrapezoid\"</td>
+    <td valign=\"top\">Implicit trapezoid rule (order 2)</td></tr>    
 </table>
 
 
