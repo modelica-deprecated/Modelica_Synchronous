@@ -4729,6 +4729,178 @@ Example used to generate a figure for the documentation of block
 </p>
 </html>"));
         end FractionalDelay;
+
+        model TestStep "Example of using the clocked Step source block"
+          import Modelica_Synchronous;
+           extends Modelica.Icons.Example;
+        Modelica_Synchronous.RealSignals.Sources.Step step(startTime=0.2)
+          annotation (Placement(transformation(extent={{-60,20},{-40,40}})));
+        Modelica_Synchronous.RealSignals.Sampler.AssignClock assignClock1
+          annotation (Placement(transformation(extent={{-24,24},{-12,36}})));
+        Modelica_Synchronous.ClockSignals.Clocks.PeriodicRealClock
+          periodicClock1(period=0.1)
+          annotation (Placement(transformation(extent={{-70,-18},{-58,-6}})));
+        equation
+
+        connect(step.y, assignClock1.u) annotation (Line(
+            points={{-39,30},{-25.2,30}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(periodicClock1.y, assignClock1.clock) annotation (Line(
+            points={{-57.4,-12},{-18,-12},{-18,22.8}},
+            color={175,175,175},
+            pattern=LinePattern.Dot,
+            thickness=0.5,
+            smooth=Smooth.None));
+        annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent=
+                  {{-100,-100},{100,100}}), graphics));
+        end TestStep;
+
+        model TestStepTicked
+        "Example of using the clocked StepTicked source block"
+          import Modelica_Synchronous;
+           extends Modelica.Icons.Example;
+        Modelica_Synchronous.RealSignals.Sampler.AssignClock assignClock1
+          annotation (Placement(transformation(extent={{-24,24},{-12,36}})));
+        Modelica_Synchronous.ClockSignals.Clocks.PeriodicRealClock
+          periodicClock1(period=0.1)
+          annotation (Placement(transformation(extent={{-70,-18},{-58,-6}})));
+        Modelica_Synchronous.RealSignals.Sources.StepTicked stepTicked(
+            startTick=3)
+          annotation (Placement(transformation(extent={{-66,20},{-46,40}})));
+        equation
+
+        connect(periodicClock1.y, assignClock1.clock) annotation (Line(
+            points={{-57.4,-12},{-18,-12},{-18,22.8}},
+            color={175,175,175},
+            pattern=LinePattern.Dot,
+            thickness=0.5,
+            smooth=Smooth.None));
+        connect(stepTicked.y, assignClock1.u) annotation (Line(
+            points={{-45,30},{-25.2,30}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent=
+                  {{-100,-100},{100,100}}), graphics));
+        end TestStepTicked;
+
+        model TestSine "Example of using the clocked Sine source block"
+          import Modelica_Synchronous;
+           extends Modelica.Icons.Example;
+        Modelica_Synchronous.RealSignals.Sampler.AssignClock assignClock1
+          annotation (Placement(transformation(extent={{-24,24},{-12,36}})));
+        Modelica_Synchronous.ClockSignals.Clocks.PeriodicRealClock
+          periodicClock1(period=0.1)
+          annotation (Placement(transformation(extent={{-70,-18},{-58,-6}})));
+        Modelica_Synchronous.RealSignals.Sources.Sine sine(freqHz=2)
+          annotation (Placement(transformation(extent={{-66,20},{-46,40}})));
+        equation
+
+        connect(periodicClock1.y, assignClock1.clock) annotation (Line(
+            points={{-57.4,-12},{-18,-12},{-18,22.8}},
+            color={175,175,175},
+            pattern=LinePattern.Dot,
+            thickness=0.5,
+            smooth=Smooth.None));
+        connect(sine.y, assignClock1.u) annotation (Line(
+            points={{-45,30},{-25.2,30}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent=
+                  {{-100,-100},{100,100}}), graphics));
+        end TestSine;
+
+        model TestSineTicked "Example of using the clocked Sine source block"
+          import Modelica_Synchronous;
+           extends Modelica.Icons.Example;
+        Modelica_Synchronous.RealSignals.Sampler.AssignClock assignClock1
+          annotation (Placement(transformation(extent={{-24,24},{-12,36}})));
+        Modelica_Synchronous.ClockSignals.Clocks.PeriodicRealClock
+          periodicClock1(period=0.1)
+          annotation (Placement(transformation(extent={{-70,-18},{-58,-6}})));
+        Modelica_Synchronous.RealSignals.Sources.SineTicked sineTicked(
+          periodTicks=10,
+          startTick=3,
+          periodOffset=2)
+          annotation (Placement(transformation(extent={{-72,20},{-52,40}})));
+        Modelica.Blocks.Sources.Sine sine(
+          freqHz=1,
+          offset=0,
+          startTime=0.3,
+          phase=1/5*(2*Modelica.Constants.pi))
+          annotation (Placement(transformation(extent={{-74,58},{-54,78}})));
+        equation
+
+        connect(periodicClock1.y, assignClock1.clock) annotation (Line(
+            points={{-57.4,-12},{-18,-12},{-18,22.8}},
+            color={175,175,175},
+            pattern=LinePattern.Dot,
+            thickness=0.5,
+            smooth=Smooth.None));
+        connect(sineTicked.y, assignClock1.u) annotation (Line(
+            points={{-51,30},{-25.2,30}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent=
+                  {{-100,-100},{100,100}}), graphics));
+        end TestSineTicked;
+
+        model TestRamp "Example of using the clocked Ramp source block"
+          import Modelica_Synchronous;
+           extends Modelica.Icons.Example;
+        Modelica_Synchronous.RealSignals.Sampler.AssignClock assignClock1
+          annotation (Placement(transformation(extent={{-24,24},{-12,36}})));
+        Modelica_Synchronous.ClockSignals.Clocks.PeriodicRealClock
+          periodicClock1(period=0.1)
+          annotation (Placement(transformation(extent={{-70,-18},{-58,-6}})));
+        Modelica_Synchronous.RealSignals.Sources.Ramp ramp(duration=0.5)
+          annotation (Placement(transformation(extent={{-72,20},{-52,40}})));
+        equation
+
+        connect(periodicClock1.y, assignClock1.clock) annotation (Line(
+            points={{-57.4,-12},{-18,-12},{-18,22.8}},
+            color={175,175,175},
+            pattern=LinePattern.Dot,
+            thickness=0.5,
+            smooth=Smooth.None));
+        connect(ramp.y, assignClock1.u) annotation (Line(
+            points={{-51,30},{-25.2,30}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent=
+                  {{-100,-100},{100,100}}), graphics));
+        end TestRamp;
+
+        model TestRampTicked
+        "Example of using the clocked RampTicked source block"
+          import Modelica_Synchronous;
+           extends Modelica.Icons.Example;
+        Modelica_Synchronous.RealSignals.Sampler.AssignClock assignClock1
+          annotation (Placement(transformation(extent={{-24,24},{-12,36}})));
+        Modelica_Synchronous.ClockSignals.Clocks.PeriodicRealClock
+          periodicClock1(period=0.1)
+          annotation (Placement(transformation(extent={{-70,-18},{-58,-6}})));
+        Modelica_Synchronous.RealSignals.Sources.RampTicked rampTicked(
+          height=1,
+          durationTicks=3,
+          startTick=2,
+          offset=0)
+          annotation (Placement(transformation(extent={{-72,20},{-52,40}})));
+        equation
+
+        connect(periodicClock1.y, assignClock1.clock) annotation (Line(
+            points={{-57.4,-12},{-18,-12},{-18,22.8}},
+            color={175,175,175},
+            pattern=LinePattern.Dot,
+            thickness=0.5,
+            smooth=Smooth.None));
+        connect(rampTicked.y, assignClock1.u) annotation (Line(
+            points={{-51,30},{-25.2,30}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent=
+                  {{-100,-100},{100,100}}), graphics));
+        end TestRampTicked;
       annotation (Documentation(info="<html>
 <p>
 This package contains models that have been used to produce
@@ -10245,6 +10417,929 @@ clocked signals, will usually result in non-expected behavior.
 </html>"));
   end Periodic;
 
+  package Sources
+    "Package of signal source blocks generating clocked Real signals"
+     extends Modelica.Icons.SourcesPackage;
+
+        block Step "Generate step signal of type Real"
+          extends Interfaces.PartialClockedSO;
+          import  Modelica_Synchronous.Types.*;
+          parameter Real height = 1 "Height of step";
+          parameter SourceType base = SourceType.simulationTime;
+
+          parameter Real offset = 0 "Offset of output signal y";
+          parameter Modelica.SIunits.Time startTime = 0
+        "Output y = offset for time < startTime";
+    protected
+          Modelica.SIunits.Time simTime;
+        equation
+          simTime = sample(time);
+          y = offset + (if simTime < startTime then 0 else height);
+          annotation (
+            Icon(coordinateSystem(
+            preserveAspectRatio=true,
+            extent={{-100,-100},{100,100}},
+            grid={1,1}), graphics={
+            Line(points={{-80,68},{-80,-80}}, color={192,192,192}),
+            Polygon(
+              points={{-80,90},{-88,68},{-72,68},{-80,90}},
+              lineColor={192,192,192},
+              fillColor={192,192,192},
+              fillPattern=FillPattern.Solid),
+            Line(points={{-90,-70},{82,-70}}, color={192,192,192}),
+            Polygon(
+              points={{90,-70},{68,-62},{68,-78},{90,-70}},
+              lineColor={192,192,192},
+              fillColor={192,192,192},
+              fillPattern=FillPattern.Solid),
+            Line(points={{-80,-70},{0,-70},{0,50},{80,50}}, color={0,0,0},
+                  pattern=LinePattern.Dot),
+            Text(
+              extent={{-150,-150},{150,-110}},
+              lineColor={0,0,0},
+              textString="startTime=%startTime"),
+                Ellipse(
+                  extent={{-86,-63},{-74,-75}},
+                  lineColor={0,0,127},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{-45,-63},{-33,-75}},
+                  lineColor={0,0,127},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{-5,56},{7,44}},
+                  lineColor={0,0,127},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{32,56},{44,44}},
+                  lineColor={0,0,127},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{71,57},{83,45}},
+                  lineColor={0,0,127},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid)}),
+            Diagram(coordinateSystem(
+            preserveAspectRatio=true,
+            extent={{-100,-100},{100,100}},
+            grid={1,1}), graphics={
+            Polygon(
+              points={{-80,90},{-86,68},{-74,68},{-80,90}},
+              lineColor={95,95,95},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid),
+            Line(points={{-80,68},{-80,-80}}, color={95,95,95}),
+            Line(
+              points={{-80,-18},{0,-18},{0,50},{80,50}},
+              color={0,0,255},
+              thickness=0.5),
+            Line(points={{-90,-70},{82,-70}}, color={95,95,95}),
+            Polygon(
+              points={{90,-70},{68,-64},{68,-76},{90,-70}},
+              lineColor={95,95,95},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid),
+            Text(
+              extent={{70,-80},{94,-100}},
+              lineColor={0,0,0},
+              textString="time"),
+            Text(
+              extent={{-21,-72},{25,-90}},
+              lineColor={0,0,0},
+              textString="startTime"),
+            Line(points={{0,-17},{0,-71}}, color={95,95,95}),
+            Text(
+              extent={{-68,-36},{-22,-54}},
+              lineColor={0,0,0},
+              textString="offset"),
+            Line(points={{-13,50},{-13,-17}}, color={95,95,95}),
+            Polygon(
+              points={{2,50},{-19,50},{2,50}},
+              lineColor={95,95,95},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid),
+            Polygon(
+              points={{-13,-17},{-16,-4},{-10,-4},{-13,-17},{-13,-17}},
+              lineColor={95,95,95},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid),
+            Polygon(
+              points={{-13,50},{-16,37},{-9,37},{-13,50}},
+              lineColor={95,95,95},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid),
+            Text(
+              extent={{-68,26},{-22,8}},
+              lineColor={0,0,0},
+              textString="height"),
+            Polygon(
+              points={{-13,-69},{-16,-56},{-10,-56},{-13,-69},{-13,-69}},
+              lineColor={95,95,95},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid),
+            Line(points={{-13,-18},{-13,-70}}, color={95,95,95}),
+            Polygon(
+              points={{-13,-18},{-16,-31},{-9,-31},{-13,-18}},
+              lineColor={95,95,95},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid),
+            Text(
+              extent={{-72,100},{-31,80}},
+              lineColor={0,0,0},
+              textString="y")}),
+        Documentation(info="<html>
+<p>
+The Real output y is a step signal:
+</p>
+
+<p>
+<img src=\"modelica://Modelica/Resources/Images/Blocks/Sources/Step.png\">
+</p>
+
+</html>"));
+        end Step;
+
+        block StepTicked
+      "Generate step signal of type Real based on counted clock ticks"
+          extends Interfaces.PartialClockedSO;
+          import Modelica_Synchronous.Types.*;
+          parameter Real height = 1 "Height of step";
+          parameter Real offset = 0 "Offset of output signal y";
+          parameter Integer startTick = 0
+        "Output y = offset for clock tick < startTick";
+    protected
+          Integer counter(start=-1);
+        equation
+          // stop counter after counter = startTick to avoid integer overflow for long running simulations
+          counter = if previous(counter) < startTick then previous(counter) + 1 else previous(counter);
+          y = offset + (if counter < startTick then 0 else height);
+          annotation (
+            Icon(coordinateSystem(
+            preserveAspectRatio=true,
+            extent={{-100,-100},{100,100}},
+            grid={1,1}), graphics={
+            Line(points={{-80,68},{-80,-80}}, color={192,192,192}),
+            Polygon(
+              points={{-80,90},{-88,68},{-72,68},{-80,90}},
+              lineColor={192,192,192},
+              fillColor={192,192,192},
+              fillPattern=FillPattern.Solid),
+            Line(points={{-90,-70},{82,-70}}, color={192,192,192}),
+            Polygon(
+              points={{90,-70},{68,-62},{68,-78},{90,-70}},
+              lineColor={192,192,192},
+              fillColor={192,192,192},
+              fillPattern=FillPattern.Solid),
+            Line(points={{-80,-70},{0,-70},{0,50},{80,50}}, color={0,0,0},
+                  pattern=LinePattern.Dot),
+            Text(
+              extent={{-150,-150},{150,-110}},
+              lineColor={0,0,0},
+              textString="startTick=%startTick"),
+                Ellipse(
+                  extent={{-86,-63},{-74,-75}},
+                  lineColor={0,0,127},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{-45,-63},{-33,-75}},
+                  lineColor={0,0,127},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{-5,56},{7,44}},
+                  lineColor={0,0,127},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{32,56},{44,44}},
+                  lineColor={0,0,127},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{71,57},{83,45}},
+                  lineColor={0,0,127},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid)}),
+            Diagram(coordinateSystem(
+            preserveAspectRatio=true,
+            extent={{-100,-100},{100,100}},
+            grid={1,1}), graphics={
+            Polygon(
+              points={{-80,90},{-86,68},{-74,68},{-80,90}},
+              lineColor={95,95,95},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid),
+            Line(points={{-80,68},{-80,-80}}, color={95,95,95}),
+            Line(
+              points={{-80,-18},{0,-18},{0,50},{80,50}},
+              color={0,0,255},
+              thickness=0.5),
+            Line(points={{-90,-70},{82,-70}}, color={95,95,95}),
+            Polygon(
+              points={{90,-70},{68,-64},{68,-76},{90,-70}},
+              lineColor={95,95,95},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid),
+            Text(
+              extent={{70,-80},{94,-100}},
+              lineColor={0,0,0},
+              textString="time"),
+            Text(
+              extent={{-21,-72},{25,-90}},
+              lineColor={0,0,0},
+              textString="startTime"),
+            Line(points={{0,-17},{0,-71}}, color={95,95,95}),
+            Text(
+              extent={{-68,-36},{-22,-54}},
+              lineColor={0,0,0},
+              textString="offset"),
+            Line(points={{-13,50},{-13,-17}}, color={95,95,95}),
+            Polygon(
+              points={{2,50},{-19,50},{2,50}},
+              lineColor={95,95,95},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid),
+            Polygon(
+              points={{-13,-17},{-16,-4},{-10,-4},{-13,-17},{-13,-17}},
+              lineColor={95,95,95},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid),
+            Polygon(
+              points={{-13,50},{-16,37},{-9,37},{-13,50}},
+              lineColor={95,95,95},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid),
+            Text(
+              extent={{-68,26},{-22,8}},
+              lineColor={0,0,0},
+              textString="height"),
+            Polygon(
+              points={{-13,-69},{-16,-56},{-10,-56},{-13,-69},{-13,-69}},
+              lineColor={95,95,95},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid),
+            Line(points={{-13,-18},{-13,-70}}, color={95,95,95}),
+            Polygon(
+              points={{-13,-18},{-16,-31},{-9,-31},{-13,-18}},
+              lineColor={95,95,95},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid),
+            Text(
+              extent={{-72,100},{-31,80}},
+              lineColor={0,0,0},
+              textString="y")}),
+        Documentation(info="<html>
+<p>
+The Real output y is a step signal:
+</p>
+
+<p>
+<img src=\"modelica://Modelica/Resources/Images/Blocks/Sources/Step.png\">
+</p>
+
+</html>"));
+        end StepTicked;
+
+        block Ramp "Generate ramp signal"
+          extends Interfaces.PartialClockedSO;
+          parameter Real height=1 "Height of ramps";
+          parameter Modelica.SIunits.Time duration(min=Modelica.Constants.small, start = 2)
+        "Durations of ramp";
+          parameter Real offset=0 "Offset of output signal";
+          parameter Modelica.SIunits.Time startTime=0
+        "Output = offset for time < startTime";
+    protected
+          Modelica.SIunits.Time simTime;
+        equation
+          simTime = sample(time);
+          y = offset + (if simTime < startTime then 0 else if simTime < (startTime +
+            duration) then (simTime - startTime)*height/duration else height);
+          annotation (
+            Icon(coordinateSystem(
+            preserveAspectRatio=true,
+            extent={{-100,-100},{100,100}},
+            grid={1,1}), graphics={
+            Line(points={{-80,68},{-80,-80}}, color={192,192,192}),
+            Polygon(
+              points={{-80,90},{-88,68},{-72,68},{-80,90}},
+              lineColor={192,192,192},
+              fillColor={192,192,192},
+              fillPattern=FillPattern.Solid),
+            Line(points={{-90,-70},{82,-70}}, color={192,192,192}),
+            Polygon(
+              points={{90,-70},{68,-62},{68,-78},{90,-70}},
+              lineColor={192,192,192},
+              fillColor={192,192,192},
+              fillPattern=FillPattern.Solid),
+            Line(points={{-80,-70},{-40,-70},{31,38}}, color={0,0,0},
+                  pattern=LinePattern.Dot),
+            Text(
+              extent={{-150,-150},{150,-110}},
+              lineColor={0,0,0},
+              textString="duration=%duration"),
+            Line(points={{31,38},{86,38}}, color={0,0,0}),
+                Ellipse(
+                  extent={{-86,-64},{-74,-76}},
+                  lineColor={0,0,127},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{-34,-48},{-22,-60}},
+                  lineColor={0,0,127},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{13,27},{25,15}},
+                  lineColor={0,0,127},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{64,44},{76,32}},
+                  lineColor={0,0,127},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid)}),
+            Diagram(coordinateSystem(
+            preserveAspectRatio=true,
+            extent={{-100,-100},{100,100}},
+            grid={1,1}), graphics={
+            Polygon(
+              points={{-80,90},{-86,68},{-74,68},{-80,90}},
+              lineColor={95,95,95},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid),
+            Line(points={{-80,68},{-80,-80}}, color={95,95,95}),
+            Line(
+              points={{-80,-20},{-20,-20},{50,50}},
+              color={0,0,255},
+              thickness=0.5),
+            Line(points={{-90,-70},{82,-70}}, color={95,95,95}),
+            Polygon(
+              points={{90,-70},{68,-64},{68,-76},{90,-70}},
+              lineColor={95,95,95},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid),
+            Polygon(
+              points={{-40,-20},{-42,-30},{-37,-30},{-40,-20}},
+              lineColor={95,95,95},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid),
+            Line(
+              points={{-40,-20},{-40,-70}},
+              color={95,95,95},
+              thickness=0.25,
+              arrow={Arrow.None,Arrow.None}),
+            Polygon(
+              points={{-40,-70},{-43,-60},{-38,-60},{-40,-70},{-40,-70}},
+              lineColor={95,95,95},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid),
+            Text(
+              extent={{-72,-39},{-34,-50}},
+              lineColor={0,0,0},
+              textString="offset"),
+            Text(
+              extent={{-38,-72},{6,-83}},
+              lineColor={0,0,0},
+              textString="startTime"),
+            Text(
+              extent={{-78,92},{-37,72}},
+              lineColor={0,0,0},
+              textString="y"),
+            Text(
+              extent={{70,-80},{94,-91}},
+              lineColor={0,0,0},
+              textString="time"),
+            Line(points={{-20,-20},{-20,-70}}, color={95,95,95}),
+            Line(
+              points={{-19,-20},{50,-20}},
+              color={95,95,95},
+              thickness=0.25,
+              arrow={Arrow.None,Arrow.None}),
+            Line(
+              points={{50,50},{101,50}},
+              color={0,0,255},
+              thickness=0.5),
+            Line(
+              points={{50,50},{50,-20}},
+              color={95,95,95},
+              thickness=0.25,
+              arrow={Arrow.None,Arrow.None}),
+            Polygon(
+              points={{50,-20},{42,-18},{42,-22},{50,-20}},
+              lineColor={95,95,95},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid),
+            Polygon(
+              points={{-20,-20},{-11,-18},{-11,-22},{-20,-20}},
+              lineColor={95,95,95},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid),
+            Polygon(
+              points={{50,50},{48,40},{53,40},{50,50}},
+              lineColor={95,95,95},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid),
+            Polygon(
+              points={{50,-20},{47,-10},{52,-10},{50,-20},{50,-20}},
+              lineColor={95,95,95},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid),
+            Text(
+              extent={{53,23},{82,10}},
+              lineColor={0,0,0},
+              textString="height"),
+            Text(
+              extent={{-2,-21},{37,-33}},
+              lineColor={0,0,0},
+              textString="duration")}),
+        Documentation(info="<html>
+<p>
+The Real output y is a ramp signal:
+</p>
+
+<p>
+<img src=\"modelica://Modelica/Resources/Images/Blocks/Sources/Ramp.png\">
+</p>
+</html>"));
+        end Ramp;
+
+        block RampTicked "Generate ramp signal based on counted clock ticks"
+          extends Interfaces.PartialClockedSO;
+          parameter Real height=1 "Height of ramps";
+          parameter Integer durationTicks(min=1) = 1
+        "Durations of ramp in number of clock ticks";
+          parameter Real offset=0 "Offset of output signal";
+
+          parameter Integer startTick = 0
+        "Output y = offset for clock tick < startTick";
+    protected
+          Integer counter(start=-1);
+        equation
+          // stop counter after counter = startTick+durationTicks to avoid integer overflow for long running simulations
+          counter = if previous(counter) < startTick+durationTicks then previous(counter) + 1 else previous(counter);
+
+          y = offset + (if counter < startTick then 0 else if counter < (startTick +
+            durationTicks) then (counter - startTick)*height/durationTicks else height);
+          annotation (
+            Icon(coordinateSystem(
+            preserveAspectRatio=true,
+            extent={{-100,-100},{100,100}},
+            grid={1,1}), graphics={
+            Line(points={{-80,68},{-80,-80}}, color={192,192,192}),
+            Polygon(
+              points={{-80,90},{-88,68},{-72,68},{-80,90}},
+              lineColor={192,192,192},
+              fillColor={192,192,192},
+              fillPattern=FillPattern.Solid),
+            Line(points={{-90,-70},{82,-70}}, color={192,192,192}),
+            Polygon(
+              points={{90,-70},{68,-62},{68,-78},{90,-70}},
+              lineColor={192,192,192},
+              fillColor={192,192,192},
+              fillPattern=FillPattern.Solid),
+            Line(points={{-80,-70},{-40,-70},{31,38}}, color={0,0,0},
+                  pattern=LinePattern.Dot),
+            Text(
+              extent={{-150,-150},{150,-110}},
+              lineColor={0,0,0},
+                  textString="duration ticks=%durationTicks"),
+            Line(points={{31,38},{86,38}}, color={0,0,0}),
+                Ellipse(
+                  extent={{-86,-64},{-74,-76}},
+                  lineColor={0,0,127},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{-34,-48},{-22,-60}},
+                  lineColor={0,0,127},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{13,27},{25,15}},
+                  lineColor={0,0,127},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{64,44},{76,32}},
+                  lineColor={0,0,127},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid)}),
+            Diagram(coordinateSystem(
+            preserveAspectRatio=true,
+            extent={{-100,-100},{100,100}},
+            grid={1,1}), graphics={
+            Polygon(
+              points={{-80,90},{-86,68},{-74,68},{-80,90}},
+              lineColor={95,95,95},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid),
+            Line(points={{-80,68},{-80,-80}}, color={95,95,95}),
+            Line(
+              points={{-80,-20},{-20,-20},{50,50}},
+              color={0,0,255},
+              thickness=0.5),
+            Line(points={{-90,-70},{82,-70}}, color={95,95,95}),
+            Polygon(
+              points={{90,-70},{68,-64},{68,-76},{90,-70}},
+              lineColor={95,95,95},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid),
+            Polygon(
+              points={{-40,-20},{-42,-30},{-37,-30},{-40,-20}},
+              lineColor={95,95,95},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid),
+            Line(
+              points={{-40,-20},{-40,-70}},
+              color={95,95,95},
+              thickness=0.25,
+              arrow={Arrow.None,Arrow.None}),
+            Polygon(
+              points={{-40,-70},{-43,-60},{-38,-60},{-40,-70},{-40,-70}},
+              lineColor={95,95,95},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid),
+            Text(
+              extent={{-72,-39},{-34,-50}},
+              lineColor={0,0,0},
+              textString="offset"),
+            Text(
+              extent={{-38,-72},{6,-83}},
+              lineColor={0,0,0},
+              textString="startTime"),
+            Text(
+              extent={{-78,92},{-37,72}},
+              lineColor={0,0,0},
+              textString="y"),
+            Text(
+              extent={{70,-80},{94,-91}},
+              lineColor={0,0,0},
+              textString="time"),
+            Line(points={{-20,-20},{-20,-70}}, color={95,95,95}),
+            Line(
+              points={{-19,-20},{50,-20}},
+              color={95,95,95},
+              thickness=0.25,
+              arrow={Arrow.None,Arrow.None}),
+            Line(
+              points={{50,50},{101,50}},
+              color={0,0,255},
+              thickness=0.5),
+            Line(
+              points={{50,50},{50,-20}},
+              color={95,95,95},
+              thickness=0.25,
+              arrow={Arrow.None,Arrow.None}),
+            Polygon(
+              points={{50,-20},{42,-18},{42,-22},{50,-20}},
+              lineColor={95,95,95},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid),
+            Polygon(
+              points={{-20,-20},{-11,-18},{-11,-22},{-20,-20}},
+              lineColor={95,95,95},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid),
+            Polygon(
+              points={{50,50},{48,40},{53,40},{50,50}},
+              lineColor={95,95,95},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid),
+            Polygon(
+              points={{50,-20},{47,-10},{52,-10},{50,-20},{50,-20}},
+              lineColor={95,95,95},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid),
+            Text(
+              extent={{53,23},{82,10}},
+              lineColor={0,0,0},
+              textString="height"),
+            Text(
+              extent={{-2,-21},{37,-33}},
+              lineColor={0,0,0},
+              textString="duration")}),
+        Documentation(info="<html>
+<p>
+The Real output y is a ramp signal:
+</p>
+
+<p>
+<img src=\"modelica://Modelica/Resources/Images/Blocks/Sources/Ramp.png\">
+</p>
+</html>"));
+        end RampTicked;
+
+        block Sine "Generate sine signal"
+          extends Interfaces.PartialClockedSO;
+          parameter Real amplitude=1 "Amplitude of sine wave";
+          parameter Modelica.SIunits.Frequency freqHz(start=1)
+        "Frequency of sine wave";
+          parameter Modelica.SIunits.Angle phase=0 "Phase of sine wave";
+          parameter Real offset=0 "Offset of output signal";
+          parameter Modelica.SIunits.Time startTime=0
+        "Output = offset for time < startTime";
+    protected
+          constant Real pi=Modelica.Constants.pi;
+    protected
+                  Modelica.SIunits.Time simTime;
+        equation
+          simTime = sample(time);
+          y = offset + (if simTime < startTime then 0 else amplitude*
+            Modelica.Math.sin(2*pi*freqHz*(simTime - startTime) + phase));
+          annotation (
+            Icon(coordinateSystem(
+            preserveAspectRatio=false,
+            extent={{-100,-100},{100,100}},
+            grid={1,1}), graphics={
+            Line(points={{-80,68},{-80,-80}}, color={192,192,192}),
+            Polygon(
+              points={{-80,90},{-88,68},{-72,68},{-80,90}},
+              lineColor={192,192,192},
+              fillColor={192,192,192},
+              fillPattern=FillPattern.Solid),
+            Line(points={{-90,0},{68,0}}, color={192,192,192}),
+            Polygon(
+              points={{90,0},{68,8},{68,-8},{90,0}},
+              lineColor={192,192,192},
+              fillColor={192,192,192},
+              fillPattern=FillPattern.Solid),
+            Line(points={{-80,0},{-68.7,34.2},{-61.5,53.1},{-55.1,66.4},{-49.4,
+                  74.6},{-43.8,79.1},{-38.2,79.8},{-32.6,76.6},{-26.9,69.7},{-21.3,
+                  59.4},{-14.9,44.1},{-6.83,21.2},{10.1,-30.8},{17.3,-50.2},{23.7,
+                  -64.2},{29.3,-73.1},{35,-78.4},{40.6,-80},{46.2,-77.6},{51.9,-71.5},
+                  {57.5,-61.9},{63.9,-47.2},{72,-24.8},{80,0}}, color={0,0,0},
+                  pattern=LinePattern.Dot),
+            Text(
+              extent={{-147,-152},{153,-112}},
+              lineColor={0,0,0},
+              textString="freqHz=%freqHz"),
+                Ellipse(
+                  extent={{-86,6},{-74,-6}},
+                  lineColor={0,0,127},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{-59,72},{-47,60}},
+                  lineColor={0,0,127},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{-31,72},{-19,60}},
+                  lineColor={0,0,127},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{-7,6},{5,-6}},
+                  lineColor={0,0,127},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{19,-60},{31,-72}},
+                  lineColor={0,0,127},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{49,-60},{61,-72}},
+                  lineColor={0,0,127},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid)}),
+            Diagram(coordinateSystem(
+            preserveAspectRatio=true,
+            extent={{-100,-100},{100,100}},
+            grid={1,1}), graphics={
+            Line(points={{-80,-90},{-80,84}}, color={95,95,95}),
+            Polygon(
+              points={{-80,97},{-84,81},{-76,81},{-80,97}},
+              lineColor={95,95,95},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid),
+            Line(points={{-99,-40},{85,-40}}, color={95,95,95}),
+            Polygon(
+              points={{97,-40},{81,-36},{81,-45},{97,-40}},
+              lineColor={95,95,95},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid),
+            Line(
+              points={{-41,-2},{-31.6,34.2},{-26.1,53.1},{-21.3,66.4},{-17.1,74.6},
+                  {-12.9,79.1},{-8.64,79.8},{-4.42,76.6},{-0.201,69.7},{4.02,59.4},
+                  {8.84,44.1},{14.9,21.2},{27.5,-30.8},{33,-50.2},{37.8,-64.2},{
+                  42,-73.1},{46.2,-78.4},{50.5,-80},{54.7,-77.6},{58.9,-71.5},{
+                  63.1,-61.9},{67.9,-47.2},{74,-24.8},{80,0}},
+              color={0,0,255},
+              thickness=0.5),
+            Line(
+              points={{-41,-2},{-80,-2}},
+              color={0,0,255},
+              thickness=0.5),
+            Text(
+              extent={{-87,12},{-40,0}},
+              lineColor={0,0,0},
+              textString="offset"),
+            Line(points={{-41,-2},{-41,-40}}, color={95,95,95}),
+            Text(
+              extent={{-60,-43},{-14,-54}},
+              lineColor={0,0,0},
+              textString="startTime"),
+            Text(
+              extent={{75,-47},{100,-60}},
+              lineColor={0,0,0},
+              textString="time"),
+            Text(
+              extent={{-80,99},{-40,82}},
+              lineColor={0,0,0},
+              textString="y"),
+            Line(points={{-9,79},{43,79}}, color={95,95,95}),
+            Line(points={{-41,-2},{50,-2}}, color={95,95,95}),
+            Polygon(
+              points={{33,79},{30,66},{37,66},{33,79}},
+              lineColor={95,95,95},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid),
+            Text(
+              extent={{37,57},{83,39}},
+              lineColor={0,0,0},
+              textString="amplitude"),
+            Polygon(
+              points={{33,-2},{30,11},{36,11},{33,-2},{33,-2}},
+              lineColor={95,95,95},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid),
+            Line(points={{33,77},{33,-2}}, color={95,95,95})}),
+        Documentation(info="<html>
+<p>
+The Real output y is a sine signal:
+</p>
+
+<p>
+<img src=\"modelica://Modelica/Resources/Images/Blocks/Sources/Sine.png\">
+</p>
+</html>"));
+        end Sine;
+
+        block SineTicked "Generate sine signal"
+          extends Interfaces.PartialClockedSO;
+          parameter Real amplitude=1 "Amplitude of sine wave";
+          parameter Real offset=0 "Offset of output signal";
+          parameter Integer periodTicks = 10
+        "Number of clock ticks for one period";
+          parameter Integer periodOffset=0
+        "Number of periods the sine signal is offset";
+          parameter Integer startTick(min=0)=0
+        "Output = offset for clock tick < startTick";
+    protected
+          constant Real pi=Modelica.Constants.pi;
+          Real Ts = interval(y) "Sample time (periodic or non-periodic)";
+          Integer counter(start=-1);
+          Boolean startOutput(start=false)
+        "Flag whether counter >= startTick reached once";
+        equation
+          // restart counter after reaching threshold to avoid integer overflow for long running simulations
+          if previous(startOutput) then
+              counter = if previous(counter) == (periodTicks-1) then 0 else previous(counter) + 1;
+              startOutput = previous(startOutput);
+          else
+            startOutput = previous(counter) >= (startTick-1);
+            counter = if startOutput then 0 else previous(counter) + 1;
+          end if;
+
+          y = offset + (if startOutput then
+          amplitude*Modelica.Math.sin(2*pi/periodTicks*(counter + periodOffset)) else 0);
+          annotation (
+            Icon(coordinateSystem(
+            preserveAspectRatio=false,
+            extent={{-100,-100},{100,100}},
+            grid={1,1}), graphics={
+            Line(points={{-80,68},{-80,-80}}, color={192,192,192}),
+            Polygon(
+              points={{-80,90},{-88,68},{-72,68},{-80,90}},
+              lineColor={192,192,192},
+              fillColor={192,192,192},
+              fillPattern=FillPattern.Solid),
+            Line(points={{-90,0},{68,0}}, color={192,192,192}),
+            Polygon(
+              points={{90,0},{68,8},{68,-8},{90,0}},
+              lineColor={192,192,192},
+              fillColor={192,192,192},
+              fillPattern=FillPattern.Solid),
+            Line(points={{-80,0},{-68.7,34.2},{-61.5,53.1},{-55.1,66.4},{-49.4,
+                  74.6},{-43.8,79.1},{-38.2,79.8},{-32.6,76.6},{-26.9,69.7},{-21.3,
+                  59.4},{-14.9,44.1},{-6.83,21.2},{10.1,-30.8},{17.3,-50.2},{23.7,
+                  -64.2},{29.3,-73.1},{35,-78.4},{40.6,-80},{46.2,-77.6},{51.9,-71.5},
+                  {57.5,-61.9},{63.9,-47.2},{72,-24.8},{80,0}}, color={0,0,0},
+                  pattern=LinePattern.Dot),
+            Text(
+              extent={{-147,-152},{153,-112}},
+              lineColor={0,0,0},
+                  textString="periodTicks=%periodTicks"),
+                Ellipse(
+                  extent={{-86,6},{-74,-6}},
+                  lineColor={0,0,127},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{-59,72},{-47,60}},
+                  lineColor={0,0,127},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{-31,72},{-19,60}},
+                  lineColor={0,0,127},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{-7,6},{5,-6}},
+                  lineColor={0,0,127},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{19,-60},{31,-72}},
+                  lineColor={0,0,127},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{49,-60},{61,-72}},
+                  lineColor={0,0,127},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid)}),
+            Diagram(coordinateSystem(
+            preserveAspectRatio=true,
+            extent={{-100,-100},{100,100}},
+            grid={1,1}), graphics={
+            Line(points={{-80,-90},{-80,84}}, color={95,95,95}),
+            Polygon(
+              points={{-80,97},{-84,81},{-76,81},{-80,97}},
+              lineColor={95,95,95},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid),
+            Line(points={{-99,-40},{85,-40}}, color={95,95,95}),
+            Polygon(
+              points={{97,-40},{81,-36},{81,-45},{97,-40}},
+              lineColor={95,95,95},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid),
+            Line(
+              points={{-41,-2},{-31.6,34.2},{-26.1,53.1},{-21.3,66.4},{-17.1,74.6},
+                  {-12.9,79.1},{-8.64,79.8},{-4.42,76.6},{-0.201,69.7},{4.02,59.4},
+                  {8.84,44.1},{14.9,21.2},{27.5,-30.8},{33,-50.2},{37.8,-64.2},{
+                  42,-73.1},{46.2,-78.4},{50.5,-80},{54.7,-77.6},{58.9,-71.5},{
+                  63.1,-61.9},{67.9,-47.2},{74,-24.8},{80,0}},
+              color={0,0,255},
+              thickness=0.5),
+            Line(
+              points={{-41,-2},{-80,-2}},
+              color={0,0,255},
+              thickness=0.5),
+            Text(
+              extent={{-87,12},{-40,0}},
+              lineColor={0,0,0},
+              textString="offset"),
+            Line(points={{-41,-2},{-41,-40}}, color={95,95,95}),
+            Text(
+              extent={{-60,-43},{-14,-54}},
+              lineColor={0,0,0},
+              textString="startTime"),
+            Text(
+              extent={{75,-47},{100,-60}},
+              lineColor={0,0,0},
+              textString="time"),
+            Text(
+              extent={{-80,99},{-40,82}},
+              lineColor={0,0,0},
+              textString="y"),
+            Line(points={{-9,79},{43,79}}, color={95,95,95}),
+            Line(points={{-41,-2},{50,-2}}, color={95,95,95}),
+            Polygon(
+              points={{33,79},{30,66},{37,66},{33,79}},
+              lineColor={95,95,95},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid),
+            Text(
+              extent={{37,57},{83,39}},
+              lineColor={0,0,0},
+              textString="amplitude"),
+            Polygon(
+              points={{33,-2},{30,11},{36,11},{33,-2},{33,-2}},
+              lineColor={95,95,95},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid),
+            Line(points={{33,77},{33,-2}}, color={95,95,95})}),
+        Documentation(info="<html>
+<p>
+The Real output y is a sine signal:
+</p>
+
+<p>
+<img src=\"modelica://Modelica/Resources/Images/Blocks/Sources/Sine.png\">
+</p>
+</html>"));
+        end SineTicked;
+  end Sources;
+
   package Interfaces
     "Library of partial blocks for components with clocked Real signals"
     extends Modelica.Icons.InterfacesPackage;
@@ -10384,6 +11479,19 @@ clocked signals, will usually result in non-expected behavior.
 
       annotation (Icon(graphics));
     end PartialClockedMIMO;
+
+    partial block PartialClockedSO
+      "Block with clocked single output Real signal"
+      extends Modelica_Synchronous.ClockSignals.Interfaces.ClockedBlockIcon;
+
+      Modelica.Blocks.Interfaces.RealOutput y
+        "Connector of clocked, Real output signal"
+        annotation (Placement(transformation(extent={{100,-10},{120,10}},
+            rotation=0)));
+
+      annotation (Icon(graphics), Diagram(coordinateSystem(preserveAspectRatio=
+                false, extent={{-100,-100},{100,100}}), graphics));
+    end PartialClockedSO;
 
     partial block PartialNoise
       "Interface for SISO blocks with Real signals that add noise to the signal"
@@ -13348,6 +14456,12 @@ The following values are possible:
 
 
 </html>"));
+
+    type SourceType = enumeration(
+      simulationTime "Simulation time based",
+      clockTick "Clock tick based",
+      externalSignal "External signal based")
+    "Base for source signal generation";
 
   annotation (Documentation(info="<html>
 <p>
