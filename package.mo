@@ -262,26 +262,9 @@ on the Modelica_Synchronous library.
 </html>"));
     end ReleaseNotes;
 
-
-class ModelicaLicense2 "Modelica License 2"
-  extends Modelica.Icons.Information;
-
-  annotation (Documentation(info="<html>
-<head>
-<title>The Modelica License 2</title>
-<style type=\"text/css\">
-*       { font-size: 10pt; font-family: Arial,sans-serif; }
-code    { font-size:  9pt; font-family: Courier,monospace;}
-h6      { font-size: 10pt; font-weight: bold; color: green; }
-h5      { font-size: 11pt; font-weight: bold; color: green; }
-h4      { font-size: 13pt; font-weight: bold; color: green; }
-address {                  font-weight: normal}
-td      { solid #000; vertical-align:top; }
-th      { solid #000; vertical-align:top; font-weight: bold; }
-table   { solid #000; border-collapse: collapse;}
-</style>
-</head>
-
+  class ModelicaLicense2 "Modelica License 2"
+    extends Modelica.Icons.Information;
+    annotation (Documentation(info="<html>
 <p>All files in this directory (Modelica_Synchronous) and in all
 subdirectories, especially all files that build package \"Modelica_Synchronous\"
 are licensed by <b>DLR</b> under the
@@ -298,18 +281,13 @@ email: Martin.Otter@dlr.de
 </p>
 
 <p style=\"margin-left: 40px;\"><b>Copyright notices of the files:</b><br>
-Copyright &copy; 2012-2013, DLR Institute of System Dynamics and Control.<br>
+Copyright &copy; 2012, DLR Institute of System Dynamics and Control.<br>
 <br>
 </p>
 
-<p>
-<a href=\"#The_Modelica_License_2-outline\">The Modelica License 2</a><br>
-<a href=\"#Frequently_Asked_Questions-outline\">Frequently Asked Questions</a><br>
-</p>
 
 <hr>
-
-<h4><a name=\"The_Modelica_License_2-outline\"></a>The Modelica License 2</h4>
+<h4><a name=\"ModelicaLicense2\"></a>The Modelica License 2</h4>
 
 <p>
 <b>Preamble.</b> The goal of this license is that Modelica related
@@ -318,69 +296,73 @@ used freely in the original or a modified form, in open source and in
 commercial environments (as long as the license conditions below are
 fulfilled, in particular sections 2c) and 2d). The Original Work is
 provided free of charge and the use is completely at your own risk.
-Developers of free Modelica packages are encouraged to utilize this
-license for their work.</p>
-
-<p>
-The Modelica License applies to any Original Work that contains the
-following licensing notice adjacent to the copyright notice(s) for
-this Original Work:</p>
-
-<p><b>Licensed by the Modelica Association under the Modelica License 2</b></p>
+</p>
 
 <p><b>1. Definitions.</b></p>
-<ol type=\"a\">
-  <li>&ldquo;License&rdquo; is this Modelica License.</li>
+<ol>
+ <li>&ldquo;License&rdquo; is this Modelica License.</li>
 
-  <li>&ldquo;Original Work&rdquo; is any work of authorship, including
-  software, images, documents, data files, that contains the above
-  licensing notice or that is packed together with a licensing notice
-  referencing it.</li>
+ <li>
+ &ldquo;Original Work&rdquo; is any work of authorship, including
+ software, images, documents, data files, that contains the above
+ licensing notice or that is packed together with a licensing notice
+ referencing it.</li>
 
-  <li>&ldquo;Licensor&rdquo; is the provider of the Original Work who has
-  placed this licensing notice adjacent to the copyright notice(s) for
-  the Original Work. The Original Work is either directly provided by
-  the owner of the Original Work, or by a licensee of the owner.</li>
+ <li>
+ &ldquo;Licensor&rdquo; is the provider of the Original Work who has
+ placed this licensing notice adjacent to the copyright notice(s) for
+ the Original Work. The Original Work is either directly provided by
+ the owner of the Original Work, or by a licensee of the owner.</li>
 
-  <li>&ldquo;Derivative Work&rdquo; is any modification of the Original
-  Work which represents, as a whole, an original work of authorship.
-  For the matter of clarity and as examples:
+ <li>
+ &ldquo;Derivative Work&rdquo; is any modification of the Original
+ Work which represents, as a whole, an original work of authorship.
+ For the matter of clarity and as examples: </li>
 
-  <ol  type=\"A\">
-    <li>Derivative Work shall not include work that remains separable from
-    the Original Work, as well as merely extracting a part of the
-    Original Work without modifying it.</li>
+ <ol>
+  <li>
+  Derivative Work shall not include work that remains separable from
+  the Original Work, as well as merely extracting a part of the
+  Original Work without modifying it.</li>
 
-    <li>Derivative Work shall not include (a) fixing of errors and/or (b)
-    adding vendor specific Modelica annotations and/or (c) using a
-    subset of the classes of a Modelica package, and/or (d) using a
-    different representation, e.g., a binary representation.</li>
-
-    <li>Derivative Work shall include classes that are copied from the
-    Original Work where declarations, equations or the documentation
-    are modified.</li>
-
-    <li>Derivative Work shall include executables to simulate the models
-    that are generated by a Modelica translator based on the Original
-    Work (of a Modelica package).</li>
-  </ol>
-
-  <li>&ldquo;Modified Work&rdquo; is any modification of the Original Work
-  with the following exceptions: (a) fixing of errors and/or (b)
+  <li>
+  Derivative Work shall not include (a) fixing of errors and/or (b)
   adding vendor specific Modelica annotations and/or (c) using a
   subset of the classes of a Modelica package, and/or (d) using a
   different representation, e.g., a binary representation.</li>
 
-  <li>&quot;Source Code&quot; means the preferred form of the Original
-  Work for making modifications to it and all available documentation
-  describing how to modify the Original Work.</li>
+  <li>
+  Derivative Work shall include classes that are copied from the
+  Original Work where declarations, equations or the documentation
+  are modified.</li>
 
-  <li>&ldquo;You&rdquo; means an individual or a legal entity exercising
-  rights under, and complying with all of the terms of, this License.</li>
+  <li>
+  Derivative Work shall include executables to simulate the models
+  that are generated by a Modelica translator based on the Original
+  Work (of a Modelica package).</li>
+ </ol>
 
-  <li>&ldquo;Modelica package&rdquo; means any Modelica library that is
-  defined with the &ldquo;<code><b>package</b>&nbsp;&lt;Name&gt;&nbsp;...&nbsp;<b>end</b>&nbsp;&lt;Name&gt;;</code>&rdquo; Modelica language element.</li>
+ <li>
+ &ldquo;Modified Work&rdquo; is any modification of the Original Work
+ with the following exceptions: (a) fixing of errors and/or (b)
+ adding vendor specific Modelica annotations and/or (c) using a
+ subset of the classes of a Modelica package, and/or (d) using a
+ different representation, e.g., a binary representation.</li>
 
+ <li>
+ &quot;Source Code&quot; means the preferred form of the Original
+ Work for making modifications to it and all available documentation
+ describing how to modify the Original Work.</li>
+
+ <li>
+ &ldquo;You&rdquo; means an individual or a legal entity exercising
+ rights under, and complying with all of the terms of, this License.</li>
+
+ <li>
+ &ldquo;Modelica package&rdquo; means any Modelica library that is
+ defined with the<br>&ldquo;<font face=\"Courier New, monospace\"><font size=2 style=\"font-size: 9pt\"><b>package</b></font></font><font face=\"Courier New, monospace\"><font size=2 style=\"font-size: 9pt\">
+ &lt;Name&gt; ... </font></font><font face=\"Courier New, monospace\"><font size=2 style=\"font-size: 9pt\"><b>end</b></font></font><font face=\"Courier New, monospace\"><font size=2 style=\"font-size: 9pt\">
+ &lt;Name&gt;;</font></font>&ldquo; Modelica language element.</li>
 </ol>
 
 <p>
@@ -388,36 +370,36 @@ this Original Work:</p>
 worldwide, royalty-free, non-exclusive, sublicensable license, for
 the duration of the copyright, to do the following:</p>
 
-<ol type=\"a\">
-  <li><p>
-  To reproduce the Original Work in copies, either alone or as part of
-  a collection.</p></li>
-  <li><p>
-  To create Derivative Works according to Section 1d) of this License.</p></li>
-  <li><p>
-  To distribute or communicate to the public copies of the <u>Original
-  Work</u> or a <u>Derivative Work</u> under <u>this License</u>. No
-  fee, neither as a copyright-license fee, nor as a selling fee for
-  the copy as such may be charged under this License. Furthermore, a
-  verbatim copy of this License must be included in any copy of the
-  Original Work or a Derivative Work under this License.<br>
-  For the matter of clarity, it is permitted A) to distribute or
-  communicate such copies as part of a (possible commercial)
-  collection where other parts are provided under different licenses
-  and a license fee is charged for the other parts only and B) to
-  charge for mere printing and shipping costs.</p></li>
-  <li><p>
-  To distribute or communicate to the public copies of a <u>Derivative
-  Work</u>, alternatively to Section 2c), under <u>any other license</u>
-  of your choice, especially also under a license for
-  commercial/proprietary software, as long as You comply with Sections
-  3, 4 and 8 below. <br>      For the matter of clarity, no
-  restrictions regarding fees, either as to a copyright-license fee or
-  as to a selling fee for the copy as such apply.</p></li>
-  <li><p>
-  To perform the Original Work publicly.</p></li>
-  <li><p>
-  To display the Original Work publicly.</p></li>
+<ol>
+ <li><p>
+ To reproduce the Original Work in copies, either alone or as part of
+ a collection.</li></p>
+ <li><p>
+ To create Derivative Works according to Section 1d) of this License.</li></p>
+ <li><p>
+ To distribute or communicate to the public copies of the <u>Original
+ Work</u> or a <u>Derivative Work</u> under <u>this License</u>. No
+ fee, neither as a copyright-license fee, nor as a selling fee for
+ the copy as such may be charged under this License. Furthermore, a
+ verbatim copy of this License must be included in any copy of the
+ Original Work or a Derivative Work under this License.<br>      For
+ the matter of clarity, it is permitted A) to distribute or
+ communicate such copies as part of a (possible commercial)
+ collection where other parts are provided under different licenses
+ and a license fee is charged for the other parts only and B) to
+ charge for mere printing and shipping costs.</li></p>
+ <li><p>
+ To distribute or communicate to the public copies of a <u>Derivative
+ Work</u>, alternatively to Section 2c), under <u>any other license</u>
+ of your choice, especially also under a license for
+ commercial/proprietary software, as long as You comply with Sections
+ 3, 4 and 8 below. <br>      For the matter of clarity, no
+ restrictions regarding fees, either as to a copyright-license fee or
+ as to a selling fee for the copy as such apply.</li></p>
+ <li><p>
+ To perform the Original Work publicly.</li></p>
+ <li><p>
+ To display the Original Work publicly.</li></p>
 </ol>
 
 <p>
@@ -500,7 +482,7 @@ License on an &quot;as is&quot; basis and without warranty, either
 express or implied, including, without limitation, the warranties of
 non-infringement, merchantability or fitness for a particular
 purpose. The entire risk as to the quality of the Original Work is
-with You.</b></u> This disclaimer of warranty constitutes an
+with You.</b></u><b> </b>This disclaimer of warranty constitutes an
 essential part of this License. No license to the Original Work is
 granted by this License except under this disclaimer.</p>
 
@@ -562,27 +544,31 @@ action. This section shall survive the termination of this License.</p>
 <p>
 <b>15. Miscellaneous.</b>
 </p>
-<ol type=\"a\">
-  <li>If any
-  provision of this License is held to be unenforceable, such
-  provision shall be reformed only to the extent necessary to make it
-  enforceable.</li>
+<ol>
+ <li>If any
+ provision of this License is held to be unenforceable, such
+ provision shall be reformed only to the extent necessary to make it
+ enforceable.</li>
 
-  <li>No verbal
-  ancillary agreements have been made. Changes and additions to this
-  License must appear in writing to be valid. This also applies to
-  changing the clause pertaining to written form.</li>
+ <li>No verbal
+ ancillary agreements have been made. Changes and additions to this
+ License must appear in writing to be valid. This also applies to
+ changing the clause pertaining to written form.</li>
 
-  <li>You may use the
-  Original Work in all ways not otherwise restricted or conditioned by
-  this License or by law, and Licensor promises not to interfere with
-  or be responsible for such uses by You.</li>
+ <li>You may use the
+ Original Work in all ways not otherwise restricted or conditioned by
+ this License or by law, and Licensor promises not to interfere with
+ or be responsible for such uses by You.</li>
 </ol>
+
+<p>
+<br>
+</p>
 
 <hr>
 
-<h5><a name=\"Frequently_Asked_Questions-outline\"></a>
-Frequently Asked Questions</h5>
+<h4><a name=\"2. Frequently Asked Questions|outline\"></a>
+Frequently Asked Questions</h4>
 <p>This
 section contains questions/answer to users and/or distributors of
 Modelica packages and/or documents under Modelica License 2. Note,
@@ -590,47 +576,52 @@ the answers to the questions below are not a legal interpretation of
 the Modelica License 2. In case of a conflict, the language of the
 license shall prevail.</p>
 
-<h6>Using or Distributing a Modelica <u>Package</u> under the Modelica License 2</h6>
+<p><br>
+</p>
+
+<p><font color=\"#008000\"><font size=3><b>Using
+or Distributing a Modelica </b></font></font><font color=\"#008000\"><font size=3><u><b>Package</b></u></font></font><font color=\"#008000\"><font size=3><b>
+under the Modelica License 2</b></font></font></p>
 
 <p><b>What are the main
 differences to the previous version of the Modelica License?</b></p>
 <ol>
-  <li><p>
-  Modelica License 1 is unclear whether the licensed Modelica package
-  can be distributed under a different license. Version 2 explicitly
-  allows that &ldquo;Derivative Work&rdquo; can be distributed under
-  any license of Your choice, see examples in Section 1d) as to what
-  qualifies as Derivative Work (so, version 2 is clearer).</p>
-  <li><p>
-  If You modify a Modelica package under Modelica License 2 (besides
-  fixing of errors, adding vendor specific Modelica annotations, using
-  a subset of the classes of a Modelica package, or using another
-  representation, e.g., a binary representation), you must rename the
-  root-level name of the package for your distribution. In version 1
-  you could keep the name (so, version 2 is more restrictive). The
-  reason of this restriction is to reduce the risk that Modelica
-  packages are available that have identical names, but different
-  functionality.</p>
-  <li><p>
-  Modelica License 1 states that &ldquo;It is not allowed to charge a
-  fee for the original version or a modified version of the software,
-  besides a reasonable fee for distribution and support&rdquo;.
-  Version 2 has a similar intention for all Original Work under
-  <u>Modelica License 2</u> (to remain free of charge and open source)
-  but states this more clearly as &ldquo;No fee, neither as a
-  copyright-license fee, nor as a selling fee for the copy as such may
-  be charged&rdquo;. Contrary to version 1, Modelica License 2 has no
-  restrictions on fees for Derivative Work that is provided under a
-  different license (so, version 2 is clearer and has fewer
-  restrictions).</p>
-  <li><p>
-  Modelica License 2 introduces several useful provisions for the
-  licensee (articles 5, 6, 12), and for the licensor (articles 7, 12,
-  13, 14) that have no counter part in version 1.</p>
-  <li><p>
-  Modelica License 2 can be applied to all type of work, including
-  documents, images and data files, contrary to version 1 that was
-  dedicated for software only (so, version 2 is more general).</p>
+ <li><p>
+ Modelica License 1 is unclear whether the licensed Modelica package
+ can be distributed under a different license. Version 2 explicitly
+ allows that &ldquo;Derivative Work&rdquo; can be distributed under
+ any license of Your choice, see examples in Section 1d) as to what
+ qualifies as Derivative Work (so, version 2 is clearer).</p>
+ <li><p>
+ If You modify a Modelica package under Modelica License 2 (besides
+ fixing of errors, adding vendor specific Modelica annotations, using
+ a subset of the classes of a Modelica package, or using another
+ representation, e.g., a binary representation), you must rename the
+ root-level name of the package for your distribution. In version 1
+ you could keep the name (so, version 2 is more restrictive). The
+ reason of this restriction is to reduce the risk that Modelica
+ packages are available that have identical names, but different
+ functionality.</p>
+ <li><p>
+ Modelica License 1 states that &ldquo;It is not allowed to charge a
+ fee for the original version or a modified version of the software,
+ besides a reasonable fee for distribution and support<span lang=\"en-GB\">&ldquo;.
+ Version 2 has a </span>similar intention for all Original Work under
+ <u>Modelica License 2</u> (to remain free of charge and open source)
+ but states this more clearly as &ldquo;No fee, neither as a
+ copyright-license fee, nor as a selling fee for the copy as such may
+ be charged&rdquo;. Contrary to version 1, Modelica License 2 has no
+ restrictions on fees for Derivative Work that is provided under a
+ different license (so, version 2 is clearer and has fewer
+ restrictions).</p>
+ <li><p>
+ Modelica License 2 introduces several useful provisions for the
+ licensee (articles 5, 6, 12), and for the licensor (articles 7, 12,
+ 13, 14) that have no counter part in version 1.</p>
+ <li><p>
+ Modelica License 2 can be applied to all type of work, including
+ documents, images and data files, contrary to version 1 that was
+ dedicated for software only (so, version 2 is more general).</p>
 </ol>
 
 <p><b>Can I distribute a
@@ -759,22 +750,26 @@ substance to a preexisting work will not qualify the work as a new
 version for such purposes.
 </p>
 
-<h6>Using or Distributing a Modelica <u>Document</u> under the Modelica License 2</h6>
+<p><br>
+</p>
+<p><font color=\"#008000\"><font size=3><b>Using
+or Distributing a Modelica </b></font></font><font color=\"#008000\"><font size=3><u><b>Document</b></u></font></font><font color=\"#008000\"><font size=3><b>
+under the Modelica License 2</b></font></font></p>
 
 <p>This
 section is devoted especially for the following applications:</p>
-<ol type=\"a\">
-  <li><p>
-  A Modelica tool extracts information out of a Modelica package and
-  presents the result in form of a &ldquo;manual&rdquo; for this
-  package in, e.g., html, doc, or pdf format.</p>
-  <li><p>
-  The Modelica language specification is a document defining the
-  Modelica language. It will be licensed under Modelica License 2.</p>
-  <li><p>
-  Someone writes a book about the Modelica language and/or Modelica
-  packages and uses information which is available in the Modelica
-  language specification and/or the corresponding Modelica package.</p>
+<ol>
+ <li><p>
+ A Modelica tool extracts information out of a Modelica package and
+ presents the result in form of a &ldquo;manual&rdquo; for this
+ package in, e.g., html, doc, or pdf format.</p>
+ <li><p>
+ The Modelica language specification is a document defining the
+ Modelica language. It will be licensed under Modelica License 2.</p>
+ <li><p>
+ Someone writes a book about the Modelica language and/or Modelica
+ packages and uses information which is available in the Modelica
+ language specification and/or the corresponding Modelica package.</p>
 </ol>
 
 <p><b>Can I sell a manual
@@ -817,7 +812,8 @@ if you are not the copyright-holder, since article 2c) does not allow
 a selling fee for a (in this case physical) copy. However, mere
 printing and shipping costs may be recovered.</p>
 </html>"));
-end ModelicaLicense2;
+
+  end ModelicaLicense2;
 
     class Requirements "Requirements"
       extends Modelica.Icons.Information;
@@ -4759,7 +4755,12 @@ Example used to generate a figure for the documentation of block
             thickness=0.5,
             smooth=Smooth.None));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent=
-                  {{-100,-100},{100,100}}), graphics));
+                  {{-100,-100},{100,100}}), graphics), Documentation(info="<html>
+<p>
+Example for block
+<a href=\"Modelica_Synchronous.RealSignals.TimeBasedSources.Step\">Modelica_Synchronous.RealSignals.TimeBasedSources.Step</a>.
+</p>
+</html>"));
         end TimeBasedStep;
 
         model TickBasedStep
@@ -4786,7 +4787,12 @@ Example used to generate a figure for the documentation of block
             color={0,0,127},
             smooth=Smooth.None));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent=
-                  {{-100,-100},{100,100}}), graphics));
+                  {{-100,-100},{100,100}}), graphics), Documentation(info="<html>
+<p>
+Example for block
+<a href=\"Modelica_Synchronous.RealSignals.TickBasedSources.Step\">Modelica_Synchronous.RealSignals.TickBasedSources.Step</a>.
+</p>
+</html>"));
         end TickBasedStep;
 
         model TimeBasedSine
@@ -4814,7 +4820,12 @@ Example used to generate a figure for the documentation of block
             color={0,0,127},
             smooth=Smooth.None));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent=
-                  {{-100,-100},{100,100}}), graphics));
+                  {{-100,-100},{100,100}}), graphics), Documentation(info="<html>
+<p>
+Example for block
+<a href=\"Modelica_Synchronous.RealSignals.TimeBasedSources.Sine\">Modelica_Synchronous.RealSignals.TimeBasedSources.Sine</a>.
+</p>
+</html>"));
         end TimeBasedSine;
 
         model TickBasedSine
@@ -4849,7 +4860,12 @@ Example used to generate a figure for the documentation of block
             color={0,0,127},
             smooth=Smooth.None));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent=
-                  {{-100,-100},{100,100}}), graphics));
+                  {{-100,-100},{100,100}}), graphics), Documentation(info="<html>
+<p>
+Example for block
+<a href=\"Modelica_Synchronous.RealSignals.TickBasedSources.Step\">Modelica_Synchronous.RealSignals.TickBasedSources.Step</a>.
+</p>
+</html>"));
         end TickBasedSine;
 
         model TimeBasedRamp
@@ -4877,7 +4893,12 @@ Example used to generate a figure for the documentation of block
             color={0,0,127},
             smooth=Smooth.None));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent=
-                  {{-100,-100},{100,100}}), graphics));
+                  {{-100,-100},{100,100}}), graphics), Documentation(info="<html>
+<p>
+Example for block
+<a href=\"Modelica_Synchronous.RealSignals.TimeBasedSources.Ramp\">Modelica_Synchronous.RealSignals.TimeBasedSources.Ramp</a>.
+</p>
+</html>"));
         end TimeBasedRamp;
 
         model TickBasedRamp
@@ -4908,7 +4929,12 @@ Example used to generate a figure for the documentation of block
             color={0,0,127},
             smooth=Smooth.None));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent=
-                  {{-100,-100},{100,100}}), graphics));
+                  {{-100,-100},{100,100}}), graphics), Documentation(info="<html>
+<p>
+Example for block
+<a href=\"Modelica_Synchronous.RealSignals.TickBasedSources.Ramp\">Modelica_Synchronous.RealSignals.TickBasedSources.Ramp</a>.
+</p>
+</html>"));
         end TickBasedRamp;
       annotation (Documentation(info="<html>
 <p>
@@ -10321,7 +10347,7 @@ contrary to a general FIR filter.
                   -14,-4},{-4,-46},{0,-64},{2,-82}},
                                              color={0,0,127}),
         Polygon(points={{-84,90},{-92,68},{-76,68},{-84,90},{-84,90}}, lineColor={192,192,192}, fillColor={192,192,192},
-                fillPattern=   FillPattern.Solid),
+                fillPattern =  FillPattern.Solid),
           Line(points={{2,-82},{4,-64},{8,-56},{12,-56},{16,-60},{18,-66},{20,-82}},
                                                                              color={0,0,127}),
           Line(points={{20,-80},{20,-78},{20,-72},{22,-66},{24,-64},{28,-64},{32,-66},
@@ -10330,7 +10356,7 @@ contrary to a general FIR filter.
                   {62,-72},{64,-76},{64,-78},{64,-80},{64,-82}},
                                                 color={0,0,127}),
         Polygon(points={{90,-82},{68,-74},{68,-90},{90,-82}}, lineColor={192,192,192}, fillColor={192,192,192},
-                fillPattern=  FillPattern.Solid),
+                fillPattern = FillPattern.Solid),
             Text(
               extent={{-26,88},{88,48}},
               lineColor={175,175,175},
@@ -10384,7 +10410,7 @@ a[:] are the filter coefficients.
 </html>"),
         Icon(graphics={
         Polygon(points={{-84,90},{-92,68},{-76,68},{-84,90},{-84,90}}, lineColor={192,192,192}, fillColor={192,192,192},
-                fillPattern=   FillPattern.Solid),
+                fillPattern =  FillPattern.Solid),
          Line(points={{-84,78},{-84,-90}}, color={192,192,192}),
         Line(points={{-84,30},{-72,30},{-52,28},{-32,20},{-26,16},{-22,12},{-18,6},{
                   -14,-4},{-4,-46},{0,-64},{2,-82}},
@@ -10400,7 +10426,7 @@ a[:] are the filter coefficients.
                   {62,-72},{64,-76},{64,-78},{64,-80},{64,-82}},
                                                 color={0,0,127}),
         Polygon(points={{90,-82},{68,-74},{68,-90},{90,-82}}, lineColor={192,192,192}, fillColor={192,192,192},
-                fillPattern=  FillPattern.Solid),
+                fillPattern = FillPattern.Solid),
         Line(points={{-90,-82},{82,-82}}, color={192,192,192}),
             Text(
               extent={{-26,86},{88,56}},
@@ -10427,7 +10453,7 @@ clocked signals, will usually result in non-expected behavior.
   end Periodic;
 
   package TimeBasedSources
-    "Package of signal source blocks generating clocked Real signals"
+    "Package of signal source blocks generating clocked simulation time based Real signals"
      extends Modelica.Icons.SourcesPackage;
 
         block Step "Generate step signal of type Real"
@@ -10559,17 +10585,22 @@ clocked signals, will usually result in non-expected behavior.
               lineColor={0,0,0},
               textString="y")}),
         Documentation(info="<html>
+<p>The block is similar to the block in <a href=\"modelica://Modelica.Blocks.Sources.Step\">Modelica.Blocks.Sources.Step</a>, but adapted to work in clocked partitions (by internal sampling of the continuous <b>time</b> variable).</p>
 <p>
 The Real output y is a step signal:
 </p>
-
 <p>
 <img src=\"modelica://Modelica/Resources/Images/Blocks/Sources/Step.png\">
 </p>
 
+<h4>Example</h4>
+<p>
+See model <a href=\"Modelica_Synchronous.Examples.Elementary.RealSignals.TimeBasedStep\">Modelica_Synchronous.Examples.Elementary.RealSignals.TimeBasedStep</a>.
+<br>
+</p>
+
 </html>"));
         end Step;
-
 
         block Ramp "Generate ramp signal"
           extends Interfaces.PartialClockedSO;
@@ -10608,7 +10639,8 @@ The Real output y is a step signal:
               extent={{-150,-150},{150,-110}},
               lineColor={0,0,0},
               textString="duration=%duration"),
-            Line(points={{31,38},{86,38}}, color={0,0,0}),
+            Line(points={{31,38},{86,38}}, color={0,0,0},
+              pattern=LinePattern.Dot),
                 Ellipse(
                   extent={{-86,-64},{-74,-76}},
                   lineColor={0,0,127},
@@ -10724,6 +10756,7 @@ The Real output y is a step signal:
               lineColor={0,0,0},
               textString="duration")}),
         Documentation(info="<html>
+<p>The block is similar to the block in <a href=\"modelica://Modelica.Blocks.Sources.Ramp\">Modelica.Blocks.Sources.Ramp</a>, but adapted to work in clocked partitions (by internal sampling of the continuous <b>time</b> variable).</p>
 <p>
 The Real output y is a ramp signal:
 </p>
@@ -10731,9 +10764,14 @@ The Real output y is a ramp signal:
 <p>
 <img src=\"modelica://Modelica/Resources/Images/Blocks/Sources/Ramp.png\">
 </p>
+
+<h4>Example</h4>
+<p>
+See model <a href=\"Modelica_Synchronous.Examples.Elementary.RealSignals.TimeBasedRamp\">Modelica_Synchronous.Examples.Elementary.RealSignals.TimeBasedRamp</a>.
+<br>
+</p>
 </html>"));
         end Ramp;
-
 
         block Sine "Generate sine signal"
           extends Interfaces.PartialClockedSO;
@@ -10826,11 +10864,11 @@ The Real output y is a ramp signal:
               fillColor={95,95,95},
               fillPattern=FillPattern.Solid),
             Line(
-              points={{-41,-2},{-31.6,34.2},{-26.1,53.1},{-21.3,66.4},{-17.1,74.6},
-                  {-12.9,79.1},{-8.64,79.8},{-4.42,76.6},{-0.201,69.7},{4.02,59.4},
-                  {8.84,44.1},{14.9,21.2},{27.5,-30.8},{33,-50.2},{37.8,-64.2},{
-                  42,-73.1},{46.2,-78.4},{50.5,-80},{54.7,-77.6},{58.9,-71.5},{
-                  63.1,-61.9},{67.9,-47.2},{74,-24.8},{80,0}},
+              points={{-41,-2},{-31.6,34.2},{-26.1,53.1},{-21.3,66.4},{-17.1,
+                  74.6},{-12.9,79.1},{-8.64,79.8},{-4.42,76.6},{-0.201,69.7},{
+                  4.02,59.4},{8.84,44.1},{14.9,21.2},{27.5,-30.8},{33,-50.2},{
+                  37.8,-64.2},{42,-73.1},{46.2,-78.4},{50.5,-80},{54.7,-77.6},{
+                  58.9,-71.5},{63.1,-61.9},{67.9,-47.2},{74,-24.8},{80,0}},
               color={0,0,255},
               thickness=0.5),
             Line(
@@ -10870,14 +10908,41 @@ The Real output y is a ramp signal:
               lineColor={95,95,95},
               fillColor={95,95,95},
               fillPattern=FillPattern.Solid),
-            Line(points={{33,77},{33,-2}}, color={95,95,95})}),
+            Line(points={{33,77},{33,-2}}, color={95,95,95}),
+                Ellipse(
+                  extent={{-47,4},{-35,-8}},
+                  lineColor={0,0,127},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{-16,85},{-4,73}},
+                  lineColor={0,0,127},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{15,5},{27,-7}},
+                  lineColor={0,0,127},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{44,-74},{56,-86}},
+                  lineColor={0,0,127},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{74,5},{86,-7}},
+                  lineColor={0,0,127},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid)}),
         Documentation(info="<html>
-<p>
-The Real output y is a sine signal:
-</p>
+<p>The block is similar to the block in <a href=\"modelica://Modelica.Blocks.Sources.Sine\">Modelica.Blocks.Sources.Sine</a>, but adapted to work in clocked partitions (by internal sampling of the continuous <b>time</b> variable).</p>
+<p>The Real output y is a sine signal: </p>
+<p><img src=\"modelica://Modelica/Resources/Images/Blocks/Sources/Sine.png\"></p>
 
+<h4>Example</h4>
 <p>
-<img src=\"modelica://Modelica/Resources/Images/Blocks/Sources/Sine.png\">
+See model <a href=\"Modelica_Synchronous.Examples.Elementary.RealSignals.TimeBasedSine\">Modelica_Synchronous.Examples.Elementary.RealSignals.TimeBasedSine</a>.
+<br>
 </p>
 </html>"));
         end Sine;
@@ -10885,9 +10950,8 @@ The Real output y is a sine signal:
   end TimeBasedSources;
 
   package TickBasedSources
-    "Package of signal source blocks generating clocked Real signals"
+    "Package of signal source blocks generating clocked ticked/sample based Real signals"
      extends Modelica.Icons.SourcesPackage;
-
 
         block Step
       "Generate step signal of type Real based on counted clock ticks"
@@ -10964,7 +11028,8 @@ The Real output y is a sine signal:
             Line(
               points={{-80,-18},{0,-18},{0,50},{80,50}},
               color={0,0,255},
-              thickness=0.5),
+              thickness=0.5,
+              pattern=LinePattern.Dot),
             Line(points={{-90,-70},{82,-70}}, color={95,95,95}),
             Polygon(
               points={{90,-70},{68,-64},{68,-76},{90,-70}},
@@ -10974,11 +11039,11 @@ The Real output y is a sine signal:
             Text(
               extent={{70,-80},{94,-100}},
               lineColor={0,0,0},
-              textString="time"),
+              textString="tick"),
             Text(
               extent={{-21,-72},{25,-90}},
               lineColor={0,0,0},
-              textString="startTime"),
+              textString="startTick"),
             Line(points={{0,-17},{0,-71}}, color={95,95,95}),
             Text(
               extent={{-68,-36},{-22,-54}},
@@ -11018,19 +11083,43 @@ The Real output y is a sine signal:
             Text(
               extent={{-72,100},{-31,80}},
               lineColor={0,0,0},
-              textString="y")}),
+              textString="y"),
+                Ellipse(
+                  extent={{-6,55},{6,43}},
+                  lineColor={0,0,127},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{-47,-12},{-35,-24}},
+                  lineColor={0,0,127},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{-86,-12},{-74,-24}},
+                  lineColor={0,0,127},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{33,56},{45,44}},
+                  lineColor={0,0,127},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{72,56},{84,44}},
+                  lineColor={0,0,127},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid)}),
         Documentation(info="<html>
 <p>
-The Real output y is a step signal:
+The Real output y is a step signal. The signal is defined in terms of clock ticks instead of simulation time:
 </p>
 
 <p>
-<img src=\"modelica://Modelica/Resources/Images/Blocks/Sources/Step.png\">
+<img src=\"modelica://Modelica_Synchronous/Resources/Images/RealSignals/TickBasedSources_Step.png\"/>
 </p>
 
 </html>"));
         end Step;
-
 
         block Ramp "Generate ramp signal based on counted clock ticks"
           extends Interfaces.PartialClockedSO;
@@ -11072,7 +11161,8 @@ The Real output y is a step signal:
               extent={{-150,-150},{150,-110}},
               lineColor={0,0,0},
                   textString="duration ticks=%durationTicks"),
-            Line(points={{31,38},{86,38}}, color={0,0,0}),
+            Line(points={{31,38},{86,38}}, color={0,0,0},
+              pattern=LinePattern.Dot),
                 Ellipse(
                   extent={{-86,-64},{-74,-76}},
                   lineColor={0,0,127},
@@ -11106,7 +11196,8 @@ The Real output y is a step signal:
             Line(
               points={{-80,-20},{-20,-20},{50,50}},
               color={0,0,255},
-              thickness=0.5),
+              thickness=0.5,
+              pattern=LinePattern.Dot),
             Line(points={{-90,-70},{82,-70}}, color={95,95,95}),
             Polygon(
               points={{90,-70},{68,-64},{68,-76},{90,-70}},
@@ -11135,7 +11226,7 @@ The Real output y is a step signal:
             Text(
               extent={{-38,-72},{6,-83}},
               lineColor={0,0,0},
-              textString="startTime"),
+              textString="startTick"),
             Text(
               extent={{-78,92},{-37,72}},
               lineColor={0,0,0},
@@ -11143,7 +11234,7 @@ The Real output y is a step signal:
             Text(
               extent={{70,-80},{94,-91}},
               lineColor={0,0,0},
-              textString="time"),
+              textString="tick"),
             Line(points={{-20,-20},{-20,-70}}, color={95,95,95}),
             Line(
               points={{-19,-20},{50,-20}},
@@ -11151,9 +11242,10 @@ The Real output y is a step signal:
               thickness=0.25,
               arrow={Arrow.None,Arrow.None}),
             Line(
-              points={{50,50},{101,50}},
+              points={{50,50},{87,50}},
               color={0,0,255},
-              thickness=0.5),
+              thickness=0.5,
+              pattern=LinePattern.Dot),
             Line(
               points={{50,50},{50,-20}},
               color={95,95,95},
@@ -11184,20 +11276,44 @@ The Real output y is a step signal:
               lineColor={0,0,0},
               textString="height"),
             Text(
-              extent={{-2,-21},{37,-33}},
+              extent={{-8,-21},{42,-39}},
               lineColor={0,0,0},
-              textString="duration")}),
+              textString="durationTicks"),
+                Ellipse(
+                  extent={{-86,-14},{-74,-26}},
+                  lineColor={0,0,127},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{-26,-14},{-14,-26}},
+                  lineColor={0,0,127},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{10,22},{22,10}},
+                  lineColor={0,0,127},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{44,56},{56,44}},
+                  lineColor={0,0,127},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{81,56},{93,44}},
+                  lineColor={0,0,127},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid)}),
         Documentation(info="<html>
 <p>
-The Real output y is a ramp signal:
+The Real output y is a ramp signal. The signal is defined in terms of clock ticks instead of simulation time:
 </p>
 
 <p>
-<img src=\"modelica://Modelica/Resources/Images/Blocks/Sources/Ramp.png\">
+<img src=\"modelica://Modelica_Synchronous/Resources/Images/RealSignals/TickBasedSources_Ramp.png\"/>
 </p>
 </html>"));
         end Ramp;
-
 
         block Sine "Generate sine signal"
           extends Interfaces.PartialClockedSO;
@@ -11285,7 +11401,7 @@ The Real output y is a ramp signal:
                   fillColor={255,255,255},
                   fillPattern=FillPattern.Solid)}),
             Diagram(coordinateSystem(
-            preserveAspectRatio=true,
+            preserveAspectRatio=false,
             extent={{-100,-100},{100,100}},
             grid={1,1}), graphics={
             Line(points={{-80,-90},{-80,84}}, color={95,95,95}),
@@ -11301,17 +11417,14 @@ The Real output y is a ramp signal:
               fillColor={95,95,95},
               fillPattern=FillPattern.Solid),
             Line(
-              points={{-41,-2},{-31.6,34.2},{-26.1,53.1},{-21.3,66.4},{-17.1,74.6},
-                  {-12.9,79.1},{-8.64,79.8},{-4.42,76.6},{-0.201,69.7},{4.02,59.4},
-                  {8.84,44.1},{14.9,21.2},{27.5,-30.8},{33,-50.2},{37.8,-64.2},{
-                  42,-73.1},{46.2,-78.4},{50.5,-80},{54.7,-77.6},{58.9,-71.5},{
-                  63.1,-61.9},{67.9,-47.2},{74,-24.8},{80,0}},
+              points={{-41,-2},{-31.6,34.2},{-26.1,53.1},{-21.3,66.4},{-17.1,
+                  74.6},{-12.9,79.1},{-8.64,79.8},{-4.42,76.6},{-0.201,69.7},{
+                  4.02,59.4},{8.84,44.1},{14.9,21.2},{27.5,-30.8},{33,-50.2},{
+                  37.8,-64.2},{42,-73.1},{46.2,-78.4},{50.5,-80},{54.7,-77.6},{
+                  58.9,-71.5},{63.1,-61.9},{67.9,-47.2},{74,-24.8},{80,0}},
               color={0,0,255},
-              thickness=0.5),
-            Line(
-              points={{-41,-2},{-80,-2}},
-              color={0,0,255},
-              thickness=0.5),
+              thickness=0.5,
+              pattern=LinePattern.Dot),
             Text(
               extent={{-87,12},{-40,0}},
               lineColor={0,0,0},
@@ -11320,11 +11433,11 @@ The Real output y is a ramp signal:
             Text(
               extent={{-60,-43},{-14,-54}},
               lineColor={0,0,0},
-              textString="startTime"),
+              textString="startTick"),
             Text(
               extent={{75,-47},{100,-60}},
               lineColor={0,0,0},
-              textString="time"),
+              textString="tick"),
             Text(
               extent={{-80,99},{-40,82}},
               lineColor={0,0,0},
@@ -11345,14 +11458,49 @@ The Real output y is a ramp signal:
               lineColor={95,95,95},
               fillColor={95,95,95},
               fillPattern=FillPattern.Solid),
-            Line(points={{33,77},{33,-2}}, color={95,95,95})}),
+            Line(points={{33,77},{33,-2}}, color={95,95,95}),
+                Ellipse(
+                  extent={{-16,85},{-4,73}},
+                  lineColor={0,0,127},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{15,5},{27,-7}},
+                  lineColor={0,0,127},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{44,-74},{56,-86}},
+                  lineColor={0,0,127},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{74,5},{86,-7}},
+                  lineColor={0,0,127},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),
+            Line(
+              points={{-80,-2},{-41,-2}},
+              color={0,0,255},
+              thickness=0.5,
+              pattern=LinePattern.Dot),
+                Ellipse(
+                  extent={{-86,4},{-74,-8}},
+                  lineColor={0,0,127},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{-47,4},{-35,-8}},
+                  lineColor={0,0,127},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid)}),
         Documentation(info="<html>
 <p>
-The Real output y is a sine signal:
+The Real output y is a sine signal. The signal is defined in terms of clock ticks instead of simulation time:
 </p>
 
 <p>
-<img src=\"modelica://Modelica/Resources/Images/Blocks/Sources/Sine.png\">
+<img src=\"modelica://Modelica_Synchronous/Resources/Images/RealSignals/TickBasedSources_Sine.png\"/>
 </p>
 </html>"));
         end Sine;
@@ -14405,21 +14553,21 @@ Specification (version &ge; 3.3):
 <tr><th><b>Types.SolverMethod.</b></th><th><b>Meaning</b></th></tr>
 <tr><td valign=\"top\">\"External\"</td>
     <td valign=\"top\">Solver specified externally</td></tr>
-
+    
 <tr><td valign=\"top\">\"ExplicitEuler\"</td>
     <td valign=\"top\">Explicit Euler method</td></tr>
-
+    
 <tr><td valign=\"top\">\"ExplicitMidPoint2\"</td>
     <td valign=\"top\">Explicit mid point rule (order 2)</td></tr>
-
+        
 <tr><td valign=\"top\">\"ExplicitRungeKutta4\"</td>
-    <td valign=\"top\">Explicit Runge-Kutta method (order 4)</td></tr>
+    <td valign=\"top\">Explicit Runge-Kutta method (order 4)</td></tr>        
 
 <tr><td valign=\"top\">\"ImplicitEuler\"</td>
     <td valign=\"top\">Implicit Euler method</td></tr>
-
+    
 <tr><td valign=\"top\">\"ImplicitTrapezoid\"</td>
-    <td valign=\"top\">Implicit trapezoid rule (order 2)</td></tr>
+    <td valign=\"top\">Implicit trapezoid rule (order 2)</td></tr>    
 </table>
 
 
