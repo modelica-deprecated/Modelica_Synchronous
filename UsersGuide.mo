@@ -148,7 +148,7 @@ a control system are discussed in the following reference:</i>
 </p>
 
 <dl>
-<dt>Looye G., Thümmel M., Kurze M., Otter M., and Bals J. (2005):</dt>
+<dt>Looye G., Th&uuml;mmel M., Kurze M., Otter M., and Bals J. (2005):</dt>
 <dd> <b>Nonlinear Inverse Models for Control</b>.
      Proceedings of 4th International Modelica Conference, ed. G. Schmitz,
      Hamburg, March 7-8.
@@ -847,9 +847,9 @@ able to support this library.
 <p><b>Acknowledgements:</b></p>
 <ul>
 <li> The design of the library has been performed in close cooperation and discussion
-     with Hilding Elmqvist from Dassault Systèmes Lund.</li>
+     with Hilding Elmqvist from Dassault Syst&egrave;mes Lund.</li>
 
-<li> Sven Erik Mattsson from Dassault Systèmes Lund developed the first
+<li> Sven Erik Mattsson from Dassault Syst&egrave;mes Lund developed the first
      Dymola prototype supporting the synchronous features of Modelica 3.3.
      Without this prototype,
      it would not have been possible to develop the Modelica_Synchronous library.</li>
