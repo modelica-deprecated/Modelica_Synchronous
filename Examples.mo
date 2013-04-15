@@ -1586,7 +1586,7 @@ so that the inverse model can be designed and evaluated as sampled data
 system within Modelica and a Modelica simulation environment.
 This approach is shown at hand of a simple example using
 a nonlinear plant model of a
-mixing unit (Föllinger O. (1998): Nichtlineare Regelungen I,
+mixing unit (F&ouml;llinger O. (1998): Nichtlineare Regelungen I,
 Oldenbourg Verlag, 8. Auflage, page 279) and utilizing this plant
 model as nonlinear feed-forward controller according to (Looye et.al. 2005):
 </p>
