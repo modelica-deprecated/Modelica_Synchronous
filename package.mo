@@ -12,12 +12,13 @@ extends Modelica.Icons.Package;
 
 
 
+
   annotation (preferredView="info",
-  uses(Modelica(version="3.2")),
+  uses(Modelica(version="3.2.1")),
     version="0.91",
-    versionBuild=2,
+    versionBuild=3,
     versionDate="2012-09-20",
-    dateModified = "2012-10-10 17:35:09Z",
+    dateModified = "2013-09-17 11:22:09Z",
     revisionId="$Id::                                       $",
   Documentation(info="<html>
 <p>
@@ -66,7 +67,7 @@ For an introduction, have especially a look at:
     </td>
     <td style=\"vertical-align: top;\"><br><b>Licensed by DLR under the Modelica License 2</b></td>
 </tr>
-<tr><td style=\"vertical-align: top;\"><b>Copyright &copy; 2012, DLR Institute of System Dynamics and Control</b></td>
+<tr><td style=\"vertical-align: top;\"><b>Copyright &copy; 2012-2013, DLR Institute of System Dynamics and Control</b></td>
 </tr>
 </table>
 </p>
