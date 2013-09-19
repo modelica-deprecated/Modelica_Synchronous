@@ -1830,7 +1830,7 @@ See model <a href=\"Modelica_Synchronous.Examples.Elementary.BooleanSignals.Tick
           counter = if startOutput then 0 else previous(counter) + 1;
         end if;
 
-        y = startOutput and (counter < widthTicks)
+        y = startOutput and (counter < widthTicks);
         annotation (
           Icon(coordinateSystem(
             preserveAspectRatio=true,
