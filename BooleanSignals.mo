@@ -1308,6 +1308,692 @@ y is set to parameter y_start.
 
   end NonPeriodic;
 
+  package TimeBasedSources
+    "Package of signal source blocks generating clocked simulation time based Boolean signals"
+     extends Modelica.Icons.SourcesPackage;
+    block Step "Generate step signal of type Boolean"
+      extends BooleanSignals.Interfaces.PartialClockedSO;
+      parameter Modelica.SIunits.Time startTime=0 "Time instant of step start";
+      parameter Boolean startValue = false "Output before startTime";
+    protected
+      Modelica.SIunits.Time simTime;
+    equation
+      simTime = sample(time);
+      y = if simTime >= startTime then not startValue else startValue;
+      annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
+                -100},{100,100}}), graphics={
+            Text(
+              extent={{-150,-150},{150,-110}},
+              lineColor={0,0,0},
+              textString="startTime=%startTime"),
+            Polygon(
+              points={{-80,88},{-88,66},{-72,66},{-80,88}},
+              lineColor={255,0,255},
+              fillColor={255,0,255},
+              fillPattern=FillPattern.Solid),
+            Line(points={{-80,66},{-80,-82}}, color={255,0,255}),
+            Line(points={{-90,-70},{72,-70}}, color={255,0,255}),
+            Polygon(
+              points={{90,-70},{68,-62},{68,-78},{90,-70}},
+              lineColor={255,0,255},
+              fillColor={255,0,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{71,7},{85,-7}},
+              lineColor=DynamicSelect({235,235,235}, if y > 0.5 then {0,255,0} else
+                        {235,235,235}),
+              fillColor=DynamicSelect({235,235,235}, if y > 0.5 then {0,255,0} else
+                        {235,235,235}),
+              fillPattern=FillPattern.Solid),
+                                           Line(points={{-80,-70},{0,-70},{0,50},{80,
+                  50}},   color={0,0,0},
+              pattern=LinePattern.Dot),
+            Ellipse(
+              extent={{-86,-64},{-74,-76}},
+              lineColor={255,0,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{-6,56},{6,44}},
+              lineColor={255,0,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{74,56},{86,44}},
+              lineColor={255,0,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{-46,-64},{-34,-76}},
+              lineColor={255,0,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{34,56},{46,44}},
+              lineColor={255,0,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid)}),
+                              Diagram(coordinateSystem(preserveAspectRatio=true,
+              extent={{-100,-100},{100,100}}), graphics={
+            Polygon(
+              points={{-80,92},{-86,70},{-74,70},{-80,92}},
+              lineColor={95,95,95},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid),
+            Line(points={{-80,70},{-80,-80}}, color={95,95,95}),
+            Line(points={{-92,-70},{68,-70}}, color={95,95,95}),
+            Polygon(
+              points={{90,-70},{68,-64},{68,-76},{90,-70}},
+              lineColor={95,95,95},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid),
+            Text(
+              extent={{54,-80},{106,-92}},
+              lineColor={0,0,0},
+              textString="time"),
+            Text(
+              extent={{-74,92},{-56,74}},
+              lineColor={0,0,0},
+              textString="y"),
+          Line(
+              points={{-80,-70},{0,-70},{0,50},{80,50}},
+              color={255,0,255},
+              thickness=0.5,
+              pattern=LinePattern.Dot),
+          Text(
+            extent={{-15,-80},{20,-88}},
+            lineColor={0,0,0},
+            textString="startTime"),
+          Polygon(
+            points={{-8,50},{-90,50},{-8,50}},
+            lineColor={95,95,95},
+            fillColor={95,95,95},
+            fillPattern=FillPattern.Solid),
+          Text(
+            extent={{-76,62},{-32,48}},
+            lineColor={0,0,0},
+            textString="not startValue"),
+          Text(
+            extent={{-78,-52},{-46,-66}},
+            lineColor={0,0,0},
+            textString="startValue"),
+            Ellipse(
+              extent={{-86,-64},{-74,-76}},
+              lineColor={255,0,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{-6,56},{6,44}},
+              lineColor={255,0,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{-46,-64},{-34,-76}},
+              lineColor={255,0,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{74,56},{86,44}},
+              lineColor={255,0,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{34,56},{46,44}},
+              lineColor={255,0,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid)}),
+        Documentation(info="<html>
+<p>The block is similar to the block in <a href=\"modelica://Modelica.Blocks.Sources.BooleanStep\">Modelica.Blocks.Sources.BooleanStep</a>, 
+but adapted to work in clocked partitions (by internal sampling of the continuous <b>time</b> variable).</p>
+<p>
+The Boolean output y is a step signal:
+</p>
+
+<p>
+<img src=\"modelica://Modelica/Resources/Images/Blocks/Sources/BooleanStep.png\">
+</p>
+
+<h4>Example</h4>
+<p>
+See model <a href=\"Modelica_Synchronous.Examples.Elementary.BooleanSignals.TimeBasedStep\">Modelica_Synchronous.Examples.Elementary.BooleanSignals.TimeBasedStep</a>.
+<br>
+</p>
+</html>"));
+    end Step;
+
+      block Pulse "Generate pulse signal of type Boolean"
+        extends BooleanSignals.Interfaces.PartialClockedSO;
+        parameter Real width(
+          final min=Modelica.Constants.small,
+          final max=100) = 50 "Width of pulse in % of period";
+        parameter Modelica.SIunits.Time period(final min=Modelica.Constants.small,start=1)
+        "Time for one period";
+        parameter Modelica.SIunits.Time startTime=0
+        "Time instant of first pulse";
+
+    protected
+        Modelica.SIunits.Time simTime;
+        parameter Modelica.SIunits.Time Twidth=period*width/100
+        "width of one pulse"                                              annotation(HideResult=true);
+
+        Modelica.SIunits.Time next(start=startTime, fixed=true)
+        "next = startTime + n*period, for smallest n such that next>simTime";
+      equation
+          simTime = sample(time);
+
+          /* I'm not happy with this logic. Too difficult to understand. Possible to improve it? */
+          next = if (simTime >= previous(next)) and (previous(next) < simTime + period) then previous(next) + period else previous(next);
+          y = simTime >= previous(next) or simTime <= next - period + Twidth;
+        annotation (
+          Icon(coordinateSystem(
+            preserveAspectRatio=true,
+            extent={{-100,-100},{100,100}},
+            grid={1,1}), graphics={Text(
+              extent={{-150,-140},{150,-110}},
+              lineColor={0,0,0},
+              textString="%period"),
+              Polygon(
+                points={{-80,88},{-88,66},{-72,66},{-80,88}},
+                lineColor={255,0,255},
+                fillColor={255,0,255},
+                fillPattern=FillPattern.Solid),
+              Line(points={{-80,66},{-80,-82}}, color={255,0,255}),
+              Line(points={{-90,-70},{72,-70}}, color={255,0,255}),
+              Polygon(
+                points={{90,-70},{68,-62},{68,-78},{90,-70}},
+                lineColor={255,0,255},
+                fillColor={255,0,255},
+                fillPattern=FillPattern.Solid),
+              Ellipse(
+                extent={{71,7},{85,-7}},
+                lineColor=DynamicSelect({235,235,235}, if y > 0.5 then {0,255,0} else
+                          {235,235,235}),
+                fillColor=DynamicSelect({235,235,235}, if y > 0.5 then {0,255,0} else
+                          {235,235,235}),
+                fillPattern=FillPattern.Solid),
+                                     Line(points={{-80,-70},{-40,-70},{-40,44},{0,44},
+                    {0,-70},{40,-70},{40,44},{79,44}},   color={0,0,0},
+              pattern=LinePattern.Dot),
+              Ellipse(
+                extent={{-86,-64},{-74,-76}},
+                lineColor={255,0,255},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid),
+              Ellipse(
+                extent={{-45,50},{-33,38}},
+                lineColor={255,0,255},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid),
+              Ellipse(
+                extent={{-6,-64},{6,-76}},
+                lineColor={255,0,255},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid),
+              Ellipse(
+                extent={{34,49},{46,37}},
+                lineColor={255,0,255},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid)}),
+          Diagram(coordinateSystem(
+            preserveAspectRatio=true,
+            extent={{-100,-100},{100,100}},
+            grid={1,1}), graphics={
+            Text(
+              extent={{-60,-74},{-19,-82}},
+              lineColor={0,0,0},
+              textString="startTime"),
+            Line(
+              points={{-78,-70},{-40,-70},{-40,20},{20,20},{20,-70},{50,-70},{
+                  50,20},{100,20}},
+              color={255,0,255},
+              thickness=0.5,
+              pattern=LinePattern.Dot),
+            Line(points={{-40,61},{-40,21}}, color={95,95,95}),
+            Line(points={{20,44},{20,20}}, color={95,95,95}),
+            Line(points={{50,58},{50,20}}, color={95,95,95}),
+            Line(points={{-40,53},{50,53}}, color={95,95,95}),
+            Line(points={{-40,35},{20,35}}, color={95,95,95}),
+            Text(
+              extent={{-18,65},{28,55}},
+              lineColor={0,0,0},
+              textString="period"),
+            Text(
+              extent={{-33,47},{14,37}},
+              lineColor={0,0,0},
+              textString="width"),
+            Line(points={{-70,20},{-41,20}}, color={95,95,95}),
+            Polygon(
+              points={{-40,35},{-31,37},{-31,33},{-40,35}},
+              lineColor={95,95,95},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid),
+            Polygon(
+              points={{20,35},{12,37},{12,33},{20,35}},
+              lineColor={95,95,95},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid),
+            Polygon(
+              points={{-40,53},{-31,55},{-31,51},{-40,53}},
+              lineColor={95,95,95},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid),
+            Polygon(
+              points={{50,53},{42,55},{42,51},{50,53}},
+              lineColor={95,95,95},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid),
+            Text(
+              extent={{-95,26},{-66,17}},
+              lineColor={0,0,0},
+              textString="true"),
+            Text(
+              extent={{-96,-60},{-75,-69}},
+              lineColor={0,0,0},
+              textString="false"),
+              Ellipse(
+                extent={{-46,26},{-34,14}},
+                lineColor={255,0,255},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid),
+              Ellipse(
+                extent={{-16,26},{-4,14}},
+                lineColor={255,0,255},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid),
+              Ellipse(
+                extent={{14,-63},{26,-75}},
+                lineColor={255,0,255},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid),
+              Ellipse(
+                extent={{44,25},{56,13}},
+                lineColor={255,0,255},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid),
+              Ellipse(
+                extent={{74,26},{86,14}},
+                lineColor={255,0,255},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid),
+              Ellipse(
+                extent={{-76,-64},{-64,-76}},
+                lineColor={255,0,255},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid)}),
+          Documentation(info="<html>
+<p>The block is similar to the block in <a href=\"modelica://Modelica.Blocks.Sources.BooleanPulse\">Modelica.Blocks.Sources.BooleanPulse</a>, 
+but adapted to work in clocked partitions (by internal sampling of the continuous <b>time</b> variable).
+</p>
+<p>
+The Boolean output y is a pulse signal:
+</p>
+
+<p>
+<img src=\"modelica://Modelica/Resources/Images/Blocks/Sources/Pulse.png\">
+</p>
+<h4>Example</h4>
+<p>
+See model <a href=\"Modelica_Synchronous.Examples.Elementary.BooleanSignals.TimeBasedPulse\">Modelica_Synchronous.Examples.Elementary.BooleanSignals.TimeBasedPulse</a>.
+<br>
+</p>
+</html>"));
+      end Pulse;
+    annotation (Documentation(info="<html>
+<p>
+This package provides <b>source</b> components akin to the blocks provided in 
+<a href=\"Modelica.Blocks.Sources\">Modelica.Blocks.Sources</a>, but with the difference
+that they provide a <b>clocked</b> output signal.
+</p>
+<p>
+As an effect it is not necessary to use an intermediate Sample block if the output signal
+is connected to a system that requires a clocked input signal. Therefore, it it can be slightly more convenient
+to use the blocks provided in this package than to use the blocks offered by <a href=\"Modelica.Blocks.Sources\">Modelica.Blocks.Sources</a>
+(since one does not need to add an additional Sample block for the transition from a continuous time signal to a clocked signal).
+</p>
+</html>"));
+  end TimeBasedSources;
+
+  package TickBasedSources
+    "Package of signal source blocks generating clocked tick/sample based Boolean signals"
+     extends Modelica.Icons.SourcesPackage;
+    block Step "Generate step signal of type Boolean"
+      extends BooleanSignals.Interfaces.PartialClockedSO;
+
+      parameter Integer startTick = 0
+        "Output y = startValue for clock tick < startTick";
+      parameter Boolean startValue = false "Output before startTick";
+
+    protected
+      Integer counter(start=0);
+    equation
+      // stop counter after counter = startTick to avoid integer overflow for long running simulations
+      counter = if previous(counter) < startTick then previous(counter) + 1 else previous(counter);
+      y = if counter >= startTick then not startValue else startValue;
+      annotation (Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,
+                -100},{100,100}}), graphics={
+            Text(
+              extent={{-150,-150},{150,-110}},
+              lineColor={0,0,0},
+              textString="startTick=%startTick"),
+            Polygon(
+              points={{-80,88},{-88,66},{-72,66},{-80,88}},
+              lineColor={255,0,255},
+              fillColor={255,0,255},
+              fillPattern=FillPattern.Solid),
+            Line(points={{-80,66},{-80,-82}}, color={255,0,255}),
+            Line(points={{-90,-70},{72,-70}}, color={255,0,255}),
+            Polygon(
+              points={{90,-70},{68,-62},{68,-78},{90,-70}},
+              lineColor={255,0,255},
+              fillColor={255,0,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{71,7},{85,-7}},
+              lineColor=DynamicSelect({235,235,235}, if y > 0.5 then {0,255,0} else
+                        {235,235,235}),
+              fillColor=DynamicSelect({235,235,235}, if y > 0.5 then {0,255,0} else
+                        {235,235,235}),
+              fillPattern=FillPattern.Solid),
+                                           Line(points={{-80,-70},{0,-70},{0,50},{80,
+                  50}},   color={0,0,0},
+              pattern=LinePattern.Dot),
+            Ellipse(
+              extent={{-86,-64},{-74,-76}},
+              lineColor={255,0,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{-6,56},{6,44}},
+              lineColor={255,0,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{74,56},{86,44}},
+              lineColor={255,0,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{-46,-64},{-34,-76}},
+              lineColor={255,0,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{34,56},{46,44}},
+              lineColor={255,0,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid)}),
+                              Diagram(coordinateSystem(preserveAspectRatio=true,
+              extent={{-100,-100},{100,100}}), graphics={
+            Polygon(
+              points={{-80,92},{-86,70},{-74,70},{-80,92}},
+              lineColor={95,95,95},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid),
+            Line(points={{-80,70},{-80,-80}}, color={95,95,95}),
+            Line(points={{-92,-70},{68,-70}}, color={95,95,95}),
+            Polygon(
+              points={{90,-70},{68,-64},{68,-76},{90,-70}},
+              lineColor={95,95,95},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid),
+            Text(
+              extent={{54,-80},{106,-92}},
+              lineColor={0,0,0},
+              textString="tick"),
+            Text(
+              extent={{-74,92},{-56,74}},
+              lineColor={0,0,0},
+              textString="y"),
+          Line(
+              points={{-80,-70},{0,-70},{0,50},{80,50}},
+              color={255,0,255},
+              thickness=0.5,
+              pattern=LinePattern.Dot),
+          Polygon(
+            points={{-8,50},{-90,50},{-8,50}},
+            lineColor={95,95,95},
+            fillColor={95,95,95},
+            fillPattern=FillPattern.Solid),
+          Text(
+            extent={{-76,62},{-32,48}},
+            lineColor={0,0,0},
+            textString="not startValue"),
+          Text(
+            extent={{-78,-52},{-46,-66}},
+            lineColor={0,0,0},
+            textString="startValue"),
+            Ellipse(
+              extent={{-86,-64},{-74,-76}},
+              lineColor={255,0,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{-6,56},{6,44}},
+              lineColor={255,0,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{-46,-64},{-34,-76}},
+              lineColor={255,0,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{74,56},{86,44}},
+              lineColor={255,0,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Ellipse(
+              extent={{34,56},{46,44}},
+              lineColor={255,0,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Text(
+              extent={{-21,-76},{26,-88}},
+              lineColor={0,0,0},
+              textString="startTick")}),
+        Documentation(info="<html>
+<p>
+The Boolean output y is a step signal. The signal is defined in terms of clock ticks instead of simulation time:
+</p>
+
+<p>
+<img src=\"modelica://Modelica_Synchronous/Resources/Images/BooleanSignals/TickBasedSources_Step.png\">
+</p>
+
+<h4>Example</h4>
+<p>
+See model <a href=\"Modelica_Synchronous.Examples.Elementary.BooleanSignals.TickBasedStep\">Modelica_Synchronous.Examples.Elementary.BooleanSignals.TickBasedStep</a>.
+</p>
+</html>"));
+    end Step;
+
+      block Pulse "Generate pulse signal of type Boolean"
+        extends BooleanSignals.Interfaces.PartialClockedSO;
+        parameter Real widthTicks(min=1,max=periodTicks) = 1
+        "Width of one pulse in clock ticks";
+        parameter Modelica.SIunits.Time periodTicks(min=1,start=1) = 2
+        "Number of clock ticks for one period";
+        parameter Integer startTick(min=1)=1
+        "Clock tick at which the first pulse starts";
+
+    protected
+        Integer counter(start=0);
+        Boolean startOutput(start=false)
+        "Flag whether counter >= startTick reached once";
+      equation
+        // restart counter after reaching threshold to avoid integer overflow for long running simulations
+        if previous(startOutput) then
+            counter = if previous(counter) == (periodTicks-1) then 0 else previous(counter) + 1;
+            startOutput = previous(startOutput);
+        else
+          startOutput = previous(counter) >= (startTick-1);
+          counter = if startOutput then 0 else previous(counter) + 1;
+        end if;
+
+        y = startOutput and (counter < widthTicks)
+        annotation (
+          Icon(coordinateSystem(
+            preserveAspectRatio=true,
+            extent={{-100,-100},{100,100}},
+            grid={1,1}), graphics={Text(
+              extent={{-150,-140},{150,-110}},
+              lineColor={0,0,0},
+                textString="periodTicks=%periodTicks"),
+              Polygon(
+                points={{-80,88},{-88,66},{-72,66},{-80,88}},
+                lineColor={255,0,255},
+                fillColor={255,0,255},
+                fillPattern=FillPattern.Solid),
+              Line(points={{-80,66},{-80,-82}}, color={255,0,255}),
+              Line(points={{-90,-70},{72,-70}}, color={255,0,255}),
+              Polygon(
+                points={{90,-70},{68,-62},{68,-78},{90,-70}},
+                lineColor={255,0,255},
+                fillColor={255,0,255},
+                fillPattern=FillPattern.Solid),
+              Ellipse(
+                extent={{71,7},{85,-7}},
+                lineColor=DynamicSelect({235,235,235}, if y > 0.5 then {0,255,0} else
+                          {235,235,235}),
+                fillColor=DynamicSelect({235,235,235}, if y > 0.5 then {0,255,0} else
+                          {235,235,235}),
+                fillPattern=FillPattern.Solid),
+                Line(points={{-80,-70},{-40,-70},{-40,44},{0,44},
+                    {0,-70},{40,-70},{40,44},{79,44}},   color={0,0,0},
+                pattern=LinePattern.Dot),
+              Ellipse(
+                extent={{-86,-64},{-74,-76}},
+                lineColor={255,0,255},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid),
+              Ellipse(
+                extent={{-46,49},{-34,37}},
+                lineColor={255,0,255},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid),
+              Ellipse(
+                extent={{-6,-64},{6,-76}},
+                lineColor={255,0,255},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid),
+              Ellipse(
+                extent={{34,49},{46,37}},
+                lineColor={255,0,255},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid)}),
+      Diagram(coordinateSystem(
+            preserveAspectRatio=true,
+            extent={{-100,-100},{100,100}},
+            grid={1,1}), graphics={
+            Text(
+              extent={{-60,-74},{-19,-82}},
+              lineColor={0,0,0},
+                textString="startTick"),
+            Line(
+                points={{-78,-70},{-40,-70},{-40,20},{20,20},{20,-70},{50,-70},{50,20},
+                    {100,20}},
+                color={255,0,255},
+                thickness=0.5,
+                pattern=LinePattern.Dot),
+            Line(points={{-40,68},{-40,20}}, color={95,95,95}),
+            Line(points={{-10,40},{-10,20}},
+                                           color={95,95,95}),
+            Line(points={{50,65},{50,27}}, color={95,95,95}),
+            Line(points={{-40,60},{50,60}}, color={95,95,95}),
+            Line(points={{-40,35},{-10,35}},color={95,95,95}),
+            Text(
+              extent={{-18,72},{28,62}},
+              lineColor={0,0,0},
+                textString="periodTicks"),
+            Text(
+              extent={{-37,51},{10,41}},
+              lineColor={0,0,0},
+                textString="widthTicks"),
+            Line(points={{-70,20},{-41,20}}, color={95,95,95}),
+            Polygon(
+              points={{-40,35},{-31,37},{-31,33},{-40,35}},
+              lineColor={95,95,95},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid),
+            Polygon(
+              points={{-10,35},{-18,37},{-18,33},{-10,35}},
+              lineColor={95,95,95},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid),
+            Polygon(
+              points={{-40,60},{-31,62},{-31,58},{-40,60}},
+              lineColor={95,95,95},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid),
+            Polygon(
+              points={{50,60},{42,62},{42,58},{50,60}},
+              lineColor={95,95,95},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid),
+            Text(
+              extent={{-95,26},{-66,17}},
+              lineColor={0,0,0},
+              textString="true"),
+            Text(
+              extent={{-96,-60},{-75,-69}},
+              lineColor={0,0,0},
+              textString="false"),
+              Ellipse(
+                extent={{-46,26},{-34,14}},
+                lineColor={255,0,255},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid),
+              Ellipse(
+                extent={{-16,26},{-4,14}},
+                lineColor={255,0,255},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid),
+              Ellipse(
+                extent={{14,-63},{26,-75}},
+                lineColor={255,0,255},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid),
+              Ellipse(
+                extent={{44,25},{56,13}},
+                lineColor={255,0,255},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid),
+              Ellipse(
+                extent={{74,26},{86,14}},
+                lineColor={255,0,255},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid),
+              Ellipse(
+                extent={{-76,-64},{-64,-76}},
+                lineColor={255,0,255},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid)}),
+          Documentation(info="<html>
+<p>The block is similar to the block in <a href=\"modelica://Modelica.Blocks.Sources.BooleanPulse\">Modelica.Blocks.Sources.BooleanPulse</a>, 
+but adapted to work in clocked partitions (by internal sampling of the continuous <b>time</b> variable).
+</p>
+<p>
+The Boolean output y is a pulse signal:
+</p>
+
+<p>
+<img src=\"modelica://Modelica_Synchronous/Resources/Images/BooleanSignals/TickBasedSources_Pulse.png\">
+</p>
+<h4>Example</h4>
+<p>
+See model <a href=\"Modelica_Synchronous.Examples.Elementary.BooleanSignals.TickBasedPulse\">Modelica_Synchronous.Examples.Elementary.BooleanSignals.TickBasedPulse</a>.
+</p>
+</html>"));
+      end Pulse;
+    annotation (Documentation(info="<html>
+<p>This package provides <b>source</b> components akin to the blocks provided in <a href=\"Modelica.Blocks.Sources\">Modelica.Blocks.Sources</a>, but with the difference that they provide </p>
+<p><ol>
+<li>a <b>clocked</b> output signal and</li>
+<li>are parametrized in terms of <b>clock ticks</b> rather than simulation time.</li>
+</ol></p>
+</html>"));
+  end TickBasedSources;
+
   package Interfaces
     "Library of partial blocks for components with clocked Boolean signals"
     extends Modelica.Icons.InterfacesPackage;
@@ -1386,6 +2072,20 @@ y is set to parameter y_start.
       annotation (Icon(graphics), Diagram(coordinateSystem(preserveAspectRatio=
                 false, extent={{-100,-100},{100,100}}), graphics));
     end PartialClockedSISO;
+
+    partial block PartialClockedSO
+      "Block with clocked single output Boolean signals"
+      extends Modelica_Synchronous.ClockSignals.Interfaces.ClockedBlockIcon;
+
+      Modelica.Blocks.Interfaces.BooleanOutput
+                                            y
+        "Connector of clocked, Real output signal"
+        annotation (Placement(transformation(extent={{100,-10},{120,10}},
+            rotation=0)));
+
+      annotation (Icon(graphics), Diagram(coordinateSystem(preserveAspectRatio=false,
+                       extent={{-100,-100},{100,100}}), graphics));
+    end PartialClockedSO;
     annotation (Documentation(info="<html>
 <p>
 This package contains partial blocks that are used to

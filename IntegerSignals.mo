@@ -1443,6 +1443,19 @@ See model <a href=\"Modelica_Synchronous.Examples.Elementary.IntegerSignals.Time
 </html>"));
     end Step;
 
+    annotation (Documentation(info="<html>
+<p>
+This package provides <b>source</b> components akin to the blocks provided in 
+<a href=\"Modelica.Blocks.Sources\">Modelica.Blocks.Sources</a>, but with the difference
+that they provide a <b>clocked</b> output signal.
+</p>
+<p>
+As an effect it is not necessary to use an intermediate Sample block if the output signal
+is connected to a system that requires a clocked input signal. Therefore, it it can be slightly more convenient
+to use the blocks provided in this package than to use the blocks offered by <a href=\"Modelica.Blocks.Sources\">Modelica.Blocks.Sources</a>
+(since one does not need to add an additional Sample block for the transition from a continuous time signal to a clocked signal).
+</p>
+</html>"));
   end TimeBasedSources;
 
   package TickBasedSources
@@ -1452,10 +1465,10 @@ See model <a href=\"Modelica_Synchronous.Examples.Elementary.IntegerSignals.Time
         extends Interfaces.PartialClockedSO;
       parameter Integer height = 1 "Height of step";
       parameter Integer offset = 0 "Offset of output signal y";
-      parameter Integer startTick = 0
+      parameter Integer startTick(min=1) = 1
         "Output y = offset for clock tick < startTick";
     protected
-      Integer counter(start=-1);
+      Integer counter(start=0);
     equation
       // stop counter after counter = startTick to avoid integer overflow for long running simulations
       counter = if previous(counter) < startTick then previous(counter) + 1 else previous(counter);
@@ -1613,6 +1626,13 @@ See model <a href=\"Modelica_Synchronous.Examples.Elementary.IntegerSignals.Tick
 </p>
 </html>"));
     end Step;
+    annotation (Documentation(info="<html>
+<p>This package provides <b>source</b> components akin to the blocks provided in <a href=\"Modelica.Blocks.Sources\">Modelica.Blocks.Sources</a>, but with the difference that they provide </p>
+<p><ol>
+<li>a <b>clocked</b> output signal and</li>
+<li>are parametrized in terms of <b>clock ticks</b> rather than simulation time.</li>
+</ol></p>
+</html>"));
   end TickBasedSources;
 
   package Interfaces

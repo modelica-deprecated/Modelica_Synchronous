@@ -1,10 +1,7 @@
 within ;
 package Modelica_Synchronous "Modelica_Synchronous (version 0.91) - Basic synchronous input/output control blocks
 that are triggered by clocks"
-
-
 extends Modelica.Icons.Package;
-
 
 
 
@@ -15,10 +12,10 @@ extends Modelica.Icons.Package;
 
   annotation (preferredView="info",
   uses(Modelica(version="3.2.1")),
-    version="0.91",
-    versionBuild=4,
-    versionDate="2012-09-20",
-    dateModified = "2013-09-17 11:22:09Z",
+    version="0.92",
+    versionBuild=1,
+    versionDate="2013-09-19",
+    dateModified = "2013-09-19 18:16:00Z",
     revisionId="$Id::                                       $",
   Documentation(info="<html>
 <p>

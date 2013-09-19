@@ -1,7 +1,6 @@
 within Modelica_Synchronous;
 package WorkInProgress "Models that are under developmend and test models"
   package Incubate "Stuff that might be adapted and used at some future time"
-
     package TrueTime
       "Communication block and external C interface of TrueTime simulators."
     extends Modelica_Synchronous.WorkInProgress.Icons.PackageNotReady;
@@ -9,73 +8,56 @@ package WorkInProgress "Models that are under developmend and test models"
         "Implementation of TrueTime kernel and network simulators in external C-code"
         class Kernel "External C interface of kernel simulator"
         extends ExternalObject;
-
         encapsulated function constructor
             "Initialize simulated real-time kernel"
             import
               Modelica_Synchronous.WorkInProgress.Incubate.TrueTime.ExternalC.Kernel;
-
           input Integer policy "Scheduling policy";
           input Integer numberOfTasks "Number of tasks";
           output Kernel kernelHandle "Handle to kernel simulator object";
-
           external "C" kernelHandle = Kernel_Init(policy, numberOfTasks);
-
           annotation (Include="#include \"./Extras/C-Sources/TrueTime/kernel.c\"");
         end constructor;
 
         encapsulated function destructor "Terminate simulated real-time kernel"
             import
               Modelica_Synchronous.WorkInProgress.Incubate.TrueTime.ExternalC.Kernel;
-
           input Kernel kernelHandle "Handle to kernel simulator object";
-
           external "C" Kernel_Terminate(kernelHandle);
-
         end destructor;
 
           encapsulated function runKernel "Run the kernel simulator instance"
             import
               Modelica_Synchronous.WorkInProgress.Incubate.TrueTime.ExternalC.Kernel;
-
             input Kernel kernelHandle "Handle to kernel simulator object";
             input Real currTime "Current time";
-
             external "C" runKernel(kernelHandle, currTime);
-
           end runKernel;
 
           encapsulated function getNextHitKernel
             "Get next event time for kernel simulator"
             import
               Modelica_Synchronous.WorkInProgress.Incubate.TrueTime.ExternalC.Kernel;
-
             input Kernel kernelHandle "Handle to kernel simulator object";
             input Real currTime "Current time";
             output Real nextT "Next event time";
-
             external "C" nextT = getNextHitKernel(kernelHandle, currTime);
-
           end getNextHitKernel;
 
           encapsulated function getSchedule "Get the real-time task schedule"
             import
               Modelica_Synchronous.WorkInProgress.Incubate.TrueTime.ExternalC.Kernel;
-
             input Kernel kernelHandle "Handle to kernel simulator object";
             input Integer numberOfTasks "Number of tasks";
             input Real currTime "Current time";
             output Real schedule[numberOfTasks] "Task schedule";
-
             external "C" getSchedule(kernelHandle, schedule, numberOfTasks);
-
           end getSchedule;
 
           encapsulated function createTask
             "Create a real-time kernel task (called during initialization)"
             import
               Modelica_Synchronous.WorkInProgress.Incubate.TrueTime.ExternalC.Kernel;
-
             input Kernel kernelHandle "Handle to kernel simulator object";
             input Integer taskID "Task ID";
             input String taskName "Task name";
@@ -84,25 +66,20 @@ package WorkInProgress "Models that are under developmend and test models"
             input Real deadline "Task (relative) deadline";
             input Real offset "Task offset";
             output Integer errNo "To indicate success";
-
             external "C" errNo = createTask(kernelHandle, taskID, taskName, period, priority, deadline, offset);
-
           end createTask;
 
           encapsulated function createJob
             "Create task instance for controller calculation"
             import
               Modelica_Synchronous.WorkInProgress.Incubate.TrueTime.ExternalC.Kernel;
-
             input Kernel kernelHandle "Handle to kernel simulator object";
             input String taskName "Task name";
             input Real executionTimeCalculate "Time to calculate outputs";
             input Real executionTimeUpdate "Time to update states";
             input Real currTime "Current time";
             output Integer errNo "To indicate success";
-
             external "C" errNo = createJob(kernelHandle, taskName, executionTimeCalculate, executionTimeUpdate, currTime);
-
           end createJob;
 
           encapsulated function createJobNw
@@ -111,7 +88,6 @@ package WorkInProgress "Models that are under developmend and test models"
               Modelica_Synchronous.WorkInProgress.Incubate.TrueTime.ExternalC.Kernel;
             import
               Modelica_Synchronous.WorkInProgress.Incubate.TrueTime.ExternalC.Network;
-
             input Kernel kernelHandle "Handle to kernel simulator object";
             input String taskName "Task name";
             input Real executionTimeCalculate "Time to calculate outputs";
@@ -122,115 +98,89 @@ package WorkInProgress "Models that are under developmend and test models"
             input Integer framePriority "Frame priority";
             input Real currTime "Current time";
             output Integer errNo "To indicate success";
-
             external "C" errNo = createJobNw(kernelHandle, taskName, executionTimeCalculate, executionTimeUpdate,
                                             networkHandle, frameDataSize, frameID, framePriority, currTime);
-
           end createJobNw;
 
         encapsulated function setControl "Set computed control signal for task"
             import
               Modelica_Synchronous.WorkInProgress.Incubate.TrueTime.ExternalC.Kernel;
-
             input Kernel kernelHandle "Handle to kernel simulator object";
             input String taskName "Task name";
             input Real u "Control signal";
             input Real currTime "Current time";
             output Integer errNo "To indicate success";
-
             external "C" errNo = setControl(kernelHandle, taskName, u, currTime);
-
         end setControl;
 
         encapsulated function analogOut "Output calculated control signal"
             import
               Modelica_Synchronous.WorkInProgress.Incubate.TrueTime.ExternalC.Kernel;
-
             input Kernel kernelHandle "Handle to kernel simulator object";
             input String taskName "Task name";
             input Real currTime "Current time";
             input Real u "Dummy input for correct incidence";
             output Real data "Output data";
-
             external "C" data = analogOut(kernelHandle, taskName, currTime);
-
         end analogOut;
-
         end Kernel;
 
         class Network "External C interface of network simulator"
         extends ExternalObject;
-
         encapsulated function constructor "Initialize simulated network bus"
             import
               Modelica_Synchronous.WorkInProgress.Incubate.TrueTime.ExternalC.Network;
-
           input Real params[:] "General parameter vector";
           input Real schedule[:] "Schedule for TDMA";
           input Real systemmatrix[:,:] "System matrix for TTCAN";
           input Real statschedule[:] "Static schedule for FlexRay";
           input Real dymschedule[:] "Dynamic schedule for FlexRay";
           output Network networkHandle "Handle to network simulator object";
-
           external "C" networkHandle = Network_Init(params, size(params,1), schedule, size(schedule,1),
                                              systemmatrix, size(systemmatrix,1), size(systemmatrix,2),
                                              statschedule, size(statschedule,1),
                                              dymschedule, size(dymschedule,1));
-
           annotation (Include="#include \"./Extras/C-Sources/TrueTime/network.c\"");
         end constructor;
 
         encapsulated function destructor "Terminate simulated network bus"
             import
               Modelica_Synchronous.WorkInProgress.Incubate.TrueTime.ExternalC.Network;
-
           input Network networkHandle "Handle to network simulator object";
-
           external "C" Network_Terminate(networkHandle);
-
         end destructor;
 
           encapsulated function runNetwork "Run the network simulator instance"
             import
               Modelica_Synchronous.WorkInProgress.Incubate.TrueTime.ExternalC.Network;
-
             input Network networkHandle "Handle to network simulator object";
             input Real currTime "Current time";
-
             external "C" runNetwork(networkHandle, currTime);
-
           end runNetwork;
 
           encapsulated function getNextHitNetwork
             "Get next event time for network simulator"
             import
               Modelica_Synchronous.WorkInProgress.Incubate.TrueTime.ExternalC.Network;
-
             input Network networkHandle "Handle to network simulator object";
             input Real currTime "Current time";
             output Real nextT "Next event time";
-
             external "C" nextT = getNextHitNetwork(networkHandle, currTime);
-
           end getNextHitNetwork;
 
           encapsulated function getNwSchedule "Get the network schedule"
             import
               Modelica_Synchronous.WorkInProgress.Incubate.TrueTime.ExternalC.Network;
-
             input Network networkHandle "Handle to network simulator object";
             input Integer numberOfFrames "Number of frames";
             input Real currTime "Current time";
             output Real transmissionSchedule[numberOfFrames];
-
             external "C" getNwSchedule(networkHandle, transmissionSchedule, numberOfFrames);
-
           end getNwSchedule;
 
           encapsulated function transmitFrame "Transmit a network frame"
             import
               Modelica_Synchronous.WorkInProgress.Incubate.TrueTime.ExternalC.Network;
-
             input Network networkHandle "Handle to network simulator object";
             input Integer frameID "Frame identifier";
             input Real data "Frame data";
@@ -238,25 +188,19 @@ package WorkInProgress "Models that are under developmend and test models"
             input Integer framePriority "Frame priority";
             input Real currTime "Current time";
             output Integer errNo "To indicate success";
-
             external "C" errNo = transmitFrame(networkHandle, frameID, frameID, data, frameSize, framePriority, currTime);
-
           end transmitFrame;
 
         encapsulated function receiveFrame "Receive a network frame"
             import
               Modelica_Synchronous.WorkInProgress.Incubate.TrueTime.ExternalC.Network;
-
             input Network networkHandle "Handle to network simulator object";
             input Integer frameID "Frame identifier";
             input Real currTime "Current time";
             input Real u "Dummy input for correct incidence";
             output Real data "Received data";
-
             external "C" data = receiveFrame(networkHandle, frameID, currTime);
-
         end receiveFrame;
-
         end Network;
       end ExternalC;
 
@@ -266,7 +210,6 @@ package WorkInProgress "Models that are under developmend and test models"
           prioDM "Deadline-monotonic scheduling",
           prioEDF "Earliest-deadline-first scheduling")
         "Enumeration to define scheduling policies";
-
       type MacPolicyEnum = enumeration(
           Ethernet,
           CAN,
@@ -275,17 +218,14 @@ package WorkInProgress "Models that are under developmend and test models"
           FlexRay) "Enumeration to define Media Access Control policies";
       block ControllerTask "Truetime simulation: Controller task"
       extends Modelica_Synchronous.WorkInProgress.Icons.CommunicationIcon;
-
         parameter String taskName = "DefaultTask" "Task name" annotation (Dialog(group="Controller task parameters"));
         parameter Real executionTimeCalculate = 0.002
           "Execution time to calculate outputs"                                             annotation (Dialog(group="Controller task parameters"));
         parameter Real executionTimeUpdate = -1
           "Execution time to update states"                                       annotation (Dialog(group="Controller task parameters"));
-
         parameter
           Modelica_Synchronous.WorkInProgress.Incubate.TrueTime.ExternalC.Kernel
           kernelHandle "Handle to kernel simulator object" annotation(Dialog(group="Kernel simulator"));
-
         Modelica.Blocks.Interfaces.RealInput u
           annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
         Modelica.Blocks.Interfaces.RealOutput y
@@ -295,11 +235,9 @@ package WorkInProgress "Models that are under developmend and test models"
               extent={{-20,-20},{20,20}},
               rotation=90,
               origin={0,-120})));
-
       protected
         Real err;
         Real set_ctrl;
-
       equation
         when trigger then
           err =
@@ -322,7 +260,6 @@ package WorkInProgress "Models that are under developmend and test models"
                   taskName,
                   time,
                   u);
-
           annotation (
           Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                   -100},{100,100}}), graphics),
@@ -407,7 +344,6 @@ package WorkInProgress "Models that are under developmend and test models"
 
       block TransmitReceive "TrueTime simulation: Transmit/Receive"
       extends Modelica_Synchronous.WorkInProgress.Icons.CommunicationIcon;
-
         parameter Integer frameDataSize = 32 "Frame size (bits)" annotation (Dialog(group="Transmission parameters"));
         parameter Integer frameID = 1 "Frame ID (1,...,numberOfFrames)" annotation (Dialog(group="Transmission parameters"));
         parameter Integer framePriority = frameID
@@ -415,7 +351,6 @@ package WorkInProgress "Models that are under developmend and test models"
         parameter
           Modelica_Synchronous.WorkInProgress.Incubate.TrueTime.ExternalC.Network
           networkHandle "Handle to network simulator object" annotation(Dialog(group="Network simulator"));
-
         Modelica.Blocks.Interfaces.RealInput u
           annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
         Modelica.Blocks.Interfaces.RealOutput y
@@ -425,7 +360,6 @@ package WorkInProgress "Models that are under developmend and test models"
               extent={{-20,-20},{20,20}},
               rotation=90,
               origin={0,-120})));
-
       protected
         Real err;
       equation
@@ -445,7 +379,6 @@ package WorkInProgress "Models that are under developmend and test models"
                   frameID,
                   time,
                   u);
-
       annotation (
           Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                   -100},{100,100}}), graphics),
@@ -501,17 +434,14 @@ package WorkInProgress "Models that are under developmend and test models"
       block ControllerNode
         "TrueTime simulation: Controller task with network interface"
       extends Modelica_Synchronous.WorkInProgress.Icons.CommunicationIcon;
-
         parameter String taskName = "DefaultTask" "Task name" annotation (Dialog(group="Controller task parameters"));
         parameter Real executionTimeCalculate = 0.002
           "Execution time to calculate outputs"                                             annotation (Dialog(group="Controller task parameters"));
         parameter Real executionTimeUpdate = -1
           "Execution time to update states"                                       annotation (Dialog(group="Controller task parameters"));
-
         parameter
           Modelica_Synchronous.WorkInProgress.Incubate.TrueTime.ExternalC.Kernel
           kernelHandle "Handle to kernel simulator object" annotation(Dialog(group="Kernel simulator"));
-
         parameter Integer frameDataSize = 32 "Frame size (bits)" annotation (Dialog(group="Transmission parameters"));
         parameter Integer frameID = 1 "Frame ID (1,...,numberOfFrames)" annotation (Dialog(group="Transmission parameters"));
         parameter Integer framePriority = frameID
@@ -519,7 +449,6 @@ package WorkInProgress "Models that are under developmend and test models"
         parameter
           Modelica_Synchronous.WorkInProgress.Incubate.TrueTime.ExternalC.Network
           networkHandle "Handle to network simulator object" annotation(Dialog(group="Network simulator"));
-
         Modelica.Blocks.Interfaces.RealInput u
           annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
         Modelica.Blocks.Interfaces.RealOutput y
@@ -529,11 +458,9 @@ package WorkInProgress "Models that are under developmend and test models"
               extent={{-20,-20},{20,20}},
               rotation=90,
               origin={0,-120})));
-
       protected
         Real err;
         Real set_ctrl;
-
       equation
         when trigger then
           err =
@@ -560,7 +487,6 @@ package WorkInProgress "Models that are under developmend and test models"
                   frameID,
                   time,
                   u);
-
       annotation (
           Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                   -100},{100,100}}), graphics),
@@ -656,7 +582,6 @@ package WorkInProgress "Models that are under developmend and test models"
                 smooth=Smooth.None,
                 pattern=LinePattern.Dot)}));
       end ControllerNode;
-
     end TrueTime;
 
     package IntegerSignals
@@ -666,7 +591,6 @@ package WorkInProgress "Models that are under developmend and test models"
             parameter Integer uMin= -uMax "Lower limits of input signals";
             parameter Boolean limitsAtInit = true
           "= false, if limits are ignored during initializiation (i.e., y=u)";
-
             Modelica.Blocks.Interfaces.IntegerInput u
           annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
             Modelica.Blocks.Interfaces.IntegerOutput y
@@ -752,7 +676,6 @@ as output.
                                                                                        annotation(Dialog(group="Computational delay in seconds = interval() * shiftCounter/resolution"));
         parameter Integer resolution(min=1) = 1
           "Time quantization resolution of sample interval" annotation(Dialog(group="Computational delay in seconds = interval() * shiftCounter/resolution"));
-
       protected
        Integer ubuf;
       equation
@@ -785,10 +708,8 @@ as output.
       block FractionalDelay
         "Delay clocked input signal for a fractional multiple of the sample period"
       extends Modelica_Synchronous.IntegerSignals.Interfaces.PartialClockedSISO;
-
         parameter Integer shift(min=0) = 0
           "Delay = interval() * shift/resolution";
-
         parameter Integer resolution(min=1) = 1
           "Time quantization resolution of sample interval";
         final parameter Integer n = div(shift,resolution);
@@ -798,12 +719,9 @@ as output.
         Boolean first(start=true) "Used to identify the first clock tick";
       equation
        first = false;
-
        u_buffer = if previous(first) then fill(u,n+1) else
          cat(1, {u}, previous(u_buffer[1:n]));
-
        y = shiftSample(u_buffer[n+1], shift, resolution);
-
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true,  extent={{-100,
                   -100},{100,100}}), graphics),
           Icon(graphics={
@@ -872,7 +790,6 @@ as output.
                                                                                        annotation(Dialog(group="Computational delay in seconds = interval() * shiftCounter/resolution"));
         parameter Integer resolution(min=1) = 1
           "Time quantization resolution of sample interval" annotation(Dialog(group="Computational delay in seconds = interval() * shiftCounter/resolution"));
-
       protected
        Boolean ubuf;
       equation
@@ -886,10 +803,8 @@ as output.
       block FractionalDelay
         "Delay clocked input signal for a fractional multiple of the sample period"
       extends Modelica_Synchronous.BooleanSignals.Interfaces.PartialClockedSISO;
-
         parameter Integer shift(min=0) = 0
           "Delay = interval() * shift/resolution";
-
         parameter Integer resolution(min=1) = 1
           "Time quantization resolution of sample interval";
         final parameter Integer n = div(shift,resolution);
@@ -899,12 +814,9 @@ as output.
         Boolean first(start=true) "Used to identify the first clock tick";
       equation
        first = false;
-
        u_buffer = if previous(first) then fill(u,n+1) else
          cat(1, {u}, previous(u_buffer[1:n]));
-
        y = shiftSample(u_buffer[n+1], shift, resolution);
-
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true,  extent={{-100,
                   -100},{100,100}}), graphics),
           Icon(graphics={
@@ -965,7 +877,6 @@ as output.
         parameter Modelica.SIunits.Time communicationDelayTime(min=0)=0
           "Time delay due to communication";
         /* Modelica 3.3 doesn't allow the following code since interval(..) has a non-parameter variability! */
-
       /* Statement as comment, in order that check does not produce an error
 protected
   parameter Integer shiftSampleParam[2] = realDelay2shiftSampleParameters(communicationDelayTime, interval(u));
@@ -974,7 +885,6 @@ equation
   */
       equation
         y = 0;
-
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true,  extent={{-100,
                   -100},{100,100}}), graphics));
       end CommunicationDelaySpecifiedInSeconds;
@@ -1001,13 +911,11 @@ equation
           number := substring(number,1, length(number) -1);
           index := findLast(number, "0");
         end while;
-
         // Compute fitting resolution and shiftCounter
         iDecPoint :=findLast(number, ".");
         resolution := length(number) - iDecPoint;
         shift := delayRateRatio * 10^resolution;
         shiftCounter := integer(floor(shift + 0.5));
-
         param := {shiftCounter, resolution};
       end realDelay2shiftSampleParameters;
     end RealSignals;
@@ -1047,7 +955,6 @@ equation
         u_pre = previous(u);
         y = previous(y) + k*( (1 + T/Ti + Td/T)*u - (1 + 2*Td/T)*u_pre + Td/T*previous(u_pre));
       end when;
-
       annotation (defaultComponentName="PI1",
            Icon(graphics={
             Polygon(
@@ -1153,7 +1060,6 @@ form of a PID controller by using the backward rectangular approximation (also c
         initType=Modelica_LinearSystems2.Controller.Types.InitWithGlobalDefault.NoInit,
         methodType=Modelica_LinearSystems2.Controller.Types.MethodWithGlobalDefault.ExplicitEuler,
         Nd=1) annotation (Placement(transformation(extent={{8,-60},{28,-40}})));
-
     equation
       connect(step.y, sample1.u) annotation (Line(
           points={{-61,10},{-9.2,10}},
@@ -1189,9 +1095,7 @@ form of a PID controller by using the backward rectangular approximation (also c
     block FIRbyWindow
       "FIR filter defined by filter order, cut-off frequency and window-type"
       import Modelica_Synchronous;
-
       extends Modelica_Synchronous.RealSignals.Interfaces.PartialClockedSISO;
-
       parameter
         Modelica_Synchronous.WorkInProgress.Incubate.Types.FIR_FilterType
                                                       filterType=
@@ -1204,7 +1108,6 @@ form of a PID controller by using the backward rectangular approximation (also c
         "Type of window";
       parameter Real beta=2.12 "Beta-Parameter for Kaiser-window"
           annotation(Dialog(enable = window == Modelica_Synchronous.Types.FIR_Window.Kaiser));
-
       final output Real a[order+1]=Modelica_Synchronous.WorkInProgress.Incubate.Internal.FIR_coefficients(
           filterType,
           order,
@@ -1212,10 +1115,8 @@ form of a PID controller by using the backward rectangular approximation (also c
           interval(u),
           window,
           beta);
-
       Modelica_Synchronous.RealSignals.Periodic.FIRbyCoefficients FIRbyCoefficients1(final a=a)
         annotation (Placement(transformation(extent={{-20,-10},{0,10}})));
-
     equation
       connect(FIRbyCoefficients1.u, u)
                                       annotation (Line(
@@ -1309,7 +1210,6 @@ this block computes the filter coefficients a[:] by design parameters
         input Real beta=2.12 "Beta-Parameter for Kaiser-window"
             annotation(Dialog(enable = window == Modelica_Synchronous.Types.Window.Kaiser));
         output Real a[order+1] "Filter coefficient vector";
-
       protected
         constant Real pi=Modelica.Constants.pi;
         Boolean isEven=mod(order,2)==0;
@@ -1317,7 +1217,6 @@ this block computes the filter coefficients a[:] by design parameters
         Integer i;
         Real w[order + 1];
         Real k;
-
       algorithm
         assert(filterType == FilterType.LowPass or filterType == FilterType.HighPass and isEven,
                "High pass FIR filters must have an even order");
@@ -1337,10 +1236,8 @@ this block computes the filter coefficients a[:] by design parameters
                       w[i]/(k*pi) else w[i]*(sin(k*pi) - sin(k*Wc))/(k*pi);
            end if;
         end for;
-
         // Scale coefficients, so that the sum is one
         a := a/sum(a);
-
         annotation (
           Documentation(info="<HTML>
 <p>
@@ -1370,7 +1267,6 @@ The beta parameter is only needed by the Kaiser window.
 
       function FIR_window
         "Calculation of n-point weighting window for FIR filter"
-
         import Window =
           Modelica_Synchronous.WorkInProgress.Incubate.Types.FIR_Window;
         input Integer na "Number of points of weighting window vector";
@@ -1404,7 +1300,6 @@ The beta parameter is only needed by the Kaiser window.
         else
           a := ones(na);
         end if;
-
         annotation (
           Documentation(info="<HTML>
 <p>
@@ -1432,14 +1327,12 @@ only needed by the Kaiser window. The types of windows are:
 
       function bessel0
         "Polynomial approximation of the zeroth order modified Bessel function"
-
         input Real x;
         output Real y;
       protected
         Real ax;
         Real a;
       algorithm
-
         ax := abs(x);
         if ax < 3.75 then
           a := (x/3.75)^2;
@@ -1475,7 +1368,6 @@ The function is used to calculate the Kaiser-window via
 </HTML>
 "));
       end bessel0;
-
       annotation (Documentation(info="<html>
 <p>
 This package contains functions that are usually not directly be utilized
@@ -1488,9 +1380,7 @@ by a user.
   end Incubate;
 
   package Icons
-
     block DoesNotTranslate
-
       annotation (Icon(graphics={                   Text(
               extent={{-100,100},{100,-100}},
               lineColor={255,0,0},
@@ -1500,7 +1390,6 @@ by a user.
     end DoesNotTranslate;
 
     block OperatesOnlyPartially
-
       annotation (Icon(graphics={Rectangle(extent={{-100,100},{100,-100}},
                                                                          lineColor=
                   {255,128,0}),                     Text(
@@ -1510,7 +1399,6 @@ by a user.
     end OperatesOnlyPartially;
 
     partial package PackageNotReady
-
       annotation (Icon(graphics={Rectangle(
               extent={{-100,100},{100,-100}},
               lineColor={127,0,0},
@@ -1519,7 +1407,6 @@ by a user.
     end PackageNotReady;
 
     partial block BlockNotReady
-
       annotation (Icon(graphics={Rectangle(
               extent={{-100,100},{100,-100}},
               lineColor={127,0,0},
@@ -1529,7 +1416,6 @@ by a user.
 
     partial block CommunicationIcon
       "Icon for a port block that communicates a signal"
-
       annotation (
            Icon(coordinateSystem(
                  preserveAspectRatio=true,
@@ -1545,7 +1431,6 @@ by a user.
               fillColor={85,85,255},
               fillPattern=FillPattern.Solid,
               textString="%name")}));
-
     end CommunicationIcon;
   end Icons;
 
@@ -1566,7 +1451,6 @@ by a user.
       Modelica_Synchronous.ClockSignals.Clocks.PeriodicRealClock
                                periodicRealClock(period=0.01)
         annotation (Placement(transformation(extent={{-74,-14},{-62,-2}})));
-
     equation
       connect(sine.y, sample1.u) annotation (Line(
           points={{-59,30},{-45.2,30}},
@@ -1608,7 +1492,6 @@ by a user.
         a=a,
         sampleFactor=1)
         annotation (Placement(transformation(extent={{-20,-40},{0,-20}})));
-
       inner Modelica_LinearSystems2.Controller.SampleClock sampleClock(blockType=
             Modelica_LinearSystems2.Controller.Types.BlockType.Discrete,
           sampleTime=0.01)
@@ -1713,7 +1596,6 @@ by a user.
 
     block TestFIR_Step2
       extends Modelica_Synchronous.WorkInProgress.Icons.OperatesOnlyPartially;
-
       inner Modelica_LinearSystems2.Controller.SampleClock sampleClock(blockType=
             Modelica_LinearSystems2.Controller.Types.BlockType.Discrete, sampleTime=
            0.1)
@@ -1772,7 +1654,6 @@ by a user.
 
     block TestFIR_Step2b
       extends Modelica_Synchronous.WorkInProgress.Icons.OperatesOnlyPartially;
-
       Modelica.Blocks.Sources.Step step(startTime=0.4999, offset=0.5)
         annotation (Placement(transformation(extent={{-80,40},{-60,60}})));
       Modelica_Synchronous.RealSignals.Sampler.SampleClocked
@@ -1812,7 +1693,6 @@ by a user.
     end TestFIR_Step2b;
 
     model TestInterpolator
-
       Modelica.Blocks.Sources.Sine sine(freqHz=2,
         offset=0.1,
         startTime=0)
@@ -2049,7 +1929,6 @@ by a user.
     end TestStateSpace;
 
     model TestRealSampler
-
       Modelica.Blocks.Sources.Sine sine1(
         freqHz=2,
         offset=0.1,
@@ -2124,7 +2003,6 @@ by a user.
     end TestRealSampler;
 
     model TestShiftSample
-
       Modelica.Blocks.Sources.Sine sine(freqHz=2,
         offset=0.1,
         startTime=0)
@@ -2420,7 +2298,6 @@ by a user.
     end TestClockedRealToSquare;
 
     model TestIntegerSamplerAndHolds
-
       Modelica_Synchronous.IntegerSignals.Sampler.AssignClock
                                                  assignClock1
         annotation (Placement(transformation(extent={{-46,64},{-34,76}})));
@@ -2548,7 +2425,6 @@ by a user.
           points={{-33.4,70},{-27.7,70},{-27.7,70},{-26,70},{-26,112},{34.8,112}},
           color={255,127,0},
           smooth=Smooth.None));
-
       connect(assignClock1.y, UnitDelay1.u) annotation (Line(
           points={{-33.4,70},{-26,70},{-26,88},{30,88}},
           color={255,127,0},
@@ -2568,7 +2444,6 @@ by a user.
     end TestIntegerSamplerAndHolds;
 
     model TestBooleanSamplerAndHolds
-
       Modelica_Synchronous.BooleanSignals.Sampler.AssignClock
                                                  assignClock1
         annotation (Placement(transformation(extent={{-48,64},{-36,76}})));
@@ -2715,7 +2590,6 @@ by a user.
     model TestReplaceableSamplerHold
       "Using partial sample and hold blocks to allow redeclaration of blocks to simulated communication blocks"
      extends Modelica.Icons.Example;
-
       Modelica.Mechanics.Rotational.Components.Inertia load(J=10,
         phi(fixed=true, start=0),
         w(fixed=true, start=0))
@@ -2727,13 +2601,10 @@ by a user.
             origin={117,-15})));
       Modelica.Blocks.Sources.Ramp ramp(duration=2)
         annotation (Placement(transformation(extent={{-111,0},{-91,20}})));
-
       Modelica.Blocks.Math.Feedback feedback
         annotation (Placement(transformation(extent={{-43,0},{-23,20}})));
-
       Modelica.Mechanics.Rotational.Sources.Torque torque
         annotation (Placement(transformation(extent={{60,0},{80,20}})));
-
       Modelica_Synchronous.ClockSignals.Clocks.PeriodicRealClock
                                                     periodicClock(period=0.1)
         annotation (Placement(transformation(extent={{-78,-72},{-58,-52}})));
@@ -3050,7 +2921,6 @@ by a user.
     block TriggeredBooleanSampler "Triggered sampling of continuous signals"
       extends Modelica.Blocks.Interfaces.DiscreteBlockIcon;
       parameter Boolean y_start=false "initial value of output signal";
-
       Modelica.Blocks.Interfaces.BooleanInput u
         "Connector with a Boolean input signal"             annotation (Placement(
             transformation(extent={{-140,-20},{-100,20}}, rotation=0)));
@@ -3116,7 +2986,6 @@ the initial value defined via parameter <b>y0</b>.
     block TriggeredIntegerSampler "Triggered sampling of continuous signals"
       extends Modelica.Blocks.Interfaces.DiscreteBlockIcon;
       parameter Integer y_start=0 "initial value of output signal";
-
       Modelica.Blocks.Interfaces.IntegerInput u
         "Connector with a Integer input signal"             annotation (Placement(
             transformation(extent={{-140,-20},{-100,20}}, rotation=0)));
@@ -3246,7 +3115,6 @@ the initial value defined via parameter <b>y0</b>.
       model SuperSampling "Different ways to super sample a signal"
       extends Modelica.Icons.Example;
         parameter Integer factor=4 "Super sampling factor";
-
         Modelica.Blocks.Sources.Sine sine(freqHz=2,
           offset=0.1,
           startTime=0.0)
@@ -3359,7 +3227,6 @@ the initial value defined via parameter <b>y0</b>.
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
                 -100,-100},{100,100}}), graphics), experiment(StopTime=1.2));
     end TheDifferentClocks;
-
   end ForDocumentation;
 
   block Interpolator
@@ -3372,7 +3239,6 @@ the initial value defined via parameter <b>y0</b>.
     parameter Boolean movingAverageFilter = true
       "= true, linearly interpolated signal is filtered by moving average filter (current restriction: inferFactor and movingAverageFilter cannot be both true)"
       annotation(choices(__Dymola_checkBox=true));
-
     Modelica.Blocks.Interfaces.RealInput u
       "Connector of clocked, Real input signal"
       annotation (Placement(transformation(extent={{-140,-20},{-100,20}},

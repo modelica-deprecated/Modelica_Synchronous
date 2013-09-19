@@ -199,6 +199,24 @@ synchronous languages (Benveniste et. al. 2002):</i>
   package ReleaseNotes "Release notes"
     extends Modelica.Icons.Information;
 
+    class Version_0_92 "Version 0.92 (Sept. 19, 2012)"
+      extends Modelica.Icons.Information;
+      annotation (Documentation(info="<html>
+<p>
+Changes with respect to version 0.91:
+</p>
+
+<ul>
+<li> The library uses the latest Modelica Standard Libary (MSL) version 3.2.1 (but still works with version 3.2). </li>
+<li> Added a couple of convenience source blocks for Real, Integer, and Boolean signals that are similar to the blocks
+     found in the MSL, but have as output a clocked signal.</li>
+<li> Added a couple of source blocks that are parametrized in terms of clock ticks rather than simulation time.</li>
+<li> All new blocks are utilized in at least one test.</li>
+</ul>
+
+</html>"));
+    end Version_0_92;
+
     class Version_0_91 "Version 0.91 (Sept. 20, 2012)"
       extends Modelica.Icons.Information;
       annotation (Documentation(info="<html>

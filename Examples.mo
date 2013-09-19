@@ -3956,8 +3956,8 @@ Example for block
         annotation (Placement(transformation(extent={{-70,-18},{-58,-6}})));
       Modelica_Synchronous.RealSignals.TickBasedSources.Sine sine(
         periodTicks=10,
-        startTick=3,
-        periodOffset=2)
+        periodOffset=2,
+          startTick=4)
         annotation (Placement(transformation(extent={{-72,20},{-52,40}})));
       Modelica.Blocks.Sources.Sine sineRef(
         freqHz=1,
@@ -4711,7 +4711,7 @@ Example for block
       Modelica_Synchronous.IntegerSignals.TickBasedSources.Step step(
         height=3,
         offset=1,
-        startTick=2)
+          startTick=3)
         annotation (Placement(transformation(extent={{-60,20},{-40,40}})));
       equation
         connect(periodicClock1.y, assignClock1.clock) annotation (Line(
@@ -5332,6 +5332,145 @@ Elementary example for the documentation of block
 </html>"));
       end UpSample;
 
+      model TimeBasedStep
+        "Example of using the clocked simulation time based Boolean Step source block"
+        import Modelica_Synchronous;
+         extends Modelica.Icons.Example;
+
+        Modelica_Synchronous.BooleanSignals.TimeBasedSources.Step step(
+          startTime=0.2)
+          annotation (Placement(transformation(extent={{-60,20},{-40,40}})));
+      Modelica_Synchronous.ClockSignals.Clocks.PeriodicRealClock
+        periodicClock1(period=0.1)
+        annotation (Placement(transformation(extent={{-60,-8},{-48,4}})));
+        Modelica_Synchronous.BooleanSignals.Sampler.AssignClock assignClock1
+          annotation (Placement(transformation(extent={{-22,24},{-10,36}})));
+      equation
+        connect(periodicClock1.y, assignClock1.clock) annotation (Line(
+            points={{-47.4,-2},{-16,-2},{-16,22.8}},
+            color={175,175,175},
+            pattern=LinePattern.Dot,
+            thickness=0.5,
+            smooth=Smooth.None));
+        connect(step.y, assignClock1.u) annotation (Line(
+            points={{-39,30},{-23.2,30}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                  -100},{100,100}}), graphics), experiment(StopTime=1.0),
+        Documentation(info="<html>
+<p>
+Example for block
+<a href=\"Modelica_Synchronous.BooleanSignals.TimeBasedSources.Step\">Modelica_Synchronous.BooleanSignals.TimeBasedSources.Step</a>.
+</p>
+</html>"));
+      end TimeBasedStep;
+
+      model TickBasedStep
+        "Example of using the clocked simulation tick/sample based Boolean Step source block"
+        import Modelica_Synchronous;
+         extends Modelica.Icons.Example;
+
+      Modelica_Synchronous.ClockSignals.Clocks.PeriodicRealClock
+        periodicClock1(period=0.1)
+        annotation (Placement(transformation(extent={{-60,-8},{-48,4}})));
+        Modelica_Synchronous.BooleanSignals.Sampler.AssignClock assignClock1
+          annotation (Placement(transformation(extent={{-22,24},{-10,36}})));
+      Modelica_Synchronous.BooleanSignals.TickBasedSources.Step step(startTick=
+              3)
+        annotation (Placement(transformation(extent={{-60,20},{-40,40}})));
+      equation
+        connect(periodicClock1.y, assignClock1.clock) annotation (Line(
+            points={{-47.4,-2},{-16,-2},{-16,22.8}},
+            color={175,175,175},
+            pattern=LinePattern.Dot,
+            thickness=0.5,
+            smooth=Smooth.None));
+        connect(assignClock1.u, step.y) annotation (Line(
+            points={{-23.2,30},{-39,30}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                  -100},{100,100}}), graphics), experiment(StopTime=1.0),
+        Documentation(info="<html>
+<p>
+Example for block
+<a href=\"Modelica_Synchronous.BooleanSignals.TickBasedSources.Step\">Modelica_Synchronous.BooleanSignals.TickBasedSources.Step</a>.
+</p>
+</html>"));
+      end TickBasedStep;
+
+      model TimeBasedPulse
+        "Example of using the clocked simulation time based Boolean Pulse source block"
+        import Modelica_Synchronous;
+         extends Modelica.Icons.Example;
+
+        Modelica_Synchronous.BooleanSignals.TimeBasedSources.Pulse pulse(
+          width=50,
+          period=0.4,
+          startTime=0.1)
+          annotation (Placement(transformation(extent={{-60,20},{-40,40}})));
+      Modelica_Synchronous.ClockSignals.Clocks.PeriodicRealClock
+        periodicClock1(period=0.1)
+        annotation (Placement(transformation(extent={{-60,-8},{-48,4}})));
+        Modelica_Synchronous.BooleanSignals.Sampler.AssignClock assignClock1
+          annotation (Placement(transformation(extent={{-22,24},{-10,36}})));
+      equation
+        connect(periodicClock1.y, assignClock1.clock) annotation (Line(
+            points={{-47.4,-2},{-16,-2},{-16,22.8}},
+            color={175,175,175},
+            pattern=LinePattern.Dot,
+            thickness=0.5,
+            smooth=Smooth.None));
+        connect(pulse.y, assignClock1.u) annotation (Line(
+            points={{-39,30},{-23.2,30}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                  -100},{100,100}}), graphics), experiment(StopTime=1.0),
+        Documentation(info="<html>
+<p>
+Example for block
+<a href=\"Modelica_Synchronous.BooleanSignals.TimeBasedSources.Pulse\">Modelica_Synchronous.BooleanSignals.TimeBasedSources.Pulse</a>.
+</p>
+</html>"));
+      end TimeBasedPulse;
+
+      model TickBasedPulse
+        "Example of using the clock tick based Boolean Pulse source block"
+        import Modelica_Synchronous;
+         extends Modelica.Icons.Example;
+
+      Modelica_Synchronous.ClockSignals.Clocks.PeriodicRealClock
+        periodicClock1(period=0.1)
+        annotation (Placement(transformation(extent={{-60,-8},{-48,4}})));
+        Modelica_Synchronous.BooleanSignals.Sampler.AssignClock assignClock1
+          annotation (Placement(transformation(extent={{-22,24},{-10,36}})));
+        Modelica_Synchronous.BooleanSignals.TickBasedSources.Pulse pulse(
+          widthTicks=2,
+          periodTicks=4,
+          startTick=2)
+          annotation (Placement(transformation(extent={{-60,20},{-40,40}})));
+      equation
+        connect(periodicClock1.y, assignClock1.clock) annotation (Line(
+            points={{-47.4,-2},{-16,-2},{-16,22.8}},
+            color={175,175,175},
+            pattern=LinePattern.Dot,
+            thickness=0.5,
+            smooth=Smooth.None));
+        connect(pulse.y, assignClock1.u) annotation (Line(
+            points={{-39,30},{-23.2,30}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                  -100},{100,100}}), graphics), experiment(StopTime=1.0),
+        Documentation(info="<html>
+<p>
+Example for block
+<a href=\"Modelica_Synchronous.BooleanSignals.TickBasedSources.Pulse\">Modelica_Synchronous.BooleanSignals.TickBasedSources.Pulse</a>.
+</p>
+</html>"));
+      end TickBasedPulse;
     annotation (Documentation(info="<html>
 <p>
 This package contains models that have been used to produce
