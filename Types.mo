@@ -61,7 +61,7 @@ Specification (version &ge; 3.3):
       y "y (year)",
       d "d (day)",
       h "h (hour)",
-      min "min (minutes)",
+      m "min (minutes)",
       s "s (seconds)",
       ms "ms (milli seconds)",
       us "us (micro seconds)",
@@ -87,7 +87,7 @@ The following values are possible:
 <tr><td valign=\"top\">h</td>
     <td valign=\"top\">hour (= 60*60 seconds)</td></tr>
 
-<tr><td valign=\"top\">min</td>
+<tr><td valign=\"top\">m</td>
     <td valign=\"top\">minute (= 60 seconds)</td></tr>
 
 <tr><td valign=\"top\">s</td>
