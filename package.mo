@@ -1,7 +1,8 @@
 within ;
-package Modelica_Synchronous "Modelica_Synchronous (version 0.91) - Basic synchronous input/output control blocks
+package Modelica_Synchronous "Modelica_Synchronous (version 0.92) - Basic synchronous input/output control blocks
 that are triggered by clocks"
 extends Modelica.Icons.Package;
+
 
 
 

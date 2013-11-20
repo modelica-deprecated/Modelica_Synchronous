@@ -1388,11 +1388,11 @@ precisely time-synchronized to each other.
   package Systems "Examples of complete systems"
     extends Modelica.Icons.ExamplesPackage;
 
+
     model ControlledMixingUnit
       "Simple example of a mixing unit where a (discretized) nonlinear inverse plant model is used as feedforward controller"
        extends Modelica.Icons.Example;
     import SI = Modelica.SIunits;
-
       parameter SI.Frequency freq = 1/300 "Critical frequency of filter";
       parameter Real c0(unit="mol/l") = 0.848 "Nominal concentration";
       parameter SI.Temperature T0 = 308.5 "Nominal temperature";
@@ -1402,91 +1402,81 @@ precisely time-synchronized to each other.
       parameter Real b_inv =   1.5476;
       parameter Real k0_inv =  1.05e14;
       parameter Real eps = 34.2894;
-
       parameter Real x10 = 0.42;
       parameter Real x10_inv = 0.6;
       parameter Real x20 = 0.01;
       parameter Real u0 = -0.0224;
-
       final parameter Real c_start(unit="mol/l") = c0*(1-x10);
       final parameter Real c_inv_start(unit="mol/l") = c0*(1-x10_inv);
       final parameter SI.Temperature T_start = T0*(1+x20);
       final parameter Real c_high_start(unit="mol/l") = c0*(1-0.72);
       final parameter Real T_c_start = T0*(1+u0);
-
       parameter Real pro=1.5 "Deviations of plant to inverse plant parameters";
       final parameter Real a1=a1_inv*pro;
       final parameter Real a21=a21_inv*pro;
       final parameter Real a22=a22_inv*pro;
       final parameter Real b=b_inv*pro;
       final parameter Real k0=k0_inv*pro;
-
-      Utilities.ComponentsMixingUnit.MixingUnit invMixingUnit(
-        c0= c0,
-        T0= T0,
-        a1= a1_inv,
+      Modelica_Synchronous.Examples.Systems.Utilities.ComponentsMixingUnit.MixingUnit
+        invMixingUnit(
+        c0=c0,
+        T0=T0,
+        a1=a1_inv,
         a21=a21_inv,
         a22=a22_inv,
-        b = b_inv,
-        k0= k0_inv,
+        b=b_inv,
+        k0=k0_inv,
         eps=eps,
         c(start=c_start, fixed=true),
         T(start=T_start,
           fixed=true,
           stateSelect=StateSelect.always),
-        T_c(start=T_c_start, fixed=true))
-        annotation (Placement(transformation(extent={{-12,14},{-32,34}},
-              rotation=0)));
+        T_c(start=T_c_start, fixed=true)) annotation (Placement(transformation(
+              extent={{-12,14},{-32,34}}, rotation=0)));
       Modelica.Blocks.Math.Add add
         annotation (Placement(transformation(extent={{40,-18},{56,-2}})));
       Modelica.Blocks.Math.InverseBlockConstraints inverseBlockConstraints
         annotation (Placement(transformation(extent={{-54,8},{-2,40}})));
-      Utilities.ComponentsMixingUnit.MixingUnit   mixingUnit(
+      Modelica_Synchronous.Examples.Systems.Utilities.ComponentsMixingUnit.MixingUnit
+        mixingUnit(
         c(start=c_start, fixed=true),
         T(start=T_start, fixed=true),
-        c0= c0,
-        T0= T0,
-        a1= a1,
+        c0=c0,
+        T0=T0,
+        a1=a1,
         a21=a21,
         a22=a22,
-        b = b,
-        k0= k0,
-        eps=eps)
-        annotation (Placement(transformation(extent={{88,-20},{108,0}},rotation=
-               0)));
+        b=b,
+        k0=k0,
+        eps=eps) annotation (Placement(transformation(extent={{88,-20},{108,0}},
+              rotation=0)));
       Modelica.Blocks.Math.Feedback feedback
         annotation (Placement(transformation(extent={{-24,-20},{-4,0}},
               rotation=0)));
-      Modelica.Blocks.Sources.Step step(height=c_high_start - c_start, offset=
-            c_start)
-        annotation (Placement(transformation(extent={{-138,14},{-118,34}},
-              rotation=0)));
       Modelica.Blocks.Math.Gain gain(k=20) annotation (Placement(transformation(
               extent={{4,-20},{24,0}},  rotation=0)));
-      Modelica_Synchronous.RealSignals.Sampler.Sample
-                                         sample1
-        annotation (Placement(transformation(extent={{76,-46},{64,-34}})));
-      Modelica_Synchronous.RealSignals.Sampler.Hold
-                                       hold1
-        annotation (Placement(transformation(extent={{64,-16},{76,-4}})));
-      Modelica_Synchronous.RealSignals.Sampler.SampleClocked
-                                         sample2
-        annotation (Placement(transformation(extent={{-108,18},{-96,30}})));
-      Modelica.Blocks.Continuous.Filter filter(
-        order=3,
-        f_cut=freq,
-        init=Modelica.Blocks.Types.Init.NoInit,
-        analogFilter=Modelica.Blocks.Types.AnalogFilter.CriticalDamping)
-        annotation (Placement(transformation(extent={{-86,14},{-66,34}})));
-      Modelica_Synchronous.ClockSignals.Clocks.PeriodicRealClock periodicClock(
-      period=1,
-      useSolver=true,
-      solverMethod="ExplicitEuler")
-        annotation (Placement(transformation(extent={{-134,-16},{-122,-4}})));
-    initial equation
-      filter.x[1]=0.497522;
-      invMixingUnit.c = mixingUnit.c;
 
+      Utilities.ComponentsMixingUnit.CriticalDamping
+                                              criticalDamping(
+        n=3,
+        f=freq,
+        x(start={0.49,0.49,0.49}, fixed={true, false, false}))
+        annotation (Placement(transformation(extent={{-86,14},{-66,34}})));
+      Modelica_Synchronous.RealSignals.Sampler.Hold hold1(y_start=0)
+        annotation (Placement(transformation(extent={{66,-16},{78,-4}})));
+      Modelica_Synchronous.RealSignals.Sampler.Sample sample1
+        annotation (Placement(transformation(extent={{80,-40},{68,-28}})));
+      Modelica_Synchronous.ClockSignals.Clocks.PeriodicRealClock periodicClock1(
+      useSolver=true,
+        period=1,
+        solverMethod="ExplicitEuler")
+        annotation (Placement(transformation(extent={{-134,-26},{-122,-14}})));
+      Modelica.Blocks.Sources.Step step(height=c_high_start - c_start, offset=
+            c_start)
+        annotation (Placement(transformation(extent={{-136,14},{-116,34}},
+              rotation=0)));
+      RealSignals.Sampler.SampleClocked  sample2
+        annotation (Placement(transformation(extent={{-108,18},{-96,30}})));
     equation
       connect(feedback.y, gain.u) annotation (Line(points={{-5,-10},{-5,-10},
               {2,-10}},
@@ -1503,50 +1493,50 @@ precisely time-synchronized to each other.
           points={{-34,30},{-38,30},{-38,24},{-48.8,24}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(mixingUnit.T, sample1.u) annotation (Line(
-          points={{110,-16},{116,-16},{116,-40},{77.2,-40}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(sample1.y, feedback.u2) annotation (Line(
-          points={{63.4,-40},{-14,-40},{-14,-18}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(add.y, hold1.u) annotation (Line(
-          points={{56.8,-10},{62.8,-10}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(hold1.y, mixingUnit.T_c) annotation (Line(
-          points={{76.6,-10},{86,-10}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(sample2.u, step.y) annotation (Line(
-          points={{-109.2,24},{-117,24}},
-          color={0,0,127},
-          smooth=Smooth.None));
       connect(invMixingUnit.T, feedback.u1) annotation (Line(
           points={{-34,18},{-46,18},{-46,-10},{-22,-10}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(inverseBlockConstraints.y1, add.u1) annotation (Line(
-          points={{-0.7,24},{28,24},{28,-5.2},{38.4,-5.2}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(sample2.y, filter.u) annotation (Line(
-          points={{-95.4,24},{-88,24}},
-          color={0,0,127},
-          smooth=Smooth.None));
-      connect(filter.y, inverseBlockConstraints.u1) annotation (Line(
+      connect(criticalDamping.y, inverseBlockConstraints.u1) annotation (Line(
           points={{-65,24},{-56.6,24}},
           color={0,0,127},
           smooth=Smooth.None));
-    connect(periodicClock.y, sample2.clock)       annotation (Line(
-          points={{-121.4,-10},{-102,-10},{-102,16.8}},
+      connect(hold1.y, mixingUnit.T_c) annotation (Line(
+          points={{78.6,-10},{86,-10}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(add.y, hold1.u) annotation (Line(
+          points={{56.8,-10},{64.8,-10}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(sample1.u, mixingUnit.T) annotation (Line(
+          points={{81.2,-34},{116,-34},{116,-16},{110,-16}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(sample1.y, feedback.u2) annotation (Line(
+          points={{67.4,-34},{-14,-34},{-14,-18}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(inverseBlockConstraints.y1, add.u1) annotation (Line(
+          points={{-0.7,24},{30,24},{30,-5.2},{38.4,-5.2}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(sample2.u,step. y) annotation (Line(
+          points={{-109.2,24},{-115,24}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(criticalDamping.u, sample2.y) annotation (Line(
+          points={{-88,24},{-95.4,24}},
+          color={0,0,127},
+          smooth=Smooth.None));
+      connect(periodicClock1.y, sample2.clock) annotation (Line(
+          points={{-121.4,-20},{-102,-20},{-102,16.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
           thickness=0.5,
           smooth=Smooth.None));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-140,
-              -100},{120,100}}),        graphics={Rectangle(extent={{-90,44},
+                -100},{120,100}}),      graphics={Rectangle(extent={{-90,44},
                 {60,-44}}, lineColor={255,0,0}), Text(
             extent={{12,42},{58,34}},
             lineColor={255,0,0},
@@ -2668,6 +2658,97 @@ initial equation
               smooth=Smooth.None));
           annotation (Diagram(graphics));
         end FilterOrder;
+
+        block CriticalDamping
+          "Output the input signal filtered with an n-th order filter with critical damping"
+
+          import Modelica.Blocks.Types.Init;
+          extends Modelica.Blocks.Interfaces.SISO;
+
+          parameter Integer n=2 "Order of filter";
+          parameter Modelica.SIunits.Frequency f(start=1) "Cut-off frequency";
+          parameter Boolean normalized = true
+            "= true, if amplitude at f_cut is 3 dB, otherwise unmodified filter";
+            /*
+  parameter Real x_start[n]=zeros(n) "Initial or guess values of states"
+    annotation (Dialog(group="Initialization"));
+*/
+          output Real x[n](start=zeros(n)) "Filter states";
+        protected
+          parameter Real alpha=if normalized then sqrt(2^(1/n) - 1) else 1.0
+            "Frequency correction factor for normalized filter";
+          parameter Real w=2*Modelica.Constants.pi*f/alpha;
+        equation
+          der(x[1]) = (u - x[1])*w;
+          for i in 2:n loop
+            der(x[i]) = (x[i - 1] - x[i])*w;
+          end for;
+          y = x[n];
+          annotation (
+            Icon(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
+                    100}}), graphics={
+                Line(points={{-80.6897,77.6256},{-80.6897,-90.3744}}, color={192,192,
+                      192}),
+                Polygon(
+                  points={{-79.7044,90.6305},{-87.7044,68.6305},{-71.7044,68.6305},{-79.7044,
+                      88.6305},{-79.7044,90.6305}},
+                  lineColor={192,192,192},
+                  fillColor={192,192,192},
+                  fillPattern=FillPattern.Solid),
+                Line(points={{-90,-80},{82,-80}}, color={192,192,192}),
+                Polygon(
+                  points={{90,-80},{68,-72},{68,-88},{90,-80}},
+                  lineColor={192,192,192},
+                  fillColor={192,192,192},
+                  fillPattern=FillPattern.Solid),
+                Text(
+                  extent={{0,0},{60,-60}},
+                  lineColor={192,192,192},
+                  textString="PTn"),
+                Line(points={{-80.7599,-80.5082},{-70.7599,-74.5082},{-56,-60},{-48,-42},
+                      {-42,-18},{-36,4},{-26,20},{-10.7599,34.9018},{-0.759907,
+                      38.8218},{9.24009,41.6818},{19.2401,43.7818},{29.2401,45.3118},
+                      {39.2401,46.4318},{49.2401,47.2518},{59.2401,47.8518},{69.2401,
+                      48.2918},{79.2401,48.6118}}, color={0,0,127}),
+                Text(
+                  extent={{-70,94},{26,48}},
+                  lineColor={192,192,192},
+                  textString="%n"),
+                Text(
+                  extent={{8,-106},{8,-146}},
+                  lineColor={0,0,0},
+                  textString="f=%f")}),
+            Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
+                    100,100}}), graphics={
+                Line(points={{40,0},{-40,0}}, color={0,0,0}),
+                Text(
+                  extent={{-55,55},{55,5}},
+                  lineColor={0,0,0},
+                  textString="1"),
+                Rectangle(extent={{-60,60},{60,-60}}, lineColor={0,0,255}),
+                Line(points={{-100,0},{-60,0}}, color={0,0,255}),
+                Line(points={{60,0},{100,0}}, color={0,0,255}),
+                Text(
+                  extent={{-54,-6},{44,-56}},
+                  lineColor={0,0,0},
+                  textString="(s/w + 1)"),
+                Text(
+                  extent={{38,-10},{58,-30}},
+                  lineColor={0,0,0},
+                  textString="n")}),
+            Documentation(info="<html>
+<p>This block defines the transfer function between the
+input u and the output y
+as an n-th order filter with <i>critical damping</i>
+characteristics and cut-off frequency f. It is
+a slightly simplified version of the \"Modelica.Blocks.Continuous.CriticalDamping\" block from the MSL 3.2.1.
+It doesn't provide the same initialization capabilities as the MSL block, since the initialization of
+clocked partitions is currently performed different to the continuous time partitions.
+</p>
+
+</html>
+"));
+        end CriticalDamping;
       end ComponentsMixingUnit;
     end Utilities;
   annotation (Documentation(info="<html>
