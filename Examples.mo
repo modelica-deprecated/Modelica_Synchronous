@@ -1388,7 +1388,6 @@ precisely time-synchronized to each other.
   package Systems "Examples of complete systems"
     extends Modelica.Icons.ExamplesPackage;
 
-
     model ControlledMixingUnit
       "Simple example of a mixing unit where a (discretized) nonlinear inverse plant model is used as feedforward controller"
        extends Modelica.Icons.Example;
@@ -1456,11 +1455,10 @@ precisely time-synchronized to each other.
       Modelica.Blocks.Math.Gain gain(k=20) annotation (Placement(transformation(
               extent={{4,-20},{24,0}},  rotation=0)));
 
-      Utilities.ComponentsMixingUnit.CriticalDamping
-                                              criticalDamping(
+      Utilities.ComponentsMixingUnit.CriticalDamping filter(
         n=3,
         f=freq,
-        x(start={0.49,0.49,0.49}, fixed={true, false, false}))
+        x(start={0.49,0.49,0.49}, fixed={true,false,false}))
         annotation (Placement(transformation(extent={{-86,14},{-66,34}})));
       Modelica_Synchronous.RealSignals.Sampler.Hold hold1(y_start=0)
         annotation (Placement(transformation(extent={{66,-16},{78,-4}})));
@@ -1497,7 +1495,7 @@ precisely time-synchronized to each other.
           points={{-34,18},{-46,18},{-46,-10},{-22,-10}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(criticalDamping.y, inverseBlockConstraints.u1) annotation (Line(
+      connect(filter.y, inverseBlockConstraints.u1) annotation (Line(
           points={{-65,24},{-56.6,24}},
           color={0,0,127},
           smooth=Smooth.None));
@@ -1525,7 +1523,7 @@ precisely time-synchronized to each other.
           points={{-109.2,24},{-115,24}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(criticalDamping.u, sample2.y) annotation (Line(
+      connect(filter.u, sample2.y) annotation (Line(
           points={{-88,24},{-95.4,24}},
           color={0,0,127},
           smooth=Smooth.None));
