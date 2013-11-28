@@ -88,7 +88,7 @@ For an example, see
     protected
       constant Integer conversionTable[8]={365*24*60*60, 24*60*60, 60*60, 60, 1, 1000, 1000*1000, 1000*1000*1000}
         "Table to convert from Resolution to Integer clock resolution";
-      parameter Integer resolutionFactor = conversionTable[integer(resolution)] annotation(Evaluate=true);
+      parameter Integer resolutionFactor = conversionTable[Integer(resolution)] annotation(Evaluate=true);
       Clock c annotation(HideResult=true);
     equation
       if resolution < R.s then
