@@ -6,14 +6,6 @@ package RealSignals "Library of clocked blocks for Real signals"
       "Sample the continuous-time, Real input signal and provide it as clocked output signal (clock is infered)"
       extends Modelica_Synchronous.RealSignals.Interfaces.PartialSISOSampler;
 
-      Modelica.Blocks.Interfaces.RealInput u
-        "Connector of continuous-time, Real input signal"
-        annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
-            rotation=0)));
-      Modelica.Blocks.Interfaces.RealOutput y
-        "Connector of clocked, Real output signal"
-        annotation (Placement(transformation(extent={{100,-10},{120,10}},
-            rotation=0)));
     equation
       y = sample(u);
 
