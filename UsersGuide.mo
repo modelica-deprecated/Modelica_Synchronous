@@ -197,6 +197,19 @@ synchronous languages (Benveniste et. al. 2002):</i>
   end Literature;
 
   package ReleaseNotes "Release notes"
+    class Version_0_92_Build_2 "Version 0.92 Build 2 (Sept. 9, 2015)"
+      extends Modelica.Icons.Information;
+      annotation (Documentation(info="<html>
+<p>
+Changes with respect to version 0.92 Build 1:
+</p>
+
+<ul>
+<li> RealSignals.Sampler: Removed wrong double declaration of u and y
+    (was present due to extends and due to explicit declaration)</li>
+</ul>
+</html>"));
+    end Version_0_92_Build_2;
     extends Modelica.Icons.Information;
 
     class Version_0_92 "Version 0.92 (Sept. 19, 2012)"
@@ -313,7 +326,7 @@ email: Martin.Otter@dlr.de
 </p>
 
 <p style=\"margin-left: 40px;\"><b>Copyright notices of the files:</b><br>
-Copyright &copy; 2012-2013, DLR Institute of System Dynamics and Control.<br>
+Copyright &copy; 2012-2015, DLR Institute of System Dynamics and Control.<br>
 <br>
 </p>
 
