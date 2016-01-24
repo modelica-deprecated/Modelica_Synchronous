@@ -1811,7 +1811,7 @@ See model <a href=\"Modelica_Synchronous.Examples.Elementary.BooleanSignals.Tick
         extends BooleanSignals.Interfaces.PartialClockedSO;
         parameter Real widthTicks(min=1,max=periodTicks) = 1
         "Width of one pulse in clock ticks";
-        parameter Modelica.SIunits.Time periodTicks(min=1,start=1) = 2
+        parameter Real periodTicks(min=1,start=1) = 2
         "Number of clock ticks for one period";
         parameter Integer startTick(min=1)=1
         "Clock tick at which the first pulse starts";
