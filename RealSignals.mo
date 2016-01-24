@@ -2632,7 +2632,7 @@ Copyright &copy; Hubertus Tummescheit and Department of Automatic Control, Lund 
 <i>This Modelica function is <b>free</b> software; it can be redistributed and/or modified
 under the terms of the <b>Modelica license</b>, see the license conditions
 and the accompanying <b>disclaimer</b>
-<a href=\"modelica://Modelica.UsersGuide.ModelicaLicense\">here</a>.</i>
+<a href=\"modelica://Modelica.UsersGuide.ModelicaLicense2\">here</a>.</i>
 </p>
 </HTML>"));
         end random;
@@ -3321,7 +3321,7 @@ u and past u values that are taken into account.
 
 <p>
 This block could also be implemented with block
-<a href=\"modelica://Modelica_Synchronous.Periodic.FIRbyCoefficients\">FIRbyCoefficients</a>
+<a href=\"modelica://Modelica_Synchronous.RealSignals.Periodic.FIRbyCoefficients\">FIRbyCoefficients</a>
 by using the coefficients a = fill(1/n, n). However, block <i>MovingAverage</i> is
 a more efficient implementation since it can be implemented recursively,
 contrary to a general FIR filter.
@@ -3338,7 +3338,7 @@ contrary to a general FIR filter.
                   -14,-4},{-4,-46},{0,-64},{2,-82}},
                                              color={0,0,127}),
         Polygon(points={{-84,90},{-92,68},{-76,68},{-84,90},{-84,90}}, lineColor={192,192,192}, fillColor={192,192,192},
-                fillPattern=   FillPattern.Solid),
+                fillPattern =  FillPattern.Solid),
           Line(points={{2,-82},{4,-64},{8,-56},{12,-56},{16,-60},{18,-66},{20,-82}},
                                                                              color={0,0,127}),
           Line(points={{20,-80},{20,-78},{20,-72},{22,-66},{24,-64},{28,-64},{32,-66},
@@ -3347,7 +3347,7 @@ contrary to a general FIR filter.
                   {62,-72},{64,-76},{64,-78},{64,-80},{64,-82}},
                                                 color={0,0,127}),
         Polygon(points={{90,-82},{68,-74},{68,-90},{90,-82}}, lineColor={192,192,192}, fillColor={192,192,192},
-                fillPattern=  FillPattern.Solid),
+                fillPattern = FillPattern.Solid),
             Text(
               extent={{-26,88},{88,48}},
               lineColor={175,175,175},
@@ -3398,10 +3398,14 @@ and of its past values (= FIR filter):
 where y(i) and u(i) are the values of y and u at clock tick i and
 a[:] are the filter coefficients.
 </p>
+
+<p>
+At the first clock tick i=1 the past values are filled with u at this clock tick (= steady state initialization).
+</p>
 </html>"),
         Icon(graphics={
         Polygon(points={{-84,90},{-92,68},{-76,68},{-84,90},{-84,90}}, lineColor={192,192,192}, fillColor={192,192,192},
-                fillPattern=   FillPattern.Solid),
+                fillPattern =  FillPattern.Solid),
          Line(points={{-84,78},{-84,-90}}, color={192,192,192}),
         Line(points={{-84,30},{-72,30},{-52,28},{-32,20},{-26,16},{-22,12},{-18,6},{
                   -14,-4},{-4,-46},{0,-64},{2,-82}},
@@ -3417,7 +3421,7 @@ a[:] are the filter coefficients.
                   {62,-72},{64,-76},{64,-78},{64,-80},{64,-82}},
                                                 color={0,0,127}),
         Polygon(points={{90,-82},{68,-74},{68,-90},{90,-82}}, lineColor={192,192,192}, fillColor={192,192,192},
-                fillPattern=  FillPattern.Solid),
+                fillPattern = FillPattern.Solid),
         Line(points={{-90,-82},{82,-82}}, color={192,192,192}),
             Text(
               extent={{-26,86},{88,56}},

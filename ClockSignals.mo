@@ -59,7 +59,7 @@ For an introduction to clocks see
 <a href=\"modelica://Modelica_Synchronous.UsersGuide.Clocks\">UsersGuide.Clocks</a>.
 If exact, integer based, time synchronization with absolute period definitions is
 desired, use block
-<a href=\"modelica://Modelica_Synchronous.Clocks.PeriodicExactClock\">PeriodicExactClock</a>
+<a href=\"modelica://Modelica_Synchronous.ClockSignals.Clocks.PeriodicExactClock\">PeriodicExactClock</a>
 to generate a periodic clock signal.
 </p>
 
