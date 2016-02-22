@@ -704,7 +704,7 @@ Analog to the corresponding Real signal block example there exists an elementary
               lineColor={255,128,0},
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid),
-            Line(visible=useClock,
+            Line(
               points={{0,-100},{0,70}},
               color={175,175,175},
               pattern=LinePattern.Dot,
@@ -801,7 +801,7 @@ Analog to the corresponding Real signal block example there exists an elementary
               lineColor={255,128,0},
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid),
-            Line(visible=useClock,
+            Line(
               points={{0,-100},{0,70}},
               color={175,175,175},
               pattern=LinePattern.Dot,

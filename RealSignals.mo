@@ -1640,7 +1640,7 @@ The first activation of output y of block backSample1 is shifted (4/3*20ms) befo
               lineColor={0,0,127},
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid),
-            Line(visible=useClock,
+            Line(
               points={{0,-100},{0,0}},
               color={175,175,175},
               pattern=LinePattern.Dot,
@@ -1772,7 +1772,7 @@ At every clock tick (that is at every 20ms) the output of the unitDelay1 block i
               lineColor={0,0,127},
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid),
-            Line(visible=useClock,
+            Line(
               points={{0,-100},{0,70}},
               color={175,175,175},
               pattern=LinePattern.Dot,
