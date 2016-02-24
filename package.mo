@@ -12,7 +12,7 @@ extends Modelica.Icons.Package;
 
 
   annotation (preferredView="info",
-  uses(Modelica(version="3.2.2")),
+  uses(Modelica(version="3.2.1")),
     version="0.92",
     versionBuild=2,
     versionDate="2013-09-19",
