@@ -452,9 +452,9 @@ Analog to the corresponding Real signal block example there exists an elementary
       "Shift the clocked Integer input signal by a fraction of the last interval and and provide it as clocked output signal"
 
       parameter Integer shiftCounter(min=0)=0 "Numerator of shifting formula"
-            annotation(Dialog(group="Shift first clock activation for 'shiftCounter/resolution*interval(u)' seconds"));
+            annotation(Evaluate=true, Dialog(group="Shift first clock activation for 'shiftCounter/resolution*interval(u)' seconds"));
       parameter Integer resolution(min=1)=1 "Denominator of shifting formula"
-            annotation(Dialog(group="Shift first clock activation for 'shiftCounter/resolution*interval(u)' seconds"));
+            annotation(Evaluate=true, Dialog(group="Shift first clock activation for 'shiftCounter/resolution*interval(u)' seconds"));
 
       Modelica.Blocks.Interfaces.IntegerInput
                                            u

@@ -482,10 +482,10 @@ Analog to the corresponding Real signal block example there exists an elementary
       "Shift the clocked Boolean input signal by a fraction of the last interval and and provide it as clocked output signal"
 
       parameter Integer shiftCounter(min=0)=0 "Numerator of shifting formula"
-            annotation(Dialog(group="Shift first clock activation for 'shiftCounter/resolution*interval(u)' seconds"));
+            annotation(Evaluate=true, Dialog(group="Shift first clock activation for 'shiftCounter/resolution*interval(u)' seconds"));
       parameter Integer resolution(min=1)=1
         "Denominator of shifting formula (ignored if inferShift=true)"
-            annotation(Dialog(group="Shift first clock activation for 'shiftCounter/resolution*interval(u)' seconds"));
+            annotation(Evaluate=true, Dialog(group="Shift first clock activation for 'shiftCounter/resolution*interval(u)' seconds"));
 
       Modelica.Blocks.Interfaces.BooleanInput
                                            u
@@ -572,9 +572,9 @@ Analog to the corresponding Real signal block example there exists an elementary
     block BackSample
       "Shift clock of Boolean input signal backwards in time (and access the most recent value of the input at this new clock)"
       parameter Integer backCounter(min=0)=0 "Numerator of shifting formula"
-            annotation(Dialog(group="Shift first clock activation backwards in time for 'shiftCounter/resolution*interval(u)' seconds"));
+            annotation(Evaluate=true, Dialog(group="Shift first clock activation backwards in time for 'shiftCounter/resolution*interval(u)' seconds"));
       parameter Integer resolution(min=1)=1 "Denominator of shifting formula"
-            annotation(Dialog(group="Shift first clock activation backwards in time for 'shiftCounter/resolution*interval(u)' seconds"));
+            annotation(Evaluate=true, Dialog(group="Shift first clock activation backwards in time for 'shiftCounter/resolution*interval(u)' seconds"));
       parameter Boolean y_start=false
         "Value of output y before the first clock tick of the input u";
 
