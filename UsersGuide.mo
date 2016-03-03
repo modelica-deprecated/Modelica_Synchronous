@@ -197,19 +197,6 @@ synchronous languages (Benveniste et. al. 2002):</i>
   end Literature;
 
   package ReleaseNotes "Release notes"
-    class Version_0_92_Build_2 "Version 0.92 Build 2 (Sept. 9, 2015)"
-      extends Modelica.Icons.Information;
-      annotation (Documentation(info="<html>
-<p>
-Changes with respect to version 0.92 Build 1:
-</p>
-
-<ul>
-<li> RealSignals.Sampler: Removed wrong double declaration of u and y
-    (was present due to extends and due to explicit declaration)</li>
-</ul>
-</html>"));
-    end Version_0_92_Build_2;
     extends Modelica.Icons.Information;
 
     class Version_0_92 "Version 0.92 (Sept. 19, 2012)"
@@ -227,6 +214,33 @@ Changes with respect to version 0.91:
 <li> All new blocks are utilized in at least one test.</li>
 </ul>
 
+<h4>
+Version 0.92 Build 2 (Sept. 9, 2015)
+</h4>
+
+<p>
+Changes with respect to version 0.92 Build 1:
+</p>
+
+<ul>
+<li> RealSignals.Sampler: Removed wrong double declaration of u and y
+    (was present due to extends and due to explicit declaration)</li>
+</ul>
+
+<h4>
+Version 0.92 Build 3 (March 3, 2016)
+</h4>
+
+<p>
+Changes with respect to version 0.92 Build 2:
+</p>
+
+<ul>
+<li> Invalid links in documentation fixed (#1341)</li>
+<li> BooleanSignals.TickBasedSources.Pulse wrong unit fixed (#1889)</li>
+<li> Missing useClock parameter in RealSignals.Sampler.AssignClock fixed (#1919)</li>
+<li> Set Evaluate=true to clock parameters of {Real,Integer,Boolean}Signals.Sampler.{Shift,Back}Sample(OpenModelica Ticket 3717)</li>
+</ul>
 </html>"));
     end Version_0_92;
 
