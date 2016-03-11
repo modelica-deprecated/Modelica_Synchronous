@@ -1,13 +1,13 @@
 within ;
-package Modelica_Synchronous "Modelica_Synchronous (version 0.92 Build 3) - Basic synchronous input/output control blocks
+package Modelica_Synchronous "Modelica_Synchronous (version 0.92.1) - Basic synchronous input/output control blocks
 that are triggered by clocks"
 extends Modelica.Icons.Package;
 
   annotation (preferredView="info",
-  uses(Modelica(version="3.2.1")),
-    version="0.92",
-    versionBuild=3,
-    versionDate="2013-09-19",
+  uses(Modelica(version="3.2.2")),
+    version="0.92.1",
+    versionBuild=0,
+    versionDate="2016-03-11",
     dateModified = "2016-03-03 18:16:00Z",
     revisionId="$Id::                                       $",
   Documentation(info="<html>
@@ -57,7 +57,7 @@ For an introduction, have especially a look at:
     </td>
     <td style=\"vertical-align: top;\"><br><b>Licensed by DLR under the Modelica License 2</b></td>
 </tr>
-<tr><td style=\"vertical-align: top;\"><b>Copyright &copy; 2012-2015, DLR Institute of System Dynamics and Control</b></td>
+<tr><td style=\"vertical-align: top;\"><b>Copyright &copy; 2012-2016, DLR Institute of System Dynamics and Control</b></td>
 </tr>
 </table>
 </p>
