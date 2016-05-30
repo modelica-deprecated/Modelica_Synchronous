@@ -2775,6 +2775,12 @@ simplified realistic applications.
       Modelica_Synchronous.ClockSignals.Sampler.SubSample subSample(
                              factor=3)
         annotation (Placement(transformation(extent={{-22,24},{-10,36}})));
+        Modelica_Synchronous.RealSignals.Sampler.SampleClocked sample1
+          annotation (Placement(transformation(extent={{16,52},{28,64}})));
+        Modelica.Blocks.Sources.Sine sine(freqHz=2,
+          offset=0.1,
+          startTime=0)
+          annotation (Placement(transformation(extent={{-24,48},{-4,68}})));
       equation
       connect(periodicClock.y, subSample.u) annotation (Line(
           points={{-43.4,30},{-23.2,30}},
@@ -2782,8 +2788,15 @@ simplified realistic applications.
           pattern=LinePattern.Dot,
           thickness=0.5,
           smooth=Smooth.None));
+        connect(sine.y, sample1.u) annotation (Line(points={{-3,58},{14.8,58},{
+                14.8,58}}, color={0,0,127}));
+        connect(subSample.y, sample1.clock) annotation (Line(
+            points={{-9.4,30},{22,30},{22,50.8}},
+            color={175,175,175},
+            pattern=LinePattern.Dot,
+            thickness=0.5));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-                -100},{100,100}}),   graphics), experiment(StopTime=0.2),
+                -100},{100,100}})),             experiment(StopTime=0.2),
         Documentation(info="<html>
 <p>
 Example used to generate a figure for the documentation of block
@@ -2802,6 +2815,12 @@ Example used to generate a figure for the documentation of block
       Modelica_Synchronous.ClockSignals.Sampler.SuperSample superSample(
             factor=3)
         annotation (Placement(transformation(extent={{-26,24},{-14,36}})));
+        Modelica_Synchronous.RealSignals.Sampler.SampleClocked sample1
+          annotation (Placement(transformation(extent={{10,56},{22,68}})));
+        Modelica.Blocks.Sources.Sine sine(freqHz=2,
+          offset=0.1,
+          startTime=0)
+          annotation (Placement(transformation(extent={{-30,52},{-10,72}})));
       equation
       connect(periodicClock.y, superSample.u) annotation (Line(
           points={{-43.4,30},{-27.2,30}},
@@ -2809,8 +2828,15 @@ Example used to generate a figure for the documentation of block
           pattern=LinePattern.Dot,
           thickness=0.5,
           smooth=Smooth.None));
+        connect(sine.y, sample1.u)
+          annotation (Line(points={{-9,62},{8.8,62}}, color={0,0,127}));
+        connect(superSample.y, sample1.clock) annotation (Line(
+            points={{-13.4,30},{2,30},{16,30},{16,54.8}},
+            color={175,175,175},
+            pattern=LinePattern.Dot,
+            thickness=0.5));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-                -100},{100,100}}),   graphics), experiment(StopTime=0.08),
+                -100},{100,100}})),             experiment(StopTime=0.08),
         Documentation(info="<html>
 <p>
 Example used to generate a figure for the documentation of block
@@ -2829,6 +2855,12 @@ Example used to generate a figure for the documentation of block
         Modelica_Synchronous.ClockSignals.Sampler.ShiftSample shiftSample(
           shiftCounter=4, resolution=3)
           annotation (Placement(transformation(extent={{-22,24},{-10,36}})));
+        Modelica_Synchronous.RealSignals.Sampler.SampleClocked sample1
+          annotation (Placement(transformation(extent={{14,54},{26,66}})));
+        Modelica.Blocks.Sources.Sine sine(freqHz=2,
+          offset=0.1,
+          startTime=0)
+          annotation (Placement(transformation(extent={{-26,50},{-6,70}})));
       equation
       connect(periodicClock.y, shiftSample.u) annotation (Line(
           points={{-43.4,30},{-23.2,30}},
@@ -2836,8 +2868,15 @@ Example used to generate a figure for the documentation of block
           pattern=LinePattern.Dot,
           thickness=0.5,
           smooth=Smooth.None));
+        connect(sine.y, sample1.u)
+          annotation (Line(points={{-5,60},{12.8,60}}, color={0,0,127}));
+        connect(shiftSample.y, sample1.clock) annotation (Line(
+            points={{-9.4,30},{20,30},{20,52.8}},
+            color={175,175,175},
+            pattern=LinePattern.Dot,
+            thickness=0.5));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-                -100},{100,100}}),   graphics), experiment(StopTime=0.09),
+                -100},{100,100}})),             experiment(StopTime=0.09),
         Documentation(info="<html>
 <p>
 Example used to generate a figure for the documentation of block
