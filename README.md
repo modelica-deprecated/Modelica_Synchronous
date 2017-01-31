@@ -14,7 +14,7 @@ Features include:
 
 It is planned to include this library in a future version of the Modelica Standard Library (after an evaluation period and once several Modelica tools support the synchronous language elements)
 
-![screenshot](../../Modelica_Synchronous/Resources/Images/screenshot.png)
+![screenshot](Modelica_Synchronous/Resources/Images/screenshot.png)
 
 ## Current release
 
