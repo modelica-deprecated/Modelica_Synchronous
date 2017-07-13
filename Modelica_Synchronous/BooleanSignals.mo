@@ -1473,17 +1473,16 @@ See model <a href=\"Modelica_Synchronous.Examples.Elementary.BooleanSignals.Time
 
     protected
         Modelica.SIunits.Time simTime;
-        parameter Modelica.SIunits.Time Twidth=period*width/100
+        parameter Modelica.SIunits.Duration Twidth=period*width/100
         "width of one pulse"                                              annotation(HideResult=true);
 
         Modelica.SIunits.Time next(start=startTime, fixed=true)
         "next = startTime + n*period, for smallest n such that next>simTime";
+        Modelica.SIunits.Duration tol = 0.1*interval(simTime) "Tolerance for numeric comparisons";
       equation
           simTime = sample(time);
-
-          /* I'm not happy with this logic. Too difficult to understand. Possible to improve it? */
-          next = if (simTime >= previous(next)) and (previous(next) < simTime + period) then previous(next) + period else previous(next);
-          y = simTime >= previous(next) or simTime <= next - period + Twidth;
+          next = if (simTime >= previous(next) - tol) then previous(next) + period else previous(next);
+          y = simTime >= next - period - tol and simTime < next - period + Twidth - tol;
         annotation (
           Icon(coordinateSystem(
             preserveAspectRatio=true,
