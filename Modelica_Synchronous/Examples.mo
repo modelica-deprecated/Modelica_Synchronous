@@ -605,7 +605,6 @@ of block <b>periodicClock</b> and then selecting
         annotation (Placement(transformation(extent={{38,-36},{26,-24}})));
       Modelica_Synchronous.RealSignals.NonPeriodic.PI
                  PI(
-        x(fixed=true),
         T=0.1,
         k=110)
         annotation (Placement(transformation(extent={{-14,0},{6,20}})));
