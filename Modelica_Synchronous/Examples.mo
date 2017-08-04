@@ -1429,7 +1429,7 @@ precisely time-synchronized to each other.
         T(start=T_start,
           fixed=true,
           stateSelect=StateSelect.always),
-        T_c(start=T_c_start, fixed=true)) annotation (Placement(transformation(
+        T_c(start=T_c_start)) annotation (Placement(transformation(
               extent={{-12,14},{-32,34}}, rotation=0)));
       Modelica.Blocks.Math.Add add
         annotation (Placement(transformation(extent={{40,-18},{56,-2}})));
