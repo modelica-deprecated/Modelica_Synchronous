@@ -1192,7 +1192,7 @@ this block computes the filter coefficients a[:] by design parameters
        choice="ImplicitEuler" "Implicit Euler method (order 1)"));
     package Internal
       "Internal blocks and functions that are usually of no interest for the user"
-    extends Modelica.Icons.Package;
+      extends Modelica.Icons.InternalPackage;
       function FIR_coefficients
         "Calculates the FIR-filter coefficient vector from filter design parameters"
         import FilterType =
