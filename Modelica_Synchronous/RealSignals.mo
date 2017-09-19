@@ -2199,7 +2199,7 @@ samples a sine signal with a periodic clock of 20 ms period. After that a Boolea
 
       package Internal
         "Internal blocks and functions that are usually of no interest for the user"
-         extends Modelica.Icons.Package;
+        extends Modelica.Icons.InternalPackage;
         block ComputationalDelay
           "Delays a clocked signal for at most one period, in order to model a computational delay"
         extends Modelica_Synchronous.RealSignals.Interfaces.PartialClockedSISO;
@@ -2526,6 +2526,7 @@ as output.
             end Limiter;
 
         function random "Pseudo random number generator"
+          extends Modelica.Icons.Function;
 
           input Integer seedIn[3]
             "Integer vector defining random number sequence, e.g., {23,87,187}";
