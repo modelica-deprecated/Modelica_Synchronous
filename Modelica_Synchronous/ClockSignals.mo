@@ -709,7 +709,7 @@ Connector with one output signal of type Boolean.
       "Icon, connector, and solver method of a block that generates a clock"
 
       parameter Boolean useSolver = false
-        "= true, if solverMethod shall be explicitely defined"
+        "= true, if solverMethod shall be explicitly defined"
         annotation(Evaluate=true, Dialog(tab="Advanced"), choices(__Dymola_checkBox=true));
       parameter Modelica_Synchronous.Types.SolverMethod solverMethod="ExplicitEuler"
         "Integration method used for discretized continuous-time partitions" annotation(Dialog(tab="Advanced",enable=useSolver));
