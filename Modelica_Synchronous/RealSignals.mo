@@ -3,7 +3,7 @@ package RealSignals "Library of clocked blocks for Real signals"
   extends Modelica.Icons.Package;
   package Sampler "Library of sampler and hold blocks for Real signals"
     block Sample
-      "Sample the continuous-time, Real input signal and provide it as clocked output signal (clock is infered)"
+      "Sample the continuous-time, Real input signal and provide it as clocked output signal (clock is inferred)"
       extends Modelica_Synchronous.RealSignals.Interfaces.PartialSISOSampler;
 
     equation
@@ -30,7 +30,7 @@ package RealSignals "Library of clocked blocks for Real signals"
         Documentation(info="<html>
 <p>
 This block samples the continuous-time, Real input signal u and provides it as
-clocked output signal y. The clock of the output signal is infered
+clocked output signal y. The clock of the output signal is inferred
 (that is, it needs to be defined somewhere else in the clocked partition).
 If this is not desired, use block
 <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.SampleClocked\">SampleClocked</a>
@@ -528,7 +528,7 @@ samples a sine signal with a periodic clock of 20 ms period, and adds the follow
 <p>
 This block holds the clocked Real input signal u with a zero order hold
 and provides it as continuous-time output signal y.
-The clock of the input signal is infered
+The clock of the input signal is inferred
 (that is, it needs to be defined somewhere else in the clocked partition).
 </p>
 
@@ -1978,7 +1978,7 @@ then upsamples the resulting clocked signal with a factor of 3:<br>
    </tr>
 </table>
 <p>
-The upsampling factor is explicitly given at the upSample2 block, which also makes the factor visible in the icon. For the upSample1 block the factor is infered.
+The upsampling factor is explicitly given at the upSample2 block, which also makes the factor visible in the icon. For the upSample1 block the factor is inferred.
 As can be seen, upsample1 introduces 3 additional clock ticks for the
 output y. Note, the up-arrow in the icon of the upSample blocks indicates that the
 clocks of their outputs is faster than the clocks of their inputs.
@@ -2575,7 +2575,7 @@ which should have a very large period before they repeat itself and
 appropriate statistic properties such that the sequence appears to be
 a random draw. For real-valued random numbers, the integers are scaled to
 the real interval 0.0-1.0. They result in a uniformly distributed random variate
-between 0-1, which has to be tranformed to give a random variate of a wanted
+between 0-1, which has to be transformed to give a random variate of a wanted
 distribution. There are two types of techniques for transforming random variates:
 </p>
 <ul>

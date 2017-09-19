@@ -5,7 +5,7 @@ package IntegerSignals "Library of clocked blocks for Integer signals"
     extends Modelica.Icons.Package;
 
     block Sample
-      "Sample the continuous-time, Integer input signal and provide it as clocked output signal (clock is infered)"
+      "Sample the continuous-time, Integer input signal and provide it as clocked output signal (clock is inferred)"
       extends Modelica_Synchronous.IntegerSignals.Interfaces.PartialSISOSampler;
 
     equation

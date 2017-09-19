@@ -5,7 +5,7 @@ package BooleanSignals "Library of clocked blocks for Boolean signals"
     extends Modelica.Icons.Package;
 
     block Sample
-      "Sample the continuous-time, Boolean input signal and provide it as clocked output signal (clock is infered)"
+      "Sample the continuous-time, Boolean input signal and provide it as clocked output signal (clock is inferred)"
       extends Modelica_Synchronous.BooleanSignals.Interfaces.PartialSISOSampler;
 
     equation
