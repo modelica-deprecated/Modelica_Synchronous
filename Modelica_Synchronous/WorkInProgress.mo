@@ -3232,13 +3232,13 @@ the initial value defined via parameter <b>y0</b>.
   block Interpolator
     "Super-sample the clocked Real input signal and provide it linearly interpolated and optionally filterd as clocked output signal"
     parameter Boolean inferFactor=true
-      "= true, if super-sampling factor is inferred"  annotation(Evaluate=true, choices(__Dymola_checkBox=true));
+      "= true, if super-sampling factor is inferred"  annotation(Evaluate=true, choices(checkBox=true));
     parameter Integer factor(min=1)=1
       "Super-sampling factor >= 1 (if inferFactor=false)"
                                                   annotation(Evaluate=true, Dialog(enable=not inferFactor));
     parameter Boolean movingAverageFilter = true
       "= true, linearly interpolated signal is filtered by moving average filter (current restriction: inferFactor and movingAverageFilter cannot be both true)"
-      annotation(choices(__Dymola_checkBox=true));
+      annotation(choices(checkBox=true));
     Modelica.Blocks.Interfaces.RealInput u
       "Connector of clocked, Real input signal"
       annotation (Placement(transformation(extent={{-140,-20},{-100,20}},

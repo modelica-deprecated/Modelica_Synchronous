@@ -710,7 +710,7 @@ Connector with one output signal of type Boolean.
 
       parameter Boolean useSolver = false
         "= true, if solverMethod shall be explicitly defined"
-        annotation(Evaluate=true, Dialog(tab="Advanced"), choices(__Dymola_checkBox=true));
+        annotation(Evaluate=true, Dialog(tab="Advanced"), choices(checkBox=true));
       parameter Modelica_Synchronous.Types.SolverMethod solverMethod="ExplicitEuler"
         "Integration method used for discretized continuous-time partitions" annotation(Dialog(tab="Advanced",enable=useSolver));
       Modelica_Synchronous.ClockSignals.Interfaces.ClockOutput y

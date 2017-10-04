@@ -222,7 +222,7 @@ Analog to the corresponding Real signal block example there exists an elementary
     block SubSample
       "Sub-sample the clocked Integer input signal and provide it as clocked output signal"
       parameter Boolean inferFactor=true
-        "= true, if sub-sampling factor is inferred"  annotation(Evaluate=true, choices(__Dymola_checkBox=true));
+        "= true, if sub-sampling factor is inferred"  annotation(Evaluate=true, choices(checkBox=true));
       parameter Integer factor(min=1)=1
         "Sub-sampling factor >= 1 (ignored if inferFactor=true)"
                                                                 annotation(Evaluate=true, Dialog(enable=not inferFactor));
@@ -332,7 +332,7 @@ Analog to the corresponding Real signal block example there exists an elementary
     block SuperSample
       "Super-sample the clocked Integer input signal and provide it as clocked output signal"
       parameter Boolean inferFactor=true
-        "= true, if super-sampling factor is inferred"  annotation(Evaluate=true, choices(__Dymola_checkBox=true));
+        "= true, if super-sampling factor is inferred"  annotation(Evaluate=true, choices(checkBox=true));
       parameter Integer factor(min=1)=1
         "Super-sampling factor >= 1 (ignored if inferFactor=true)"
                                                     annotation(Evaluate=true, Dialog(enable=not inferFactor));
@@ -830,7 +830,7 @@ Analog to the corresponding Real signal block example there exists an elementary
         "Upsample the clocked Integer input signal and provide it as clocked output signal"
 
         parameter Boolean inferFactor=true
-          "= true, if upsampling factor is inferred"  annotation(Evaluate=true, choices(__Dymola_checkBox=true));
+          "= true, if upsampling factor is inferred"  annotation(Evaluate=true, choices(checkBox=true));
         parameter Integer factor(min=1)=1
           "Upsampling factor >= 1 (if inferFactor=false)" annotation(Evaluate=true, Dialog(enable=not inferFactor));
         Modelica.Blocks.Interfaces.IntegerInput

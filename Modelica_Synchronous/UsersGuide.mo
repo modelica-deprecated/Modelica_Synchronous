@@ -902,7 +902,7 @@ able to support this library.
 </ul>
 </html>"));
   end Contact;
-  annotation (__Dymola_DocumentationClass=true, Documentation(info="<html>
+  annotation (DocumentationClass=true, Documentation(info="<html>
 <p>
 Library <b>Modelica_Synchronous</b> is a Modelica package
 to precisely define and synchronize sampled data systems with different sampling rates. This package contains the <b>user's guide</b> for
