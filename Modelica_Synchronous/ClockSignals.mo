@@ -23,7 +23,6 @@ package ClockSignals "Library of blocks for clocked signals"
                         graphics={
             Text(
               extent={{-200,-110},{200,-175}},
-              lineColor={0,0,0},
               textString="%period s"),
             Rectangle(
               extent={{20,58},{40,46}},
@@ -38,12 +37,10 @@ package ClockSignals "Library of blocks for clocked signals"
               rotation=90,
               origin={52,60},
               pattern=LinePattern.None,
-              lineColor={0,0,0},
               fillColor={95,95,95}),
             Text(
               visible=useSolver,
               extent={{-300,-180},{300,-245}},
-              lineColor={0,0,0},
               textString="%solverMethod")}),
         Diagram,
         Documentation(info="<html>
@@ -109,7 +106,6 @@ For an example, see
                         graphics={
             Text(
               extent={{-200,-110},{200,-175}},
-              lineColor={0,0,0},
               textString="%factor %resolution"),
             Rectangle(
               extent={{20,58},{40,46}},
@@ -128,7 +124,6 @@ For an example, see
             Text(
               visible=useSolver,
               extent={{-300,-180},{300,-245}},
-              lineColor={0,0,0},
               textString="%solverMethod")}),
         Diagram,
         Documentation(info="<html>
@@ -188,7 +183,6 @@ For an example, see
             Text(
               visible=useSolver,
               extent={{-300,-110},{300,-175}},
-              lineColor={0,0,0},
               textString="%solverMethod")}),
         Diagram,
         Documentation(info="<html>
@@ -233,12 +227,10 @@ to clocks see
 
       Modelica_Synchronous.ClockSignals.Interfaces.ClockInput u
         "Connector of a clock as input signal"
-        annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
-            rotation=0)));
+        annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
       Modelica_Synchronous.ClockSignals.Interfaces.ClockOutput y
         "Connector of a clock as output signal (clock y is slower as clock of u)"
-        annotation (Placement(transformation(extent={{100,-10},{120,10}},
-            rotation=0)));
+        annotation (Placement(transformation(extent={{100,-10},{120,10}})));
     equation
       y = subSample(u,factor);
 
@@ -261,16 +253,13 @@ to clocks see
               textString="%name"),
             Text(
               extent={{-200,-85},{200,-150}},
-              lineColor={0,0,0},
               textString="%factor"),
             Line(
               points={{-100,0},{-80,0},{-80,-60},{60,-60},{60,0},{100,0}},
               pattern=LinePattern.Dot,
-              smooth=Smooth.None,
               color={95,95,95}),                       Line(
               points={{-80,-60},{-80,0},{-100,0}},
               color={95,95,95},
-              smooth=Smooth.None,
               pattern=LinePattern.Dot),
             Ellipse(
               extent={{-95,-45},{-65,-75}},
@@ -305,7 +294,6 @@ to clocks see
             Line(
               points={{-36,-60},{-36,16},{14,16},{14,60},{60,60},{60,0}},
               color={175,175,175},
-              smooth=Smooth.None,
               pattern=LinePattern.Dot),
             Polygon(
               points={{25,0},{5,20},{5,10},{-25,10},{-25,-10},{5,-10},{5,-20},
@@ -319,8 +307,7 @@ to clocks see
             preserveAspectRatio=false,
             extent={{-100,-100},{100,100}},
             grid={2,2},
-            initialScale=0.06),
-                         graphics),
+            initialScale=0.06)),
         Documentation(info="<html>
 <p>
 This block sub-samples the input clock u and provides it as
@@ -367,12 +354,10 @@ clock subSample.y is slower as clock subSample.u.
 
       Modelica_Synchronous.ClockSignals.Interfaces.ClockInput u
         "Connector of a clock as input signal"
-        annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
-            rotation=0)));
+        annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
       Modelica_Synchronous.ClockSignals.Interfaces.ClockOutput y
         "Connector of a clock as output signal (clock y is faster as clock of u)"
-        annotation (Placement(transformation(extent={{100,-10},{120,10}},
-            rotation=0)));
+        annotation (Placement(transformation(extent={{100,-10},{120,10}})));
     equation
       y = superSample(u,factor);
 
@@ -395,7 +380,6 @@ clock subSample.y is slower as clock subSample.u.
               textString="%name"),
             Text(
               extent={{-200,-85},{200,-150}},
-              lineColor={0,0,0},
               textString="%factor"),
                                    Line(points={{-80,-60},{-40,-60},{-40,-60},{0,-60},
                   {0,-60},{0,-60},{0,80},{40,80},{40,80},{80,80},{80,0},{80,0},{80,0},
@@ -404,7 +388,6 @@ clock subSample.y is slower as clock subSample.u.
               thickness=0.5),                          Line(
               points={{-80,-60},{-80,0},{-100,0}},
               color={95,95,95},
-              smooth=Smooth.None,
               pattern=LinePattern.Dot,
               thickness=0.5),
             Ellipse(
@@ -462,8 +445,7 @@ clock subSample.y is slower as clock subSample.u.
             preserveAspectRatio=false,
             extent={{-100,-100},{100,100}},
             grid={2,2},
-            initialScale=0.06),
-                         graphics),
+            initialScale=0.06)),
         Documentation(info="<html>
 <p>
 This block super-samples the clock input signal u and provides it as
@@ -512,12 +494,10 @@ clock superSample.y is faster as clock superSample.u.
             annotation(Dialog(group="Shift first clock activation for 'shiftCounter/resolution*interval(u)' seconds"));
 
       Interfaces.ClockInput                u "Connector of clock input signal"
-        annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
-            rotation=0)));
+        annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
       Interfaces.ClockOutput                y
         "Connector of clock output signal"
-        annotation (Placement(transformation(extent={{100,-10},{120,10}},
-            rotation=0)));
+        annotation (Placement(transformation(extent={{100,-10},{120,10}})));
     equation
       y = shiftSample(u,shiftCounter,resolution);
 
@@ -543,7 +523,6 @@ clock superSample.y is faster as clock superSample.u.
               textString="%name"),
             Text(
               extent={{-200,-85},{200,-150}},
-              lineColor={0,0,0},
               textString="%shiftCounter/%resolution"),
                                    Line(points={{-80,-50},{-40,-50},{-40,50}},
                                      color={95,95,95},
@@ -578,8 +557,7 @@ clock superSample.y is faster as clock superSample.u.
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
             grid={2,2},
-            initialScale=0.06),
-                         graphics),
+            initialScale=0.06)),
         Documentation(info="<html>
 <p>
 This block shifts the first activation of clock output y by

@@ -305,41 +305,25 @@ package WorkInProgress "Models that are under developmend and test models"
                 fillPattern=FillPattern.Solid),
               Line(
                 points={{-46,20},{-46,8}},
-                color={0,0,0},
-                smooth=Smooth.None,
                 pattern=LinePattern.Dot),
               Line(
                 points={{-22,20},{-22,8}},
-                color={0,0,0},
-                smooth=Smooth.None,
                 pattern=LinePattern.Dot),
               Line(
                 points={{-4,18},{-4,-18}},
-                color={0,0,0},
-                smooth=Smooth.None,
                 pattern=LinePattern.Dot),
               Line(
                 points={{26,-6},{26,-18}},
-                color={0,0,0},
-                smooth=Smooth.None,
                 pattern=LinePattern.Dot),
               Line(
                 points={{48,20},{48,8}},
-                color={0,0,0},
-                smooth=Smooth.None,
                 pattern=LinePattern.Dot),
               Line(
-                points={{-80,-40},{76,-40}},
-                color={0,0,0},
-                smooth=Smooth.None),
+                points={{-80,-40},{76,-40}}),
               Line(
-                points={{-80,-38},{-80,-42}},
-                color={0,0,0},
-                smooth=Smooth.None),
+                points={{-80,-38},{-80,-42}}),
               Line(
-                points={{76,-38},{84,-40},{76,-42},{76,-38}},
-                color={0,0,0},
-                smooth=Smooth.None)}));
+                points={{76,-38},{84,-40},{76,-42},{76,-38}})}));
       end ControllerTask;
 
       block TransmitReceive "TrueTime simulation: Transmit/Receive"
@@ -390,12 +374,10 @@ package WorkInProgress "Models that are under developmend and test models"
                 textString="Transmit-Receive"),
               Line(
                 points={{-72,-2},{68,-2}},
-                color={0,0,255},
-                smooth=Smooth.None),
+                color={0,0,255}),
               Line(
                 points={{-42,-28},{-42,-2}},
-                color={255,0,0},
-                smooth=Smooth.None),
+                color={255,0,0}),
               Rectangle(extent={{-58,-28},{-26,-52}}, lineColor={255,0,0},
                 fillPattern=FillPattern.Solid,
                 fillColor={215,215,215}),
@@ -404,31 +386,26 @@ package WorkInProgress "Models that are under developmend and test models"
                 fillColor={215,215,215}),
               Line(
                 points={{26,-28},{26,-2}},
-                color={0,0,255},
-                smooth=Smooth.None),
+                color={0,0,255}),
               Rectangle(extent={{-24,48},{8,24}}, lineColor={255,0,0},
                 fillPattern=FillPattern.Solid,
                 fillColor={215,215,215}),
               Line(
                 points={{-8,-2},{-8,24}},
-                color={255,0,0},
-                smooth=Smooth.None),
+                color={255,0,0}),
               Line(
                 points={{-42,-2},{-8,-2}},
-                color={255,0,0},
-                smooth=Smooth.None),
+                color={255,0,0}),
               Text(
                 extent={{-80,88},{78,70}},
                 lineColor={0,0,255},
                 textString="TrueTime simulation"),
               Line(
                 points={{-8,24},{-10,16},{-6,16},{-8,24}},
-                color={255,0,0},
-                smooth=Smooth.None),
+                color={255,0,0}),
               Line(
                 points={{-42,-2},{-44,-10},{-40,-10},{-42,-2}},
-                color={255,0,0},
-                smooth=Smooth.None)}));
+                color={255,0,0})}));
       end TransmitReceive;
 
       block ControllerNode
@@ -505,20 +482,16 @@ package WorkInProgress "Models that are under developmend and test models"
                 fillColor={215,215,215}),
               Line(
                 points={{-70,-2},{70,-2}},
-                color={0,0,255},
-                smooth=Smooth.None),
+                color={0,0,255}),
               Line(
                 points={{-40,-24},{-40,-2}},
-                color={0,0,255},
-                smooth=Smooth.None),
+                color={0,0,255}),
               Line(
                 points={{-6,-2},{-6,20}},
-                color={0,0,255},
-                smooth=Smooth.None),
+                color={0,0,255}),
               Line(
                 points={{28,-24},{28,-2}},
-                color={0,0,255},
-                smooth=Smooth.None),
+                color={0,0,255}),
               Rectangle(extent={{-60,-24},{-20,-52}},
                                                   lineColor={0,0,255},
                 fillPattern=FillPattern.Solid,
@@ -558,28 +531,18 @@ package WorkInProgress "Models that are under developmend and test models"
                 fillPattern=FillPattern.Solid),
               Line(
                 points={{-20,40},{-20,36}},
-                color={0,0,0},
-                smooth=Smooth.None,
                 pattern=LinePattern.Dot),
               Line(
                 points={{-14,40},{-14,36}},
-                color={0,0,0},
-                smooth=Smooth.None,
                 pattern=LinePattern.Dot),
               Line(
                 points={{-8,40},{-8,28}},
-                color={0,0,0},
-                smooth=Smooth.None,
                 pattern=LinePattern.Dot),
               Line(
                 points={{0,32},{0,28}},
-                color={0,0,0},
-                smooth=Smooth.None,
                 pattern=LinePattern.Dot),
               Line(
                 points={{6,40},{6,36}},
-                color={0,0,0},
-                smooth=Smooth.None,
                 pattern=LinePattern.Dot)}));
       end ControllerNode;
     end TrueTime;
@@ -625,10 +588,9 @@ as output.
                 lineColor={192,192,192},
                 fillColor={192,192,192},
                 fillPattern=FillPattern.Solid),
-              Line(points={{-80,-70},{-50,-70},{50,70},{80,70}}, color={0,0,0}),
+              Line(points={{-80,-70},{-50,-70},{50,70},{80,70}}),
               Text(
                 extent={{-150,-150},{150,-110}},
-                lineColor={0,0,0},
                 textString="uMax=%uMax"),
               Text(
                 extent={{-150,150},{150,110}},
@@ -650,7 +612,7 @@ as output.
                 lineColor={192,192,192},
                 fillColor={192,192,192},
                 fillPattern=FillPattern.Solid),
-              Line(points={{-50,-40},{-30,-40},{30,40},{50,40}}, color={0,0,0}),
+              Line(points={{-50,-40},{-30,-40},{30,40},{50,40}}),
               Text(
                 extent={{46,-6},{68,-18}},
                 lineColor={128,128,128},
@@ -729,17 +691,14 @@ as output.
                 points={{-100,0},{-80,0},{-80,40},{-20,40},{-20,-40},{40,-40},{40,0},{
                     100,0}},
                 color={215,215,215},
-                smooth=Smooth.None,
                 pattern=LinePattern.Dot),
               Line(
                 points={{-100,0},{-50,0},{-50,40},{10,40},{10,-40},{70,-40},{70,-0.3125},
                     {100,0}},
                 pattern=LinePattern.Dot,
-                smooth=Smooth.None,
                 color={255,128,0}),
               Text(
                 extent={{4,-102},{4,-142}},
-                lineColor={0,0,0},
                 textString="%shift/%resolution"),
               Ellipse(
                 extent={{-90,50},{-70,30}},
@@ -824,17 +783,14 @@ as output.
                 points={{-100,0},{-80,0},{-80,40},{-20,40},{-20,-40},{40,-40},{40,0},{
                     100,0}},
                 color={215,215,215},
-                smooth=Smooth.None,
                 pattern=LinePattern.Dot),
               Line(
                 points={{-100,0},{-50,0},{-50,40},{10,40},{10,-40},{70,-40},{70,-0.3125},
                     {100,0}},
                 pattern=LinePattern.Dot,
-                smooth=Smooth.None,
                 color={255,0,255}),
               Text(
                 extent={{4,-102},{4,-142}},
-                lineColor={0,0,0},
                 textString="%shift/%resolution"),
               Ellipse(
                 extent={{-90,50},{-70,30}},
@@ -972,7 +928,6 @@ equation
             Line(
               points={{-80,-82},{-80,48},{-32,48},{-32,-10},{16,-10},{16,22},{64,22}},
               color={0,0,127},
-              smooth=Smooth.None,
               pattern=LinePattern.Dot),
             Text(
               extent={{-30,-4},{82,-58}},
@@ -1000,11 +955,9 @@ equation
               fillPattern=FillPattern.Solid),
             Text(
               extent={{-140,-140},{140,-100}},
-              lineColor={0,0,0},
               textString="Ti=%Ti, Td=%Td"),
             Text(
               extent={{-140,60},{140,100}},
-              lineColor={0,0,0},
               textString="k=%k")}),
         Documentation(info="<html>
 <p>
@@ -1015,7 +968,7 @@ This block defines a text-book version of a discrete-time PID controller by the 
    G(z) = (b0*z^2 + b1*z + b2) / (z^2 - z);
    b0 = k*(1 + T/Ti + Td/T)
    b1 = -k*(1 + 2*Td/T)
-   b2 = k*Td/T       
+   b2 = k*Td/T
 </pre>
 <p>
 where k is the gain of the controller, Ti is the time constant of the integrative part, Td is the time constant of the derivative part, and T is the sample period.
@@ -1026,7 +979,7 @@ This discrete-time form has been derived from the continuous-time
 form of a PID controller by using the backward rectangular approximation (also called backward euler method or right-hand approximation) between the  s- and z- domain:
 </p>
 <pre>
-   s = (z - 1)/(h*z)       
+   s = (z - 1)/(h*z)
 </pre>
 </html>"));
     end PID;
@@ -1063,26 +1016,21 @@ form of a PID controller by using the backward rectangular approximation (also c
     equation
       connect(step.y, sample1.u) annotation (Line(
           points={{-61,10},{-9.2,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(sample1.clock, periodicRealClock.y) annotation (Line(
           points={{-2,2.8},{-2,-10},{-23.4,-10}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(sample1.y, PI1.u) annotation (Line(
           points={{4.6,10},{26,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(sampler.u, step.y) annotation (Line(
           points={{-40,-50},{-48,-50},{-48,10},{-61,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(sampler.y, pID.u) annotation (Line(
           points={{-17,-50},{6,-50}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}),
                           graphics={Text(
@@ -1121,13 +1069,11 @@ form of a PID controller by using the backward rectangular approximation (also c
       connect(FIRbyCoefficients1.u, u)
                                       annotation (Line(
           points={{-22,0},{-120,0}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(FIRbyCoefficients1.y, y)
                                       annotation (Line(
           points={{1,0},{110,0}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       annotation (defaultComponentName="FIR1",
         Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
         graphics={
@@ -1153,8 +1099,6 @@ form of a PID controller by using the backward rectangular approximation (also c
               textString="%order"),
             Text(
               extent={{-150,-110},{150,-150}},
-              lineColor={0,0,0},
-              fillColor={0,0,0},
               fillPattern=FillPattern.Solid,
               textString="f_cut=%f_cut"),
             Text(
@@ -1454,18 +1398,15 @@ by a user.
     equation
       connect(sine.y, sample1.u) annotation (Line(
           points={{-59,30},{-45.2,30}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(sample1.y, fIRbyCoefficients.u) annotation (Line(
           points={{-31.4,30},{-22,30}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(periodicRealClock.y, sample1.clock) annotation (Line(
           points={{-61.4,-8},{-38,-8},{-38,22.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       annotation (Diagram(graphics), experiment(StopTime=0.5));
     end TestFIR_1;
 
@@ -1499,22 +1440,18 @@ by a user.
     equation
       connect(sine.y, sample1.u) annotation (Line(
           points={{-59,30},{-45.2,30}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(sample1.y, fIRbyCoefficients.u) annotation (Line(
           points={{-31.4,30},{-22,30}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(periodicRealClock.y, sample1.clock) annotation (Line(
           points={{-61.4,-8},{-38,-8},{-38,22.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(sine.y, filter.u) annotation (Line(
           points={{-59,30},{-50,30},{-50,-30},{-22,-30}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       annotation (Diagram(graphics={Text(
               extent={{-94,88},{94,40}},
               lineColor={0,0,255},
@@ -1562,30 +1499,24 @@ by a user.
     equation
       connect(step.y,filter1. u) annotation (Line(
           points={{-59,16},{-52,16},{-52,-24},{-22,-24}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(sample1.y,fIRbyCoefficients. u) annotation (Line(
           points={{-31.4,16},{-22,16}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(periodicRealClock.y,sample1. clock) annotation (Line(
           points={{-61.4,-34},{-38,-34},{-38,8.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(step.y, sample1.u) annotation (Line(
           points={{-59,16},{-45.2,16}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(step1.y, filter2.u) annotation (Line(
           points={{-59,-84},{-22,-84}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(sample1.y, movingAverage.u) annotation (Line(
           points={{-31.4,16},{-30,16},{-30,56},{-22,56}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       annotation (Diagram(graphics={Text(
               extent={{-92,110},{96,62}},
               lineColor={0,0,255},
@@ -1630,20 +1561,16 @@ by a user.
           points={{-49.4,0},{-38,0},{-38,42.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(step.y, sample1.u) annotation (Line(
           points={{-59,50},{-45.2,50}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(step1.y, filter2.u) annotation (Line(
           points={{-59,-50},{-22,-50}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(sample1.y, FIR1.u) annotation (Line(
           points={{-31.4,50},{-22,50}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       annotation (Diagram(graphics={Text(
               extent={{-94,106},{94,58}},
               lineColor={0,0,255},
@@ -1674,16 +1601,13 @@ by a user.
           points={{-49.4,0},{-38,0},{-38,42.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(step.y, sample1.u) annotation (Line(
           points={{-59,50},{-45.2,50}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(sample1.y, FIR1.u) annotation (Line(
           points={{-31.4,50},{-22,50}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       annotation (Diagram(graphics={Text(
               extent={{-90,106},{98,58}},
               lineColor={0,0,255},
@@ -1735,46 +1659,37 @@ by a user.
           points={{-37.4,0},{-30,0},{-30,42.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(sine.y, sample1.u) annotation (Line(
           points={{-73,50},{-37.2,50}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(sampler.u, sine.y) annotation (Line(
           points={{-44,-50},{-73,-50},{-73,50}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(sampler.y, ls_interpolator.u) annotation (Line(
           points={{-21,-50},{-2,-50}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(superSample1.u, periodicRealClock.y) annotation (Line(
           points={{4.8,0},{-37.4,0}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(superSample1.y, assignClock1.clock) annotation (Line(
           points={{18.6,0},{58,0},{58,42.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(sample1.y, interpolator1.u)
                                          annotation (Line(
           points={{-23.4,50},{0.8,50}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(interpolator1.y, assignClock1.u)
                                               annotation (Line(
           points={{14.6,50},{50.8,50}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(sample1.y, interpolator2.u) annotation (Line(
           points={{-23.4,50},{-12,50},{-12,24},{0.8,24}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       annotation (Diagram(graphics), experiment(StopTime=0.6));
     end TestInterpolator;
 
@@ -1806,24 +1721,19 @@ by a user.
           points={{-37.4,0},{-30,0},{-30,42.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(sine.y, sample1.u) annotation (Line(
           points={{-71,50},{-37.2,50}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(sampler.u, sine.y) annotation (Line(
           points={{-44,-50},{-71,-50},{-71,50}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(sampler.y, ls_unitDelay.u) annotation (Line(
           points={{-21,-50},{-2,-50}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(sample1.y, UnitDelay1.u) annotation (Line(
           points={{-23.4,50},{-2,50}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       annotation (Diagram(graphics), experiment(StopTime=1.2));
     end TestUnitDelay;
 
@@ -1853,25 +1763,20 @@ by a user.
           points={{-27.4,20},{-12,20},{-12,42.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(sine.y, sample1.u) annotation (Line(
           points={{-71,50},{-19.2,50}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(sampler.u, sine.y) annotation (Line(
           points={{-52,-30},{-64,-30},{-64,50},{-71,50}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(sampler.y, transferFunction2.u)
                                              annotation (Line(
           points={{-29,-30},{-2,-30}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(sample1.y, transferFunction1.u) annotation (Line(
           points={{-5.4,50},{18,50}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       annotation (Diagram(graphics), experiment(StopTime=1.2));
     end TestTransferFunction;
 
@@ -1904,27 +1809,22 @@ by a user.
     equation
       connect(sine.y, sample1.u) annotation (Line(
           points={{-71,50},{-17.2,50}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(periodicRealClock.y, sample1.clock) annotation (Line(
           points={{-31.4,30},{-10,30},{-10,42.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(sampler.y,stateSpace2. u[1]) annotation (Line(
           points={{-23,-30},{-2,-30}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(sampler.u, sine.y) annotation (Line(
           points={{-46,-30},{-62,-30},{-62,50},{-71,50}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(sample1.y, stateSpace1.u[1])
                                           annotation (Line(
           points={{-3.4,50},{18,50}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       annotation (Diagram(graphics), experiment(StopTime=1.2));
     end TestStateSpace;
 
@@ -1960,44 +1860,35 @@ by a user.
     equation
       connect(sine1.y, multiplex2_1.u1[1]) annotation (Line(
           points={{-73,30},{-62,30},{-62,16},{-50,16}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(sine2.y, multiplex2_1.u2[1]) annotation (Line(
           points={{-73,-10},{-62,-10},{-62,4},{-50,4}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(periodicClock1.y, assignClock1.clock) annotation (Line(
           points={{-13.4,-30},{16,-30},{16,2.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(assignClock1.y, gain.u) annotation (Line(
           points={{22.6,10},{38,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(multiplex2_1.y, sample1.u) annotation (Line(
           points={{-27,10},{-15.2,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(sample1.y, assignClock1.u) annotation (Line(
           points={{-1.4,10},{4,10},{4,10},{8.8,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(multiplex2_1.y, sample2.u) annotation (Line(
           points={{-27,10},{-24,10},{-24,54},{-11.2,54}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(periodicClock1.y, sample2.clock) annotation (Line(
           points={{-13.4,-30},{2,-30},{2,38},{-4,38},{-4,46.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(sample2.y, subSample1.u) annotation (Line(
           points={{2.6,54},{12.8,54}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}), graphics), experiment(StopTime=1.2));
     end TestRealSampler;
@@ -2029,36 +1920,29 @@ by a user.
     equation
       connect(sine.y, sample1.u) annotation (Line(
           points={{-71,50},{-35.2,50}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(sample1.y, shiftSample1.u) annotation (Line(
           points={{-21.4,50},{4.8,50}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(shiftSample1.y, add.u1) annotation (Line(
           points={{18.6,50},{28,50},{28,36},{38,36}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(shiftSample2.y, add.u2) annotation (Line(
           points={{22.6,24},{38,24}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(shiftSample2.u, sample1.y) annotation (Line(
           points={{8.8,24},{-6,24},{-6,50},{-21.4,50}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(periodicRealClock.y, shiftSample3.u) annotation (Line(
           points={{-71.4,0},{-55.2,0}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(shiftSample3.y, sample1.clock) annotation (Line(
           points={{-41.4,0},{-28,0},{-28,42.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
                 -100,-100},{100,100}}),
                           graphics), experiment(StopTime=1.2));
@@ -2083,26 +1967,21 @@ by a user.
     equation
       connect(sine.y, sample1.u) annotation (Line(
           points={{-71,30},{-35.2,30}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(periodicRealClock.y, sample1.clock) annotation (Line(
           points={{-43.4,10},{-28,10},{-28,22.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(sample1.y, ClockedRealToTrigger.u) annotation (Line(
           points={{-21.4,30},{-2,30}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(triggeredSampler.u, sine.y) annotation (Line(
           points={{38,70},{-56,70},{-56,30},{-71,30}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(ClockedRealToTrigger.y, triggeredSampler.trigger) annotation (Line(
           points={{21,30},{50,30},{50,58.2}},
-          color={255,0,255},
-          smooth=Smooth.None));
+          color={255,0,255}));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}),
                           graphics), Icon(graphics),
@@ -2128,25 +2007,20 @@ by a user.
           points={{-43.4,10},{-28,10},{-28,22.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(booleanPulse.y, sample1.u) annotation (Line(
           points={{-65,30},{-35.2,30}},
-          color={255,0,255},
-          smooth=Smooth.None));
+          color={255,0,255}));
       connect(sample1.y, ClockedSignalToTrigger.u) annotation (Line(
           points={{-21.4,30},{-2,30}},
-          color={255,0,255},
-          smooth=Smooth.None));
+          color={255,0,255}));
       connect(ClockedSignalToTrigger.y, triggeredBooleanSampler.trigger)
         annotation (Line(
           points={{21,30},{44,30},{44,54.2}},
-          color={255,0,255},
-          smooth=Smooth.None));
+          color={255,0,255}));
       connect(booleanPulse.y, triggeredBooleanSampler.u) annotation (Line(
           points={{-65,30},{-54,30},{-54,66},{32,66}},
-          color={255,0,255},
-          smooth=Smooth.None));
+          color={255,0,255}));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}),
                           graphics), Icon(graphics),
@@ -2173,25 +2047,20 @@ by a user.
           points={{-43.4,10},{-28,10},{-28,22.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(ClockedSignalToTrigger.y, triggeredBooleanSampler.trigger)
         annotation (Line(
           points={{21,30},{44,30},{44,54.2}},
-          color={255,0,255},
-          smooth=Smooth.None));
+          color={255,0,255}));
       connect(integerTable.y, sample1.u) annotation (Line(
           points={{-67,30},{-35.2,30}},
-          color={255,127,0},
-          smooth=Smooth.None));
+          color={255,127,0}));
       connect(integerTable.y, triggeredBooleanSampler.u) annotation (Line(
           points={{-67,30},{-52,30},{-52,66},{32,66}},
-          color={255,127,0},
-          smooth=Smooth.None));
+          color={255,127,0}));
       connect(sample1.y, ClockedSignalToTrigger.u) annotation (Line(
           points={{-21.4,30},{-2,30}},
-          color={255,127,0},
-          smooth=Smooth.None));
+          color={255,127,0}));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}),
                           graphics), Icon(graphics),
@@ -2230,34 +2099,27 @@ by a user.
     equation
       connect(sine.y, sample1.u) annotation (Line(
           points={{-71,50},{-35.2,50}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(periodicRealClock.y, sample1.clock) annotation (Line(
           points={{-47.4,8},{-28,8},{-28,42.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(sample1.y, shiftSample1.u) annotation (Line(
           points={{-21.4,50},{4.8,50}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(backSample2.u, shiftSample1.y) annotation (Line(
           points={{32.8,50},{18.6,50}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(backSample3.u, shiftSample1.y) annotation (Line(
           points={{32.8,16},{26,16},{26,50},{18.6,50}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(backSample2.y, add.u1) annotation (Line(
           points={{46.6,50},{56,50},{56,40},{66,40}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(backSample3.y, add.u2) annotation (Line(
           points={{46.6,16},{56,16},{56,28},{66,28}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}),
                           graphics), Icon(graphics),
@@ -2281,18 +2143,15 @@ by a user.
     equation
       connect(sine.y, sample1.u) annotation (Line(
           points={{-71,50},{-35.2,50}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(periodicRealClock.y, sample1.clock) annotation (Line(
           points={{-37.4,0},{-28,0},{-28,42.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(sample1.y, ClockedRealToSquare.u) annotation (Line(
           points={{-21.4,50},{-6,50}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       annotation (Diagram(graphics), Icon(graphics),
         experiment(StopTime=1.2));
     end TestClockedRealToSquare;
@@ -2359,84 +2218,66 @@ by a user.
     equation
       connect(assignClock1.y, hold1.u) annotation (Line(
           points={{-33.4,70},{-21.2,70}},
-          color={255,127,0},
-          smooth=Smooth.None));
+          color={255,127,0}));
       connect(periodicRealClock.y, assignClock1.clock) annotation (Line(
           points={{-75.4,-90},{-28,-90},{-28,58},{-40,58},{-40,62.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(sample2.u, integerConstant1.y) annotation (Line(
           points={{-45.2,-10},{-59,-10}},
-          color={255,127,0},
-          smooth=Smooth.None));
+          color={255,127,0}));
       connect(integerConstant2.y, sample1.u) annotation (Line(
           points={{-59,-50},{-52,-50},{-52,-48},{-45.2,-48}},
-          color={255,127,0},
-          smooth=Smooth.None));
+          color={255,127,0}));
       connect(periodicRealClock.y, sample1.clock) annotation (Line(
           points={{-75.4,-90},{-28,-90},{-28,-60},{-38,-60},{-38,-55.2}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(sample2.clock, periodicRealClock.y) annotation (Line(
           points={{-38,-17.2},{-38,-24},{-28,-24},{-28,-90},{-75.4,-90}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(assignClock2.clock, periodicRealClock.y) annotation (Line(
           points={{-40,22.8},{-40,16},{-28,16},{-28,-90},{-75.4,-90}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(integerConstant3.y, assignClock2.u) annotation (Line(
           points={{-59,30},{-47.2,30}},
-          color={255,127,0},
-          smooth=Smooth.None));
+          color={255,127,0}));
       connect(subSample1.u, assignClock1.y) annotation (Line(
           points={{-21.2,32},{-26,32},{-26,70},{-33.4,70}},
-          color={255,127,0},
-          smooth=Smooth.None));
+          color={255,127,0}));
       connect(subSample1.y, superSample1.u) annotation (Line(
           points={{-7.4,32},{10.8,32}},
-          color={255,127,0},
-          smooth=Smooth.None));
+          color={255,127,0}));
       connect(sample2.y, shiftSample1.u) annotation (Line(
           points={{-31.4,-10},{-17.2,-10}},
-          color={255,127,0},
-          smooth=Smooth.None));
+          color={255,127,0}));
       connect(shiftSample1.y, backSample1.u) annotation (Line(
           points={{-3.4,-10},{6.8,-10}},
-          color={255,127,0},
-          smooth=Smooth.None));
+          color={255,127,0}));
       connect(integerTable.y, sample3.u) annotation (Line(
           points={{-77,70},{-69.2,70}},
-          color={255,127,0},
-          smooth=Smooth.None));
+          color={255,127,0}));
       connect(sample3.y, assignClock1.u) annotation (Line(
           points={{-55.4,70},{-47.2,70}},
-          color={255,127,0},
-          smooth=Smooth.None));
+          color={255,127,0}));
       connect(assignClock1.y, upSample1.u) annotation (Line(
           points={{-33.4,70},{-27.7,70},{-27.7,70},{-26,70},{-26,112},{34.8,112}},
-          color={255,127,0},
-          smooth=Smooth.None));
+          color={255,127,0}));
       connect(assignClock1.y, UnitDelay1.u) annotation (Line(
           points={{-33.4,70},{-26,70},{-26,88},{30,88}},
-          color={255,127,0},
-          smooth=Smooth.None));
+          color={255,127,0}));
       connect(fractionalDelay.u, assignClock1.y) annotation (Line(
           points={{32,56},{14,56},{14,88},{-26,88},{-26,70},{-33.4,70}},
-          color={255,127,0},
-          smooth=Smooth.None));
+          color={255,127,0}));
       connect(superSample1.y, ClockedSignalToSquare.u) annotation (Line(
           points={{24.6,32},{36,32},{36,22},{50,22}},
-          color={255,127,0},
-          smooth=Smooth.None));
+          color={255,127,0}));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}),
                           graphics), Icon(graphics),
@@ -2505,82 +2346,64 @@ by a user.
           points={{-75.4,-90},{-28,-90},{-28,58},{-42,58},{-42,62.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(periodicRealClock.y, sample1.clock) annotation (Line(
           points={{-75.4,-90},{-28,-90},{-28,-60},{-38,-60},{-38,-55.2}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(sample2.clock, periodicRealClock.y) annotation (Line(
           points={{-38,-17.2},{-38,-24},{-28,-24},{-28,-90},{-75.4,-90}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(assignClock2.clock, periodicRealClock.y) annotation (Line(
           points={{-40,22.8},{-40,16},{-28,16},{-28,-90},{-75.4,-90}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(assignClock2.u, booleanConstant1.y) annotation (Line(
           points={{-47.2,30},{-59,30}},
-          color={255,0,255},
-          smooth=Smooth.None));
+          color={255,0,255}));
       connect(sample2.u, booleanConstant2.y) annotation (Line(
           points={{-45.2,-10},{-59,-10}},
-          color={255,0,255},
-          smooth=Smooth.None));
+          color={255,0,255}));
       connect(sample1.u, booleanConstant3.y) annotation (Line(
           points={{-45.2,-48},{-52,-48},{-52,-50},{-59,-50}},
-          color={255,0,255},
-          smooth=Smooth.None));
+          color={255,0,255}));
       connect(shiftSample1.u, sample2.y) annotation (Line(
           points={{-17.2,-10},{-31.4,-10}},
-          color={255,0,255},
-          smooth=Smooth.None));
+          color={255,0,255}));
       connect(subSample1.u, assignClock1.y) annotation (Line(
           points={{-21.2,48},{-24,48},{-24,70},{-35.4,70}},
-          color={255,0,255},
-          smooth=Smooth.None));
+          color={255,0,255}));
       connect(hold1.u, assignClock1.y) annotation (Line(
           points={{-23.2,70},{-35.4,70}},
-          color={255,0,255},
-          smooth=Smooth.None));
+          color={255,0,255}));
       connect(superSample1.u, subSample1.y) annotation (Line(
           points={{10.8,48},{-7.4,48}},
-          color={255,0,255},
-          smooth=Smooth.None));
+          color={255,0,255}));
       connect(shiftSample1.y, ClockedSignalToSquare.u) annotation (Line(
           points={{-3.4,-10},{18,-10}},
-          color={255,0,255},
-          smooth=Smooth.None));
+          color={255,0,255}));
       connect(booleanConstant.y, sample3.u) annotation (Line(
           points={{-75,70},{-67.2,70}},
-          color={255,0,255},
-          smooth=Smooth.None));
+          color={255,0,255}));
       connect(sample3.y, assignClock1.u) annotation (Line(
           points={{-53.4,70},{-49.2,70}},
-          color={255,0,255},
-          smooth=Smooth.None));
+          color={255,0,255}));
       connect(assignClock1.y, upSample1.u) annotation (Line(
           points={{-35.4,70},{-26,70},{-26,94},{14.8,94}},
-          color={255,0,255},
-          smooth=Smooth.None));
+          color={255,0,255}));
       connect(upSample1.y, UnitDelay1.u) annotation (Line(
           points={{28.6,94},{32,94},{32,98},{50,98}},
-          color={255,0,255},
-          smooth=Smooth.None));
+          color={255,0,255}));
       connect(assignClock1.y, fractionalDelay.u) annotation (Line(
           points={{-35.4,70},{-26,70},{-26,110},{-16,110}},
-          color={255,0,255},
-          smooth=Smooth.None));
+          color={255,0,255}));
       connect(shiftSample1.y, backSample1.u) annotation (Line(
           points={{-3.4,-10},{0,-10},{0,-38},{14.8,-38}},
-          color={255,0,255},
-          smooth=Smooth.None));
+          color={255,0,255}));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}),
                           graphics), Icon(graphics),
@@ -2645,51 +2468,38 @@ by a user.
         annotation (Placement(transformation(extent={{8,-36},{-4,-24}})));
     equation
       connect(speed.flange, load.flange_b)       annotation (Line(
-          points={{115,-5},{115,10},{107,10}},
-          color={0,0,0},
-          smooth=Smooth.None));
+          points={{115,-5},{115,10},{107,10}}));
       connect(torque.flange, load.flange_a) annotation (Line(
-          points={{80,10},{87,10}},
-          color={0,0,0},
-          smooth=Smooth.None));
+          points={{80,10},{87,10}}));
       connect(ramp.y, sample2.u) annotation (Line(
           points={{-90,10},{-69.2,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(sample2.y, feedback.u1) annotation (Line(
           points={{-55.4,10},{-41,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(hold1.y, torque.tau) annotation (Line(
           points={{38.6,10},{58,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(speed.w, sample1.u) annotation (Line(
           points={{115,-21.8},{115,-30},{39.2,-30}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(feedback.y, PI.u) annotation (Line(
           points={{-24,10},{-16,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(PI.y, hold1.u) annotation (Line(
           points={{7,10},{24.8,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(sample1.y, assignClock1.u) annotation (Line(
           points={{25.4,-30},{9.2,-30}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(assignClock1.y, feedback.u2) annotation (Line(
           points={{-4.6,-30},{-33,-30},{-33,2}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(periodicClock.y, assignClock1.clock) annotation (Line(
           points={{-57,-62},{2,-62},{2,-37.2}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-140,-100},
                 {140,100}},
             grid={2,2}), graphics={
@@ -2755,36 +2565,29 @@ by a user.
     equation
       connect(sine.y, sample1.u) annotation (Line(
           points={{-71,50},{-45.2,50}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(sample1.y, assignClock1.u) annotation (Line(
           points={{-31.4,50},{-17.2,50}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(periodicRealClock.y, assignClock1.clock) annotation (Line(
           points={{-45.4,28},{-10,28},{-10,42.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(assignClock1.y, hold1.u) annotation (Line(
           points={{-3.4,50},{8.8,50}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(sine.y, sample2.u) annotation (Line(
           points={{-71,50},{-52,50},{-52,74},{-45.2,74}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(sample2.y, assignClock2.u) annotation (Line(
           points={{-31.4,74},{-19.2,74}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(periodicRealClock.y, assignClock2.clock) annotation (Line(
           points={{-45.4,28},{44,28},{44,62},{-12,62},{-12,66.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}),
                           graphics), experiment(StopTime=1.2));
@@ -2811,22 +2614,18 @@ by a user.
     equation
       connect(sine.y, sample1.u) annotation (Line(
           points={{-71,50},{-59.2,50}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(sample1.y, assignClock1.u) annotation (Line(
           points={{-45.4,50},{-31.2,50}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(periodicRealClock.y, assignClock1.clock) annotation (Line(
           points={{-53.4,24},{-24,24},{-24,42.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(assignClock1.y, fixedDelay.u) annotation (Line(
           points={{-17.4,50},{-8,50}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}),
                           graphics), experiment(StopTime=1.2));
@@ -2848,22 +2647,18 @@ by a user.
     equation
       connect(booleanPulse.y, eventClock.u) annotation (Line(
           points={{-59,30},{-37.2,30}},
-          color={255,0,255},
-          smooth=Smooth.None));
+          color={255,0,255}));
       connect(sine.y, sample1.u) annotation (Line(
           points={{-19,70},{-7.2,70}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(sample1.y, firstOrder.u) annotation (Line(
           points={{6.6,70},{18,70}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(eventClock.y, sample1.clock) annotation (Line(
           points={{-23.4,30},{0,30},{0,62.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}), graphics), experiment(StopTime=1.2));
     end TestEventClockWithIntegrator;
@@ -2889,23 +2684,19 @@ by a user.
     equation
       connect(sine.y, sample1.u) annotation (Line(
           points={{-19,70},{-7.2,70}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(sample1.y, firstOrder.u) annotation (Line(
           points={{6.6,70},{18,70}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(periodicExactClock.y, sample1.clock) annotation (Line(
           points={{-21.4,32},{0,32},{0,62.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       annotation (
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
                 100}}), graphics),
-        experiment(StopTime=0.0001),
-        __Dymola_experimentSetupOutput);
+        experiment(StopTime=0.0001));
     end TestExactClockWithIntegrator;
 
     model TestSuperSampleClock
@@ -2923,10 +2714,10 @@ by a user.
       parameter Boolean y_start=false "initial value of output signal";
       Modelica.Blocks.Interfaces.BooleanInput u
         "Connector with a Boolean input signal"             annotation (Placement(
-            transformation(extent={{-140,-20},{-100,20}}, rotation=0)));
+            transformation(extent={{-140,-20},{-100,20}})));
       Modelica.Blocks.Interfaces.BooleanOutput y
         "Connector with a Boolean output signal"             annotation (Placement(
-            transformation(extent={{100,-10},{120,10}}, rotation=0)));
+            transformation(extent={{100,-10},{120,10}})));
       Modelica.Blocks.Interfaces.BooleanInput trigger annotation (Placement(
             transformation(
             origin={0,-118},
@@ -2988,10 +2779,10 @@ the initial value defined via parameter <b>y0</b>.
       parameter Integer y_start=0 "initial value of output signal";
       Modelica.Blocks.Interfaces.IntegerInput u
         "Connector with a Integer input signal"             annotation (Placement(
-            transformation(extent={{-140,-20},{-100,20}}, rotation=0)));
+            transformation(extent={{-140,-20},{-100,20}})));
       Modelica.Blocks.Interfaces.IntegerOutput y
         "Connector with a Integer output signal"             annotation (Placement(
-            transformation(extent={{100,-10},{120,10}}, rotation=0)));
+            transformation(extent={{100,-10},{120,10}})));
       Modelica.Blocks.Interfaces.BooleanInput trigger annotation (Placement(
             transformation(
             origin={0,-118},
@@ -3082,32 +2873,26 @@ the initial value defined via parameter <b>y0</b>.
     equation
       connect(sample1.y, firstOrder.u) annotation (Line(
           points={{6.6,50},{18,50}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(periodicExactClock.y, sample1.clock) annotation (Line(
           points={{-23.4,70},{0,70},{0,57.2}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(const.y, sample1.u) annotation (Line(
           points={{-59,50},{-7.2,50}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(const.y, firstOrderCont.u) annotation (Line(
           points={{-59,50},{-40,50},{-40,10},{18,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(const.y, firstOrderDiscretized.u) annotation (Line(
           points={{-59,50},{-40,50},{-40,-30},{18,-30}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       annotation (
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                 {100,100}}),
                         graphics),
-        experiment(StopTime=3),
-        __Dymola_experimentSetupOutput);
+        experiment(StopTime=3));
     end TestExactClockWithSolver;
 
     package Effects "Examples demonstrating specific effects"
@@ -3141,32 +2926,26 @@ the initial value defined via parameter <b>y0</b>.
       equation
         connect(sine.y, sample1.u) annotation (Line(
             points={{-39,10},{-25.2,10}},
-            color={0,0,127},
-            smooth=Smooth.None));
+            color={0,0,127}));
         connect(periodicRealClock.y, sample1.clock) annotation (Line(
             points={{-41.4,-28},{-18,-28},{-18,2.8}},
             color={175,175,175},
             pattern=LinePattern.Dot,
-            thickness=0.5,
-            smooth=Smooth.None));
+            thickness=0.5));
         connect(sample1.y, superSample1.u) annotation (Line(
             points={{-11.4,10},{0,10},{0,40},{22.8,40}},
-            color={0,0,127},
-            smooth=Smooth.None));
+            color={0,0,127}));
         connect(sample1.y, upSample1.u)
                                        annotation (Line(
             points={{-11.4,10},{20.8,10}},
-            color={0,0,127},
-            smooth=Smooth.None));
+            color={0,0,127}));
         connect(sample1.y, superSampleIpo1.u)
                                            annotation (Line(
             points={{-11.4,10},{0,10},{0,-20},{22.8,-20}},
-            color={0,0,127},
-            smooth=Smooth.None));
+            color={0,0,127}));
         connect(superSampleIpo1.y, movingAverage.u) annotation (Line(
             points={{36.6,-20},{56,-20}},
-            color={0,0,127},
-            smooth=Smooth.None));
+            color={0,0,127}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                   -100},{100,100}}),
                             graphics),
@@ -3204,26 +2983,22 @@ the initial value defined via parameter <b>y0</b>.
     equation
       connect(booleanPulse.y, eventClock.u) annotation (Line(
           points={{-75,-10},{-37.2,-10}},
-          color={255,0,255},
-          smooth=Smooth.None));
+          color={255,0,255}));
       connect(periodicRealClock.y, y1) annotation (Line(
           points={{-23.4,50},{6,50}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(periodicExactClock.y, y2) annotation (Line(
           points={{-23.4,20},{6,20}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(eventClock.y, y3) annotation (Line(
           points={{-23.4,-10},{6,-10}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
                 -100,-100},{100,100}}), graphics), experiment(StopTime=1.2));
     end TheDifferentClocks;
@@ -3241,12 +3016,10 @@ the initial value defined via parameter <b>y0</b>.
       annotation(choices(checkBox=true));
     Modelica.Blocks.Interfaces.RealInput u
       "Connector of clocked, Real input signal"
-      annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
-          rotation=0)));
+      annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
     Modelica.Blocks.Interfaces.RealOutput y
       "Connector of clocked, Real output signal (clock of y is faster als clock of u)"
-      annotation (Placement(transformation(extent={{100,-10},{120,10}},
-          rotation=0)));
+      annotation (Placement(transformation(extent={{100,-10},{120,10}})));
     Modelica_Synchronous.RealSignals.Sampler.SuperSampleInterpolated         superSampleIpo(final
         inferFactor=inferFactor, final factor=factor)
       annotation (Placement(transformation(extent={{-76,-6},{-64,6}})));
@@ -3262,24 +3035,19 @@ the initial value defined via parameter <b>y0</b>.
                                                       "cannot be both true");
     connect(u, superSampleIpo.u)  annotation (Line(
         points={{-120,0},{-77.2,0}},
-        color={0,0,127},
-        smooth=Smooth.None));
+        color={0,0,127}));
     connect(superSampleIpo.y, movingAverage.u)  annotation (Line(
         points={{-63.4,0},{2,0}},
-        color={0,0,127},
-        smooth=Smooth.None));
+        color={0,0,127}));
     connect(movingAverage.y, y) annotation (Line(
         points={{25,0},{110,0}},
-        color={0,0,127},
-        smooth=Smooth.None));
+        color={0,0,127}));
     connect(superSampleIpo.y, y_aux)  annotation (Line(
         points={{-63.4,0},{-16,0},{-16,32},{18,32}},
-        color={0,0,127},
-        smooth=Smooth.None));
+        color={0,0,127}));
     connect(y_aux, y) annotation (Line(
         points={{18,32},{40,32},{40,0},{110,0}},
-        color={0,0,127},
-        smooth=Smooth.None));
+        color={0,0,127}));
     annotation (Icon(coordinateSystem(
           preserveAspectRatio=true,
           extent={{-100,-100},{100,100}},
@@ -3295,7 +3063,6 @@ the initial value defined via parameter <b>y0</b>.
             points={{-100,0},{-80,0},{-80,-60},{0,-60},{0,80},{80,80},{80,0.078125},
                 {100,0}},
             color={215,215,215},
-            smooth=Smooth.None,
             pattern=LinePattern.Dot),
           Text(
             extent={{-200,173},{200,108}},
@@ -3341,7 +3108,6 @@ the initial value defined via parameter <b>y0</b>.
             fillPattern=FillPattern.Solid),
           Text(visible=not inferFactor,
             extent={{-200,-75},{200,-140}},
-            lineColor={0,0,0},
             textString="%factor"),
           Polygon(
             points={{25,0},{5,20},{5,10},{-25,10},{-25,-10},{5,-10},{5,-20},

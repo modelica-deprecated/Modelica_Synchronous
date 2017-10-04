@@ -36,29 +36,21 @@ package Examples
 
     equation
       connect(speed.flange, load.flange_b)       annotation (Line(
-          points={{108,-5},{108,10},{100,10}},
-          color={0,0,0},
-          smooth=Smooth.None));
+          points={{108,-5},{108,10},{100,10}}));
       connect(feedback.y, PI.u) annotation (Line(
           points={{-24,10},{-14,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(torque.flange, load.flange_a) annotation (Line(
-          points={{73,10},{80,10}},
-          color={0,0,0},
-          smooth=Smooth.None));
+          points={{73,10},{80,10}}));
       connect(ramp.y, feedback.u1) annotation (Line(
           points={{-90,10},{-41,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(PI.y, torque.tau) annotation (Line(
           points={{9,10},{51,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(speed.w, feedback.u2) annotation (Line(
           points={{108,-21.8},{108,-26},{-33,-26},{-33,2}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-140,-100},
                 {140,100}},
             grid={2,2}), graphics={
@@ -131,47 +123,35 @@ Original simple controlled drive with a
       annotation (Placement(transformation(extent={{-106,-46},{-94,-34}})));
     equation
       connect(speed.flange, load.flange_b)       annotation (Line(
-          points={{115,-5},{115,10},{107,10}},
-          color={0,0,0},
-          smooth=Smooth.None));
+          points={{115,-5},{115,10},{107,10}}));
       connect(torque.flange, load.flange_a) annotation (Line(
-          points={{80,10},{87,10}},
-          color={0,0,0},
-          smooth=Smooth.None));
+          points={{80,10},{87,10}}));
       connect(feedback.y, PI.u) annotation (Line(
           points={{-24,10},{-16,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(ramp.y, sample2.u) annotation (Line(
           points={{-90,10},{-69.2,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(sample2.y, feedback.u1) annotation (Line(
           points={{-55.4,10},{-41,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(PI.y, hold1.u) annotation (Line(
           points={{7,10},{24.8,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(hold1.y, torque.tau) annotation (Line(
           points={{38.6,10},{58,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(sample1.u, speed.w) annotation (Line(
           points={{39.2,-32},{115,-32},{115,-21.8}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(feedback.u2, sample1.y) annotation (Line(
           points={{-33,2},{-34,2},{-34,-32},{25.4,-32}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
     connect(periodicClock.y, sample2.clock) annotation (Line(
         points={{-93.4,-40},{-62,-40},{-62,2.8}},
         color={175,175,175},
         pattern=LinePattern.Dot,
-        thickness=0.5,
-        smooth=Smooth.None));
+        thickness=0.5));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-140,
               -100},{140,100}},
             grid={2,2}), graphics={
@@ -245,47 +225,35 @@ modelled as a clocked partition
       annotation (Placement(transformation(extent={{-98,-36},{-86,-24}})));
     equation
       connect(speed.flange, load.flange_b)       annotation (Line(
-          points={{92,3},{92,10},{87,10}},
-          color={0,0,0},
-          smooth=Smooth.None));
+          points={{92,3},{92,10},{87,10}}));
       connect(torque.flange, load.flange_a) annotation (Line(
-          points={{60,10},{67,10}},
-          color={0,0,0},
-          smooth=Smooth.None));
+          points={{60,10},{67,10}}));
       connect(ramp.y, sample2.u) annotation (Line(
           points={{-79,10},{-67.2,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(sample2.y, feedback.u1) annotation (Line(
           points={{-53.4,10},{-45,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(hold1.y, torque.tau) annotation (Line(
           points={{26.6,10},{38,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(speed.w, sample1.u) annotation (Line(
           points={{92,-13.8},{92,-20},{27.2,-20}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(sample1.y, feedback.u2) annotation (Line(
           points={{13.4,-20},{-37,-20},{-37,2}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(feedback.y, PI.u) annotation (Line(
           points={{-28,10},{-20,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(PI.y, hold1.u) annotation (Line(
           points={{3,10},{12.8,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
     connect(periodicClock.y, sample2.clock) annotation (Line(
         points={{-85.4,-30},{-60,-30},{-60,2.8}},
         color={175,175,175},
         pattern=LinePattern.Dot,
-        thickness=0.5,
-        smooth=Smooth.None));
+        thickness=0.5));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-140,
               -100},{140,100}},
             grid={2,2}), graphics={
@@ -363,47 +331,35 @@ taken into account the actual sample period.
       annotation (Placement(transformation(extent={{-100,-46},{-88,-34}})));
     equation
       connect(speed.flange, load.flange_b)       annotation (Line(
-          points={{115,-5},{115,10},{107,10}},
-          color={0,0,0},
-          smooth=Smooth.None));
+          points={{115,-5},{115,10},{107,10}}));
       connect(torque.flange, load.flange_a) annotation (Line(
-          points={{80,10},{87,10}},
-          color={0,0,0},
-          smooth=Smooth.None));
+          points={{80,10},{87,10}}));
       connect(ramp.y, sample2.u) annotation (Line(
           points={{-90,10},{-69.2,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(sample2.y, feedback.u1) annotation (Line(
           points={{-55.4,10},{-41,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(hold1.y, torque.tau) annotation (Line(
           points={{38.6,10},{58,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(speed.w, sample1.u) annotation (Line(
           points={{115,-21.8},{115,-30},{39.2,-30}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(sample1.y, feedback.u2) annotation (Line(
           points={{25.4,-30},{-33,-30},{-33,2}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(feedback.y, PI.u) annotation (Line(
           points={{-24,10},{-16,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(PI.y, hold1.u) annotation (Line(
           points={{7,10},{24.8,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
     connect(periodicClock.y, sample2.clock) annotation (Line(
         points={{-87.4,-40},{-62,-40},{-62,2.8}},
         color={175,175,175},
         pattern=LinePattern.Dot,
-        thickness=0.5,
-        smooth=Smooth.None));
+        thickness=0.5));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-140,
               -100},{140,100}},
             grid={2,2}), graphics={
@@ -480,47 +436,35 @@ a Real periodic clock.
       annotation (Placement(transformation(extent={{-94,-32},{-82,-20}})));
     equation
       connect(speed.flange, load.flange_b)       annotation (Line(
-          points={{95,1},{95,10},{89,10}},
-          color={0,0,0},
-          smooth=Smooth.None));
+          points={{95,1},{95,10},{89,10}}));
       connect(torque.flange, load.flange_a) annotation (Line(
-          points={{62,10},{69,10}},
-          color={0,0,0},
-          smooth=Smooth.None));
+          points={{62,10},{69,10}}));
       connect(ramp.y, sample2.u) annotation (Line(
           points={{-80,10},{-67.2,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(sample2.y, feedback.u1) annotation (Line(
           points={{-53.4,10},{-45,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(hold1.y, torque.tau) annotation (Line(
           points={{32.6,10},{40,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(speed.w, sample1.u) annotation (Line(
           points={{95,-15.8},{95,-20},{31.2,-20}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(sample1.y, feedback.u2) annotation (Line(
           points={{17.4,-20},{-37,-20},{-37,2}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(feedback.y, PI.u)  annotation (Line(
           points={{-28,10},{-22,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(PI.y, hold1.u)  annotation (Line(
           points={{1,10},{18.8,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
     connect(periodicClock.y, sample2.clock) annotation (Line(
         points={{-81.4,-26},{-60,-26},{-60,2.8}},
         color={175,175,175},
         pattern=LinePattern.Dot,
-        thickness=0.5,
-        smooth=Smooth.None));
+        thickness=0.5));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-140,
               -100},{140,100}},
             grid={2,2}), graphics={
@@ -616,51 +560,38 @@ of block <b>periodicClock</b> and then selecting
       annotation (Placement(transformation(extent={{-54,-74},{-42,-62}})));
     equation
       connect(speed.flange, load.flange_b)       annotation (Line(
-          points={{115,-5},{115,10},{107,10}},
-          color={0,0,0},
-          smooth=Smooth.None));
+          points={{115,-5},{115,10},{107,10}}));
       connect(torque.flange, load.flange_a) annotation (Line(
-          points={{80,10},{87,10}},
-          color={0,0,0},
-          smooth=Smooth.None));
+          points={{80,10},{87,10}}));
       connect(ramp.y, sample2.u) annotation (Line(
           points={{-90,10},{-69.2,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(sample2.y, feedback.u1) annotation (Line(
           points={{-55.4,10},{-41,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(hold1.y, torque.tau) annotation (Line(
           points={{38.6,10},{58,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(speed.w, sample1.u) annotation (Line(
           points={{115,-21.8},{115,-30},{39.2,-30}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(feedback.y, PI.u) annotation (Line(
           points={{-24,10},{-16,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(PI.y, hold1.u) annotation (Line(
           points={{7,10},{24.8,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(sample1.y, assignClock1.u) annotation (Line(
           points={{25.4,-30},{9.2,-30}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(assignClock1.y, feedback.u2) annotation (Line(
           points={{-4.6,-30},{-33,-30},{-33,2}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
     connect(periodicClock.y, assignClock1.clock) annotation (Line(
         points={{-41.4,-68},{2,-68},{2,-37.2}},
         color={175,175,175},
         pattern=LinePattern.Dot,
-        thickness=0.5,
-        smooth=Smooth.None));
+        thickness=0.5));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-140,
               -100},{140,100}},
             grid={2,2}), graphics={
@@ -761,46 +692,33 @@ system with one sample period.
         annotation (Placement(transformation(extent={{-56,0},{-36,20}})));
     equation
       connect(speed.flange, load.flange_b)       annotation (Line(
-          points={{110,-4},{110,10},{104,10}},
-          color={0,0,0},
-          smooth=Smooth.None));
+          points={{110,-4},{110,10},{104,10}}));
       connect(feedback2.y, PI.u)
                                 annotation (Line(
           points={{3.2,10},{12,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(torque.flange, load.flange_a) annotation (Line(
-          points={{81,10},{88,10}},
-          color={0,0,0},
-          smooth=Smooth.None));
+          points={{81,10},{88,10}}));
       connect(angle.flange, load.flange_b) annotation (Line(
-          points={{128,-4},{128,10},{104,10}},
-          color={0,0,0},
-          smooth=Smooth.None));
+          points={{128,-4},{128,10},{104,10}}));
       connect(PI.y, torque.tau) annotation (Line(
           points={{35,10},{62.3,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(speed.w, feedback2.u2) annotation (Line(
           points={{110,-16.6},{110,-30},{-4,-30},{-4,3.6}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(angle.phi, feedback1.u2) annotation (Line(
           points={{128,-16.6},{128,-46},{-74,-46},{-74,3.6}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(kinematicPTP.q[1], feedback1.u1) annotation (Line(
           points={{-113,18},{-100,18},{-100,10},{-80.4,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(feedback1.y, gain.u) annotation (Line(
           points={{-66.8,10},{-58,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(gain.y, feedback2.u1) annotation (Line(
           points={{-35,10},{-10.4,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-140,
                 -100},{140,100}},
             grid={2,2}), graphics={
@@ -900,84 +818,63 @@ Original cascade controlled drive with a
         annotation (Placement(transformation(extent={{78,-76},{66,-64}})));
     equation
       connect(speed.flange, load.flange_b)       annotation (Line(
-          points={{110,-4},{110,10},{104,10}},
-          color={0,0,0},
-          smooth=Smooth.None));
+          points={{110,-4},{110,10},{104,10}}));
       connect(feedback2.y, PI.u)
                                 annotation (Line(
           points={{3.2,10},{12,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(torque.flange, load.flange_a) annotation (Line(
-          points={{81,10},{88,10}},
-          color={0,0,0},
-          smooth=Smooth.None));
+          points={{81,10},{88,10}}));
       connect(angle.flange, load.flange_b) annotation (Line(
-          points={{128,-4},{128,10},{104,10}},
-          color={0,0,0},
-          smooth=Smooth.None));
+          points={{128,-4},{128,10},{104,10}}));
       connect(feedback1.y, gain.u) annotation (Line(
           points={{-66.8,10},{-58,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(speed.w, sample1.u) annotation (Line(
           points={{110,-16.6},{110,-20},{53.2,-20}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(angle.phi, sample2.u) annotation (Line(
           points={{128,-16.6},{128,-40},{-40.8,-40}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(sample1.y, feedback2.u2) annotation (Line(
           points={{39.4,-20},{-4,-20},{-4,3.6}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(sample2.y, feedback1.u2) annotation (Line(
           points={{-54.6,-40},{-74,-40},{-74,3.6}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(PI.y, hold1.u) annotation (Line(
           points={{35,10},{40.8,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(hold1.y, torque.tau) annotation (Line(
           points={{54.6,10},{62.3,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(sample3.y, feedback1.u1) annotation (Line(
           points={{-91.4,10},{-80.4,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(kinematicPTP.q[1], sample3.u) annotation (Line(
           points={{-115,10},{-105.2,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
     connect(gain.y, super.u)    annotation (Line(
           points={{-35,10},{-29.2,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
     connect(super.y, feedback2.u1)    annotation (Line(
           points={{-15.4,10},{-10.4,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(subSample1.y, sample3.clock) annotation (Line(
           points={{3.4,-70},{-98,-70},{-98,2.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(periodicRealClock.y, sample1.clock) annotation (Line(
           points={{65.4,-70},{46,-70},{46,-27.2}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(periodicRealClock.y, subSample1.u) annotation (Line(
           points={{65.4,-70},{17.2,-70}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-140,
                 -100},{140,100}},
             grid={2,2}), graphics={
@@ -1079,72 +976,53 @@ clock inference.
         annotation (Placement(transformation(extent={{76,-72},{64,-60}})));
     equation
       connect(speed.flange, load.flange_b)       annotation (Line(
-          points={{110,-4},{110,10},{104,10}},
-          color={0,0,0},
-          smooth=Smooth.None));
+          points={{110,-4},{110,10},{104,10}}));
       connect(feedback2.y, PI.u)
                                 annotation (Line(
           points={{3.2,10},{12,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(torque.flange, load.flange_a) annotation (Line(
-          points={{81,10},{88,10}},
-          color={0,0,0},
-          smooth=Smooth.None));
+          points={{81,10},{88,10}}));
       connect(angle.flange, load.flange_b) annotation (Line(
-          points={{128,-4},{128,10},{104,10}},
-          color={0,0,0},
-          smooth=Smooth.None));
+          points={{128,-4},{128,10},{104,10}}));
       connect(feedback1.y, gain.u) annotation (Line(
           points={{-66.8,10},{-58,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(speed.w, sample1.u) annotation (Line(
           points={{110,-16.6},{110,-20},{53.2,-20}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(angle.phi, sample2.u) annotation (Line(
           points={{128,-16.6},{128,-40},{19.2,-40}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(sample1.y, feedback2.u2) annotation (Line(
           points={{39.4,-20},{-4,-20},{-4,3.6}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(sample2.y, feedback1.u2) annotation (Line(
           points={{5.4,-40},{-74,-40},{-74,3.6}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(PI.y, hold1.u) annotation (Line(
           points={{35,10},{40.8,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(hold1.y, torque.tau) annotation (Line(
           points={{54.6,10},{62.3,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(sample3.y, feedback1.u1) annotation (Line(
           points={{-87.4,10},{-80.4,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(kinematicPTP.q[1], sample3.u) annotation (Line(
           points={{-113,18},{-106,18},{-106,10},{-101.2,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
     connect(gain.y, super.u)    annotation (Line(
           points={{-35,10},{-29.2,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
     connect(super.y, feedback2.u1)    annotation (Line(
           points={{-15.4,10},{-10.4,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(periodicRealClock.y, sample1.clock) annotation (Line(
           points={{63.4,-66},{46,-66},{46,-27.2}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-140,
                 -100},{140,100}},
             grid={2,2}), graphics={
@@ -1249,78 +1127,58 @@ defined by the super-sampling factor defined at the \"super\" block.
         annotation (Placement(transformation(extent={{22,-76},{34,-64}})));
     equation
       connect(speed.flange, load.flange_b)       annotation (Line(
-          points={{110,-4},{110,10},{104,10}},
-          color={0,0,0},
-          smooth=Smooth.None));
+          points={{110,-4},{110,10},{104,10}}));
       connect(feedback2.y, PI.u)
                                 annotation (Line(
           points={{3.2,10},{12,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(torque.flange, load.flange_a) annotation (Line(
-          points={{81,10},{88,10}},
-          color={0,0,0},
-          smooth=Smooth.None));
+          points={{81,10},{88,10}}));
       connect(angle.flange, load.flange_b) annotation (Line(
-          points={{128,-4},{128,10},{104,10}},
-          color={0,0,0},
-          smooth=Smooth.None));
+          points={{128,-4},{128,10},{104,10}}));
       connect(feedback1.y, gain.u) annotation (Line(
           points={{-66.8,10},{-58,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(speed.w, sample1.u) annotation (Line(
           points={{110,-16.6},{110,-20},{53.2,-20}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(angle.phi, sample2.u) annotation (Line(
           points={{128,-16.6},{128,-40},{-44.8,-40}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(sample1.y, feedback2.u2) annotation (Line(
           points={{39.4,-20},{-4,-20},{-4,3.6}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(sample2.y, feedback1.u2) annotation (Line(
           points={{-58.6,-40},{-74,-40},{-74,3.6}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(PI.y, hold1.u) annotation (Line(
           points={{35,10},{40.8,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(hold1.y, torque.tau) annotation (Line(
           points={{54.6,10},{62.3,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(sample3.y, feedback1.u1) annotation (Line(
           points={{-87.4,10},{-80.4,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(kinematicPTP.q[1], sample3.u) annotation (Line(
           points={{-113,18},{-106,18},{-106,10},{-101.2,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
     connect(gain.y, super.u)    annotation (Line(
           points={{-35,10},{-29.2,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
     connect(super.y, feedback2.u1)    annotation (Line(
           points={{-15.4,10},{-10.4,10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(slowClock.y, sample3.clock) annotation (Line(
           points={{-115.4,-68},{-94,-68},{-94,2.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(fastClock.y, sample1.clock) annotation (Line(
           points={{34.6,-70},{46,-70},{46,-27.2}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false,extent={{-140,-100},
                 {140,100}},
             grid={2,2}), graphics={
@@ -1430,7 +1288,7 @@ precisely time-synchronized to each other.
           fixed=true,
           stateSelect=StateSelect.always),
         T_c(start=T_c_start)) annotation (Placement(transformation(
-              extent={{-12,14},{-32,34}}, rotation=0)));
+              extent={{-12,14},{-32,34}})));
       Modelica.Blocks.Math.Add add
         annotation (Placement(transformation(extent={{40,-18},{56,-2}})));
       Modelica.Blocks.Math.InverseBlockConstraints inverseBlockConstraints
@@ -1446,13 +1304,11 @@ precisely time-synchronized to each other.
         a22=a22,
         b=b,
         k0=k0,
-        eps=eps) annotation (Placement(transformation(extent={{88,-20},{108,0}},
-              rotation=0)));
+        eps=eps) annotation (Placement(transformation(extent={{88,-20},{108,0}})));
       Modelica.Blocks.Math.Feedback feedback
-        annotation (Placement(transformation(extent={{-24,-20},{-4,0}},
-              rotation=0)));
+        annotation (Placement(transformation(extent={{-24,-20},{-4,0}})));
       Modelica.Blocks.Math.Gain gain(k=20) annotation (Placement(transformation(
-              extent={{4,-20},{24,0}},  rotation=0)));
+              extent={{4,-20},{24,0}})));
 
       Utilities.ComponentsMixingUnit.CriticalDamping filter(
         n=3,
@@ -1470,8 +1326,7 @@ precisely time-synchronized to each other.
         annotation (Placement(transformation(extent={{-134,-26},{-122,-14}})));
       Modelica.Blocks.Sources.Step step(height=c_high_start - c_start, offset=
             c_start)
-        annotation (Placement(transformation(extent={{-136,14},{-116,34}},
-              rotation=0)));
+        annotation (Placement(transformation(extent={{-136,14},{-116,34}})));
       RealSignals.Sampler.SampleClocked  sample2
         annotation (Placement(transformation(extent={{-108,18},{-96,30}})));
     equation
@@ -1480,58 +1335,45 @@ precisely time-synchronized to each other.
             color={0,0,127}));
       connect(gain.y, add.u2) annotation (Line(
           points={{25,-10},{32,-10},{32,-14.8},{38.4,-14.8}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(inverseBlockConstraints.y2, invMixingUnit.T_c) annotation (Line(
           points={{-5.9,24},{-10,24}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(invMixingUnit.c, inverseBlockConstraints.u2) annotation (Line(
           points={{-34,30},{-38,30},{-38,24},{-48.8,24}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(invMixingUnit.T, feedback.u1) annotation (Line(
           points={{-34,18},{-46,18},{-46,-10},{-22,-10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(filter.y, inverseBlockConstraints.u1) annotation (Line(
           points={{-65,24},{-56.6,24}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(hold1.y, mixingUnit.T_c) annotation (Line(
           points={{78.6,-10},{86,-10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(add.y, hold1.u) annotation (Line(
           points={{56.8,-10},{64.8,-10}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(sample1.u, mixingUnit.T) annotation (Line(
           points={{81.2,-34},{116,-34},{116,-16},{110,-16}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(sample1.y, feedback.u2) annotation (Line(
           points={{67.4,-34},{-14,-34},{-14,-18}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(inverseBlockConstraints.y1, add.u1) annotation (Line(
           points={{-0.7,24},{30,24},{30,-5.2},{38.4,-5.2}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(sample2.u,step. y) annotation (Line(
           points={{-109.2,24},{-115,24}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(filter.u, sample2.y) annotation (Line(
           points={{-88,24},{-95.4,24}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(periodicClock1.y, sample2.clock) annotation (Line(
           points={{-121.4,-20},{-102,-20},{-102,16.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-140,
                 -100},{120,100}}),      graphics={Rectangle(extent={{-90,44},
                 {60,-44}}, lineColor={255,0,0}), Text(
@@ -1734,7 +1576,7 @@ Obviously, the concentration follows reasonably well the desired one. By using a
       Modelica.Mechanics.Rotational.Sources.Torque torque2(
                                         useSupport=false)
                                 annotation (Placement(transformation(extent={{90,-10},
-                {70,10}}, rotation=0)));
+                {70,10}})));
       Modelica.Mechanics.Rotational.Sensors.AngleSensor angleSensor
         annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
@@ -1743,49 +1585,36 @@ Obviously, the concentration follows reasonably well the desired one. By using a
     equation
     connect(speedRef.y, sample1.u)             annotation (Line(
           points={{-69,6},{-61.4,6}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(sample1.y, speedControl.N_des) annotation (Line(
           points={{-45.3,6},{-35.2,6}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(speedControl.Theta, hold1.u) annotation (Line(
           points={{1.6,0},{6.8,0}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(hold1.y, engine.Theta)    annotation (Line(
           points={{20.6,0},{28,0},{28,1.77636e-015},{27.2,1.77636e-015}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(torque2.flange, engine.flange_b)    annotation (Line(
-          points={{70,0},{65.28,0},{65.28,1.77636e-015},{58.56,1.77636e-015}},
-          color={0,0,0},
-          smooth=Smooth.None));
+          points={{70,0},{65.28,0},{65.28,1.77636e-015},{58.56,1.77636e-015}}));
 
       connect(add.y, torque2.tau) annotation (Line(
           points={{109.4,0},{92,0}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(step1.y, add.u2) annotation (Line(
           points={{133.3,-13},{128,-13},{128,-3.6},{123.2,-3.6}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(step.y, add.u1) annotation (Line(
           points={{133.3,14},{128,14},{128,3.6},{123.2,3.6}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(triggeredSpeed.N_clocked, speedControl.N) annotation (Line(
           points={{-3,-50},{-60,-50},{-60,-9},{-35.2,-9}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(engine.flange_b, angleSensor.flange) annotation (Line(
-          points={{58.56,1.77636e-015},{64,1.77636e-015},{64,-22}},
-          color={0,0,0},
-          smooth=Smooth.None));
+          points={{58.56,1.77636e-015},{64,1.77636e-015},{64,-22}}));
       connect(angleSensor.phi, triggeredSpeed.angle) annotation (Line(
           points={{64,-43},{64,-50},{20,-50}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                 -100},{160,100}}),
                           graphics={Rectangle(extent={{104,26},{154,-32}},
@@ -1794,8 +1623,7 @@ Obviously, the concentration follows reasonably well the desired one. By using a
               lineColor={0,0,255},
               textString="Load torque")}),
                                      Icon(coordinateSystem(preserveAspectRatio=true,
-                      extent={{-100,-100},{100,100}}),
-                                          graphics),
+                      extent={{-100,-100},{100,100}})),
       experiment(StopTime=1.1),
       Documentation(info="<html>
 <p>
@@ -1963,7 +1791,6 @@ initial equation
           annotation (Diagram(graphics), Icon(graphics={
                 Rectangle(
                   extent={{-100,100},{100,-100}},
-                  lineColor={0,0,0},
                   fillColor={255,255,255},
                   fillPattern=FillPattern.Solid),
                 Polygon(
@@ -2265,12 +2092,11 @@ initial equation
           Modelica.Mechanics.Rotational.Sources.Torque
                                     torque(useSupport=false)
                                    annotation (Placement(transformation(extent={{40,-8},
-                    {56,8}},          rotation=0)));
+                    {56,8}})));
           Modelica.Mechanics.Rotational.Components.Inertia
                                         inertia1(J=0.14, w(fixed=true, start=209),
             phi(fixed=true, start=0))
-            annotation (Placement(transformation(extent={{64,-8},{80,8}},
-                  rotation=0)));
+            annotation (Placement(transformation(extent={{64,-8},{80,8}})));
           Modelica.Mechanics.Rotational.Sensors.SpeedSensor speedSensor annotation (
              Placement(transformation(
                 extent={{-10,-10},{10,10}},
@@ -2286,78 +2112,57 @@ initial equation
         equation
           connect(Theta, throttleBody.Theta) annotation (Line(
               points={{-120,0},{-92,0},{-92,36},{-80,36}},
-              color={0,0,127},
-              smooth=Smooth.None));
+              color={0,0,127}));
           connect(throttleBody.m_ai_dot, intakeManifold.m_ai_dot) annotation (Line(
               points={{-57,30},{-52,30},{-52,10},{-86,10},{-86,-4},{-80,-4}},
-              color={0,0,127},
-              smooth=Smooth.None));
+              color={0,0,127}));
           connect(intakeManifold.P_m, throttleBody.Pm) annotation (Line(
               points={{-57,-16},{-52,-16},{-52,-26},{-88,-26},{-88,24},{-80,24}},
-              color={0,0,127},
-              smooth=Smooth.None));
+              color={0,0,127}));
           connect(inductionToPowerDelay.m_a_delayed, torqueGeneration.m_a)
             annotation (Line(
               points={{-1,-10},{6,-10},{6,44},{16,44}},
-              color={0,0,127},
-              smooth=Smooth.None));
+              color={0,0,127}));
           connect(cylinderAirCharge.m_a, inductionToPowerDelay.m_a) annotation (
               Line(
               points={{-29,-10},{-24,-10}},
-              color={0,0,127},
-              smooth=Smooth.None));
+              color={0,0,127}));
           connect(intakeManifold.m_ao_dot, cylinderAirCharge.m_ao_dot) annotation (
               Line(
               points={{-57,-4},{-56,-4},{-56,-10},{-52,-10}},
-              color={0,0,127},
-              smooth=Smooth.None));
+              color={0,0,127}));
           connect(cylinderAirCharge.clock, crankshaftPositionEvent.edge180Clock)
             annotation (Line(
               points={{-40,-22},{-40,-58},{49,-58}},
-              color={128,0,255},
-              smooth=Smooth.None));
+              color={128,0,255}));
           connect(inductionToPowerDelay.clock, crankshaftPositionEvent.edge180Clock)
             annotation (Line(
               points={{-12,-22},{-12,-58},{49,-58}},
-              color={128,0,255},
-              smooth=Smooth.None));
+              color={128,0,255}));
           connect(torque.tau, torqueGeneration.T_torque_e) annotation (Line(
               points={{38.4,0},{32,0},{32,20},{48,20},{48,38},{39,38}},
-              color={0,0,127},
-              smooth=Smooth.None));
+              color={0,0,127}));
           connect(torque.flange, inertia1.flange_a) annotation (Line(
-              points={{56,0},{64,0}},
-              color={0,0,0},
-              smooth=Smooth.None));
+              points={{56,0},{64,0}}));
           connect(inertia1.flange_b, speedSensor.flange) annotation (Line(
-              points={{80,0},{84,0},{84,-8},{88,-8}},
-              color={0,0,0},
-              smooth=Smooth.None));
+              points={{80,0},{84,0},{84,-8},{88,-8}}));
           connect(inertia1.flange_b, flange_b) annotation (Line(
-              points={{80,0},{104,0}},
-              color={0,0,0},
-              smooth=Smooth.None));
+              points={{80,0},{104,0}}));
           connect(torqueGeneration.N, speedSensor.w) annotation (Line(
               points={{16,32},{10,32},{10,-36},{88,-36},{88,-29}},
-              color={0,0,127},
-              smooth=Smooth.None));
+              color={0,0,127}));
           connect(intakeManifold.N, speedSensor.w) annotation (Line(
               points={{-80,-16},{-86,-16},{-86,-78},{88,-78},{88,-29}},
-              color={0,0,127},
-              smooth=Smooth.None));
+              color={0,0,127}));
           connect(angleSensor.flange, inertia1.flange_b) annotation (Line(
-              points={{100,-36},{100,0},{80,0}},
-              color={0,0,0},
-              smooth=Smooth.None));
+              points={{100,-36},{100,0},{80,0}}));
           connect(angleSensor.phi, crankshaftPositionEvent.angle) annotation (
              Line(
               points={{100,-57},{100,-64},{72,-64}},
-              color={0,0,127},
-              smooth=Smooth.None));
+              color={0,0,127}));
           annotation (Icon(graphics={
                 Rectangle(
                   extent={{-100,100},{100,-100}},
-                  lineColor={0,0,0},
                   fillColor={255,255,255},
                   fillPattern=FillPattern.Solid),
                 Polygon(
@@ -2368,7 +2173,6 @@ initial equation
                   fillPattern=FillPattern.Solid),
                 Polygon(
                   points={{58,8},{-34,-6},{-34,-46},{58,-32},{58,8}},
-                  lineColor={0,0,0},
                   pattern=LinePattern.None,
                   fillColor={135,135,135},
                   fillPattern=FillPattern.Solid),
@@ -2409,7 +2213,7 @@ initial equation
                   pattern=LinePattern.None,
                   fillColor={95,95,95},
                   fillPattern=FillPattern.Solid),
-                Line(points={{-46,38},{-36,54},{40,66}}, color={0,0,0}),
+                Line(points={{-46,38},{-36,54},{40,66}}),
                 Text(
                   extent={{-100,-50},{100,-90}},
                   lineColor={0,0,255},
@@ -2426,15 +2230,12 @@ initial equation
         import SI = Modelica.SIunits;
           Modelica.Blocks.Interfaces.RealInput T_c(unit="K")
             "Cooling temperature"
-            annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
-                  rotation=0)));
+            annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
           Modelica.Blocks.Interfaces.RealOutput c(unit="mol/l") "Concentration"
-            annotation (Placement(transformation(extent={{100,40},{140,80}},
-                  rotation=0)));
+            annotation (Placement(transformation(extent={{100,40},{140,80}})));
           Modelica.Blocks.Interfaces.RealOutput T(unit="K")
             "Temperature in mixing unit"
-            annotation (Placement(transformation(extent={{100,-80},{140,-40}},
-                  rotation=0)));
+            annotation (Placement(transformation(extent={{100,-80},{140,-40}})));
           parameter Real c0(unit="mol/l") = 0.848 "Nominal concentration";
           parameter SI.Temperature T0 = 308.5 "Nominal temperature";
           parameter Real a1 = 0.2674;
@@ -2460,8 +2261,7 @@ initial equation
           der(c) = -wa11*c - wa12*gamma + wa13;
           der(T) = -wa21*T + wa22*gamma + wa23 + wb*T_c;
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
-                    -100,-100},{100,100}}),
-                              graphics),
+                    -100,-100},{100,100}})),
                                Icon(coordinateSystem(preserveAspectRatio=false,
                   extent={{-100,-100},{100,100}}), graphics={
                 Rectangle(
@@ -2479,31 +2279,26 @@ initial equation
                   textString="%name"),
                 Text(
                   extent={{118,-86},{160,-124}},
-                  lineColor={0,0,0},
                   textString="T"),
                 Text(
                   extent={{116,114},{158,76}},
-                  lineColor={0,0,0},
                   textString="c"),
                 Text(
                   extent={{-194,72},{-108,34}},
-                  lineColor={0,0,0},
                   textString="T_c"),
-                Line(points={{0,-50},{0,-100}}, color={0,0,0}),
+                Line(points={{0,-50},{0,-100}}),
                 Ellipse(
                   extent={{-42,-38},{0,-66}},
-                  lineColor={0,0,0},
                   fillColor={255,255,255},
                   fillPattern=FillPattern.Solid),
                 Ellipse(
                   extent={{0,-38},{42,-66}},
-                  lineColor={0,0,0},
                   fillColor={255,255,255},
                   fillPattern=FillPattern.Solid),
-                Line(points={{0,80},{0,16}}, color={0,0,0}),
-                Line(points={{20,80},{20,16}}, color={0,0,0}),
-                Line(points={{-86,-72},{-86,-114}}, color={0,0,0}),
-                Line(points={{-66,-72},{-66,-114}}, color={0,0,0})}));
+                Line(points={{0,80},{0,16}}),
+                Line(points={{20,80},{20,16}}),
+                Line(points={{-86,-72},{-86,-114}}),
+                Line(points={{-66,-72},{-66,-114}})}));
         end MixingUnit;
 
         model MixingUnitWithContinuousControl
@@ -2553,16 +2348,14 @@ initial equation
               fixed=true,
               stateSelect=StateSelect.always),
             T_c(start=T_c_start, fixed=true))
-            annotation (Placement(transformation(extent={{-14,14},{-34,34}},
-                  rotation=0)));
+            annotation (Placement(transformation(extent={{-14,14},{-34,34}})));
           Modelica.Blocks.Math.Add add
             annotation (Placement(transformation(extent={{40,-18},{56,-2}})));
           Modelica.Blocks.Math.InverseBlockConstraints inverseBlockConstraints
             annotation (Placement(transformation(extent={{-54,8},{-2,40}})));
           Modelica.Blocks.Continuous.CriticalDamping filter(f=freq, n=3,
             normalized=false)
-            annotation (Placement(transformation(extent={{-86,14},{-66,34}},
-                  rotation=0)));
+            annotation (Placement(transformation(extent={{-86,14},{-66,34}})));
           Utilities.ComponentsMixingUnit.MixingUnit   mixingUnit(
             c(start=c_start, fixed=true),
             T(start=T_start, fixed=true),
@@ -2574,17 +2367,14 @@ initial equation
             b = b,
             k0= k0,
             eps=eps)
-            annotation (Placement(transformation(extent={{70,-20},{90,0}}, rotation=
-                   0)));
+            annotation (Placement(transformation(extent={{70,-20},{90,0}})));
           Modelica.Blocks.Math.Feedback feedback
-            annotation (Placement(transformation(extent={{-24,-20},{-4,0}},
-                  rotation=0)));
+            annotation (Placement(transformation(extent={{-24,-20},{-4,0}})));
           Modelica.Blocks.Sources.Step step(height=c_high_start - c_start, offset=
                 c_start)
-            annotation (Placement(transformation(extent={{-118,14},{-98,34}},
-                  rotation=0)));
+            annotation (Placement(transformation(extent={{-118,14},{-98,34}})));
           Modelica.Blocks.Math.Gain gain(k=20) annotation (Placement(transformation(
-                  extent={{4,-20},{24,0}},  rotation=0)));
+                  extent={{4,-20},{24,0}})));
         equation
           connect(step.y, filter.u)  annotation (Line(points={{-97,24},{-97,24},{
                   -88,24}},
@@ -2597,32 +2387,25 @@ initial equation
                 color={0,0,127}));
           connect(add.y, mixingUnit.T_c) annotation (Line(
               points={{56.8,-10},{68,-10}},
-              color={0,0,127},
-              smooth=Smooth.None));
+              color={0,0,127}));
           connect(gain.y, add.u2) annotation (Line(
               points={{25,-10},{32,-10},{32,-14.8},{38.4,-14.8}},
-              color={0,0,127},
-              smooth=Smooth.None));
+              color={0,0,127}));
           connect(inverseBlockConstraints.y2, invMixingUnit.T_c) annotation (Line(
               points={{-5.9,24},{-12,24}},
-              color={0,0,127},
-              smooth=Smooth.None));
+              color={0,0,127}));
           connect(inverseBlockConstraints.y1, add.u1) annotation (Line(
               points={{-0.7,24},{32,24},{32,-5.2},{38.4,-5.2}},
-              color={0,0,127},
-              smooth=Smooth.None));
+              color={0,0,127}));
           connect(filter.y, inverseBlockConstraints.u1) annotation (Line(
               points={{-65,24},{-56.6,24}},
-              color={0,0,127},
-              smooth=Smooth.None));
+              color={0,0,127}));
           connect(invMixingUnit.T, feedback.u1) annotation (Line(
               points={{-36,18},{-42,18},{-42,-10},{-22,-10}},
-              color={0,0,127},
-              smooth=Smooth.None));
+              color={0,0,127}));
           connect(invMixingUnit.c, inverseBlockConstraints.u2) annotation (Line(
               points={{-36,30},{-38,30},{-38,24},{-48.8,24}},
-              color={0,0,127},
-              smooth=Smooth.None));
+              color={0,0,127}));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=true,  extent={{-120,
                     -100},{100,100}}),      graphics),
             experiment(StopTime=500),
@@ -2642,17 +2425,14 @@ initial equation
         equation
           connect(inverseBlockConstraints.u1, c_ref) annotation (Line(
               points={{27.3,11},{55,11}},
-              color={0,0,127},
-              smooth=Smooth.None));
+              color={0,0,127}));
           connect(mixingUnit.T_c, inverseBlockConstraints.y2) annotation (
               Line(
               points={{-22,8},{-30,8},{-30,11},{-37.05,11}},
-              color={0,0,127},
-              smooth=Smooth.None));
+              color={0,0,127}));
           connect(mixingUnit.c, inverseBlockConstraints.u2) annotation (Line(
               points={{2,14},{10,14},{10,11},{17.4,11}},
-              color={0,0,127},
-              smooth=Smooth.None));
+              color={0,0,127}));
           annotation (Diagram(graphics));
         end FilterOrder;
 
@@ -2713,25 +2493,21 @@ initial equation
                   textString="%n"),
                 Text(
                   extent={{8,-106},{8,-146}},
-                  lineColor={0,0,0},
                   textString="f=%f")}),
             Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{
                     100,100}}), graphics={
-                Line(points={{40,0},{-40,0}}, color={0,0,0}),
+                Line(points={{40,0},{-40,0}}),
                 Text(
                   extent={{-55,55},{55,5}},
-                  lineColor={0,0,0},
                   textString="1"),
                 Rectangle(extent={{-60,60},{60,-60}}, lineColor={0,0,255}),
                 Line(points={{-100,0},{-60,0}}, color={0,0,255}),
                 Line(points={{60,0},{100,0}}, color={0,0,255}),
                 Text(
                   extent={{-54,-6},{44,-56}},
-                  lineColor={0,0,0},
                   textString="(s/w + 1)"),
                 Text(
                   extent={{38,-10},{58,-30}},
-                  lineColor={0,0,0},
                   textString="n")}),
             Documentation(info="<html>
 <p>This block defines the transfer function between the
@@ -2785,8 +2561,7 @@ simplified realistic applications.
           points={{-43.4,30},{-23.2,30}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
         connect(sine.y, sample1.u) annotation (Line(points={{-3,58},{14.8,58},{
                 14.8,58}}, color={0,0,127}));
         connect(subSample.y, sample1.clock) annotation (Line(
@@ -2825,8 +2600,7 @@ Example used to generate a figure for the documentation of block
           points={{-43.4,30},{-27.2,30}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
         connect(sine.y, sample1.u)
           annotation (Line(points={{-9,62},{8.8,62}}, color={0,0,127}));
         connect(superSample.y, sample1.clock) annotation (Line(
@@ -2865,8 +2639,7 @@ Example used to generate a figure for the documentation of block
           points={{-43.4,30},{-23.2,30}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
         connect(sine.y, sample1.u)
           annotation (Line(points={{-5,60},{12.8,60}}, color={0,0,127}));
         connect(shiftSample.y, sample1.clock) annotation (Line(
@@ -2913,18 +2686,15 @@ sub-library.
       equation
         connect(sine.y, sample.u) annotation (Line(
             points={{-59,30},{-47.2,30}},
-            color={0,0,127},
-            smooth=Smooth.None));
+            color={0,0,127}));
         connect(sample.y, assignClock.u) annotation (Line(
             points={{-33.4,30},{-23.2,30}},
-            color={0,0,127},
-            smooth=Smooth.None));
+            color={0,0,127}));
         connect(periodicClock.y, assignClock.clock) annotation (Line(
             points={{-29.4,4},{-16,4},{-16,22.8}},
             color={175,175,175},
             pattern=LinePattern.Dot,
-            thickness=0.5,
-            smooth=Smooth.None));
+            thickness=0.5));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                   -100},{100,100}}), graphics), experiment(StopTime=0.2),
         Documentation(info="<html>
@@ -2950,18 +2720,15 @@ Example used to generate a figure for the documentation of block
       equation
         connect(sample.y, assignClock.u) annotation (Line(
             points={{-33.4,30},{-23.2,30}},
-            color={0,0,127},
-            smooth=Smooth.None));
+            color={0,0,127}));
         connect(periodicClock.y, assignClock.clock) annotation (Line(
             points={{-29.4,4},{-16,4},{-16,22.8}},
             color={175,175,175},
             pattern=LinePattern.Dot,
-            thickness=0.5,
-            smooth=Smooth.None));
+            thickness=0.5));
       connect(step.y, sample.u) annotation (Line(
           points={{-59,30},{-47.2,30}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}),   graphics), experiment(StopTime=0.2),
         Documentation(info="<html>
@@ -2995,34 +2762,27 @@ Example used to generate a figure for the documentation of block
         connect(step.y, sample1.u)
                                 annotation (Line(
           points={{-59,30},{-53.2,30}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
         connect(gain.y, hold.u) annotation (Line(
             points={{13,30},{18.8,30}},
-            color={0,0,127},
-            smooth=Smooth.None));
+            color={0,0,127}));
         connect(feedback.y, gain.u) annotation (Line(
             points={{-17,30},{-10,30}},
-            color={0,0,127},
-            smooth=Smooth.None));
+            color={0,0,127}));
         connect(sample2.y, feedback.u2) annotation (Line(
             points={{-6.6,0},{-26,0},{-26,22}},
-            color={0,0,127},
-            smooth=Smooth.None));
+            color={0,0,127}));
         connect(periodicClock.y, sample1.clock) annotation (Line(
             points={{-63.4,0},{-46,0},{-46,22.8}},
             color={175,175,175},
             pattern=LinePattern.Dot,
-            thickness=0.5,
-            smooth=Smooth.None));
+            thickness=0.5));
         connect(sample1.y, feedback.u1) annotation (Line(
             points={{-39.4,30},{-34,30}},
-            color={0,0,127},
-            smooth=Smooth.None));
+            color={0,0,127}));
         connect(hold.y, sample2.u) annotation (Line(
             points={{32.6,30},{38,30},{38,0},{7.2,0}},
-            color={0,0,127},
-            smooth=Smooth.None));
+            color={0,0,127}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                   -100},{100,100}}), graphics), experiment(StopTime=0.2),
         Documentation(info="<html>
@@ -3050,14 +2810,12 @@ Example used to generate a figure for the documentation of block
       equation
         connect(sine.y, sample.u) annotation (Line(
             points={{-59,30},{-47.2,30}},
-            color={0,0,127},
-            smooth=Smooth.None));
+            color={0,0,127}));
       connect(periodicClock.y, sample.clock) annotation (Line(
           points={{-49.4,0},{-40,0},{-40,22.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}),   graphics), experiment(StopTime=0.2),
         Documentation(info="<html>
@@ -3091,16 +2849,13 @@ Example used to generate a figure for the documentation of block
           points={{-15.4,0},{-8,0},{-8,22.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(sine1.y, sample.u[1]) annotation (Line(
           points={{-59,8},{-38,8},{-38,29.4},{-15.2,29.4}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(sine2.y, sample.u[2]) annotation (Line(
           points={{-59,40},{-38,40},{-38,30.6},{-15.2,30.6}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}),   graphics), experiment(StopTime=0.2),
         Documentation(info="<html>
@@ -3138,18 +2893,15 @@ Example used to generate a figure for the documentation of block
       equation
         connect(sine.y, sample.u) annotation (Line(
             points={{-59,30},{-47.2,30}},
-            color={0,0,127},
-            smooth=Smooth.None));
+            color={0,0,127}));
         connect(sample.y, assignClock.u) annotation (Line(
             points={{-33.4,30},{-23.2,30}},
-            color={0,0,127},
-            smooth=Smooth.None));
+            color={0,0,127}));
         connect(periodicClock.y, assignClock.clock) annotation (Line(
             points={{-29.4,4},{-16,4},{-16,22.8}},
             color={175,175,175},
             pattern=LinePattern.Dot,
-            thickness=0.5,
-            smooth=Smooth.None));
+            thickness=0.5));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                   -100},{100,100}}), graphics), experiment(StopTime=0.2),
           Documentation(info="<html>
@@ -3182,22 +2934,18 @@ Example used to generate a figure for the documentation of block
       equation
         connect(sine.y, sample.u) annotation (Line(
             points={{-59,30},{-53.2,30}},
-            color={0,0,127},
-            smooth=Smooth.None));
+            color={0,0,127}));
       connect(periodicClock.y, sample.clock) annotation (Line(
           points={{-55.4,0},{-46,0},{-46,22.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(sample.y, shiftSample.u) annotation (Line(
           points={{-39.4,30},{-31.2,30}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(shiftSample.y, hold.u) annotation (Line(
           points={{-17.4,30},{-9.2,30}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}),   graphics), experiment(StopTime=0.2),
         Documentation(info="<html>
@@ -3238,22 +2986,18 @@ Example used to generate a figure for the documentation of block
       equation
         connect(sine.y, sample.u) annotation (Line(
             points={{-59,30},{-53.2,30}},
-            color={0,0,127},
-            smooth=Smooth.None));
+            color={0,0,127}));
       connect(periodicClock.y, sample.clock) annotation (Line(
           points={{-55.4,0},{-46,0},{-46,22.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(sample.y, shiftSample.u) annotation (Line(
           points={{-39.4,30},{-31.2,30}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
         connect(shiftSample.y, hold.u) annotation (Line(
             points={{-17.4,30},{-9.2,30}},
-            color={0,0,127},
-            smooth=Smooth.None));
+            color={0,0,127}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                   -100},{100,100}}), graphics), experiment(StopTime=0.2),
         Documentation(info="<html>
@@ -3294,22 +3038,18 @@ Example used to generate a figure for the documentation of block
       equation
         connect(sine.y, sample.u) annotation (Line(
             points={{-59,30},{-53.2,30}},
-            color={0,0,127},
-            smooth=Smooth.None));
+            color={0,0,127}));
       connect(periodicClock.y, sample.clock) annotation (Line(
           points={{-55.4,0},{-46,0},{-46,22.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(sample.y, shiftSample.u) annotation (Line(
           points={{-39.4,30},{-31.2,30}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
         connect(shiftSample.y, hold.u) annotation (Line(
             points={{-17.4,30},{-9.2,30}},
-            color={0,0,127},
-            smooth=Smooth.None));
+            color={0,0,127}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                   -100},{100,100}}), graphics), experiment(StopTime=0.2),
         Documentation(info="<html>
@@ -3340,18 +3080,15 @@ Example used to generate a figure for the documentation of block
       equation
         connect(sine.y, sample.u) annotation (Line(
             points={{-59,30},{-47.2,30}},
-            color={0,0,127},
-            smooth=Smooth.None));
+            color={0,0,127}));
       connect(periodicClock.y, sample.clock) annotation (Line(
           points={{-49.4,0},{-40,0},{-40,22.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(sample.y, subSample.u) annotation (Line(
           points={{-33.4,30},{-23.2,30}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}),   graphics), experiment(StopTime=0.2),
         Documentation(info="<html>
@@ -3382,19 +3119,16 @@ Example used to generate a figure for the documentation of block
       equation
         connect(sine.y, sample.u) annotation (Line(
             points={{-59,30},{-47.2,30}},
-            color={0,0,127},
-            smooth=Smooth.None));
+            color={0,0,127}));
       connect(periodicClock.y, sample.clock) annotation (Line(
           points={{-49.4,0},{-40,0},{-40,22.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
         connect(sample.y, superSample.u)
                                      annotation (Line(
           points={{-33.4,30},{-23.2,30}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}),   graphics), experiment(StopTime=0.08),
         Documentation(info="<html>
@@ -3426,19 +3160,16 @@ Example used to generate a figure for the documentation of block
       equation
         connect(sine.y, sample.u) annotation (Line(
             points={{-59,30},{-47.2,30}},
-            color={0,0,127},
-            smooth=Smooth.None));
+            color={0,0,127}));
       connect(periodicClock.y, sample.clock) annotation (Line(
           points={{-49.4,0},{-40,0},{-40,22.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(sample.y, superSampleIpo.u)
                                      annotation (Line(
           points={{-33.4,30},{-23.2,30}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}),   graphics), experiment(StopTime=0.06),
         Documentation(info="<html>
@@ -3469,18 +3200,15 @@ Example used to generate a figure for the documentation of block
       equation
         connect(sine.y, sample.u) annotation (Line(
             points={{-59,30},{-47.2,30}},
-            color={0,0,127},
-            smooth=Smooth.None));
+            color={0,0,127}));
       connect(periodicClock.y, sample.clock) annotation (Line(
           points={{-49.4,0},{-40,0},{-40,22.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
         connect(sample.y, shiftSample1.u) annotation (Line(
             points={{-33.4,30},{-23.2,30}},
-            color={0,0,127},
-            smooth=Smooth.None));
+            color={0,0,127}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                   -100},{100,100}}), graphics), experiment(StopTime=0.09),
         Documentation(info="<html>
@@ -3516,22 +3244,18 @@ Example used to generate a figure for the documentation of block
       equation
         connect(sine.y, sample.u) annotation (Line(
             points={{-59,30},{-47.2,30}},
-            color={0,0,127},
-            smooth=Smooth.None));
+            color={0,0,127}));
       connect(periodicClock.y, sample.clock) annotation (Line(
           points={{-49.4,0},{-40,0},{-40,22.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
         connect(sample.y, shiftSample1.u) annotation (Line(
             points={{-33.4,30},{-27.2,30}},
-            color={0,0,127},
-            smooth=Smooth.None));
+            color={0,0,127}));
       connect(shiftSample1.y, backSample1.u) annotation (Line(
           points={{-13.4,30},{-5.2,30}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}),   graphics), experiment(StopTime=0.09),
         Documentation(info="<html>
@@ -3562,24 +3286,19 @@ Example used to generate a figure for the documentation of block
           points={{-29.4,6},{-20,6},{-20,20.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(add.u2, const.y) annotation (Line(
           points={{-60,22},{-71,22}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(assignClock1.y, unitDelay1.u) annotation (Line(
           points={{-13.4,28},{-2,28},{-2,58},{-36,58}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(unitDelay1.y, add.u1) annotation (Line(
           points={{-59,58},{-68,58},{-68,34},{-60,34}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(add.y, assignClock1.u) annotation (Line(
           points={{-37,28},{-27.2,28}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}),   graphics), experiment(StopTime=0.09),
         Documentation(info="<html>
@@ -3616,42 +3335,33 @@ Example used to generate a figure for the documentation of block
       equation
       connect(add.u2, const.y) annotation (Line(
           points={{-60,32},{-71,32}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(unitDelay1.y, add.u1) annotation (Line(
           points={{-59,68},{-68,68},{-68,44},{-60,44}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(periodicClock.y, assignClock1.clock) annotation (Line(
           points={{-41.4,-44},{-18,-44},{-18,16.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(const1.y, add1.u1) annotation (Line(
           points={{-71,0},{-68,0},{-68,18},{-60,18}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(unitDelay2.y, add1.u2) annotation (Line(
           points={{-59,-18},{-66,-18},{-66,6},{-60,6}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(add.y, assignClock1.u[1]) annotation (Line(
           points={{-37,38},{-32,38},{-32,23.4},{-25.2,23.4}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(add1.y, assignClock1.u[2]) annotation (Line(
           points={{-37,12},{-32,12},{-32,24.6},{-25.2,24.6}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(assignClock1.y[2], unitDelay2.u) annotation (Line(
           points={{-11.4,24.3},{-6,24.3},{-6,-18},{-36,-18}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(assignClock1.y[1], unitDelay1.u) annotation (Line(
           points={{-11.4,23.7},{-6,23.7},{-6,68},{-36,68}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}),   graphics), experiment(StopTime=0.09),
         Documentation(info="<html>
@@ -3686,30 +3396,24 @@ Example used to generate a figure for the documentation of block
       equation
       connect(sine.y, sample.u) annotation (Line(
           points={{-59,30},{-49.2,30}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(periodicClock.y, sample.clock) annotation (Line(
           points={{-55.4,0},{-42,0},{-42,22.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(sample.y, upSample1.u) annotation (Line(
           points={{-35.4,30},{-32,30},{-32,40},{-27.2,40}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(upSample2.u, sample.y) annotation (Line(
           points={{-27.2,20},{-32,20},{-32,30},{-35.4,30}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(upSample2.y, add.u2) annotation (Line(
           points={{-13.4,20},{-8,20},{-8,24},{-2,24}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(upSample1.y, add.u1) annotation (Line(
           points={{-13.4,40},{-8,40},{-8,36},{-2,36}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}),   graphics), experiment(StopTime=0.09),
         Documentation(info="<html>
@@ -3750,31 +3454,25 @@ Example used to generate a figure for the documentation of block
       equation
       connect(sine.y, sample.u) annotation (Line(
           points={{-59,30},{-49.2,30}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(periodicClock.y, sample.clock) annotation (Line(
           points={{-55.4,0},{-42,0},{-42,22.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
         connect(upSample.u, sample.y)
                                      annotation (Line(
           points={{-25.2,30},{-35.4,30}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
         connect(sample.y, superSampleIpo.u) annotation (Line(
             points={{-35.4,30},{-32,30},{-32,-38},{10.8,-38}},
-            color={0,0,127},
-            smooth=Smooth.None));
+            color={0,0,127}));
         connect(upSample.y, FIR2.u) annotation (Line(
             points={{-11.4,30},{-8,30},{-8,-4},{4,-4}},
-            color={0,0,127},
-            smooth=Smooth.None));
+            color={0,0,127}));
         connect(FIR1.u, upSample.y) annotation (Line(
             points={{4,30},{-11.4,30}},
-            color={0,0,127},
-            smooth=Smooth.None));
+            color={0,0,127}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                   -100},{100,100}}), graphics), experiment(StopTime=0.06),
         Documentation(info="<html>
@@ -3808,26 +3506,21 @@ Example used to generate a figure for the documentation of block
       equation
       connect(sine.y, sample.u) annotation (Line(
           points={{-59,30},{-49.2,30}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(periodicClock.y, sample.clock) annotation (Line(
           points={{-55.4,0},{-42,0},{-42,22.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(triggeredSampler.u, sine.y) annotation (Line(
           points={{8,50},{-54,50},{-54,30},{-59,30}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(sample.y, clockToTrigger.u) annotation (Line(
           points={{-35.4,30},{-22,30}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(triggeredSampler.trigger, clockToTrigger.y) annotation (Line(
           points={{20,38.2},{20,30},{1,30}},
-          color={255,0,255},
-          smooth=Smooth.None));
+          color={255,0,255}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}),   graphics), experiment(StopTime=0.09),
         Documentation(info="<html>
@@ -3859,18 +3552,15 @@ Example used to generate a figure for the documentation of block
       equation
       connect(sine.y, sample.u) annotation (Line(
           points={{-59,30},{-49.2,30}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(periodicClock.y, sample.clock) annotation (Line(
           points={{-55.4,0},{-42,0},{-42,22.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(sample.y, clockToSquareWave.u) annotation (Line(
           points={{-35.4,30},{-26,30}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}),   graphics), experiment(StopTime=0.09),
         Documentation(info="<html>
@@ -3901,16 +3591,13 @@ Example used to generate a figure for the documentation of block
           points={{-49.4,0},{-40,0},{-40,22.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(sample.y, uniformNoise.u) annotation (Line(
           points={{-33.4,30},{-28,30}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(const.y, sample.u) annotation (Line(
           points={{-55,30},{-47.2,30}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}),   graphics), experiment(StopTime=1.1),
         Documentation(info="<html>
@@ -3942,18 +3629,15 @@ Example used to generate a figure for the documentation of block
       equation
       connect(sine.y, sample.u) annotation (Line(
           points={{-59,30},{-49.2,30}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(periodicClock.y, sample.clock) annotation (Line(
           points={{-55.4,0},{-42,0},{-42,22.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(fractionalDelay.u, sample.y) annotation (Line(
           points={{-28,30},{-35.4,30}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}),   graphics), experiment(StopTime=0.09),
         Documentation(info="<html>
@@ -3980,14 +3664,12 @@ Example used to generate a figure for the documentation of block
 
       connect(step.y, assignClock1.u) annotation (Line(
           points={{-39,30},{-25.2,30}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(periodicClock1.y, assignClock1.clock) annotation (Line(
           points={{-57.4,-12},{-18,-12},{-18,22.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent=
                 {{-100,-100},{100,100}}), graphics), Documentation(info="<html>
 <p>
@@ -4014,12 +3696,10 @@ Example for block
           points={{-57.4,-12},{-18,-12},{-18,22.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(step.y, assignClock1.u)       annotation (Line(
           points={{-45,30},{-25.2,30}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent=
                 {{-100,-100},{100,100}}), graphics), Documentation(info="<html>
 <p>
@@ -4047,12 +3727,10 @@ Example for block
           points={{-57.4,-12},{-18,-12},{-18,22.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(sine.y, assignClock1.u) annotation (Line(
           points={{-45,30},{-25.2,30}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent=
                 {{-100,-100},{100,100}}), graphics), Documentation(info="<html>
 <p>
@@ -4087,12 +3765,10 @@ Example for block
           points={{-57.4,-12},{-18,-12},{-18,22.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(sine.y, assignClock1.u)       annotation (Line(
           points={{-51,30},{-25.2,30}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent=
                 {{-100,-100},{100,100}}), graphics), Documentation(info="<html>
 <p>
@@ -4120,12 +3796,10 @@ Example for block
           points={{-57.4,-12},{-18,-12},{-18,22.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(ramp.y, assignClock1.u) annotation (Line(
           points={{-51,30},{-25.2,30}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent=
                 {{-100,-100},{100,100}}), graphics), Documentation(info="<html>
 <p>
@@ -4156,12 +3830,10 @@ Example for block
           points={{-57.4,-12},{-18,-12},{-18,22.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(ramp.y, assignClock1.u)       annotation (Line(
           points={{-51,30},{-25.2,30}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent=
                 {{-100,-100},{100,100}}), graphics), Documentation(info="<html>
 <p>
@@ -4203,16 +3875,13 @@ sub-library.
             points={{-29.4,4},{-16,4},{-16,22.8}},
             color={175,175,175},
             pattern=LinePattern.Dot,
-            thickness=0.5,
-            smooth=Smooth.None));
+            thickness=0.5));
       connect(step.y, sample.u) annotation (Line(
           points={{-59,30},{-49.2,30}},
-          color={255,127,0},
-          smooth=Smooth.None));
+          color={255,127,0}));
       connect(sample.y, assignClock.u) annotation (Line(
           points={{-35.4,30},{-23.2,30}},
-          color={255,127,0},
-          smooth=Smooth.None));
+          color={255,127,0}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}),   graphics), experiment(StopTime=0.2),
         Documentation(info="<html>
@@ -4253,38 +3922,30 @@ Elementary example for the documentation of block
             points={{-63.4,0},{-54,0},{-54,22.8}},
             color={175,175,175},
             pattern=LinePattern.Dot,
-            thickness=0.5,
-            smooth=Smooth.None));
+            thickness=0.5));
         connect(sample1.y, sum1.u[1])
                                    annotation (Line(
           points={{-47.4,30},{-39.7,30},{-39.7,30.1},{-26,30.1}},
-          color={255,127,0},
-          smooth=Smooth.None));
+          color={255,127,0}));
         connect(sample2.y, sum1.u[2])
                                    annotation (Line(
           points={{-6.6,0},{-40,0},{-40,25.9},{-26,25.9}},
-          color={255,127,0},
-          smooth=Smooth.None));
+          color={255,127,0}));
         connect(integerConstant.y, sum2.u[1]) annotation (Line(
             points={{-13,60},{-4,60},{-4,32.1},{2,32.1}},
-            color={255,127,0},
-            smooth=Smooth.None));
+            color={255,127,0}));
         connect(sum1.y, sum2.u[2]) annotation (Line(
             points={{-13.1,28},{-5.55,28},{-5.55,27.9},{2,27.9}},
-            color={255,127,0},
-            smooth=Smooth.None));
+            color={255,127,0}));
         connect(hold.u, sum2.y) annotation (Line(
             points={{20.8,30},{14.9,30}},
-            color={255,127,0},
-            smooth=Smooth.None));
+            color={255,127,0}));
         connect(hold.y, sample2.u) annotation (Line(
             points={{34.6,30},{50,30},{50,0},{7.2,0}},
-            color={255,127,0},
-            smooth=Smooth.None));
+            color={255,127,0}));
         connect(sample1.u, step.y) annotation (Line(
             points={{-61.2,30},{-75,30}},
-            color={255,127,0},
-            smooth=Smooth.None));
+            color={255,127,0}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                   -100},{100,100}},
               grid={1,1}),           graphics), experiment(StopTime=0.2),
@@ -4318,12 +3979,10 @@ Elementary example for the documentation of block
           points={{-49.4,0},{-40,0},{-40,22.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
         connect(step.y, sample.u) annotation (Line(
             points={{-59,30},{-47.2,30}},
-            color={255,127,0},
-            smooth=Smooth.None));
+            color={255,127,0}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                   -100},{100,100}}), graphics), experiment(StopTime=0.2),
         Documentation(info="<html>
@@ -4356,16 +4015,13 @@ Elementary example for the documentation of block
           points={{-15.4,0},{-8,0},{-8,22.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
         connect(step1.y, sample.u[1]) annotation (Line(
             points={{-59,8},{-38,8},{-38,29.4},{-15.2,29.4}},
-            color={255,127,0},
-            smooth=Smooth.None));
+            color={255,127,0}));
         connect(step2.y, sample.u[2]) annotation (Line(
             points={{-59,40},{-38,40},{-38,30.6},{-15.2,30.6}},
-            color={255,127,0},
-            smooth=Smooth.None));
+            color={255,127,0}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                   -100},{100,100}}), graphics), experiment(StopTime=0.2),
         Documentation(info="<html>
@@ -4401,20 +4057,16 @@ Elementary example for the documentation of block
           points={{-55.4,0},{-46,0},{-46,22.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
         connect(table.y, sample.u) annotation (Line(
             points={{-59,30},{-53.2,30}},
-            color={255,127,0},
-            smooth=Smooth.None));
+            color={255,127,0}));
         connect(sample.y, shiftSample.u) annotation (Line(
             points={{-39.4,30},{-31.2,30}},
-            color={255,127,0},
-            smooth=Smooth.None));
+            color={255,127,0}));
         connect(shiftSample.y, hold.u) annotation (Line(
             points={{-17.4,30},{-9.2,30}},
-            color={255,127,0},
-            smooth=Smooth.None));
+            color={255,127,0}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                   -100},{100,100}}), graphics), experiment(StopTime=0.2),
         Documentation(info="<html>
@@ -4447,16 +4099,13 @@ Elementary example for the documentation of block
           points={{-49.4,0},{-40,0},{-40,22.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
         connect(table.y, sample.u) annotation (Line(
             points={{-59,30},{-47.2,30}},
-            color={255,127,0},
-            smooth=Smooth.None));
+            color={255,127,0}));
         connect(sample.y, subSample.u) annotation (Line(
             points={{-33.4,30},{-23.2,30}},
-            color={255,127,0},
-            smooth=Smooth.None));
+            color={255,127,0}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                   -100},{100,100}}), graphics), experiment(StopTime=0.2),
         Documentation(info="<html>
@@ -4488,16 +4137,13 @@ Elementary example for the documentation of block
           points={{-49.4,0},{-40,0},{-40,22.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(table.y, sample.u) annotation (Line(
           points={{-59,30},{-47.2,30}},
-          color={255,127,0},
-          smooth=Smooth.None));
+          color={255,127,0}));
       connect(sample.y, superSample.u) annotation (Line(
           points={{-33.4,30},{-23.2,30}},
-          color={255,127,0},
-          smooth=Smooth.None));
+          color={255,127,0}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}),   graphics), experiment(StopTime=0.2),
         Documentation(info="<html>
@@ -4529,16 +4175,13 @@ Elementary example for the documentation of block
           points={{-49.4,0},{-40,0},{-40,22.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(table.y, sample.u) annotation (Line(
           points={{-59,30},{-47.2,30}},
-          color={255,127,0},
-          smooth=Smooth.None));
+          color={255,127,0}));
       connect(sample.y, shiftSample1.u) annotation (Line(
           points={{-33.4,30},{-23.2,30}},
-          color={255,127,0},
-          smooth=Smooth.None));
+          color={255,127,0}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}),   graphics), experiment(StopTime=0.09),
         Documentation(info="<html>
@@ -4575,20 +4218,16 @@ Elementary example for the documentation of block
           points={{-49.4,0},{-40,0},{-40,22.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(sample.y, shiftSample1.u) annotation (Line(
           points={{-33.4,30},{-19.2,30}},
-          color={255,127,0},
-          smooth=Smooth.None));
+          color={255,127,0}));
       connect(shiftSample1.y, backSample1.u) annotation (Line(
           points={{-5.4,30},{12.8,30}},
-          color={255,127,0},
-          smooth=Smooth.None));
+          color={255,127,0}));
       connect(table.y, sample.u) annotation (Line(
           points={{-59,30},{-47.2,30}},
-          color={255,127,0},
-          smooth=Smooth.None));
+          color={255,127,0}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}),   graphics), experiment(StopTime=0.09),
         Documentation(info="<html>
@@ -4620,24 +4259,19 @@ Elementary example for the documentation of block
           points={{-29.4,6},{-20,6},{-20,20.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(assignClock1.y, unitDelay1.u) annotation (Line(
           points={{-13.4,28},{-2,28},{-2,58},{-36,58}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(unitDelay1.y, sum.u[1]) annotation (Line(
           points={{-59,58},{-70,58},{-70,30.1},{-54,30.1}},
-          color={255,127,0},
-          smooth=Smooth.None));
+          color={255,127,0}));
       connect(const.y, sum.u[2]) annotation (Line(
           points={{-75,22},{-62,22},{-62,25.9},{-54,25.9}},
-          color={255,127,0},
-          smooth=Smooth.None));
+          color={255,127,0}));
       connect(sum.y, assignClock1.u) annotation (Line(
           points={{-41.1,28},{-27.2,28}},
-          color={255,127,0},
-          smooth=Smooth.None));
+          color={255,127,0}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}),   graphics), experiment(StopTime=0.09),
         Documentation(info="<html>
@@ -4678,40 +4312,31 @@ Elementary example for the documentation of block
           points={{-41.4,-44},{-18,-44},{-18,16.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(assignClock1.y[1], unitDelay1.u) annotation (Line(
           points={{-11.4,23.7},{4,23.7},{4,68},{-36,68}},
-          color={255,127,0},
-          smooth=Smooth.None));
+          color={255,127,0}));
       connect(assignClock1.y[2], unitDelay2.u) annotation (Line(
           points={{-11.4,24.3},{4,24.3},{4,-18},{-36,-18}},
-          color={255,127,0},
-          smooth=Smooth.None));
+          color={255,127,0}));
       connect(unitDelay1.y, sum1.u[1]) annotation (Line(
           points={{-59,68},{-64,68},{-64,40.1},{-54,40.1}},
-          color={255,127,0},
-          smooth=Smooth.None));
+          color={255,127,0}));
       connect(const.y, sum1.u[2]) annotation (Line(
           points={{-71,32},{-62,32},{-62,35.9},{-54,35.9}},
-          color={255,127,0},
-          smooth=Smooth.None));
+          color={255,127,0}));
       connect(const1.y, sum2.u[1]) annotation (Line(
           points={{-71,0},{-68,0},{-68,12},{-54,12.1}},
-          color={255,127,0},
-          smooth=Smooth.None));
+          color={255,127,0}));
       connect(unitDelay2.y, sum2.u[2]) annotation (Line(
           points={{-59,-18},{-62,-18},{-62,8},{-58,8},{-58,8},{-54,7.9}},
-          color={255,127,0},
-          smooth=Smooth.None));
+          color={255,127,0}));
       connect(sum1.y, assignClock1.u[1]) annotation (Line(
           points={{-41.1,38},{-34,38},{-34,23.4},{-25.2,23.4}},
-          color={255,127,0},
-          smooth=Smooth.None));
+          color={255,127,0}));
       connect(sum2.y, assignClock1.u[2]) annotation (Line(
           points={{-41.1,10},{-34,10},{-34,24.6},{-25.2,24.6}},
-          color={255,127,0},
-          smooth=Smooth.None));
+          color={255,127,0}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}),   graphics), experiment(StopTime=0.09),
         Documentation(info="<html>
@@ -4747,28 +4372,22 @@ Elementary example for the documentation of block
           points={{-55.4,0},{-42,0},{-42,22.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(table.y, sample.u) annotation (Line(
           points={{-59,30},{-49.2,30}},
-          color={255,127,0},
-          smooth=Smooth.None));
+          color={255,127,0}));
       connect(sample.y, upSample1.u) annotation (Line(
           points={{-35.4,30},{-32,30},{-32,40},{-27.2,40}},
-          color={255,127,0},
-          smooth=Smooth.None));
+          color={255,127,0}));
       connect(sample.y, upSample2.u) annotation (Line(
           points={{-35.4,30},{-32,30},{-32,20},{-27.2,20}},
-          color={255,127,0},
-          smooth=Smooth.None));
+          color={255,127,0}));
       connect(upSample1.y, sum.u[1]) annotation (Line(
           points={{-13.4,40},{-6,40},{-6,32.1},{2,32.1}},
-          color={255,127,0},
-          smooth=Smooth.None));
+          color={255,127,0}));
       connect(upSample2.y, sum.u[2]) annotation (Line(
           points={{-13.4,20},{-6,20},{-6,27.9},{2,27.9}},
-          color={255,127,0},
-          smooth=Smooth.None));
+          color={255,127,0}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}),   graphics), experiment(StopTime=0.09),
         Documentation(info="<html>
@@ -4797,14 +4416,12 @@ Elementary example for the documentation of block
       equation
         connect(step.y, assignClock1.u) annotation (Line(
             points={{-39,30},{-23.2,30}},
-            color={255,127,0},
-            smooth=Smooth.None));
+            color={255,127,0}));
         connect(periodicClock1.y, assignClock1.clock) annotation (Line(
             points={{-47.4,-2},{-16,-2},{-16,22.8}},
             color={175,175,175},
             pattern=LinePattern.Dot,
-            thickness=0.5,
-            smooth=Smooth.None));
+            thickness=0.5));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                   -100},{100,100}}), graphics), experiment(StopTime=1.0),
         Documentation(info="<html>
@@ -4835,12 +4452,10 @@ Example for block
             points={{-47.4,-2},{-16,-2},{-16,22.8}},
             color={175,175,175},
             pattern=LinePattern.Dot,
-            thickness=0.5,
-            smooth=Smooth.None));
+            thickness=0.5));
       connect(step.y, assignClock1.u) annotation (Line(
           points={{-39,30},{-23.2,30}},
-          color={255,127,0},
-          smooth=Smooth.None));
+          color={255,127,0}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}),   graphics), experiment(StopTime=1.0),
         Documentation(info="<html>
@@ -4883,16 +4498,13 @@ sub-library.
             points={{-29.4,4},{-16,4},{-16,22.8}},
             color={175,175,175},
             pattern=LinePattern.Dot,
-            thickness=0.5,
-            smooth=Smooth.None));
+            thickness=0.5));
       connect(step.y, sample.u) annotation (Line(
           points={{-59,30},{-49.2,30}},
-          color={255,0,255},
-          smooth=Smooth.None));
+          color={255,0,255}));
       connect(sample.y, assignClock.u) annotation (Line(
           points={{-35.4,30},{-23.2,30}},
-          color={255,0,255},
-          smooth=Smooth.None));
+          color={255,0,255}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}),   graphics), experiment(StopTime=0.2),
         Documentation(info="<html>
@@ -4933,36 +4545,28 @@ Elementary example for the documentation of block
             points={{-63.4,0},{-54,0},{-54,22.8}},
             color={175,175,175},
             pattern=LinePattern.Dot,
-            thickness=0.5,
-            smooth=Smooth.None));
+            thickness=0.5));
       connect(step.y, sample1.u) annotation (Line(
           points={{-75,30},{-61.2,30}},
-          color={255,0,255},
-          smooth=Smooth.None));
+          color={255,0,255}));
       connect(hold.y, sample2.u) annotation (Line(
           points={{34.6,30},{39,30},{39,0},{7.2,0}},
-          color={255,0,255},
-          smooth=Smooth.None));
+          color={255,0,255}));
       connect(sample2.y, xor.u2) annotation (Line(
           points={{-6.6,0},{-47,0},{-47,22},{-41,22}},
-          color={255,0,255},
-          smooth=Smooth.None));
+          color={255,0,255}));
       connect(xor.u1, sample1.y) annotation (Line(
           points={{-41,30},{-47.4,30}},
-          color={255,0,255},
-          smooth=Smooth.None));
+          color={255,0,255}));
       connect(hold.u, xor1.y) annotation (Line(
           points={{20.8,30},{17.4,30},{17.4,31},{15,31}},
-          color={255,0,255},
-          smooth=Smooth.None));
+          color={255,0,255}));
       connect(xor1.u1, integerConstant.y) annotation (Line(
           points={{-8,31},{-8,45.5},{-17,45.5},{-17,61}},
-          color={255,0,255},
-          smooth=Smooth.None));
+          color={255,0,255}));
       connect(xor1.u2, xor.y) annotation (Line(
           points={{-8,23},{-13,23},{-13,30},{-18,30}},
-          color={255,0,255},
-          smooth=Smooth.None));
+          color={255,0,255}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}},
               grid={1,1}),           graphics), experiment(StopTime=0.2),
@@ -4996,12 +4600,10 @@ Elementary example for the documentation of block
           points={{-49.4,0},{-40,0},{-40,22.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(sample.u, step.y) annotation (Line(
           points={{-47.2,30},{-59,30}},
-          color={255,0,255},
-          smooth=Smooth.None));
+          color={255,0,255}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}),   graphics), experiment(StopTime=0.2),
         Documentation(info="<html>
@@ -5034,16 +4636,13 @@ Elementary example for the documentation of block
           points={{-15.4,0},{-8,0},{-8,22.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
         connect(sample.u[1], step2.y) annotation (Line(
             points={{-15.2,29.4},{-36,29.4},{-36,40},{-59,40}},
-            color={255,0,255},
-            smooth=Smooth.None));
+            color={255,0,255}));
         connect(step1.y, sample.u[2]) annotation (Line(
             points={{-59,8},{-38,8},{-38,30.6},{-15.2,30.6}},
-            color={255,0,255},
-            smooth=Smooth.None));
+            color={255,0,255}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                   -100},{100,100}}), graphics), experiment(StopTime=0.2),
         Documentation(info="<html>
@@ -5078,20 +4677,16 @@ Elementary example for the documentation of block
           points={{-55.4,0},{-46,0},{-46,22.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
         connect(table.y, sample.u) annotation (Line(
             points={{-59,30},{-53.2,30}},
-            color={255,127,0},
-            smooth=Smooth.None));
+            color={255,127,0}));
       connect(shiftSample.u, sample.y) annotation (Line(
           points={{-31.2,30},{-39.4,30}},
-          color={255,0,255},
-          smooth=Smooth.None));
+          color={255,0,255}));
       connect(hold.u, shiftSample.y) annotation (Line(
           points={{-9.2,30},{-17.4,30}},
-          color={255,0,255},
-          smooth=Smooth.None));
+          color={255,0,255}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}),   graphics), experiment(StopTime=0.2),
         Documentation(info="<html>
@@ -5123,16 +4718,13 @@ Elementary example for the documentation of block
           points={{-49.4,0},{-40,0},{-40,22.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(sample.u, table.y) annotation (Line(
           points={{-47.2,30},{-55,30}},
-          color={255,0,255},
-          smooth=Smooth.None));
+          color={255,0,255}));
       connect(subSample.u, sample.y) annotation (Line(
           points={{-23.2,30},{-33.4,30}},
-          color={255,0,255},
-          smooth=Smooth.None));
+          color={255,0,255}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}),   graphics), experiment(StopTime=0.2),
         Documentation(info="<html>
@@ -5163,16 +4755,13 @@ Elementary example for the documentation of block
           points={{-49.4,0},{-40,0},{-40,22.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(table.y, sample.u) annotation (Line(
           points={{-57,30},{-47.2,30}},
-          color={255,0,255},
-          smooth=Smooth.None));
+          color={255,0,255}));
       connect(superSample.u, sample.y) annotation (Line(
           points={{-23.2,30},{-33.4,30}},
-          color={255,0,255},
-          smooth=Smooth.None));
+          color={255,0,255}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}),   graphics), experiment(StopTime=0.2),
         Documentation(info="<html>
@@ -5203,16 +4792,13 @@ Elementary example for the documentation of block
           points={{-49.4,0},{-40,0},{-40,22.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(sample.u, table.y) annotation (Line(
           points={{-47.2,30},{-57,30}},
-          color={255,0,255},
-          smooth=Smooth.None));
+          color={255,0,255}));
       connect(shiftSample1.u, sample.y) annotation (Line(
           points={{-23.2,30},{-33.4,30}},
-          color={255,0,255},
-          smooth=Smooth.None));
+          color={255,0,255}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}),   graphics), experiment(StopTime=0.09),
         Documentation(info="<html>
@@ -5248,20 +4834,16 @@ Elementary example for the documentation of block
           points={{-49.4,0},{-40,0},{-40,22.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(sample.u, table.y) annotation (Line(
           points={{-47.2,30},{-59,30}},
-          color={255,0,255},
-          smooth=Smooth.None));
+          color={255,0,255}));
       connect(shiftSample1.u, sample.y) annotation (Line(
           points={{-19.2,30},{-33.4,30}},
-          color={255,0,255},
-          smooth=Smooth.None));
+          color={255,0,255}));
       connect(backSample1.u, shiftSample1.y) annotation (Line(
           points={{12.8,30},{-5.4,30}},
-          color={255,0,255},
-          smooth=Smooth.None));
+          color={255,0,255}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}),   graphics), experiment(StopTime=0.09),
         Documentation(info="<html>
@@ -5292,24 +4874,19 @@ Elementary example for the documentation of block
           points={{-29.4,6},{-20,6},{-20,20.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(assignClock1.y, unitDelay1.u) annotation (Line(
           points={{-13.4,28},{-2,28},{-2,58},{-36,58}},
-          color={0,0,127},
-          smooth=Smooth.None));
+          color={0,0,127}));
       connect(assignClock1.u, xor.y) annotation (Line(
           points={{-27.2,28},{-38,28}},
-          color={255,0,255},
-          smooth=Smooth.None));
+          color={255,0,255}));
       connect(integerConstant.y, xor.u2) annotation (Line(
           points={{-75,13},{-68.5,13},{-68.5,20},{-61,20}},
-          color={255,0,255},
-          smooth=Smooth.None));
+          color={255,0,255}));
       connect(unitDelay1.y, xor.u1) annotation (Line(
           points={{-59,58},{-70,58},{-70,28},{-61,28}},
-          color={255,0,255},
-          smooth=Smooth.None));
+          color={255,0,255}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}),   graphics), experiment(StopTime=0.09),
         Documentation(info="<html>
@@ -5349,40 +4926,31 @@ Elementary example for the documentation of block
           points={{-41.4,-44},{-18,-44},{-18,16.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(xor.u1, unitDelay1.y) annotation (Line(
           points={{-59,38},{-64,38},{-64,68},{-59,68}},
-          color={255,0,255},
-          smooth=Smooth.None));
+          color={255,0,255}));
       connect(xor.u2, integerConstant.y) annotation (Line(
           points={{-59,30},{-65,30},{-65,31},{-71,31}},
-          color={255,0,255},
-          smooth=Smooth.None));
+          color={255,0,255}));
       connect(xor1.u1, integerConstant1.y) annotation (Line(
           points={{-59,12},{-66,12},{-66,1},{-71,1}},
-          color={255,0,255},
-          smooth=Smooth.None));
+          color={255,0,255}));
       connect(unitDelay2.y, xor1.u2) annotation (Line(
           points={{-59,-18},{-64,-18},{-64,4},{-59,4}},
-          color={255,0,255},
-          smooth=Smooth.None));
+          color={255,0,255}));
       connect(xor.y, assignClock1.u[1]) annotation (Line(
           points={{-36,38},{-32,38},{-32,23.4},{-25.2,23.4}},
-          color={255,0,255},
-          smooth=Smooth.None));
+          color={255,0,255}));
       connect(xor1.y, assignClock1.u[2]) annotation (Line(
           points={{-36,12},{-32,12},{-32,24.6},{-25.2,24.6}},
-          color={255,0,255},
-          smooth=Smooth.None));
+          color={255,0,255}));
       connect(assignClock1.y[1], unitDelay1.u) annotation (Line(
           points={{-11.4,23.7},{-2,23.7},{-2,68},{-36,68}},
-          color={255,0,255},
-          smooth=Smooth.None));
+          color={255,0,255}));
       connect(assignClock1.y[2], unitDelay2.u) annotation (Line(
           points={{-11.4,24.3},{-2,24.3},{-2,-18},{-36,-18}},
-          color={255,0,255},
-          smooth=Smooth.None));
+          color={255,0,255}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}),   graphics), experiment(StopTime=0.09),
         Documentation(info="<html>
@@ -5417,28 +4985,22 @@ Elementary example for the documentation of block
           points={{-55.4,0},{-42,0},{-42,22.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
-          thickness=0.5,
-          smooth=Smooth.None));
+          thickness=0.5));
       connect(table1.y, sample.u) annotation (Line(
           points={{-61,30},{-49.2,30}},
-          color={255,0,255},
-          smooth=Smooth.None));
+          color={255,0,255}));
       connect(upSample1.u, sample.y) annotation (Line(
           points={{-27.2,40},{-30,40},{-30,30},{-35.4,30}},
-          color={255,0,255},
-          smooth=Smooth.None));
+          color={255,0,255}));
       connect(upSample2.u, sample.y) annotation (Line(
           points={{-27.2,20},{-30,20},{-30,30},{-35.4,30}},
-          color={255,0,255},
-          smooth=Smooth.None));
+          color={255,0,255}));
       connect(upSample1.y, and1.u1) annotation (Line(
           points={{-13.4,40},{-8,40},{-8,30},{-2,30}},
-          color={255,0,255},
-          smooth=Smooth.None));
+          color={255,0,255}));
       connect(upSample2.y, and1.u2) annotation (Line(
           points={{-13.4,20},{-8,20},{-8,22},{-2,22}},
-          color={255,0,255},
-          smooth=Smooth.None));
+          color={255,0,255}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}),   graphics), experiment(StopTime=0.09),
         Documentation(info="<html>
@@ -5467,12 +5029,10 @@ Elementary example for the documentation of block
             points={{-47.4,-2},{-16,-2},{-16,22.8}},
             color={175,175,175},
             pattern=LinePattern.Dot,
-            thickness=0.5,
-            smooth=Smooth.None));
+            thickness=0.5));
         connect(step.y, assignClock1.u) annotation (Line(
             points={{-39,30},{-23.2,30}},
-            color={255,0,255},
-            smooth=Smooth.None));
+            color={255,0,255}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                   -100},{100,100}}), graphics), experiment(StopTime=1.0),
         Documentation(info="<html>
@@ -5501,12 +5061,10 @@ Example for block
             points={{-47.4,-2},{-16,-2},{-16,22.8}},
             color={175,175,175},
             pattern=LinePattern.Dot,
-            thickness=0.5,
-            smooth=Smooth.None));
+            thickness=0.5));
         connect(assignClock1.u, step.y) annotation (Line(
             points={{-23.2,30},{-39,30}},
-            color={255,0,255},
-            smooth=Smooth.None));
+            color={255,0,255}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                   -100},{100,100}}), graphics), experiment(StopTime=1.0),
         Documentation(info="<html>
@@ -5537,12 +5095,10 @@ Example for block
             points={{-47.4,-2},{-16,-2},{-16,22.8}},
             color={175,175,175},
             pattern=LinePattern.Dot,
-            thickness=0.5,
-            smooth=Smooth.None));
+            thickness=0.5));
         connect(pulse.y, assignClock1.u) annotation (Line(
             points={{-39,30},{-23.2,30}},
-            color={255,0,255},
-            smooth=Smooth.None));
+            color={255,0,255}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                   -100},{100,100}}), graphics), experiment(StopTime=1.0),
         Documentation(info="<html>
@@ -5573,12 +5129,10 @@ Example for block
             points={{-47.4,-2},{-16,-2},{-16,22.8}},
             color={175,175,175},
             pattern=LinePattern.Dot,
-            thickness=0.5,
-            smooth=Smooth.None));
+            thickness=0.5));
         connect(pulse.y, assignClock1.u) annotation (Line(
             points={{-39,30},{-23.2,30}},
-            color={255,0,255},
-            smooth=Smooth.None));
+            color={255,0,255}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                   -100},{100,100}}), graphics), experiment(StopTime=1.0),
         Documentation(info="<html>

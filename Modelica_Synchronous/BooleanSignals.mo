@@ -27,8 +27,7 @@ package BooleanSignals "Library of clocked blocks for Boolean signals"
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
             grid={2,2},
-            initialScale=0.06),
-                         graphics),
+            initialScale=0.06)),
         Documentation(info="<html>
 <p>
 This block for Boolean signals works similarly as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.Sample\">RealSignals.Sampler.Sample</a>).
@@ -52,13 +51,11 @@ Analog to the corresponding Real signal block examples there exist two elementar
       Modelica.Blocks.Interfaces.BooleanInput
                                            u
         "Connector of continuous-time, Boolean input signal"
-        annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
-            rotation=0)));
+        annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
       Modelica.Blocks.Interfaces.BooleanOutput
                                             y
         "Connector of clocked, Boolean output signal"
-        annotation (Placement(transformation(extent={{100,-10},{120,10}},
-            rotation=0)));
+        annotation (Placement(transformation(extent={{100,-10},{120,10}})));
     equation
       y = sample(u,clock);
 
@@ -73,7 +70,6 @@ Analog to the corresponding Real signal block examples there exist two elementar
             Line(
               points={{0,-100},{0,18}},
               color={175,175,175},
-              smooth=Smooth.None,
               pattern=LinePattern.Dot,
               thickness=0.5),
             Text(
@@ -84,8 +80,7 @@ Analog to the corresponding Real signal block examples there exist two elementar
             preserveAspectRatio=false,
             extent={{-100,-100},{100,100}},
             grid={2,2},
-            initialScale=0.06),
-                         graphics),
+            initialScale=0.06)),
         Documentation(info="<html>
 <p>
 This block for Boolean signals works similarly as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.SampleClocked\">RealSignals.Sampler.SampleClocked</a>).
@@ -104,13 +99,11 @@ Analog to the corresponding Real signal block example there exists an elementary
       Modelica.Blocks.Interfaces.BooleanInput
                                            u[n]
         "Connector of continuous-time, Boolean input signal vector"
-        annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
-            rotation=0), iconTransformation(extent={{-140,-20},{-100,20}})));
+        annotation (Placement(transformation(extent={{-140,-20},{-100,20}}), iconTransformation(extent={{-140,-20},{-100,20}})));
       Modelica.Blocks.Interfaces.BooleanOutput
                                             y[n]
         "Connector of clocked, Boolean output signal vector"
-        annotation (Placement(transformation(extent={{100,-10},{120,10}},
-            rotation=0)));
+        annotation (Placement(transformation(extent={{100,-10},{120,10}})));
       Modelica_Synchronous.ClockSignals.Interfaces.ClockInput
                                                  clock
         "Output signal vector y is associated with this clock input"                           annotation (Placement(transformation(
@@ -131,7 +124,6 @@ Analog to the corresponding Real signal block example there exists an elementary
             Line(
               points={{0,-100},{0,18}},
               color={175,175,175},
-              smooth=Smooth.None,
               pattern=LinePattern.Dot,
               thickness=0.5),
             Text(
@@ -140,7 +132,6 @@ Analog to the corresponding Real signal block example there exists an elementary
               textString="%name"),
             Text(
               extent={{-160,-30},{20,-80}},
-              lineColor={0,0,0},
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid,
               textString="n=%n")}),
@@ -148,8 +139,7 @@ Analog to the corresponding Real signal block example there exists an elementary
             preserveAspectRatio=false,
             extent={{-100,-100},{100,100}},
             grid={2,2},
-            initialScale=0.06),
-                         graphics),
+            initialScale=0.06)),
         Documentation(info="<html>
 <p>
 This block for Boolean signals works similarly as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.SampleVectorizedAndClocked\">RealSignals.Sampler.SampleVectorizedAndClocked</a>).
@@ -168,13 +158,11 @@ Analog to the corresponding Real signal block example there exists an elementary
       Modelica.Blocks.Interfaces.BooleanInput
                                            u(final start=y_start)
         "Connector of clocked, Boolean input signal"
-        annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
-            rotation=0)));
+        annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
       Modelica.Blocks.Interfaces.BooleanOutput
                                             y
         "Connector of continuous-time, Boolean output signal"
-        annotation (Placement(transformation(extent={{100,-10},{120,10}},
-            rotation=0)));
+        annotation (Placement(transformation(extent={{100,-10},{120,10}})));
     equation
         y = hold(u);
 
@@ -196,8 +184,7 @@ Analog to the corresponding Real signal block example there exists an elementary
                   0}},               color={255,0,255}),
                                                        Line(
               points={{-80,-60},{-80,0},{-106,0}},
-              color={255,0,255},
-              smooth=Smooth.None),
+              color={255,0,255}),
             Ellipse(
               extent={{-90,-50},{-70,-70}},
               lineColor={255,0,255},
@@ -225,7 +212,6 @@ Analog to the corresponding Real signal block example there exists an elementary
               fillPattern=FillPattern.Solid),
             Text(
               extent={{-200,-80},{200,-145}},
-              lineColor={0,0,0},
               textString="%y_start"),
             Text(
               extent={{-200,165},{200,100}},
@@ -260,13 +246,11 @@ Analog to the corresponding Real signal block example there exists an elementary
       Modelica.Blocks.Interfaces.BooleanInput
                                            u
         "Connector of clocked, Boolean input signal"
-        annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
-            rotation=0)));
+        annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
       Modelica.Blocks.Interfaces.BooleanOutput
                                             y
         "Connector of clocked, Boolean output signal (clock of y is slower as clock of u)"
-        annotation (Placement(transformation(extent={{100,-10},{120,10}},
-            rotation=0)));
+        annotation (Placement(transformation(extent={{100,-10},{120,10}})));
     equation
       if inferFactor then
          y = subSample(u);
@@ -290,7 +274,6 @@ Analog to the corresponding Real signal block example there exists an elementary
             Line(
               points={{-100,0},{-80,0},{-80,-60},{60,-60},{60,0},{100,0}},
               pattern=LinePattern.Dot,
-              smooth=Smooth.None,
               color={255,0,255}),
             Text(
               extent={{-200,165},{200,100}},
@@ -298,7 +281,6 @@ Analog to the corresponding Real signal block example there exists an elementary
               textString="%name"),
             Text(visible=not inferFactor,
               extent={{-200,-85},{200,-150}},
-              lineColor={0,0,0},
               textString="%factor"),
             Ellipse(
               extent={{-95,-45},{-65,-75}},
@@ -333,7 +315,6 @@ Analog to the corresponding Real signal block example there exists an elementary
             Line(
               points={{-36,-60},{-36,-30},{14,-30},{14,60},{60,60},{60,0}},
               color={215,215,215},
-              smooth=Smooth.None,
               pattern=LinePattern.Dot),
             Polygon(
               points={{25,0},{5,20},{5,10},{-25,10},{-25,-10},{5,-10},{5,-20},
@@ -347,8 +328,7 @@ Analog to the corresponding Real signal block example there exists an elementary
             preserveAspectRatio=false,
             extent={{-100,-100},{100,100}},
             grid={2,2},
-            initialScale=0.06),
-                         graphics),
+            initialScale=0.06)),
         Documentation(info="<html>
 <p>
 This block for Boolean signals works similarly as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.SubSample\">RealSignals.Sampler.SubSample</a>).
@@ -370,13 +350,11 @@ Analog to the corresponding Real signal block example there exists an elementary
       Modelica.Blocks.Interfaces.BooleanInput
                                            u
         "Connector of clocked, Boolean input signal"
-        annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
-            rotation=0)));
+        annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
       Modelica.Blocks.Interfaces.BooleanOutput
                                             y
         "Connector of clocked, Boolean output signal (clock of y is faster as clock of u)"
-        annotation (Placement(transformation(extent={{100,-10},{120,10}},
-            rotation=0)));
+        annotation (Placement(transformation(extent={{100,-10},{120,10}})));
     equation
       if inferFactor then
          y = superSample(u);
@@ -404,7 +382,6 @@ Analog to the corresponding Real signal block example there exists an elementary
               pattern=LinePattern.Dot),                Line(
               points={{-80,-60},{-80,0},{-100,0}},
               color={255,0,255},
-              smooth=Smooth.None,
               pattern=LinePattern.Dot),
             Text(
               extent={{-200,175},{200,110}},
@@ -412,7 +389,6 @@ Analog to the corresponding Real signal block example there exists an elementary
               textString="%name"),
             Text(visible=not inferFactor,
               extent={{-200,-85},{200,-150}},
-              lineColor={0,0,0},
               textString="%factor"),
             Ellipse(
               extent={{-95,-45},{-65,-75}},
@@ -466,8 +442,7 @@ Analog to the corresponding Real signal block example there exists an elementary
             preserveAspectRatio=false,
             extent={{-100,-100},{100,100}},
             grid={2,2},
-            initialScale=0.06),
-                         graphics),
+            initialScale=0.06)),
         Documentation(info="<html>
 <p>
 This block for Boolean signals works similarly as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.SuperSample\">RealSignals.Sampler.SuperSample</a>).
@@ -490,13 +465,11 @@ Analog to the corresponding Real signal block example there exists an elementary
       Modelica.Blocks.Interfaces.BooleanInput
                                            u
         "Connector of clocked, Boolean input signal"
-        annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
-            rotation=0)));
+        annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
       Modelica.Blocks.Interfaces.BooleanOutput
                                             y
         "Connector of clocked, Boolean output signal (clock of y is faster als clock of u)"
-        annotation (Placement(transformation(extent={{100,-10},{120,10}},
-            rotation=0)));
+        annotation (Placement(transformation(extent={{100,-10},{120,10}})));
     equation
       y = shiftSample(u,shiftCounter,resolution);
 
@@ -522,7 +495,6 @@ Analog to the corresponding Real signal block example there exists an elementary
               textString="%name"),
             Text(
               extent={{-200,-85},{200,-150}},
-              lineColor={0,0,0},
               textString="%shiftCounter/%resolution"),
                                    Line(points={{-80,-50},{-40,-50},{-40,50}},
                                      color={255,0,255},
@@ -557,8 +529,7 @@ Analog to the corresponding Real signal block example there exists an elementary
             preserveAspectRatio=false,
             extent={{-100,-100},{100,100}},
             grid={2,2},
-            initialScale=0.06),
-                         graphics),
+            initialScale=0.06)),
         Documentation(info="<html>
 <p>
 This block for Boolean signals works similarly as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.ShiftSample\">RealSignals.Sampler.ShiftSample</a>).
@@ -581,13 +552,11 @@ Analog to the corresponding Real signal block example there exists an elementary
       Modelica.Blocks.Interfaces.BooleanInput
                                            u(start=y_start)
         "Connector of clocked, Boolean input signal"
-        annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
-            rotation=0)));
+        annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
       Modelica.Blocks.Interfaces.BooleanOutput
                                             y
         "Connector of clocked, Boolean output signal (clock of y is faster als clock of u)"
-        annotation (Placement(transformation(extent={{100,-10},{120,10}},
-            rotation=0)));
+        annotation (Placement(transformation(extent={{100,-10},{120,10}})));
     equation
       y = backSample(u,backCounter,resolution);
 
@@ -613,7 +582,6 @@ Analog to the corresponding Real signal block example there exists an elementary
               textString="%name"),
             Text(
               extent={{-200,-135},{200,-200}},
-              lineColor={0,0,0},
               textString="%backCounter/%resolution"),
                                    Line(points={{-80,-50},{-40,-50},{-40,50}},
                                      color={255,0,255},
@@ -645,14 +613,12 @@ Analog to the corresponding Real signal block example there exists an elementary
               fillPattern=FillPattern.Solid),
             Text(
               extent={{-200,-74},{200,-139}},
-              lineColor={0,0,0},
               textString="y_start=%y_start")}),
         Diagram(coordinateSystem(
             preserveAspectRatio=false,
             extent={{-100,-100},{100,100}},
             grid={2,2},
-            initialScale=0.06),
-                         graphics),
+            initialScale=0.06)),
         Documentation(info="<html>
 <p>
 This block for Boolean signals works similarly as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.BackSample\">RealSignals.Sampler.BackSample</a>).
@@ -668,13 +634,11 @@ Analog to the corresponding Real signal block example there exists an elementary
       Modelica.Blocks.Interfaces.BooleanInput
                                            u
         "Connector of clocked, Boolean input signal"
-        annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
-            rotation=0)));
+        annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
       Modelica.Blocks.Interfaces.BooleanOutput
                                             y
         "Connector of clocked, Boolean output signal"
-        annotation (Placement(transformation(extent={{100,-10},{120,10}},
-            rotation=0)));
+        annotation (Placement(transformation(extent={{100,-10},{120,10}})));
       Modelica_Synchronous.ClockSignals.Interfaces.ClockInput
                                                  clock annotation (Placement(transformation(
             extent={{-20,-20},{20,20}},
@@ -708,7 +672,6 @@ Analog to the corresponding Real signal block example there exists an elementary
               pattern=LinePattern.Dot),                Line(
               points={{-80,-60},{-80,0},{-106,0}},
               color={255,0,255},
-              smooth=Smooth.None,
               pattern=LinePattern.Dot),
             Ellipse(
               extent={{-90,-50},{-70,-70}},
@@ -739,14 +702,12 @@ Analog to the corresponding Real signal block example there exists an elementary
               points={{0,-100},{0,70}},
               color={175,175,175},
               pattern=LinePattern.Dot,
-              smooth=Smooth.None,
               thickness=0.5)}),
         Diagram(coordinateSystem(
             preserveAspectRatio=false,
             extent={{-100,-100},{100,100}},
             grid={2,2},
-            initialScale=0.06),
-                         graphics),
+            initialScale=0.06)),
         Documentation(info="<html>
 <p>
 This block for Boolean signals works similarly as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.AssignClock\">RealSignals.Sampler.AssignClock</a>).
@@ -765,13 +726,11 @@ Analog to the corresponding Real signal block example there exists an elementary
       Modelica.Blocks.Interfaces.BooleanInput
                                            u[n]
         "Connector of clocked, Boolean input signal"
-        annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
-            rotation=0)));
+        annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
       Modelica.Blocks.Interfaces.BooleanOutput
                                             y[n]
         "Connector of clocked, Boolean output signal"
-        annotation (Placement(transformation(extent={{100,-10},{120,10}},
-            rotation=0)));
+        annotation (Placement(transformation(extent={{100,-10},{120,10}})));
       Modelica_Synchronous.ClockSignals.Interfaces.ClockInput
                                                  clock annotation (Placement(transformation(
             extent={{-20,-20},{20,20}},
@@ -796,7 +755,6 @@ Analog to the corresponding Real signal block example there exists an elementary
               textString="%name"),
             Text(
               extent={{0,-32},{180,-82}},
-              lineColor={0,0,0},
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid,
               textString="n=%n"),  Line(points={{-80,-60},{-40,-60},{-40,0},{
@@ -805,7 +763,6 @@ Analog to the corresponding Real signal block example there exists an elementary
               pattern=LinePattern.Dot),                Line(
               points={{-80,-60},{-80,0},{-106,0}},
               color={255,0,255},
-              smooth=Smooth.None,
               pattern=LinePattern.Dot),
             Ellipse(
               extent={{-90,-50},{-70,-70}},
@@ -836,14 +793,12 @@ Analog to the corresponding Real signal block example there exists an elementary
               points={{0,-100},{0,70}},
               color={175,175,175},
               pattern=LinePattern.Dot,
-              smooth=Smooth.None,
               thickness=0.5)}),
         Diagram(coordinateSystem(
             preserveAspectRatio=false,
             extent={{-100,-100},{100,100}},
             grid={2,2},
-            initialScale=0.06),
-                         graphics),
+            initialScale=0.06)),
         Documentation(info="<html>
 <p>
 This block for Boolean signals works similarly as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.AssignClockVectorized\">RealSignals.Sampler.AssignClockVectorized</a>).
@@ -867,11 +822,11 @@ Analog to the corresponding Real signal block example there exists an elementary
         Modelica.Blocks.Interfaces.BooleanInput
                                              u
           "Connector of clocked, Boolean input signal"
-          annotation (Placement(transformation(extent={{-140,-20},{-100,20}}, rotation=0)));
+          annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
         Modelica.Blocks.Interfaces.BooleanOutput
                                               y
           "Connector of clocked, Boolean output signal (clock of y is faster as clock of u)"
-          annotation (Placement(transformation(extent={{100,-10},{120,10}}, rotation=0)));
+          annotation (Placement(transformation(extent={{100,-10},{120,10}})));
       protected
         Boolean dummy annotation(HideResult=true);
         Boolean b(start=false);
@@ -909,14 +864,12 @@ Analog to the corresponding Real signal block example there exists an elementary
               Line(
                 points={{-78,-60},{40,-60},{40,0},{40,0}},
                 color={215,215,215},
-                pattern=LinePattern.Dot,
-                smooth=Smooth.None), Line(points={{-80,-60},{-40,-60},{-40,-60},{-40,0},
+                pattern=LinePattern.Dot), Line(points={{-80,-60},{-40,-60},{-40,-60},{-40,0},
                     {-40,0},{0,0},{40,0},{40,80},{40,80},{40,80},{80,80},{80,0},{80,0},
                     {100,0}},          color={255,0,255},
                 pattern=LinePattern.Dot),                Line(
                 points={{-80,-60},{-80,0},{-100,0}},
                 color={255,0,255},
-                smooth=Smooth.None,
                 pattern=LinePattern.Dot),
               Text(
                 extent={{-200,175},{200,110}},
@@ -959,12 +912,10 @@ Analog to the corresponding Real signal block example there exists an elementary
                 fillPattern=FillPattern.Solid),
               Text(visible=not inferFactor,
                 extent={{-200,-80},{200,-145}},
-                lineColor={0,0,0},
                 textString="%factor"),
               Line(
                 points={{80,80},{120,80}},
                 color={215,215,215},
-                smooth=Smooth.None,
                 pattern=LinePattern.Dot),
               Polygon(
                 points={{25,0},{5,20},{5,10},{-25,10},{-25,-10},{5,-10},{5,-20},
@@ -978,8 +929,7 @@ Analog to the corresponding Real signal block example there exists an elementary
               preserveAspectRatio=false,
               extent={{-100,-100},{100,100}},
               grid={2,2},
-              initialScale=0.06),
-                           graphics),
+              initialScale=0.06)),
           Documentation(info="<html>
 <p>
 This block for Boolean signals works similarly as the corresponding block for Real signals (see
@@ -1000,7 +950,7 @@ Analog to the corresponding Real signal block example there exists an elementary
             annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
           Modelica.Blocks.Interfaces.BooleanOutput y
           "Connector of Boolean output signal"     annotation (Placement(
-                transformation(extent={{100,-10},{120,10}}, rotation=0),
+                transformation(extent={{100,-10},{120,10}}),
                 iconTransformation(extent={{100,-10},{120,10}})));
       protected
           Boolean y2(start=y_start);
@@ -1038,10 +988,10 @@ Analog to the corresponding Real signal block example there exists an elementary
                   fillColor=DynamicSelect({235,235,235}, if y > 0.5 then {0,255,0} else
                             {235,235,235}),
                   fillPattern=FillPattern.Solid),
-              Line(points={{-60,-70},{-60,70}}, color={0,0,0}),
-              Line(points={{-20,-70},{-20,70}}, color={0,0,0}),
-              Line(points={{20,-70},{20,70}}, color={0,0,0}),
-              Line(points={{60,-70},{60,70}}, color={0,0,0})}),
+              Line(points={{-60,-70},{-60,70}}),
+              Line(points={{-20,-70},{-20,70}}),
+              Line(points={{20,-70},{20,70}}),
+              Line(points={{60,-70},{60,70}})}),
             Diagram(coordinateSystem(
               preserveAspectRatio=false,
               extent={{-100,-100},{100,100}},
@@ -1063,7 +1013,7 @@ This block for Boolean signals works similarly as the corresponding block for Re
             annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
           Modelica.Blocks.Interfaces.BooleanOutput y
           "Connector of Boolean output signal"     annotation (Placement(
-                transformation(extent={{100,-10},{120,10}}, rotation=0),
+                transformation(extent={{100,-10},{120,10}}),
                 iconTransformation(extent={{100,-10},{120,10}})));
       protected
           Boolean y2(start=y_start);
@@ -1097,8 +1047,7 @@ This block for Boolean signals works similarly as the corresponding block for Re
                             {235,235,235}),
                   fillPattern=FillPattern.Solid),
                                        Line(points={{-80,-70},{-40,-70},{-40,44},
-                    {0,44},{0,-70},{40,-70},{40,44},{79,44}},
-                                                           color={0,0,0})}),
+                    {0,44},{0,-70},{40,-70},{40,44},{79,44}})}),
             Diagram(coordinateSystem(
               preserveAspectRatio=true,
               extent={{-100,-100},{100,100}},
@@ -1213,7 +1162,6 @@ contains utility blocks that are used as building blocks for user-relevant block
               lineColor={255,0,255}),
             Text(
               extent={{-150,-140},{150,-100}},
-              lineColor={0,0,0},
               textString="y_start=%y_start")}),
         Documentation(info="<html>
 <p>
@@ -1262,17 +1210,14 @@ y is set to parameter y_start.
               points={{-100,0},{-80,0},{-80,40},{-20,40},{-20,-40},{40,-40},{40,0},{
                   100,0}},
               color={215,215,215},
-              smooth=Smooth.None,
               pattern=LinePattern.Dot),
             Line(
               points={{-100,0},{-50,0},{-50,40},{10,40},{10,-40},{70,-40},{70,-0.3125},
                   {100,0}},
               pattern=LinePattern.Dot,
-              smooth=Smooth.None,
               color={255,0,255}),
             Text(
               extent={{4,-102},{4,-142}},
-              lineColor={0,0,0},
               textString="%shift/%resolution"),
             Ellipse(
               extent={{-90,50},{-70,30}},
@@ -1324,7 +1269,6 @@ y is set to parameter y_start.
                 -100},{100,100}}), graphics={
             Text(
               extent={{-150,-150},{150,-110}},
-              lineColor={0,0,0},
               textString="startTime=%startTime"),
             Polygon(
               points={{-80,88},{-88,66},{-72,66},{-80,88}},
@@ -1346,8 +1290,7 @@ y is set to parameter y_start.
                         {235,235,235}),
               fillPattern=FillPattern.Solid),
                                            Line(points={{-80,-70},{0,-70},{0,50},{80,
-                  50}},   color={0,0,0},
-              pattern=LinePattern.Dot),
+                  50}},   pattern=LinePattern.Dot),
             Ellipse(
               extent={{-86,-64},{-74,-76}},
               lineColor={255,0,255},
@@ -1389,11 +1332,9 @@ y is set to parameter y_start.
               fillPattern=FillPattern.Solid),
             Text(
               extent={{54,-80},{106,-92}},
-              lineColor={0,0,0},
               textString="time"),
             Text(
               extent={{-74,92},{-56,74}},
-              lineColor={0,0,0},
               textString="y"),
           Line(
               points={{-80,-70},{0,-70},{0,50},{80,50}},
@@ -1402,7 +1343,6 @@ y is set to parameter y_start.
               pattern=LinePattern.Dot),
           Text(
             extent={{-15,-80},{20,-88}},
-            lineColor={0,0,0},
             textString="startTime"),
           Polygon(
             points={{-8,50},{-90,50},{-8,50}},
@@ -1411,11 +1351,9 @@ y is set to parameter y_start.
             fillPattern=FillPattern.Solid),
           Text(
             extent={{-76,62},{-32,48}},
-            lineColor={0,0,0},
             textString="not startValue"),
           Text(
             extent={{-78,-52},{-46,-66}},
-            lineColor={0,0,0},
             textString="startValue"),
             Ellipse(
               extent={{-86,-64},{-74,-76}},
@@ -1443,7 +1381,7 @@ y is set to parameter y_start.
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid)}),
         Documentation(info="<html>
-<p>The block is similar to the block in <a href=\"modelica://Modelica.Blocks.Sources.BooleanStep\">Modelica.Blocks.Sources.BooleanStep</a>, 
+<p>The block is similar to the block in <a href=\"modelica://Modelica.Blocks.Sources.BooleanStep\">Modelica.Blocks.Sources.BooleanStep</a>,
 but adapted to work in clocked partitions (by internal sampling of the continuous <b>time</b> variable).</p>
 <p>
 The Boolean output y is a step signal:
@@ -1489,7 +1427,6 @@ See model <a href=\"Modelica_Synchronous.Examples.Elementary.BooleanSignals.Time
             extent={{-100,-100},{100,100}},
             grid={1,1}), graphics={Text(
               extent={{-150,-140},{150,-110}},
-              lineColor={0,0,0},
               textString="%period"),
               Polygon(
                 points={{-80,88},{-88,66},{-72,66},{-80,88}},
@@ -1511,8 +1448,7 @@ See model <a href=\"Modelica_Synchronous.Examples.Elementary.BooleanSignals.Time
                           {235,235,235}),
                 fillPattern=FillPattern.Solid),
                                      Line(points={{-80,-70},{-40,-70},{-40,44},{0,44},
-                    {0,-70},{40,-70},{40,44},{79,44}},   color={0,0,0},
-              pattern=LinePattern.Dot),
+                    {0,-70},{40,-70},{40,44},{79,44}},   pattern=LinePattern.Dot),
               Ellipse(
                 extent={{-86,-64},{-74,-76}},
                 lineColor={255,0,255},
@@ -1539,7 +1475,6 @@ See model <a href=\"Modelica_Synchronous.Examples.Elementary.BooleanSignals.Time
             grid={1,1}), graphics={
             Text(
               extent={{-60,-74},{-19,-82}},
-              lineColor={0,0,0},
               textString="startTime"),
             Line(
               points={{-78,-70},{-40,-70},{-40,20},{20,20},{20,-70},{50,-70},{
@@ -1554,11 +1489,9 @@ See model <a href=\"Modelica_Synchronous.Examples.Elementary.BooleanSignals.Time
             Line(points={{-40,35},{20,35}}, color={95,95,95}),
             Text(
               extent={{-18,65},{28,55}},
-              lineColor={0,0,0},
               textString="period"),
             Text(
               extent={{-33,47},{14,37}},
-              lineColor={0,0,0},
               textString="width"),
             Line(points={{-70,20},{-41,20}}, color={95,95,95}),
             Polygon(
@@ -1583,11 +1516,9 @@ See model <a href=\"Modelica_Synchronous.Examples.Elementary.BooleanSignals.Time
               fillPattern=FillPattern.Solid),
             Text(
               extent={{-95,26},{-66,17}},
-              lineColor={0,0,0},
               textString="true"),
             Text(
               extent={{-96,-60},{-75,-69}},
-              lineColor={0,0,0},
               textString="false"),
               Ellipse(
                 extent={{-46,26},{-34,14}},
@@ -1620,7 +1551,7 @@ See model <a href=\"Modelica_Synchronous.Examples.Elementary.BooleanSignals.Time
                 fillColor={255,255,255},
                 fillPattern=FillPattern.Solid)}),
           Documentation(info="<html>
-<p>The block is similar to the block in <a href=\"modelica://Modelica.Blocks.Sources.BooleanPulse\">Modelica.Blocks.Sources.BooleanPulse</a>, 
+<p>The block is similar to the block in <a href=\"modelica://Modelica.Blocks.Sources.BooleanPulse\">Modelica.Blocks.Sources.BooleanPulse</a>,
 but adapted to work in clocked partitions (by internal sampling of the continuous <b>time</b> variable).
 </p>
 <p>
@@ -1639,7 +1570,7 @@ See model <a href=\"Modelica_Synchronous.Examples.Elementary.BooleanSignals.Time
       end Pulse;
     annotation (Documentation(info="<html>
 <p>
-This package provides <b>source</b> components akin to the blocks provided in 
+This package provides <b>source</b> components akin to the blocks provided in
 <a href=\"Modelica.Blocks.Sources\">Modelica.Blocks.Sources</a>, but with the difference
 that they provide a <b>clocked</b> output signal.
 </p>
@@ -1672,7 +1603,6 @@ to use the blocks provided in this package than to use the blocks offered by <a 
                 -100},{100,100}}), graphics={
             Text(
               extent={{-150,-150},{150,-110}},
-              lineColor={0,0,0},
               textString="startTick=%startTick"),
             Polygon(
               points={{-80,88},{-88,66},{-72,66},{-80,88}},
@@ -1694,8 +1624,7 @@ to use the blocks provided in this package than to use the blocks offered by <a 
                         {235,235,235}),
               fillPattern=FillPattern.Solid),
                                            Line(points={{-80,-70},{0,-70},{0,50},{80,
-                  50}},   color={0,0,0},
-              pattern=LinePattern.Dot),
+                  50}},   pattern=LinePattern.Dot),
             Ellipse(
               extent={{-86,-64},{-74,-76}},
               lineColor={255,0,255},
@@ -1737,11 +1666,9 @@ to use the blocks provided in this package than to use the blocks offered by <a 
               fillPattern=FillPattern.Solid),
             Text(
               extent={{54,-80},{106,-92}},
-              lineColor={0,0,0},
               textString="tick"),
             Text(
               extent={{-74,92},{-56,74}},
-              lineColor={0,0,0},
               textString="y"),
           Line(
               points={{-80,-70},{0,-70},{0,50},{80,50}},
@@ -1755,11 +1682,9 @@ to use the blocks provided in this package than to use the blocks offered by <a 
             fillPattern=FillPattern.Solid),
           Text(
             extent={{-76,62},{-32,48}},
-            lineColor={0,0,0},
             textString="not startValue"),
           Text(
             extent={{-78,-52},{-46,-66}},
-            lineColor={0,0,0},
             textString="startValue"),
             Ellipse(
               extent={{-86,-64},{-74,-76}},
@@ -1788,7 +1713,6 @@ to use the blocks provided in this package than to use the blocks offered by <a 
               fillPattern=FillPattern.Solid),
             Text(
               extent={{-21,-76},{26,-88}},
-              lineColor={0,0,0},
               textString="startTick")}),
         Documentation(info="<html>
 <p>
@@ -1836,8 +1760,7 @@ See model <a href=\"Modelica_Synchronous.Examples.Elementary.BooleanSignals.Tick
             extent={{-100,-100},{100,100}},
             grid={1,1}), graphics={Text(
               extent={{-150,-140},{150,-110}},
-              lineColor={0,0,0},
-                textString="periodTicks=%periodTicks"),
+              textString="periodTicks=%periodTicks"),
               Polygon(
                 points={{-80,88},{-88,66},{-72,66},{-80,88}},
                 lineColor={255,0,255},
@@ -1858,8 +1781,7 @@ See model <a href=\"Modelica_Synchronous.Examples.Elementary.BooleanSignals.Tick
                           {235,235,235}),
                 fillPattern=FillPattern.Solid),
                 Line(points={{-80,-70},{-40,-70},{-40,44},{0,44},
-                    {0,-70},{40,-70},{40,44},{79,44}},   color={0,0,0},
-                pattern=LinePattern.Dot),
+                    {0,-70},{40,-70},{40,44},{79,44}},   pattern=LinePattern.Dot),
               Ellipse(
                 extent={{-86,-64},{-74,-76}},
                 lineColor={255,0,255},
@@ -1886,8 +1808,7 @@ See model <a href=\"Modelica_Synchronous.Examples.Elementary.BooleanSignals.Tick
             grid={1,1}), graphics={
             Text(
               extent={{-60,-74},{-19,-82}},
-              lineColor={0,0,0},
-                textString="startTick"),
+              textString="startTick"),
             Line(
                 points={{-78,-70},{-40,-70},{-40,20},{20,20},{20,-70},{50,-70},{50,20},
                     {100,20}},
@@ -1902,12 +1823,10 @@ See model <a href=\"Modelica_Synchronous.Examples.Elementary.BooleanSignals.Tick
             Line(points={{-40,35},{-10,35}},color={95,95,95}),
             Text(
               extent={{-18,72},{28,62}},
-              lineColor={0,0,0},
-                textString="periodTicks"),
+              textString="periodTicks"),
             Text(
               extent={{-37,51},{10,41}},
-              lineColor={0,0,0},
-                textString="widthTicks"),
+              textString="widthTicks"),
             Line(points={{-70,20},{-41,20}}, color={95,95,95}),
             Polygon(
               points={{-40,35},{-31,37},{-31,33},{-40,35}},
@@ -1931,11 +1850,9 @@ See model <a href=\"Modelica_Synchronous.Examples.Elementary.BooleanSignals.Tick
               fillPattern=FillPattern.Solid),
             Text(
               extent={{-95,26},{-66,17}},
-              lineColor={0,0,0},
               textString="true"),
             Text(
               extent={{-96,-60},{-75,-69}},
-              lineColor={0,0,0},
               textString="false"),
               Ellipse(
                 extent={{-46,26},{-34,14}},
@@ -1968,7 +1885,7 @@ See model <a href=\"Modelica_Synchronous.Examples.Elementary.BooleanSignals.Tick
                 fillColor={255,255,255},
                 fillPattern=FillPattern.Solid)}),
           Documentation(info="<html>
-<p>The block is similar to the block in <a href=\"modelica://Modelica.Blocks.Sources.BooleanPulse\">Modelica.Blocks.Sources.BooleanPulse</a>, 
+<p>The block is similar to the block in <a href=\"modelica://Modelica.Blocks.Sources.BooleanPulse\">Modelica.Blocks.Sources.BooleanPulse</a>,
 but adapted to work in clocked partitions (by internal sampling of the continuous <b>time</b> variable).
 </p>
 <p>
@@ -2011,8 +1928,7 @@ See model <a href=\"Modelica_Synchronous.Examples.Elementary.BooleanSignals.Tick
               extent={{-99,40},{99,-40}},
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None,
-              lineColor={0,0,0}),
+              pattern=LinePattern.None),
             Line(points={{-100,0},{-45,0}}, color={255,85,255}),
             Ellipse(
               extent={{-25,-10},{-45,10}},
@@ -2038,19 +1954,16 @@ See model <a href=\"Modelica_Synchronous.Examples.Elementary.BooleanSignals.Tick
       Modelica.Blocks.Interfaces.BooleanInput
                                            u
         "Connector of continuous-time, Real input signal"
-        annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
-            rotation=0)));
+        annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
       Modelica.Blocks.Interfaces.BooleanOutput
                                             y
         "Connector of clocked, Real output signal"
-        annotation (Placement(transformation(extent={{100,-10},{120,10}},
-            rotation=0)));
+        annotation (Placement(transformation(extent={{100,-10},{120,10}})));
     equation
 
       annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                 {100,100}}), graphics), Diagram(coordinateSystem(
-              preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
-            graphics));
+              preserveAspectRatio=false, extent={{-100,-100},{100,100}})));
     end PartialSISOSampler;
 
     partial block PartialClockedSISO
@@ -2060,13 +1973,11 @@ See model <a href=\"Modelica_Synchronous.Examples.Elementary.BooleanSignals.Tick
       Modelica.Blocks.Interfaces.BooleanInput
                                            u
         "Connector of clocked, Real input signal"
-        annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
-            rotation=0)));
+        annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
       Modelica.Blocks.Interfaces.BooleanOutput
                                             y
         "Connector of clocked, Real output signal"
-        annotation (Placement(transformation(extent={{100,-10},{120,10}},
-            rotation=0)));
+        annotation (Placement(transformation(extent={{100,-10},{120,10}})));
 
       annotation (Icon(graphics), Diagram(coordinateSystem(preserveAspectRatio=
                 false, extent={{-100,-100},{100,100}}), graphics));
@@ -2079,8 +1990,7 @@ See model <a href=\"Modelica_Synchronous.Examples.Elementary.BooleanSignals.Tick
       Modelica.Blocks.Interfaces.BooleanOutput
                                             y
         "Connector of clocked, Real output signal"
-        annotation (Placement(transformation(extent={{100,-10},{120,10}},
-            rotation=0)));
+        annotation (Placement(transformation(extent={{100,-10},{120,10}})));
 
       annotation (Icon(graphics), Diagram(coordinateSystem(preserveAspectRatio=false,
                        extent={{-100,-100},{100,100}}), graphics));
