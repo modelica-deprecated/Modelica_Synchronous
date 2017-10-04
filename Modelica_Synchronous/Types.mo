@@ -38,21 +38,21 @@ Specification (version &ge; 3.3):
 <tr><th><b>Types.SolverMethod.</b></th><th><b>Meaning</b></th></tr>
 <tr><td valign=\"top\">\"External\"</td>
     <td valign=\"top\">Solver specified externally</td></tr>
-    
+
 <tr><td valign=\"top\">\"ExplicitEuler\"</td>
     <td valign=\"top\">Explicit Euler method</td></tr>
-    
+
 <tr><td valign=\"top\">\"ExplicitMidPoint2\"</td>
     <td valign=\"top\">Explicit mid point rule (order 2)</td></tr>
-        
+
 <tr><td valign=\"top\">\"ExplicitRungeKutta4\"</td>
-    <td valign=\"top\">Explicit Runge-Kutta method (order 4)</td></tr>        
+    <td valign=\"top\">Explicit Runge-Kutta method (order 4)</td></tr>
 
 <tr><td valign=\"top\">\"ImplicitEuler\"</td>
     <td valign=\"top\">Implicit Euler method</td></tr>
-    
+
 <tr><td valign=\"top\">\"ImplicitTrapezoid\"</td>
-    <td valign=\"top\">Implicit trapezoid rule (order 2)</td></tr>    
+    <td valign=\"top\">Implicit trapezoid rule (order 2)</td></tr>
 </table>
 
 

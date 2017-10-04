@@ -27,8 +27,7 @@ package IntegerSignals "Library of clocked blocks for Integer signals"
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
             grid={2,2},
-            initialScale=0.06),
-                         graphics),
+            initialScale=0.06)),
         Documentation(info="<html>
 <p>
 This block for Integer signals works similarly as the corresponding block for Real signals
@@ -54,13 +53,11 @@ Analog to the corresponding Real signal block examples there exist two elementar
       Modelica.Blocks.Interfaces.IntegerInput
                                            u
         "Connector of continuous-time, Integer input signal"
-        annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
-            rotation=0)));
+        annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
       Modelica.Blocks.Interfaces.IntegerOutput
                                             y
         "Connector of clocked, Integer output signal"
-        annotation (Placement(transformation(extent={{100,-10},{120,10}},
-            rotation=0)));
+        annotation (Placement(transformation(extent={{100,-10},{120,10}})));
     equation
       y = sample(u,clock);
 
@@ -75,7 +72,6 @@ Analog to the corresponding Real signal block examples there exist two elementar
             Line(
               points={{0,-100},{0,18}},
               color={175,175,175},
-              smooth=Smooth.None,
               pattern=LinePattern.Dot,
               thickness=0.5),
             Text(
@@ -86,8 +82,7 @@ Analog to the corresponding Real signal block examples there exist two elementar
             preserveAspectRatio=false,
             extent={{-100,-100},{100,100}},
             grid={2,2},
-            initialScale=0.06),
-                         graphics),
+            initialScale=0.06)),
         Documentation(info="<html>
 <p>
 This block for Integer signals works similarly as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.SampleClocked\">RealSignals.Sampler.SampleClocked</a>).
@@ -106,13 +101,11 @@ Analog to the corresponding Real signal block example there exists an elementary
       Modelica.Blocks.Interfaces.IntegerInput
                                            u[n]
         "Connector of continuous-time, Integer input signal vector"
-        annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
-            rotation=0), iconTransformation(extent={{-140,-20},{-100,20}})));
+        annotation (Placement(transformation(extent={{-140,-20},{-100,20}}), iconTransformation(extent={{-140,-20},{-100,20}})));
       Modelica.Blocks.Interfaces.IntegerOutput
                                             y[n]
         "Connector of clocked, Integer output signal vector"
-        annotation (Placement(transformation(extent={{100,-10},{120,10}},
-            rotation=0)));
+        annotation (Placement(transformation(extent={{100,-10},{120,10}})));
       Modelica_Synchronous.ClockSignals.Interfaces.ClockInput
                                                  clock
         "Output signal vector y is associated with this clock input"                           annotation (Placement(transformation(
@@ -133,7 +126,6 @@ Analog to the corresponding Real signal block example there exists an elementary
             Line(
               points={{0,-100},{0,18}},
               color={175,175,175},
-              smooth=Smooth.None,
               pattern=LinePattern.Dot,
               thickness=0.5),
             Text(
@@ -142,7 +134,6 @@ Analog to the corresponding Real signal block example there exists an elementary
               textString="%name"),
             Text(
               extent={{-160,-30},{20,-80}},
-              lineColor={0,0,0},
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid,
               textString="n=%n")}),
@@ -150,8 +141,7 @@ Analog to the corresponding Real signal block example there exists an elementary
             preserveAspectRatio=false,
             extent={{-100,-100},{100,100}},
             grid={2,2},
-            initialScale=0.06),
-                         graphics),
+            initialScale=0.06)),
         Documentation(info="<html>
 <p>
 This block for Integer signals works similarly as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.SampleVectorizedAndClocked\">RealSignals.Sampler.SampleVectorizedAndClocked</a>).
@@ -201,7 +191,6 @@ Analog to the corresponding Real signal block example there exists an elementary
               fillPattern=FillPattern.Solid),
             Text(
               extent={{-200,-80},{200,-145}},
-              lineColor={0,0,0},
               textString="%y_start")}),
         Documentation(info="<html>
 <p>
@@ -230,13 +219,11 @@ Analog to the corresponding Real signal block example there exists an elementary
       Modelica.Blocks.Interfaces.IntegerInput
                                            u
         "Connector of clocked, Integer input signal"
-        annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
-            rotation=0)));
+        annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
       Modelica.Blocks.Interfaces.IntegerOutput
                                             y
         "Connector of clocked, Integer output signal (clock of y is slower as clock of u)"
-        annotation (Placement(transformation(extent={{100,-10},{120,10}},
-            rotation=0)));
+        annotation (Placement(transformation(extent={{100,-10},{120,10}})));
     equation
       if inferFactor then
          y = subSample(u);
@@ -260,7 +247,6 @@ Analog to the corresponding Real signal block example there exists an elementary
             Line(
               points={{-100,0},{-80,0},{-80,-60},{60,-60},{60,0},{100,0}},
               pattern=LinePattern.Dot,
-              smooth=Smooth.None,
               color={255,128,0}),
             Text(
               extent={{-200,165},{200,100}},
@@ -268,7 +254,6 @@ Analog to the corresponding Real signal block example there exists an elementary
               textString="%name"),
             Text(visible=not inferFactor,
               extent={{-200,-85},{200,-150}},
-              lineColor={0,0,0},
               textString="%factor"),
             Ellipse(
               extent={{-95,-45},{-65,-75}},
@@ -303,7 +288,6 @@ Analog to the corresponding Real signal block example there exists an elementary
             Line(
               points={{-36,-60},{-36,-30},{14,-30},{14,60},{60,60},{60,0}},
               color={215,215,215},
-              smooth=Smooth.None,
               pattern=LinePattern.Dot),
             Polygon(
               points={{25,0},{5,20},{5,10},{-25,10},{-25,-10},{5,-10},{5,-20},
@@ -317,8 +301,7 @@ Analog to the corresponding Real signal block example there exists an elementary
             preserveAspectRatio=false,
             extent={{-100,-100},{100,100}},
             grid={2,2},
-            initialScale=0.06),
-                         graphics),
+            initialScale=0.06)),
         Documentation(info="<html>
 <p>
 This block for Integer signals works similarly as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.SubSample\">RealSignals.Sampler.SubSample</a>).
@@ -340,13 +323,11 @@ Analog to the corresponding Real signal block example there exists an elementary
       Modelica.Blocks.Interfaces.IntegerInput
                                            u
         "Connector of clocked, Integer input signal"
-        annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
-            rotation=0)));
+        annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
       Modelica.Blocks.Interfaces.IntegerOutput
                                             y
         "Connector of clocked, Integer output signal (clock of y is faster as clock of u)"
-        annotation (Placement(transformation(extent={{100,-10},{120,10}},
-            rotation=0)));
+        annotation (Placement(transformation(extent={{100,-10},{120,10}})));
     equation
       if inferFactor then
          y = superSample(u);
@@ -374,7 +355,6 @@ Analog to the corresponding Real signal block example there exists an elementary
               pattern=LinePattern.Dot),                Line(
               points={{-80,-60},{-80,0},{-100,0}},
               color={255,128,0},
-              smooth=Smooth.None,
               pattern=LinePattern.Dot),
             Text(
               extent={{-200,175},{200,110}},
@@ -382,7 +362,6 @@ Analog to the corresponding Real signal block example there exists an elementary
               textString="%name"),
             Text(visible=not inferFactor,
               extent={{-200,-85},{200,-150}},
-              lineColor={0,0,0},
               textString="%factor"),
             Ellipse(
               extent={{-95,-45},{-65,-75}},
@@ -436,8 +415,7 @@ Analog to the corresponding Real signal block example there exists an elementary
             preserveAspectRatio=false,
             extent={{-100,-100},{100,100}},
             grid={2,2},
-            initialScale=0.06),
-                         graphics),
+            initialScale=0.06)),
         Documentation(info="<html>
 <p>
 This block for Integer signals works similarly as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.SuperSample\">RealSignals.Sampler.SuperSample</a>).
@@ -459,13 +437,11 @@ Analog to the corresponding Real signal block example there exists an elementary
       Modelica.Blocks.Interfaces.IntegerInput
                                            u
         "Connector of clocked, Integer input signal"
-        annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
-            rotation=0)));
+        annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
       Modelica.Blocks.Interfaces.IntegerOutput
                                             y
         "Connector of clocked, Integer output signal"
-        annotation (Placement(transformation(extent={{100,-10},{120,10}},
-            rotation=0)));
+        annotation (Placement(transformation(extent={{100,-10},{120,10}})));
     equation
       y = shiftSample(u,shiftCounter,resolution);
 
@@ -491,7 +467,6 @@ Analog to the corresponding Real signal block example there exists an elementary
               textString="%name"),
             Text(
               extent={{-200,-85},{200,-150}},
-              lineColor={0,0,0},
               textString="%shiftCounter/%resolution"),
                                    Line(points={{-80,-50},{-40,-50},{-40,50}},
                                      color={255,128,0},
@@ -526,8 +501,7 @@ Analog to the corresponding Real signal block example there exists an elementary
             preserveAspectRatio=false,
             extent={{-100,-100},{100,100}},
             grid={2,2},
-            initialScale=0.06),
-                         graphics),
+            initialScale=0.06)),
         Documentation(info="<html>
 <p>
 This block for Integer signals works similarly as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.ShiftSample\">RealSignals.Sampler.ShiftSample</a>).
@@ -550,13 +524,11 @@ Analog to the corresponding Real signal block example there exists an elementary
       Modelica.Blocks.Interfaces.IntegerInput
                                            u(start=y_start)
         "Connector of clocked, Integer input signal"
-        annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
-            rotation=0)));
+        annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
       Modelica.Blocks.Interfaces.IntegerOutput
                                             y
         "Connector of clocked, Integer output signal (clock of y is faster als clock of u)"
-        annotation (Placement(transformation(extent={{100,-10},{120,10}},
-            rotation=0)));
+        annotation (Placement(transformation(extent={{100,-10},{120,10}})));
     equation
       y = backSample(u,backCounter,resolution);
 
@@ -582,7 +554,6 @@ Analog to the corresponding Real signal block example there exists an elementary
               textString="%name"),
             Text(
               extent={{-200,-135},{200,-200}},
-              lineColor={0,0,0},
               textString="%backCounter/%resolution"),
                                    Line(points={{-80,-50},{-40,-50},{-40,50}},
                                      color={255,128,0},
@@ -614,14 +585,12 @@ Analog to the corresponding Real signal block example there exists an elementary
               fillPattern=FillPattern.Solid),
             Text(
               extent={{-200,-74},{200,-139}},
-              lineColor={0,0,0},
               textString="y_start=%y_start")}),
         Diagram(coordinateSystem(
             preserveAspectRatio=false,
             extent={{-100,-100},{100,100}},
             grid={2,2},
-            initialScale=0.06),
-                         graphics),
+            initialScale=0.06)),
         Documentation(info="<html>
 <p>
 This block for Integer signals works similarly as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.BackSample\">RealSignals.Sampler.BackSample</a>).
@@ -637,13 +606,11 @@ Analog to the corresponding Real signal block example there exists an elementary
       Modelica.Blocks.Interfaces.IntegerInput
                                            u
         "Connector of clocked, Integer input signal"
-        annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
-            rotation=0)));
+        annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
       Modelica.Blocks.Interfaces.IntegerOutput
                                             y
         "Connector of clocked, Integer output signal"
-        annotation (Placement(transformation(extent={{100,-10},{120,10}},
-            rotation=0)));
+        annotation (Placement(transformation(extent={{100,-10},{120,10}})));
        Modelica_Synchronous.ClockSignals.Interfaces.ClockInput
                                                   clock annotation (Placement(transformation(
             extent={{-20,-20},{20,20}},
@@ -677,7 +644,6 @@ Analog to the corresponding Real signal block example there exists an elementary
               pattern=LinePattern.Dot),                Line(
               points={{-80,-60},{-80,0},{-106,0}},
               color={255,128,0},
-              smooth=Smooth.None,
               pattern=LinePattern.Dot),
             Ellipse(
               extent={{-90,-50},{-70,-70}},
@@ -708,14 +674,12 @@ Analog to the corresponding Real signal block example there exists an elementary
               points={{0,-100},{0,70}},
               color={175,175,175},
               pattern=LinePattern.Dot,
-              smooth=Smooth.None,
               thickness=0.5)}),
         Diagram(coordinateSystem(
             preserveAspectRatio=false,
             extent={{-100,-100},{100,100}},
             grid={2,2},
-            initialScale=0.06),
-                         graphics),
+            initialScale=0.06)),
         Documentation(info="<html>
 <p>
 This block for Integer signals works similarly as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.AssignClock\">RealSignals.Sampler.AssignClock</a>).
@@ -734,13 +698,11 @@ Analog to the corresponding Real signal block example there exists an elementary
       Modelica.Blocks.Interfaces.IntegerInput
                                            u[n]
         "Connector of clocked, Integer input signal"
-        annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
-            rotation=0)));
+        annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
       Modelica.Blocks.Interfaces.IntegerOutput
                                             y[n]
         "Connector of clocked, Integer output signal"
-        annotation (Placement(transformation(extent={{100,-10},{120,10}},
-            rotation=0)));
+        annotation (Placement(transformation(extent={{100,-10},{120,10}})));
        Modelica_Synchronous.ClockSignals.Interfaces.ClockInput
                                                   clock annotation (Placement(transformation(
             extent={{-20,-20},{20,20}},
@@ -765,7 +727,6 @@ Analog to the corresponding Real signal block example there exists an elementary
               textString="%name"),
             Text(
               extent={{0,-32},{180,-82}},
-              lineColor={0,0,0},
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid,
               textString="n=%n"),  Line(points={{-80,-60},{-40,-60},{-40,0},{
@@ -774,7 +735,6 @@ Analog to the corresponding Real signal block example there exists an elementary
               pattern=LinePattern.Dot),                Line(
               points={{-80,-60},{-80,0},{-106,0}},
               color={255,128,0},
-              smooth=Smooth.None,
               pattern=LinePattern.Dot),
             Ellipse(
               extent={{-90,-50},{-70,-70}},
@@ -805,14 +765,12 @@ Analog to the corresponding Real signal block example there exists an elementary
               points={{0,-100},{0,70}},
               color={175,175,175},
               pattern=LinePattern.Dot,
-              smooth=Smooth.None,
               thickness=0.5)}),
         Diagram(coordinateSystem(
             preserveAspectRatio=false,
             extent={{-100,-100},{100,100}},
             grid={2,2},
-            initialScale=0.06),
-                         graphics),
+            initialScale=0.06)),
         Documentation(info="<html>
 <p>
 This block for Integer signals works similarly as the corresponding block for Real signals (see <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.AssignClockVectorized\">RealSignals.Sampler.AssignClockVectorized</a>).
@@ -836,11 +794,11 @@ Analog to the corresponding Real signal block example there exists an elementary
         Modelica.Blocks.Interfaces.IntegerInput
                                              u
           "Connector of clocked, Integer input signal"
-          annotation (Placement(transformation(extent={{-140,-20},{-100,20}}, rotation=0)));
+          annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
         Modelica.Blocks.Interfaces.IntegerOutput
                                               y
           "Connector of clocked, Integer output signal (clock of y is faster as clock of u)"
-          annotation (Placement(transformation(extent={{100,-10},{120,10}}, rotation=0)));
+          annotation (Placement(transformation(extent={{100,-10},{120,10}})));
       protected
         Integer dummy annotation(HideResult=true);
         Boolean b(start=false);
@@ -878,14 +836,12 @@ Analog to the corresponding Real signal block example there exists an elementary
               Line(
                 points={{-78,-60},{40,-60},{40,0},{40,0}},
                 color={215,215,215},
-                pattern=LinePattern.Dot,
-                smooth=Smooth.None), Line(points={{-80,-60},{-40,-60},{-40,-60},{-40,0},
+                pattern=LinePattern.Dot), Line(points={{-80,-60},{-40,-60},{-40,-60},{-40,0},
                     {-40,0},{0,0},{40,0},{40,80},{40,80},{40,80},{80,80},{80,0},{80,0},
                     {100,0}},          color={255,128,0},
                 pattern=LinePattern.Dot),                Line(
                 points={{-80,-60},{-80,0},{-100,0}},
                 color={255,128,0},
-                smooth=Smooth.None,
                 pattern=LinePattern.Dot),
               Text(
                 extent={{-200,175},{200,110}},
@@ -928,12 +884,10 @@ Analog to the corresponding Real signal block example there exists an elementary
                 fillPattern=FillPattern.Solid),
               Text(visible=not inferFactor,
                 extent={{-200,-80},{200,-145}},
-                lineColor={0,0,0},
                 textString="%factor"),
               Line(
                 points={{80,80},{120,80}},
                 color={215,215,215},
-                smooth=Smooth.None,
                 pattern=LinePattern.Dot),
               Polygon(
                 points={{25,0},{5,20},{5,10},{-25,10},{-25,-10},{5,-10},{5,-20},
@@ -947,8 +901,7 @@ Analog to the corresponding Real signal block example there exists an elementary
               preserveAspectRatio=false,
               extent={{-100,-100},{100,100}},
               grid={2,2},
-              initialScale=0.06),
-                           graphics),
+              initialScale=0.06)),
           Documentation(info="<html>
 <p>
 This block for Integer signals works similarly as the corresponding block for Real signals (see
@@ -970,7 +923,7 @@ Analog to the corresponding Real signal block example there exists an elementary
             annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
           Modelica.Blocks.Interfaces.BooleanOutput y
           "Connector of Boolean output signal"     annotation (Placement(
-                transformation(extent={{100,-10},{120,10}}, rotation=0),
+                transformation(extent={{100,-10},{120,10}}),
                 iconTransformation(extent={{100,-10},{120,10}})));
       protected
           Boolean y2(start=y_start);
@@ -1008,10 +961,10 @@ Analog to the corresponding Real signal block example there exists an elementary
                   fillColor=DynamicSelect({235,235,235}, if y > 0.5 then {0,255,0} else
                             {235,235,235}),
                   fillPattern=FillPattern.Solid),
-              Line(points={{-60,-70},{-60,70}}, color={0,0,0}),
-              Line(points={{-20,-70},{-20,70}}, color={0,0,0}),
-              Line(points={{20,-70},{20,70}}, color={0,0,0}),
-              Line(points={{60,-70},{60,70}}, color={0,0,0})}),
+              Line(points={{-60,-70},{-60,70}}),
+              Line(points={{-20,-70},{-20,70}}),
+              Line(points={{20,-70},{20,70}}),
+              Line(points={{60,-70},{60,70}})}),
             Diagram(coordinateSystem(
               preserveAspectRatio=false,
               extent={{-100,-100},{100,100}},
@@ -1033,7 +986,7 @@ This block for Integer signals works similar as the corresponding block for Real
             annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
           Modelica.Blocks.Interfaces.BooleanOutput y
           "Connector of Boolean output signal"     annotation (Placement(
-                transformation(extent={{100,-10},{120,10}}, rotation=0),
+                transformation(extent={{100,-10},{120,10}}),
                 iconTransformation(extent={{100,-10},{120,10}})));
       protected
           Boolean y2(start=y_start);
@@ -1067,7 +1020,7 @@ This block for Integer signals works similar as the corresponding block for Real
                             {235,235,235}),
                   fillPattern=FillPattern.Solid),
                                        Line(points={{-80,-70},{-40,-70},{-40,44},{0,44},
-                      {0,-70},{40,-70},{40,44},{79,44}},   color={0,0,0})}),
+                      {0,-70},{40,-70},{40,44},{79,44}})}),
             Diagram(coordinateSystem(
               preserveAspectRatio=false,
               extent={{-100,-100},{100,100}},
@@ -1179,7 +1132,6 @@ contains utility blocks that are used as building blocks for user-relevant block
               lineColor={255,128,0}),
             Text(
               extent={{-150,-140},{150,-100}},
-              lineColor={0,0,0},
               textString="y_start=%y_start")}),
         Documentation(info="<html>
 <p>
@@ -1228,17 +1180,14 @@ y is set to parameter y_start.
               points={{-100,0},{-80,0},{-80,40},{-20,40},{-20,-40},{40,-40},{40,0},{
                   100,0}},
               color={215,215,215},
-              smooth=Smooth.None,
               pattern=LinePattern.Dot),
             Line(
               points={{-100,0},{-50,0},{-50,40},{10,40},{10,-40},{70,-40},{70,-0.3125},
                   {100,0}},
               pattern=LinePattern.Dot,
-              smooth=Smooth.None,
               color={255,128,0}),
             Text(
               extent={{4,-102},{4,-142}},
-              lineColor={0,0,0},
               textString="%shift/%resolution"),
             Ellipse(
               extent={{-90,50},{-70,30}},
@@ -1306,7 +1255,6 @@ y is set to parameter y_start.
               pattern=LinePattern.Dot),
             Text(
               extent={{-150,-150},{150,-110}},
-              lineColor={0,0,0},
               textString="startTime=%startTime"),
             Ellipse(
               extent={{-6,56},{6,44}},
@@ -1354,16 +1302,13 @@ y is set to parameter y_start.
               fillPattern=FillPattern.Solid),
             Text(
               extent={{66,-78},{92,-88}},
-              lineColor={0,0,0},
               textString="time"),
             Text(
               extent={{-21,-76},{26,-88}},
-              lineColor={0,0,0},
               textString="startTime"),
             Line(points={{0,-17},{0,-71}}, color={95,95,95}),
             Text(
               extent={{-60,-36},{-12,-48}},
-              lineColor={0,0,0},
               textString="offset"),
             Line(points={{-13,50},{-13,-17}}, color={95,95,95}),
             Polygon(
@@ -1383,7 +1328,6 @@ y is set to parameter y_start.
               fillPattern=FillPattern.Solid),
             Text(
               extent={{-58,22},{-12,10}},
-              lineColor={0,0,0},
               textString="height"),
             Polygon(
               points={{-13,-69},{-16,-56},{-10,-56},{-13,-69},{-13,-69}},
@@ -1398,7 +1342,6 @@ y is set to parameter y_start.
               fillPattern=FillPattern.Solid),
             Text(
               extent={{-78,96},{-44,80}},
-              lineColor={0,0,0},
               textString="y"),
             Ellipse(
               extent={{-86,-12},{-74,-24}},
@@ -1445,7 +1388,7 @@ See model <a href=\"Modelica_Synchronous.Examples.Elementary.IntegerSignals.Time
 
     annotation (Documentation(info="<html>
 <p>
-This package provides <b>source</b> components akin to the blocks provided in 
+This package provides <b>source</b> components akin to the blocks provided in
 <a href=\"Modelica.Blocks.Sources\">Modelica.Blocks.Sources</a>, but with the difference
 that they provide a <b>clocked</b> output signal.
 </p>
@@ -1491,7 +1434,6 @@ to use the blocks provided in this package than to use the blocks offered by <a 
               pattern=LinePattern.Dot),
             Text(
               extent={{-150,-150},{150,-110}},
-              lineColor={0,0,0},
               textString="startTick=%startTick"),
             Ellipse(
               extent={{-6,56},{6,44}},
@@ -1539,16 +1481,13 @@ to use the blocks provided in this package than to use the blocks offered by <a 
               fillPattern=FillPattern.Solid),
             Text(
               extent={{66,-78},{92,-88}},
-              lineColor={0,0,0},
               textString="tick"),
             Text(
               extent={{-21,-76},{26,-88}},
-              lineColor={0,0,0},
               textString="startTick"),
             Line(points={{0,-17},{0,-71}}, color={95,95,95}),
             Text(
               extent={{-60,-36},{-12,-48}},
-              lineColor={0,0,0},
               textString="offset"),
             Line(points={{-13,50},{-13,-17}}, color={95,95,95}),
             Polygon(
@@ -1568,7 +1507,6 @@ to use the blocks provided in this package than to use the blocks offered by <a 
               fillPattern=FillPattern.Solid),
             Text(
               extent={{-58,22},{-12,10}},
-              lineColor={0,0,0},
               textString="height"),
             Polygon(
               points={{-13,-69},{-16,-56},{-10,-56},{-13,-69},{-13,-69}},
@@ -1583,7 +1521,6 @@ to use the blocks provided in this package than to use the blocks offered by <a 
               fillPattern=FillPattern.Solid),
             Text(
               extent={{-78,96},{-44,80}},
-              lineColor={0,0,0},
               textString="y"),
             Ellipse(
               extent={{-86,-12},{-74,-24}},
@@ -1653,8 +1590,7 @@ See model <a href=\"Modelica_Synchronous.Examples.Elementary.IntegerSignals.Tick
               extent={{-99,40},{99,-40}},
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid,
-              pattern=LinePattern.None,
-              lineColor={0,0,0}),
+              pattern=LinePattern.None),
             Line(points={{-100,0},{-45,0}}, color={255,128,0}),
             Ellipse(
               extent={{-25,-10},{-45,10}},
@@ -1680,13 +1616,11 @@ See model <a href=\"Modelica_Synchronous.Examples.Elementary.IntegerSignals.Tick
       Modelica.Blocks.Interfaces.IntegerInput
                                            u
         "Connector of continuous-time, Real input signal"
-        annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
-            rotation=0)));
+        annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
       Modelica.Blocks.Interfaces.IntegerOutput
                                             y
         "Connector of clocked, Real output signal"
-        annotation (Placement(transformation(extent={{100,-10},{120,10}},
-            rotation=0)));
+        annotation (Placement(transformation(extent={{100,-10},{120,10}})));
     equation
 
       annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
@@ -1702,13 +1636,11 @@ See model <a href=\"Modelica_Synchronous.Examples.Elementary.IntegerSignals.Tick
       Modelica.Blocks.Interfaces.IntegerInput
                                            u(final start=y_start)
         "Connector of clocked, Integer input signal"
-        annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
-            rotation=0)));
+        annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
       Modelica.Blocks.Interfaces.IntegerOutput
                                             y
         "Connector of continuous-time, Integer output signal"
-        annotation (Placement(transformation(extent={{100,-10},{120,10}},
-            rotation=0)));
+        annotation (Placement(transformation(extent={{100,-10},{120,10}})));
 
       annotation (
         defaultComponentName="hold1",
@@ -1728,11 +1660,9 @@ See model <a href=\"Modelica_Synchronous.Examples.Elementary.IntegerSignals.Tick
                                      color={255,128,0}),
                                                        Line(
               points={{-60,-40},{-60,0},{-100,0}},
-              color={255,128,0},
-              smooth=Smooth.None),
+              color={255,128,0}),
             Text(
               extent={{-200,-80},{200,-145}},
-              lineColor={0,0,0},
               textString="%y_start"),
             Text(
               extent={{-200,129},{200,64}},
@@ -1754,13 +1684,11 @@ See model <a href=\"Modelica_Synchronous.Examples.Elementary.IntegerSignals.Tick
       Modelica.Blocks.Interfaces.IntegerInput
                                            u
         "Connector of clocked, Real input signal"
-        annotation (Placement(transformation(extent={{-140,-20},{-100,20}},
-            rotation=0)));
+        annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
       Modelica.Blocks.Interfaces.IntegerOutput
                                             y
         "Connector of clocked, Real output signal"
-        annotation (Placement(transformation(extent={{100,-10},{120,10}},
-            rotation=0)));
+        annotation (Placement(transformation(extent={{100,-10},{120,10}})));
 
       annotation (Icon(graphics), Diagram(coordinateSystem(preserveAspectRatio=
                 false, extent={{-100,-100},{100,100}}), graphics));
@@ -1773,12 +1701,10 @@ See model <a href=\"Modelica_Synchronous.Examples.Elementary.IntegerSignals.Tick
       Modelica.Blocks.Interfaces.IntegerOutput
                                             y
         "Connector of clocked, Real output signal"
-        annotation (Placement(transformation(extent={{100,-10},{120,10}},
-            rotation=0)));
+        annotation (Placement(transformation(extent={{100,-10},{120,10}})));
 
       annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{
-                -100,-100},{100,100}}),
-                       graphics), Diagram(coordinateSystem(preserveAspectRatio=
+                -100,-100},{100,100}})), Diagram(coordinateSystem(preserveAspectRatio=
                 false, extent={{-100,-100},{100,100}}), graphics));
     end PartialClockedSO;
     annotation (Documentation(info="<html>
