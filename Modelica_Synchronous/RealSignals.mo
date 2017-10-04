@@ -291,14 +291,14 @@ signals are sampled with a periodic clock of 20 ms period:<br>
 
       parameter Boolean noisy = false
         "= true, if output should be superimposed with noise"
-        annotation(Evaluate=true,choices(__Dymola_checkBox=true),Dialog(enable=sampled,group="Sampling and noise"));
+        annotation(Evaluate=true,choices(checkBox=true),Dialog(enable=sampled,group="Sampling and noise"));
 
       parameter Boolean limited = false "= true, if output is limited"
-        annotation(Evaluate=true,choices(__Dymola_checkBox=true),Dialog(group="Limiting and quantization"));
+        annotation(Evaluate=true,choices(checkBox=true),Dialog(group="Limiting and quantization"));
       parameter Boolean quantized = false
         "= true, if output quantization effects included"
         annotation(Evaluate=true,Dialog(enable=limited,group="Limiting and quantization"));
-                                                                   // Dialog(enable=...) does not work with __Dymola_checkBox=... !?
+                                                                   // Dialog(enable=...) does not work with checkBox=... !?
       parameter Real yMax=1 "Upper limit of output (if limited = true)" annotation(Dialog(enable=limited,group="Limiting and quantization"));
       parameter Real yMin=-yMax "Lower limit of output (if limited = true)" annotation(Dialog(enable=limited,group="Limiting and quantization"));
       parameter Integer bits(min=1)=8
@@ -311,7 +311,7 @@ signals are sampled with a periodic clock of 20 ms period:<br>
         Modelica_Synchronous.RealSignals.Sampler.Utilities.Internal.UniformNoise
         noise if noisy constrainedby
         Modelica_Synchronous.RealSignals.Interfaces.PartialNoise "Noise model"
-        annotation (__Dymola_choicesAllMatching=true, Dialog(enable=noisy,group="Sampling and noise"),Placement(transformation(extent={{-54,-6},
+        annotation (choicesAllMatching=true, Dialog(enable=noisy,group="Sampling and noise"),Placement(transformation(extent={{-54,-6},
                 {-42,6}})));
       Modelica_Synchronous.RealSignals.Sampler.Utilities.Internal.Limiter limiter(uMax=yMax,
           uMin=yMin) if limited
@@ -578,7 +578,7 @@ to -1.0 (= the value of parameter hold.y_start).<br>
 
       parameter Boolean computationalDelay = false
         "=true, if a computational delay should be imposed"
-        annotation(Evaluate=true, choices(__Dymola_checkBox=true), Dialog(group="Computational delay in seconds = interval() * shiftCounter/resolution"));
+        annotation(Evaluate=true, choices(checkBox=true), Dialog(group="Computational delay in seconds = interval() * shiftCounter/resolution"));
       parameter Integer shiftCounter(min=0,max=resolution) = 0
         "(min=0, max=resolution), computational delay = interval()*shiftCounter/resolution"
         annotation(Dialog(enable=computationalDelay, group="Computational delay in seconds = interval() * shiftCounter/resolution"));
@@ -586,11 +586,11 @@ to -1.0 (= the value of parameter hold.y_start).<br>
         "Time quantization resolution of sample interval" annotation(Dialog(enable=computationalDelay, group="Computational delay in seconds = interval() * shiftCounter/resolution"));
 
       parameter Boolean limited = false "= true, if output is limited"
-         annotation(Evaluate=true,choices(__Dymola_checkBox=true),Dialog(group="Limiting and quantization"));
+         annotation(Evaluate=true,choices(checkBox=true),Dialog(group="Limiting and quantization"));
       parameter Boolean quantized = false
         "= true, if output quantization effects included"
         annotation(Evaluate=true,Dialog(enable=limited,group="Limiting and quantization"));
-                                                                   // Dialog(enable=...) does not work with __Dymola_checkBox=... !?
+                                                                   // Dialog(enable=...) does not work with checkBox=... !?
       parameter Real yMax=1 "Upper limit of output (if limited = true)" annotation(Dialog(enable=limited,group="Limiting and quantization"));
       parameter Real yMin=-yMax "Lower limit of output (if limited = true)" annotation(Dialog(enable=limited,group="Limiting and quantization"));
       parameter Integer bits(min=1)=8
@@ -812,7 +812,7 @@ from above:<br>
     block SubSample
       "Sub-sample the clocked Real input signal and provide it as clocked output signal"
       parameter Boolean inferFactor=true
-        "= true, if sub-sampling factor is inferred"  annotation(Evaluate=true, choices(__Dymola_checkBox=true));
+        "= true, if sub-sampling factor is inferred"  annotation(Evaluate=true, choices(checkBox=true));
       parameter Integer factor(min=1)=1
         "Sub-sampling factor >= 1 (ignored if inferFactor=true)"
                                                                 annotation(Evaluate=true, Dialog(enable=not inferFactor));
@@ -956,7 +956,7 @@ clock of subSample.y is slower as the clock of subSample.u.
     block SuperSample
       "Super-sample the clocked Real input signal and provide it as clocked output signal"
       parameter Boolean inferFactor=true
-        "= true, if super-sampling factor is inferred"  annotation(Evaluate=true, choices(__Dymola_checkBox=true));
+        "= true, if super-sampling factor is inferred"  annotation(Evaluate=true, choices(checkBox=true));
       parameter Integer factor(min=1)=1
         "Super-sampling factor >= 1 (ignored if inferFactor=true)"
                                                     annotation(Evaluate=true, Dialog(enable=not inferFactor));
@@ -1114,7 +1114,7 @@ clock of superSample.y is faster as the clock of superSample.u.
       "Super-sample the clocked Real input signal and provide it linearly interpolated as clocked output signal (this is also called an Interpolator)"
 
       parameter Boolean inferFactor=true
-        "= true, if super-sampling factor is inferred"  annotation(Evaluate=true, choices(__Dymola_checkBox=true));
+        "= true, if super-sampling factor is inferred"  annotation(Evaluate=true, choices(checkBox=true));
       parameter Integer factor(min=1)=1
         "Super-sampling factor >= 1 (if inferFactor=false)"
                                                     annotation(Evaluate=true, Dialog(enable=not inferFactor));
@@ -1825,7 +1825,7 @@ of block assignClock1.
         "Upsample the clocked Real input signal and provide it as clocked output signal"
 
         parameter Boolean inferFactor=true
-          "= true, if upsampling factor is inferred"  annotation(Evaluate=true, choices(__Dymola_checkBox=true));
+          "= true, if upsampling factor is inferred"  annotation(Evaluate=true, choices(checkBox=true));
         parameter Integer factor(min=1)=1
           "Upsampling factor >= 1 (if inferFactor=false)" annotation(Evaluate=true, Dialog(enable=not inferFactor));
         Modelica.Blocks.Interfaces.RealInput u
