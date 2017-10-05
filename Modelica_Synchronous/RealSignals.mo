@@ -289,8 +289,7 @@ signals are sampled with a periodic clock of 20 ms period:<br>
         annotation(Evaluate=true,choices(checkBox=true),Dialog(group="Limiting and quantization"));
       parameter Boolean quantized = false
         "= true, if output quantization effects included"
-        annotation(Evaluate=true,Dialog(enable=limited,group="Limiting and quantization"));
-                                                                   // Dialog(enable=...) does not work with checkBox=... !?
+        annotation(Evaluate=true,choices(checkBox=true),Dialog(enable=limited,group="Limiting and quantization"));
       parameter Real yMax=1 "Upper limit of output (if limited = true)" annotation(Dialog(enable=limited,group="Limiting and quantization"));
       parameter Real yMin=-yMax "Lower limit of output (if limited = true)" annotation(Dialog(enable=limited,group="Limiting and quantization"));
       parameter Integer bits(min=1)=8
@@ -564,8 +563,7 @@ to -1.0 (= the value of parameter hold.y_start).<br>
          annotation(Evaluate=true,choices(checkBox=true),Dialog(group="Limiting and quantization"));
       parameter Boolean quantized = false
         "= true, if output quantization effects included"
-        annotation(Evaluate=true,Dialog(enable=limited,group="Limiting and quantization"));
-                                                                   // Dialog(enable=...) does not work with checkBox=... !?
+        annotation(Evaluate=true,choices(checkBox=true),Dialog(enable=limited,group="Limiting and quantization"));
       parameter Real yMax=1 "Upper limit of output (if limited = true)" annotation(Dialog(enable=limited,group="Limiting and quantization"));
       parameter Real yMin=-yMax "Lower limit of output (if limited = true)" annotation(Dialog(enable=limited,group="Limiting and quantization"));
       parameter Integer bits(min=1)=8
