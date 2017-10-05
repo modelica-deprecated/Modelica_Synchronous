@@ -765,7 +765,7 @@ from above:<br>
         Diagram(coordinateSystem(
             preserveAspectRatio=false,
             extent={{-100,-100},{100,100}},
-            initialScale=0.06), graphics));
+            initialScale=0.06)));
     end HoldWithDAeffects;
 
     block SubSample
@@ -2001,7 +2001,7 @@ initialized a bit differently.
             Diagram(coordinateSystem(
               preserveAspectRatio=true,
               extent={{-100,-100},{100,100}},
-              grid={1,1}), graphics),
+              grid={1,1})),
             Documentation(info="<html>
 <p>
 This block creates a Boolean, continuous time, trigger signal whenever the clock of the input signal is active.
@@ -2085,7 +2085,7 @@ Note, that it is clearly visible in the plot that the \"old-style\" discrete var
             Diagram(coordinateSystem(
               preserveAspectRatio=true,
               extent={{-100,-100},{100,100}},
-              grid={1,1}), graphics),
+              grid={1,1})),
             Documentation(info="<html>
 <p>
 This block creates a Boolean, continuous time, square-wave output. Whenever the clock of the input signal is active the Boolean output value changes.
@@ -2137,7 +2137,7 @@ samples a sine signal with a periodic clock of 20 ms period. After that a Boolea
           end if;
 
           annotation (Diagram(coordinateSystem(preserveAspectRatio=true,  extent={{-100,
-                    -100},{100,100}}), graphics), Documentation(info="<html>
+                    -100},{100,100}})), Documentation(info="<html>
 <p>
 This block delays a clocked Real input signal by the fraction
 shiftCounter/resolution of the last interval.
@@ -2163,7 +2163,7 @@ There is the restriction that shiftCounter/resolution &le; 1.
             y = u + noiseMin + (noiseMax - noiseMin)*noise;
 
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-                    -100},{100,100}}), graphics),
+                    -100},{100,100}})),
             Documentation(info="<html>
 <p>
 This block adds uniformly distributed noise
@@ -2353,8 +2353,8 @@ noise in the range from -0.1 .. 0.1:<br>
             y = u;
           end if;
           annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-                    -100},{100,100}}), graphics), Diagram(coordinateSystem(
-                  preserveAspectRatio=false, extent={{-100,-100},{100,100}}), graphics),
+                    -100},{100,100}})), Diagram(coordinateSystem(
+                  preserveAspectRatio=false, extent={{-100,-100},{100,100}})),
             Documentation(info="<html>
 <p>
 The clocked Real input signal is value discretized
@@ -2801,7 +2801,7 @@ y is set to parameter y_start.
      y = shiftSample(u_buffer[n+1], shift, resolution);
 
       annotation (Diagram(coordinateSystem(preserveAspectRatio=true,  extent={{-100,
-                -100},{100,100}}), graphics),
+                -100},{100,100}})),
         Icon(graphics={
             Line(
               points={{-100,0},{-80,0},{-80,40},{-20,40},{-20,-40},{40,-40},{40,0},{
@@ -4399,7 +4399,7 @@ The Real output y is a sine signal. The signal is defined in terms of clock tick
         Diagram(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
-            initialScale=0.06), graphics));
+            initialScale=0.06)));
     end SamplerIcon;
 
     partial block PartialSISOSampler
@@ -4473,7 +4473,6 @@ The Real output y is a sine signal. The signal is defined in terms of clock tick
         "Connector of clocked, Real output signal"
         annotation (Placement(transformation(extent={{100,-10},{120,10}})));
 
-      annotation (Icon(graphics));
     end PartialClockedSISO;
 
     partial block PartialClockedMIMO
@@ -4492,7 +4491,6 @@ The Real output y is a sine signal. The signal is defined in terms of clock tick
                                     annotation (Placement(transformation(extent=
              {{100,-10},{120,10}})));
 
-      annotation (Icon(graphics));
     end PartialClockedMIMO;
 
     partial block PartialClockedSO
@@ -4503,15 +4501,15 @@ The Real output y is a sine signal. The signal is defined in terms of clock tick
         "Connector of clocked, Real output signal"
         annotation (Placement(transformation(extent={{100,-10},{120,10}})));
 
-      annotation (Icon(graphics), Diagram(coordinateSystem(preserveAspectRatio=
-                false, extent={{-100,-100},{100,100}}), graphics));
+      annotation (Diagram(coordinateSystem(preserveAspectRatio=
+                false, extent={{-100,-100},{100,100}})));
     end PartialClockedSO;
 
     partial block PartialNoise
       "Interface for SISO blocks with Real signals that add noise to the signal"
       extends Modelica_Synchronous.RealSignals.Interfaces.PartialClockedSISO;
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-                -100},{100,100}}), graphics));
+                -100},{100,100}})));
     end PartialNoise;
     annotation (Documentation(info="<html>
 <p>

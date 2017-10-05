@@ -262,7 +262,7 @@ package WorkInProgress "Models that are under developmend and test models"
                   u);
           annotation (
           Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-                  -100},{100,100}}), graphics),
+                  -100},{100,100}})),
           Icon(coordinateSystem(preserveAspectRatio=true,  extent={{-100,-100},
                   {100,100}}), graphics={
               Text(
@@ -365,7 +365,7 @@ package WorkInProgress "Models that are under developmend and test models"
                   u);
       annotation (
           Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-                  -100},{100,100}}), graphics),
+                  -100},{100,100}})),
           Icon(coordinateSystem(preserveAspectRatio=true,  extent={{-100,-100},{100,100}}),
                                graphics={
               Text(
@@ -466,7 +466,7 @@ package WorkInProgress "Models that are under developmend and test models"
                   u);
       annotation (
           Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-                  -100},{100,100}}), graphics),
+                  -100},{100,100}})),
           Icon(coordinateSystem(preserveAspectRatio=true,  extent={{-100,-100},
                   {100,100}}), graphics={
               Text(
@@ -645,7 +645,7 @@ as output.
        ubuf = if shiftCounter == resolution then previous(u) else u;
        y = shiftSample(ubuf, shiftCounter, resolution);
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true,  extent={{-100,
-                  -100},{100,100}}), graphics));
+                  -100},{100,100}})));
       end ComputationalDelay;
 
       block UniformNoise
@@ -664,7 +664,7 @@ as output.
                                                              previous(seedState));
           y = u + noiseMin + integer((noiseMax - noiseMin)*noise + 0.5);
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-                  -100},{100,100}}), graphics));
+                  -100},{100,100}})));
       end UniformNoise;
 
       block FractionalDelay
@@ -685,7 +685,7 @@ as output.
          cat(1, {u}, previous(u_buffer[1:n]));
        y = shiftSample(u_buffer[n+1], shift, resolution);
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true,  extent={{-100,
-                  -100},{100,100}}), graphics),
+                  -100},{100,100}})),
           Icon(graphics={
               Line(
                 points={{-100,0},{-80,0},{-80,40},{-20,40},{-20,-40},{40,-40},{40,0},{
@@ -737,7 +737,7 @@ as output.
         extends
           Modelica_Synchronous.IntegerSignals.Interfaces.PartialClockedSISO;
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-                  -100},{100,100}}), graphics));
+                  -100},{100,100}})));
       end PartialIntegerNoise;
     end IntegerSignals;
 
@@ -756,7 +756,7 @@ as output.
        ubuf = if shiftCounter == resolution then previous(u) else u;
        y = shiftSample(ubuf, shiftCounter, resolution);
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true,  extent={{-100,
-                  -100},{100,100}}), graphics));
+                  -100},{100,100}})));
       end ComputationalDelay;
 
       block FractionalDelay
@@ -777,7 +777,7 @@ as output.
          cat(1, {u}, previous(u_buffer[1:n]));
        y = shiftSample(u_buffer[n+1], shift, resolution);
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true,  extent={{-100,
-                  -100},{100,100}}), graphics),
+                  -100},{100,100}})),
           Icon(graphics={
               Line(
                 points={{-100,0},{-80,0},{-80,40},{-20,40},{-20,-40},{40,-40},{40,0},{
@@ -842,7 +842,7 @@ equation
       equation
         y = 0;
         annotation (Diagram(coordinateSystem(preserveAspectRatio=true,  extent={{-100,
-                  -100},{100,100}}), graphics));
+                  -100},{100,100}})));
       end CommunicationDelaySpecifiedInSeconds;
 
       function realDelay2shiftSampleParameters
@@ -1407,7 +1407,7 @@ by a user.
           color={175,175,175},
           pattern=LinePattern.Dot,
           thickness=0.5));
-      annotation (Diagram(graphics), experiment(StopTime=0.5));
+      annotation (experiment(StopTime=0.5));
     end TestFIR_1;
 
     model TestFIR
@@ -1690,7 +1690,7 @@ by a user.
       connect(sample1.y, interpolator2.u) annotation (Line(
           points={{-23.4,50},{-12,50},{-12,24},{0.8,24}},
           color={0,0,127}));
-      annotation (Diagram(graphics), experiment(StopTime=0.6));
+      annotation (experiment(StopTime=0.6));
     end TestInterpolator;
 
     model TestUnitDelay
@@ -1734,7 +1734,7 @@ by a user.
       connect(sample1.y, UnitDelay1.u) annotation (Line(
           points={{-23.4,50},{-2,50}},
           color={0,0,127}));
-      annotation (Diagram(graphics), experiment(StopTime=1.2));
+      annotation (experiment(StopTime=1.2));
     end TestUnitDelay;
 
     model TestTransferFunction
@@ -1777,7 +1777,7 @@ by a user.
       connect(sample1.y, transferFunction1.u) annotation (Line(
           points={{-5.4,50},{18,50}},
           color={0,0,127}));
-      annotation (Diagram(graphics), experiment(StopTime=1.2));
+      annotation (experiment(StopTime=1.2));
     end TestTransferFunction;
 
     model TestStateSpace
@@ -1825,7 +1825,7 @@ by a user.
                                           annotation (Line(
           points={{-3.4,50},{18,50}},
           color={0,0,127}));
-      annotation (Diagram(graphics), experiment(StopTime=1.2));
+      annotation (experiment(StopTime=1.2));
     end TestStateSpace;
 
     model TestRealSampler
@@ -1890,7 +1890,7 @@ by a user.
           points={{2.6,54},{12.8,54}},
           color={0,0,127}));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-                -100},{100,100}}), graphics), experiment(StopTime=1.2));
+                -100},{100,100}})), experiment(StopTime=1.2));
     end TestRealSampler;
 
     model TestShiftSample
@@ -1944,8 +1944,7 @@ by a user.
           pattern=LinePattern.Dot,
           thickness=0.5));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
-                -100,-100},{100,100}}),
-                          graphics), experiment(StopTime=1.2));
+                -100,-100},{100,100}})), experiment(StopTime=1.2));
     end TestShiftSample;
 
     model TestClockedRealToTrigger
@@ -1983,8 +1982,7 @@ by a user.
           points={{21,30},{50,30},{50,58.2}},
           color={255,0,255}));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-                -100},{100,100}}),
-                          graphics), Icon(graphics),
+                -100},{100,100}})),
         experiment(StopTime=1.2));
     end TestClockedRealToTrigger;
 
@@ -2022,8 +2020,7 @@ by a user.
           points={{-65,30},{-54,30},{-54,66},{32,66}},
           color={255,0,255}));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-                -100},{100,100}}),
-                          graphics), Icon(graphics),
+                -100},{100,100}})),
         experiment(StopTime=1.2));
     end TestClockedBooleanToTrigger;
 
@@ -2062,8 +2059,7 @@ by a user.
           points={{-21.4,30},{-2,30}},
           color={255,127,0}));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-                -100},{100,100}}),
-                          graphics), Icon(graphics),
+                -100},{100,100}})),
         experiment(StopTime=1.2));
     end TestClockedIntegerToTrigger;
 
@@ -2121,8 +2117,7 @@ by a user.
           points={{46.6,16},{56,16},{56,28},{66,28}},
           color={0,0,127}));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-                -100},{100,100}}),
-                          graphics), Icon(graphics),
+                -100},{100,100}})),
         experiment(StopTime=1.2));
     end TestBackSample;
 
@@ -2152,8 +2147,7 @@ by a user.
       connect(sample1.y, ClockedRealToSquare.u) annotation (Line(
           points={{-21.4,50},{-6,50}},
           color={0,0,127}));
-      annotation (Diagram(graphics), Icon(graphics),
-        experiment(StopTime=1.2));
+      annotation (experiment(StopTime=1.2));
     end TestClockedRealToSquare;
 
     model TestIntegerSamplerAndHolds
@@ -2279,8 +2273,7 @@ by a user.
           points={{24.6,32},{36,32},{36,22},{50,22}},
           color={255,127,0}));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-                -100},{100,100}}),
-                          graphics), Icon(graphics),
+                -100},{100,100}})),
         experiment(StopTime=1.2));
     end TestIntegerSamplerAndHolds;
 
@@ -2405,8 +2398,7 @@ by a user.
           points={{-3.4,-10},{0,-10},{0,-38},{14.8,-38}},
           color={255,0,255}));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-                -100},{100,100}}),
-                          graphics), Icon(graphics),
+                -100},{100,100}})),
         experiment(StopTime=1.2));
     end TestBooleanSamplerAndHolds;
 
@@ -2589,8 +2581,7 @@ by a user.
           pattern=LinePattern.Dot,
           thickness=0.5));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-                -100},{100,100}}),
-                          graphics), experiment(StopTime=1.2));
+                -100},{100,100}})), experiment(StopTime=1.2));
     end TestSimulatedADC;
 
     model TestCommunicationDelay
@@ -2627,8 +2618,7 @@ by a user.
           points={{-17.4,50},{-8,50}},
           color={0,0,127}));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-                -100},{100,100}}),
-                          graphics), experiment(StopTime=1.2));
+                -100},{100,100}})), experiment(StopTime=1.2));
     end TestCommunicationDelay;
 
     model TestEventClockWithIntegrator
@@ -2660,7 +2650,7 @@ by a user.
           pattern=LinePattern.Dot,
           thickness=0.5));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-                -100},{100,100}}), graphics), experiment(StopTime=1.2));
+                -100},{100,100}})), experiment(StopTime=1.2));
     end TestEventClockWithIntegrator;
 
     model TestExactClockWithIntegrator
@@ -2695,7 +2685,7 @@ by a user.
           thickness=0.5));
       annotation (
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-                100}}), graphics),
+                100}})),
         experiment(StopTime=0.0001));
     end TestExactClockWithIntegrator;
 
@@ -2890,9 +2880,7 @@ the initial value defined via parameter <b>y0</b>.
           color={0,0,127}));
       annotation (
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
-                {100,100}}),
-                        graphics),
-        experiment(StopTime=3));
+                {100,100}})), experiment(StopTime=3));
     end TestExactClockWithSolver;
 
     package Effects "Examples demonstrating specific effects"
@@ -2947,9 +2935,7 @@ the initial value defined via parameter <b>y0</b>.
             points={{36.6,-20},{56,-20}},
             color={0,0,127}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-                  -100},{100,100}}),
-                            graphics),
-          experiment(StopTime=0.15));
+                  -100},{100,100}})), experiment(StopTime=0.15));
       end SuperSampling;
     end Effects;
   end Tests;
@@ -3000,7 +2986,7 @@ the initial value defined via parameter <b>y0</b>.
           pattern=LinePattern.Dot,
           thickness=0.5));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
-                -100,-100},{100,100}}), graphics), experiment(StopTime=1.2));
+                -100,-100},{100,100}})), experiment(StopTime=1.2));
     end TheDifferentClocks;
   end ForDocumentation;
 
@@ -3117,7 +3103,6 @@ the initial value defined via parameter <b>y0</b>.
             lineColor={95,95,95},
             origin={-57,24},
             rotation=90)}),        Diagram(coordinateSystem(preserveAspectRatio=false,
-            extent={{-100,-100},{100,100}}),
-                                           graphics));
+            extent={{-100,-100},{100,100}})));
   end Interpolator;
 end WorkInProgress;

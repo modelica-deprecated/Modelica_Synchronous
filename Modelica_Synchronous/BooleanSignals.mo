@@ -232,7 +232,7 @@ Analog to the corresponding Real signal block example there exists an elementary
 "),     Diagram(coordinateSystem(
             preserveAspectRatio=false,
             extent={{-100,-100},{100,100}},
-            initialScale=0.06), graphics));
+            initialScale=0.06)));
     end Hold;
 
     block SubSample
@@ -995,7 +995,7 @@ Analog to the corresponding Real signal block example there exists an elementary
             Diagram(coordinateSystem(
               preserveAspectRatio=false,
               extent={{-100,-100},{100,100}},
-              grid={1,1}), graphics),
+              grid={1,1})),
             Documentation(info="<html>
 <p>
 This block for Boolean signals works similarly as the corresponding block for Real signals (see
@@ -1051,7 +1051,7 @@ This block for Boolean signals works similarly as the corresponding block for Re
             Diagram(coordinateSystem(
               preserveAspectRatio=true,
               extent={{-100,-100},{100,100}},
-              grid={1,1}), graphics),
+              grid={1,1})),
             Documentation(info="<html>
 <p>
 This block for Boolean signals works similarly as the corresponding block for Real signals (see
@@ -1204,7 +1204,7 @@ y is set to parameter y_start.
      y = shiftSample(u_buffer[n+1], shift, resolution);
 
       annotation (Diagram(coordinateSystem(preserveAspectRatio=true,  extent={{-100,
-                -100},{100,100}}), graphics),
+                -100},{100,100}})),
         Icon(graphics={
             Line(
               points={{-100,0},{-80,0},{-80,40},{-20,40},{-20,-40},{40,-40},{40,0},{
@@ -1945,7 +1945,7 @@ See model <a href=\"Modelica_Synchronous.Examples.Elementary.BooleanSignals.Tick
         Diagram(coordinateSystem(
             preserveAspectRatio=true,
             extent={{-100,-100},{100,100}},
-            initialScale=0.06), graphics));
+            initialScale=0.06)));
     end SamplerIcon;
 
     partial block PartialSISOSampler
@@ -1962,7 +1962,7 @@ See model <a href=\"Modelica_Synchronous.Examples.Elementary.BooleanSignals.Tick
     equation
 
       annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
-                {100,100}}), graphics), Diagram(coordinateSystem(
+                {100,100}})), Diagram(coordinateSystem(
               preserveAspectRatio=false, extent={{-100,-100},{100,100}})));
     end PartialSISOSampler;
 
@@ -1979,8 +1979,8 @@ See model <a href=\"Modelica_Synchronous.Examples.Elementary.BooleanSignals.Tick
         "Connector of clocked, Real output signal"
         annotation (Placement(transformation(extent={{100,-10},{120,10}})));
 
-      annotation (Icon(graphics), Diagram(coordinateSystem(preserveAspectRatio=
-                false, extent={{-100,-100},{100,100}}), graphics));
+      annotation (Diagram(coordinateSystem(preserveAspectRatio=
+                false, extent={{-100,-100},{100,100}})));
     end PartialClockedSISO;
 
     partial block PartialClockedSO
@@ -1992,8 +1992,8 @@ See model <a href=\"Modelica_Synchronous.Examples.Elementary.BooleanSignals.Tick
         "Connector of clocked, Real output signal"
         annotation (Placement(transformation(extent={{100,-10},{120,10}})));
 
-      annotation (Icon(graphics), Diagram(coordinateSystem(preserveAspectRatio=false,
-                       extent={{-100,-100},{100,100}}), graphics));
+      annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
+                       extent={{-100,-100},{100,100}})));
     end PartialClockedSO;
     annotation (Documentation(info="<html>
 <p>
