@@ -1,6 +1,6 @@
 within Modelica_Synchronous;
 package Types "Library of types with choices, especially to build menus"
-extends Modelica.Icons.Package;
+extends Modelica.Icons.TypesPackage;
 
   type SolverMethod = String
     "Enumeration defining the integration method to solve differential equations in a clocked discretized continuous-time partition"
