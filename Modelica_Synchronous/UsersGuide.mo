@@ -327,7 +327,7 @@ table   { solid #000; border-collapse: collapse;}
 
 <p>All files in this directory (Modelica_Synchronous) and in all
 subdirectories, especially all files that build package \"Modelica_Synchronous\"
-are licensed by <b>DLR</b> under the
+are licensed by the <b>Modelica Association</b> under the
 <b>Modelica License 2</b>.</p>
 
 <p style=\"margin-left: 40px;\"><b>Licensor:</b><br>

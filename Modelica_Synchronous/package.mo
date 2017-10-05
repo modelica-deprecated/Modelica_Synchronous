@@ -55,7 +55,7 @@ For an introduction, have especially a look at:
 <tr><td colspan=\"1\" rowspan=\"2\" style=\"vertical-align: middle;\">
     <img src=\"modelica://Modelica_Synchronous/Resources/Images/dlr_logo.png\">
     </td>
-    <td style=\"vertical-align: top;\"><br><b>Licensed by DLR under the Modelica License 2</b></td>
+    <td style=\"vertical-align: top;\"><br><b>Licensed by the Modelica Association under the Modelica License 2</b></td>
 </tr>
 <tr><td style=\"vertical-align: top;\"><b>Copyright &copy; 2012-2016, DLR Institute of System Dynamics and Control</b></td>
 </tr>
