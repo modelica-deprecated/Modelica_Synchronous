@@ -2696,7 +2696,7 @@ sub-library.
             pattern=LinePattern.Dot,
             thickness=0.5));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-                  -100},{100,100}}), graphics), experiment(StopTime=0.2),
+                  -100},{100,100}})), experiment(StopTime=0.2),
         Documentation(info="<html>
 <p>
 Example used to generate a figure for the documentation of block
@@ -2784,7 +2784,7 @@ Example used to generate a figure for the documentation of block
             points={{32.6,30},{38,30},{38,0},{7.2,0}},
             color={0,0,127}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-                  -100},{100,100}}), graphics), experiment(StopTime=0.2),
+                  -100},{100,100}})), experiment(StopTime=0.2),
         Documentation(info="<html>
 <p>
 Example used to generate a figure for the documentation of block
@@ -2903,7 +2903,7 @@ Example used to generate a figure for the documentation of block
             pattern=LinePattern.Dot,
             thickness=0.5));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-                  -100},{100,100}}), graphics), experiment(StopTime=0.2),
+                  -100},{100,100}})), experiment(StopTime=0.2),
           Documentation(info="<html>
 <p>
 Example used to generate a figure for the documentation of block
@@ -2999,7 +2999,7 @@ Example used to generate a figure for the documentation of block
             points={{-17.4,30},{-9.2,30}},
             color={0,0,127}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-                  -100},{100,100}}), graphics), experiment(StopTime=0.2),
+                  -100},{100,100}})), experiment(StopTime=0.2),
         Documentation(info="<html>
 <p>
 Example used to generate a figure for the documentation of block
@@ -3051,7 +3051,7 @@ Example used to generate a figure for the documentation of block
             points={{-17.4,30},{-9.2,30}},
             color={0,0,127}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-                  -100},{100,100}}), graphics), experiment(StopTime=0.2),
+                  -100},{100,100}})), experiment(StopTime=0.2),
         Documentation(info="<html>
 <p>
 Example used to generate a figure for the documentation of block
@@ -3210,7 +3210,7 @@ Example used to generate a figure for the documentation of block
             points={{-33.4,30},{-23.2,30}},
             color={0,0,127}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-                  -100},{100,100}}), graphics), experiment(StopTime=0.09),
+                  -100},{100,100}})), experiment(StopTime=0.09),
         Documentation(info="<html>
 <p>
 Example used to generate a figure for the documentation of block
@@ -3474,7 +3474,7 @@ Example used to generate a figure for the documentation of block
             points={{4,30},{-11.4,30}},
             color={0,0,127}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-                  -100},{100,100}}), graphics), experiment(StopTime=0.06),
+                  -100},{100,100}})), experiment(StopTime=0.06),
         Documentation(info="<html>
 <p>
 Example used to generate a figure for the documentation of block
@@ -3671,7 +3671,7 @@ Example used to generate a figure for the documentation of block
           pattern=LinePattern.Dot,
           thickness=0.5));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent=
-                {{-100,-100},{100,100}}), graphics), Documentation(info="<html>
+                {{-100,-100},{100,100}})), Documentation(info="<html>
 <p>
 Example for block
 <a href=\"Modelica_Synchronous.RealSignals.TimeBasedSources.Step\">Modelica_Synchronous.RealSignals.TimeBasedSources.Step</a>.
@@ -3701,7 +3701,7 @@ Example for block
           points={{-45,30},{-25.2,30}},
           color={0,0,127}));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent=
-                {{-100,-100},{100,100}}), graphics), Documentation(info="<html>
+                {{-100,-100},{100,100}})), Documentation(info="<html>
 <p>
 Example for block
 <a href=\"Modelica_Synchronous.RealSignals.TickBasedSources.Step\">Modelica_Synchronous.RealSignals.TickBasedSources.Step</a>.
@@ -3732,7 +3732,7 @@ Example for block
           points={{-45,30},{-25.2,30}},
           color={0,0,127}));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent=
-                {{-100,-100},{100,100}}), graphics), Documentation(info="<html>
+                {{-100,-100},{100,100}})), Documentation(info="<html>
 <p>
 Example for block
 <a href=\"Modelica_Synchronous.RealSignals.TimeBasedSources.Sine\">Modelica_Synchronous.RealSignals.TimeBasedSources.Sine</a>.
@@ -3770,7 +3770,7 @@ Example for block
           points={{-51,30},{-25.2,30}},
           color={0,0,127}));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent=
-                {{-100,-100},{100,100}}), graphics), Documentation(info="<html>
+                {{-100,-100},{100,100}})), Documentation(info="<html>
 <p>
 Example for block
 <a href=\"Modelica_Synchronous.RealSignals.TickBasedSources.Step\">Modelica_Synchronous.RealSignals.TickBasedSources.Step</a>.
@@ -3801,7 +3801,7 @@ Example for block
           points={{-51,30},{-25.2,30}},
           color={0,0,127}));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent=
-                {{-100,-100},{100,100}}), graphics), Documentation(info="<html>
+                {{-100,-100},{100,100}})), Documentation(info="<html>
 <p>
 Example for block
 <a href=\"Modelica_Synchronous.RealSignals.TimeBasedSources.Ramp\">Modelica_Synchronous.RealSignals.TimeBasedSources.Ramp</a>.
@@ -3835,7 +3835,7 @@ Example for block
           points={{-51,30},{-25.2,30}},
           color={0,0,127}));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent=
-                {{-100,-100},{100,100}}), graphics), Documentation(info="<html>
+                {{-100,-100},{100,100}})), Documentation(info="<html>
 <p>
 Example for block
 <a href=\"Modelica_Synchronous.RealSignals.TickBasedSources.Ramp\">Modelica_Synchronous.RealSignals.TickBasedSources.Ramp</a>.
@@ -3984,7 +3984,7 @@ Elementary example for the documentation of block
             points={{-59,30},{-47.2,30}},
             color={255,127,0}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-                  -100},{100,100}}), graphics), experiment(StopTime=0.2),
+                  -100},{100,100}})), experiment(StopTime=0.2),
         Documentation(info="<html>
 <p>
 Elementary example for the documentation of block
@@ -4023,7 +4023,7 @@ Elementary example for the documentation of block
             points={{-59,40},{-38,40},{-38,30.6},{-15.2,30.6}},
             color={255,127,0}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-                  -100},{100,100}}), graphics), experiment(StopTime=0.2),
+                  -100},{100,100}})), experiment(StopTime=0.2),
         Documentation(info="<html>
 <p>
 Elementary example for the documentation of block
@@ -4068,7 +4068,7 @@ Elementary example for the documentation of block
             points={{-17.4,30},{-9.2,30}},
             color={255,127,0}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-                  -100},{100,100}}), graphics), experiment(StopTime=0.2),
+                  -100},{100,100}})), experiment(StopTime=0.2),
         Documentation(info="<html>
 <p>
 Elementary example for the documentation of block
@@ -4107,7 +4107,7 @@ Elementary example for the documentation of block
             points={{-33.4,30},{-23.2,30}},
             color={255,127,0}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-                  -100},{100,100}}), graphics), experiment(StopTime=0.2),
+                  -100},{100,100}})), experiment(StopTime=0.2),
         Documentation(info="<html>
 <p>
 Elementary example for the documentation of block
@@ -4423,7 +4423,7 @@ Elementary example for the documentation of block
             pattern=LinePattern.Dot,
             thickness=0.5));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-                  -100},{100,100}}), graphics), experiment(StopTime=1.0),
+                  -100},{100,100}})), experiment(StopTime=1.0),
         Documentation(info="<html>
 <p>
 Example for block
@@ -4644,7 +4644,7 @@ Elementary example for the documentation of block
             points={{-59,8},{-38,8},{-38,30.6},{-15.2,30.6}},
             color={255,0,255}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-                  -100},{100,100}}), graphics), experiment(StopTime=0.2),
+                  -100},{100,100}})), experiment(StopTime=0.2),
         Documentation(info="<html>
 <p>
 Elementary example for the documentation of block
@@ -5034,7 +5034,7 @@ Elementary example for the documentation of block
             points={{-39,30},{-23.2,30}},
             color={255,0,255}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-                  -100},{100,100}}), graphics), experiment(StopTime=1.0),
+                  -100},{100,100}})), experiment(StopTime=1.0),
         Documentation(info="<html>
 <p>
 Example for block
@@ -5066,7 +5066,7 @@ Example for block
             points={{-23.2,30},{-39,30}},
             color={255,0,255}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-                  -100},{100,100}}), graphics), experiment(StopTime=1.0),
+                  -100},{100,100}})), experiment(StopTime=1.0),
         Documentation(info="<html>
 <p>
 Example for block
@@ -5100,7 +5100,7 @@ Example for block
             points={{-39,30},{-23.2,30}},
             color={255,0,255}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-                  -100},{100,100}}), graphics), experiment(StopTime=1.0),
+                  -100},{100,100}})), experiment(StopTime=1.0),
         Documentation(info="<html>
 <p>
 Example for block
@@ -5134,7 +5134,7 @@ Example for block
             points={{-39,30},{-23.2,30}},
             color={255,0,255}));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-                  -100},{100,100}}), graphics), experiment(StopTime=1.0),
+                  -100},{100,100}})), experiment(StopTime=1.0),
         Documentation(info="<html>
 <p>
 Example for block
