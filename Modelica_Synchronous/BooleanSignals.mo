@@ -810,7 +810,7 @@ Analog to the corresponding Real signal block example there exists an elementary
     end AssignClockVectorized;
 
     package Utilities "Utility components that are usually not directly used"
-       extends Modelica.Icons.Package;
+       extends Modelica.Icons.UtilitiesPackage;
 
       block UpSample
         "Upsample the clocked Boolean input signal and provide it as clocked output signal"

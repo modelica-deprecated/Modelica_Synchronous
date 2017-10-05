@@ -1677,7 +1677,7 @@ and the new offset for the next event is computed.
     end EngineThrottleControl;
 
     package Utilities
-      extends Modelica.Icons.Package;
+      extends Modelica.Icons.UtilitiesPackage;
       package ComponentsThrottleControl
         extends Modelica.Icons.Package;
         block ThrottleBody "Basic throttle body equations"

@@ -1741,7 +1741,7 @@ of block assignClock1.
     end AssignClockVectorized;
 
     package Utilities "Utility components that are usually not directly used"
-       extends Modelica.Icons.Package;
+       extends Modelica.Icons.UtilitiesPackage;
 
       block UpSample
         "Upsample the clocked Real input signal and provide it as clocked output signal"
