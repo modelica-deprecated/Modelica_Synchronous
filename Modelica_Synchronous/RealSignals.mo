@@ -3103,7 +3103,7 @@ states can be set as start values of <b>x</b>.<p>
       output Real x(start=0) "Discrete PI state";
     equation
       when Clock() then
-         x = previous(x) + u/Td;
+         x = previous(x) + u/Td*interval();
          y = kd*(x + u);
       end when;
 
