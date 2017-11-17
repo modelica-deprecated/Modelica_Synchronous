@@ -4,7 +4,7 @@ that are triggered by clocks"
 extends Modelica.Icons.Package;
 
   annotation (preferredView="info",
-  uses(Modelica(version="3.2.2")),
+  uses(Modelica(version="3.2.2"), ModelicaServices(version="3.2.2")),
     version="0.92.1",
     versionBuild=0,
     versionDate="2016-03-11",
