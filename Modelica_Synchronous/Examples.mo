@@ -814,7 +814,7 @@ Original cascade controlled drive with a
                                              subSample1(factor=5)
         annotation (Placement(transformation(extent={{16,-76},{4,-64}})));
       Modelica_Synchronous.ClockSignals.Clocks.PeriodicRealClock
-                               periodicRealClock(period=0.02)
+                               periodicRealClock(period=0.002)
         annotation (Placement(transformation(extent={{78,-76},{66,-64}})));
     equation
       connect(speed.flange, load.flange_b)       annotation (Line(
@@ -972,7 +972,7 @@ clock inference.
         inferFactor=false)
         annotation (Placement(transformation(extent={{-28,4},{-16,16}})));
       Modelica_Synchronous.ClockSignals.Clocks.PeriodicRealClock
-                               periodicRealClock(period=0.02)
+                               periodicRealClock(period=0.002)
         annotation (Placement(transformation(extent={{76,-72},{64,-60}})));
     equation
       connect(speed.flange, load.flange_b)       annotation (Line(
@@ -1118,11 +1118,11 @@ defined by the super-sampling factor defined at the \"super\" block.
           true)
         annotation (Placement(transformation(extent={{-28,4},{-16,16}})));
       Modelica_Synchronous.ClockSignals.Clocks.PeriodicExactClock
-                                slowClock(factor=100, resolution=
+                                slowClock(factor=10, resolution=
             Modelica_Synchronous.Types.Resolution.ms) annotation (Placement(
             transformation(extent={{-128,-74},{-116,-62}})));
       Modelica_Synchronous.ClockSignals.Clocks.PeriodicExactClock
-                                fastClock(factor=20, resolution=
+                                fastClock(factor=2, resolution=
             Modelica_Synchronous.Types.Resolution.ms)
         annotation (Placement(transformation(extent={{22,-76},{34,-64}})));
     equation
