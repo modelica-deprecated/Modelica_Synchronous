@@ -1557,7 +1557,7 @@ Obviously, the concentration follows reasonably well the desired one. By using a
         annotation (Placement(transformation(extent={{8,-6},{20,6}})));
       Modelica_Synchronous.Examples.Systems.Utilities.ComponentsThrottleControl.CrankshaftPositionEvent
         triggeredSpeed
-        annotation (Placement(transformation(extent={{18,-60},{-2,-40}})));
+        annotation (Placement(transformation(extent={{20,-60},{0,-40}})));
       Modelica_Synchronous.Examples.Systems.Utilities.ComponentsThrottleControl.Engine2
         engine
         annotation (Placement(transformation(extent={{30,-14},{58,14}})));
@@ -1582,6 +1582,10 @@ Obviously, the concentration follows reasonably well the desired one. By using a
             extent={{-10,-10},{10,10}},
             rotation=-90,
             origin={64,-32})));
+      Modelica.Blocks.Continuous.Der derivative
+        annotation (Placement(transformation(extent={{20,-90},{0,-70}})));
+      RealSignals.Sampler.SampleClocked sample2
+        annotation (Placement(transformation(extent={{-22,-74},{-34,-86}})));
     equation
     connect(speedRef.y, sample1.u)             annotation (Line(
           points={{-69,6},{-61.4,6}},
@@ -1607,14 +1611,21 @@ Obviously, the concentration follows reasonably well the desired one. By using a
       connect(step.y, add.u1) annotation (Line(
           points={{133.3,14},{128,14},{128,3.6},{123.2,3.6}},
           color={0,0,127}));
-      connect(triggeredSpeed.N_clocked, speedControl.N) annotation (Line(
-          points={{-3,-50},{-60,-50},{-60,-9},{-35.2,-9}},
-          color={0,0,127}));
       connect(engine.flange_b, angleSensor.flange) annotation (Line(
           points={{58.56,1.77636e-015},{64,1.77636e-015},{64,-22}}));
-      connect(angleSensor.phi, triggeredSpeed.angle) annotation (Line(
-          points={{64,-43},{64,-50},{20,-50}},
-          color={0,0,127}));
+      connect(angleSensor.phi, derivative.u) annotation (Line(points={{64,-43},
+              {64,-80},{22,-80}}, color={0,0,127}));
+      connect(derivative.y, sample2.u)
+        annotation (Line(points={{-1,-80},{-20.8,-80}}, color={0,0,127}));
+      connect(sample2.y, speedControl.N) annotation (Line(points={{-34.6,-80},{
+              -50,-80},{-50,-9},{-35.2,-9}}, color={0,0,127}));
+      connect(triggeredSpeed.edge180Clock, sample2.clock) annotation (Line(
+          points={{-1,-50},{-28,-50},{-28,-72.8}},
+          color={175,175,175},
+          pattern=LinePattern.Dot,
+          thickness=0.5));
+      connect(angleSensor.phi, triggeredSpeed.angle) annotation (Line(points={{
+              64,-43},{64,-50},{22,-50}}, color={0,0,127}));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                 -100},{160,100}}),
                           graphics={Rectangle(extent={{104,26},{154,-32}},
@@ -1989,24 +2000,18 @@ initial equation
               annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
           Modelica_Synchronous.ClockSignals.Interfaces.ClockOutput
                                  edge180Clock
-            annotation (Placement(transformation(extent={{100,50},{120,70}})));
+            annotation (Placement(transformation(extent={{100,-10},{120,10}}),
+                iconTransformation(extent={{100,-10},{120,10}})));
         protected
-          Modelica.SIunits.AngularVelocity N;
           Real offset(start=0, fixed=true);
           Real hold_offset = hold(offset);
           Boolean edge180Event;
-        public
-          Modelica.Blocks.Interfaces.RealOutput N_clocked
-            annotation (Placement(transformation(extent={{100,-10},{120,10}})));
         equation
-          N = der(angle);
           edge180Event = angle >= hold_offset+Modelica.Constants.pi;
           edge180Clock = Clock(edge180Event);
           when edge180Clock then
              offset = sample(angle);
-             N_clocked = sample(N);
           end when;
-          annotation (Diagram(graphics));
         end CrankshaftPositionEvent;
 
         block CylinderAirCharge
