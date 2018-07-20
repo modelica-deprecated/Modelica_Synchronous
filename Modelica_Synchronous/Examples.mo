@@ -1,4 +1,4 @@
-within Modelica_Synchronous;
+﻿within Modelica_Synchronous;
 package Examples
   "Library of examples to demonstrate the usage of package Modelica_Synchronous"
   extends Modelica.Icons.ExamplesPackage;
@@ -1545,92 +1545,94 @@ Obviously, the concentration follows reasonably well the desired one. By using a
       startTime=5,
       offset=207.34,
       height=103.67)
-        annotation (Placement(transformation(extent={{-90,-4},{-70,16}})));
+        annotation (Placement(transformation(extent={{-90,6},{-70,26}})));
       Modelica_Synchronous.Examples.Systems.Utilities.ComponentsThrottleControl.SpeedControl
         speedControl
-        annotation (Placement(transformation(extent={{-32,-15},{0,15}})));
+        annotation (Placement(transformation(extent={{-32,-5},{0,25}})));
       Modelica_Synchronous.RealSignals.Sampler.Sample
                      sample1
-        annotation (Placement(transformation(extent={{-60,-1},{-46,13}})));
+        annotation (Placement(transformation(extent={{-60,9},{-46,23}})));
       Modelica_Synchronous.RealSignals.Sampler.Hold
                    hold1(y_start=8.9)
-        annotation (Placement(transformation(extent={{8,-6},{20,6}})));
+        annotation (Placement(transformation(extent={{8,4},{20,16}})));
       Modelica_Synchronous.Examples.Systems.Utilities.ComponentsThrottleControl.RotationalClock
-        rotationalClock
-        annotation (Placement(transformation(extent={{20,-60},{0,-40}})));
+        rotationalClock(trigger_interval(displayUnit="deg") = 3.1415926535898)
+        annotation (Placement(transformation(extent={{20,-50},{0,-30}})));
       Modelica_Synchronous.Examples.Systems.Utilities.ComponentsThrottleControl.Engine2
-        engine
-        annotation (Placement(transformation(extent={{30,-14},{58,14}})));
+        engine(
+          crankshaftPositionEvent(
+            trigger_interval = rotationalClock.trigger_interval))
+        annotation (Placement(transformation(extent={{30,-4},{58,24}})));
       Modelica.Blocks.Sources.Step step(
         height=-5,
         offset=25,
         startTime=2)
-        annotation (Placement(transformation(extent={{148,7},{134,21}})));
+        annotation (Placement(transformation(extent={{148,17},{134,31}})));
       Modelica.Blocks.Sources.Step step1(
         height=5,
         offset=0,
         startTime=8)
-        annotation (Placement(transformation(extent={{148,-20},{134,-6}})));
+        annotation (Placement(transformation(extent={{148,-10},{134,4}})));
       Modelica.Blocks.Math.Add add(k1=-1, k2=-1)
-        annotation (Placement(transformation(extent={{122,-6},{110,6}})));
+        annotation (Placement(transformation(extent={{122,4},{110,16}})));
       Modelica.Mechanics.Rotational.Sources.Torque torque2(
                                         useSupport=false)
-                                annotation (Placement(transformation(extent={{90,-10},
-                {70,10}})));
+                                annotation (Placement(transformation(extent={{90,0},{
+                70,20}})));
       Modelica.Mechanics.Rotational.Sensors.AngleSensor angleSensor
         annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=-90,
-            origin={64,-32})));
+            origin={64,-22})));
       Modelica.Blocks.Continuous.Der derivative
         annotation (Placement(transformation(extent={{20,-90},{0,-70}})));
       RealSignals.Sampler.SampleClocked sample2
         annotation (Placement(transformation(extent={{-24,-74},{-36,-86}})));
     equation
     connect(speedRef.y, sample1.u)             annotation (Line(
-          points={{-69,6},{-61.4,6}},
+          points={{-69,16},{-61.4,16}},
           color={0,0,127}));
       connect(sample1.y, speedControl.N_des) annotation (Line(
-          points={{-45.3,6},{-35.2,6}},
+          points={{-45.3,16},{-35.2,16}},
           color={0,0,127}));
       connect(speedControl.Theta, hold1.u) annotation (Line(
-          points={{1.6,0},{6.8,0}},
+          points={{1.6,10},{6.8,10}},
           color={0,0,127}));
       connect(hold1.y, engine.Theta)    annotation (Line(
-          points={{20.6,0},{28,0},{28,1.77636e-015},{27.2,1.77636e-015}},
+          points={{20.6,10},{27.2,10}},
           color={0,0,127}));
       connect(torque2.flange, engine.flange_b)    annotation (Line(
-          points={{70,0},{65.28,0},{65.28,1.77636e-015},{58.56,1.77636e-015}}));
+          points={{70,10},{58.56,10}}));
 
       connect(add.y, torque2.tau) annotation (Line(
-          points={{109.4,0},{92,0}},
+          points={{109.4,10},{92,10}},
           color={0,0,127}));
       connect(step1.y, add.u2) annotation (Line(
-          points={{133.3,-13},{128,-13},{128,-3.6},{123.2,-3.6}},
+          points={{133.3,-3},{128,-3},{128,6.4},{123.2,6.4}},
           color={0,0,127}));
       connect(step.y, add.u1) annotation (Line(
-          points={{133.3,14},{128,14},{128,3.6},{123.2,3.6}},
+          points={{133.3,24},{128,24},{128,13.6},{123.2,13.6}},
           color={0,0,127}));
       connect(engine.flange_b, angleSensor.flange) annotation (Line(
-          points={{58.56,1.77636e-015},{64,1.77636e-015},{64,-22}}));
-      connect(angleSensor.phi, derivative.u) annotation (Line(points={{64,-43},
+          points={{58.56,10},{64,10},{64,-12}}));
+      connect(angleSensor.phi, derivative.u) annotation (Line(points={{64,-33},
               {64,-80},{22,-80}}, color={0,0,127}));
       connect(derivative.y, sample2.u)
         annotation (Line(points={{-1,-80},{-22.8,-80}}, color={0,0,127}));
       connect(sample2.y, speedControl.N) annotation (Line(points={{-36.6,-80},{
-              -50,-80},{-50,-9},{-35.2,-9}}, color={0,0,127}));
+              -50,-80},{-50,1},{-35.2,1}},   color={0,0,127}));
       connect(rotationalClock.y, sample2.clock) annotation (Line(
-          points={{-1,-50},{-30,-50},{-30,-72.8}},
+          points={{-1,-40},{-30,-40},{-30,-72.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
           thickness=0.5));
       connect(angleSensor.phi, rotationalClock.angle)
-        annotation (Line(points={{64,-43},{64,-50},{22,-50}}, color={0,0,127}));
+        annotation (Line(points={{64,-33},{64,-40},{22,-40}}, color={0,0,127}));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                 -100},{160,100}}),
-                          graphics={Rectangle(extent={{104,26},{154,-32}},
+                          graphics={Rectangle(extent={{104,36},{154,-22}},
                 lineColor={0,0,255}), Text(
-              extent={{110,-26},{152,-30}},
+              extent={{110,-16},{152,-20}},
               lineColor={0,0,255},
               textString="Load torque")}),
                                      Icon(coordinateSystem(preserveAspectRatio=true,
@@ -1655,17 +1657,18 @@ The complete system is shown in figure below (diagram-layer):
 Block <code>speedControl</code> is the discrete control system. The boundaries
 of this controller are defined by <code>sample1</code>, <code>sample2</code> and
 <code>hold1</code>. The sampling is done via <code>rotationalClock</code>, an
-event-based clock that ticks every 180 degree rotation of the crankshaft angle.
-The speed controller therefore is automatically executed every half-rotation of
-the engine's crankshaft. To produce respective clock ticks,
+event-based clock that ticks every 180° rotation of the crankshaft angle. The
+speed controller therefore is automatically executed every half-rotation of the
+engine's crankshaft. To produce respective clock ticks,
 <a href=\"modelica://Modelica_Synchronous.Examples.Systems.Utilities.ComponentsThrottleControl.RotationalClock\">rotationalClock</a>
 bookeeps the angular of the last time a half-rotation of
 the crankshaft has been recognized (<code>angular_offset</code>). Given
 <code>angular_offset</code>, the event-condition for half-rotations is:
 <p>
-<code>angle >= hold(angular_offset) + Modelica.Constants.pi</code>
+<code>abs(angle - angular_offset) >= abs(trigger_interval)</code>
 <p>
-The model of <code>rotationalClock</code> therefore is (diagram-layer):
+with <code>trigger_interval = 180°</code>. The model of
+<code>rotationalClock</code> therefore is (diagram-layer):
 </p>
 <img src=\"modelica://Modelica_Synchronous/Resources/Images/Examples/RotationalClock_Model.png\">
 <p>
@@ -1983,9 +1986,13 @@ initial equation
         end SpeedControl;
 
         block RotationalClock
-          "Event clock generating a clock tick every 180deg rotation of an observed
-   input angle."
+          "Event clock generating a clock tick each time an observed input angle
+   changed for a certain rotational interval."
           extends ClockSignals.Interfaces.PartialClock;
+
+          parameter Modelica.SIunits.Angle trigger_interval = 2*Modelica.Constants.pi
+            "Rotational interval the input angle must be changed to trigger the next
+     clock tick.";
 
           Modelica.Blocks.Interfaces.RealInput angle(unit = "rad")
             "Input angle observed for generating clock ticks."
@@ -1997,59 +2004,77 @@ initial equation
             annotation (Placement(transformation(
               extent = {{-10,-10},{10,10}},
               rotation = 90,
-              origin = {0,-40})));
+              origin={0,-50})));
           RealSignals.Sampler.SampleClocked update_offset
-            annotation (Placement(transformation(extent = {{-76,-6},{-64,6}})));
+            annotation (Placement(transformation(extent = {{-78,-8},{-62,8}})));
           RealSignals.Sampler.Hold angular_offset
-            annotation (Placement(transformation(extent = {{-36,-6},{-24,6}})));
-          Modelica.Blocks.Math.Add add
-            annotation (Placement(transformation(extent = {{0,20},{20,40}})));
+            annotation (Placement(transformation(extent = {{-48,-8},{-32,8}})));
+          Modelica.Blocks.Math.Add sub(k2=-1)
+            annotation (Placement(transformation(extent = {{-40,70},{-20,90}})));
           Modelica.Blocks.Logical.GreaterEqual greaterEqual
-            annotation (Placement(transformation(extent = {{40,70},{60,90}})));
-          Modelica.Blocks.Sources.Constant pi(k = Modelica.Constants.pi)
-            annotation (Placement(transformation(extent = {{-40,50},{-20,70}})));
+            annotation (Placement(transformation(extent = {{50,70},{70,90}})));
+          Modelica.Blocks.Sources.Constant threshold(k = trigger_interval)
+            annotation (Placement(transformation(extent = {{0,-10},{20,10}})));
+          Modelica.Blocks.Math.Abs abs2
+            annotation (Placement(transformation(extent = {{40,-10},{60,10}})));
+          Modelica.Blocks.Math.Abs abs1
+            annotation (Placement(transformation(extent = {{0,70},{20,90}})));
 
         equation
           connect(angle, update_offset.u)
             annotation (Line(
-              points = {{-120,0},{-77.2,0}},
+              points = {{-120,0},{-79.6,0}},
               color = {0,0,127}));
           connect(eventClock.y, update_offset.clock)
             annotation (Line(
-              points = {{8.88178e-16,-29},{8.88178e-16,-30},{0,-30},{0,-20},{-70,-20},
-                {-70,-7.2}},
+              points = {{6.66134e-16,-39},{6.66134e-16,-30},{-70,-30},{-70,-9.6}},
               color = {175,175,175},
               pattern = LinePattern.Dot,
               thickness = 0.5));
           connect(update_offset.y, angular_offset.u)
             annotation (Line(
-              points = {{-63.4,0},{-37.2,0}},
+              points = {{-61.2,0},{-49.6,0}},
               color = {0,0,127}));
-          connect(angular_offset.y, add.u2)
+          connect(angular_offset.y,sub. u2)
             annotation (Line(
-              points = {{-23.4,0},{-10,0},{-10,24},{-2,24}},
-              color = {0,0,127}));
-          connect(pi.y, add.u1)
-            annotation (Line(
-              points = {{-19,60},{-10,60},{-10,36},{-2,36}},
-              color = {0,0,127}));
-          connect(angle, greaterEqual.u1)
-            annotation (Line(
-              points = {{-120,0},{-90,0},{-90,80},{38,80}},
-              color = {0,0,127}));
-          connect(add.y, greaterEqual.u2)
-            annotation (Line(
-              points = {{21,30},{30,30},{30,72},{38,72}},
+              points = {{-31.2,0},{-20,0},{-20,40},{-50,40},{-50,74},{-42,74}},
               color = {0,0,127}));
           connect(greaterEqual.y, eventClock.u)
             annotation (Line(
-              points = {{61,80},{70,80},{70,-70},{0,-70},{0,-52},{-6.66134e-16,-52}},
+              points = {{71,80},{80,80},{80,-70},{0,-70},{0,-62},{-8.88178e-16,-62}},
               color = {255,0,255}));
-          connect(eventClock.y, y) annotation (Line(
-              points = {{8.88178e-16,-29},{0,-29},{0,-20},{80,-20},{80,0},{110,0}},
+          connect(eventClock.y, y)
+            annotation (Line(
+              points = {{6.66134e-16,-39},{0,-39},{0,-30},{90,-30},{90,0},{110,0}},
               color = {175,175,175},
               pattern = LinePattern.Dot,
               thickness = 0.5));
+          connect(sub.y, abs1.u)
+            annotation (Line(
+              points = {{-19,80},{-2,80}},
+              color = {0,0,127}));
+          connect(angle, sub.u1)
+            annotation (Line(
+              points = {{-120,0},{-90,0},{-90,86},{-42,86}},
+              color = {0,0,127}));
+          connect(abs1.y, greaterEqual.u1)
+            annotation (Line(
+              points = {{21,80},{48,80}},
+              color = {0,0,127}));
+          connect(threshold.y, abs2.u)
+            annotation (Line(
+              points = {{21,0},{38,0}},
+              color = {0,0,127}));
+          connect(abs2.y, greaterEqual.u2)
+            annotation (Line(
+              points = {{61,0},{70,0},{70,40},{40,40},{40,72},{48,72}},
+              color = {0,0,127}));
+
+          annotation (Icon(graphics={
+            Text(
+              extent = {{-140,-120},{140,-150}},
+              lineColor = {0,0,0},
+              textString = "%trigger_interval%")}));
         end RotationalClock;
 
         block CylinderAirCharge
