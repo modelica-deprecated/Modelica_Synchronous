@@ -1585,7 +1585,7 @@ Obviously, the concentration follows reasonably well the desired one. By using a
       Modelica.Blocks.Continuous.Der derivative
         annotation (Placement(transformation(extent={{20,-90},{0,-70}})));
       RealSignals.Sampler.SampleClocked sample2
-        annotation (Placement(transformation(extent={{-22,-74},{-34,-86}})));
+        annotation (Placement(transformation(extent={{-24,-74},{-36,-86}})));
     equation
     connect(speedRef.y, sample1.u)             annotation (Line(
           points={{-69,6},{-61.4,6}},
@@ -1616,11 +1616,11 @@ Obviously, the concentration follows reasonably well the desired one. By using a
       connect(angleSensor.phi, derivative.u) annotation (Line(points={{64,-43},
               {64,-80},{22,-80}}, color={0,0,127}));
       connect(derivative.y, sample2.u)
-        annotation (Line(points={{-1,-80},{-20.8,-80}}, color={0,0,127}));
-      connect(sample2.y, speedControl.N) annotation (Line(points={{-34.6,-80},{
+        annotation (Line(points={{-1,-80},{-22.8,-80}}, color={0,0,127}));
+      connect(sample2.y, speedControl.N) annotation (Line(points={{-36.6,-80},{
               -50,-80},{-50,-9},{-35.2,-9}}, color={0,0,127}));
-      connect(rotationalClock.tick, sample2.clock) annotation (Line(
-          points={{-1,-50},{-28,-50},{-28,-72.8}},
+      connect(rotationalClock.y, sample2.clock) annotation (Line(
+          points={{-1,-50},{-30,-50},{-30,-72.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
           thickness=0.5));
@@ -1985,16 +1985,15 @@ initial equation
         block RotationalClock
           "Event clock generating a clock tick every 180deg rotation of an observed
    input angle."
-          extends Modelica.Blocks.Interfaces.BlockIcon;
+          extends ClockSignals.Interfaces.PartialClock;
 
-          Modelica.Blocks.Interfaces.RealInput angle(unit="rad")
+          Modelica.Blocks.Interfaces.RealInput angle(unit = "rad")
             "Input angle observed for generating clock ticks."
             annotation (Placement(transformation(extent = {{-140,-20},{-100,20}})));
-          Modelica_Synchronous.ClockSignals.Interfaces.ClockOutput tick
-            "Clock ticks generated."
-            annotation (Placement(transformation(extent = {{100,-10},{120,10}})));
 
-          ClockSignals.Clocks.EventClock eventClock
+          ClockSignals.Clocks.EventClock eventClock(
+            useSolver = useSolver,
+            solverMethod = solverMethod)
             annotation (Placement(transformation(
               extent = {{-10,-10},{10,10}},
               rotation = 90,
@@ -2046,8 +2045,7 @@ initial equation
             annotation (Line(
               points = {{61,80},{70,80},{70,-70},{0,-70},{0,-52},{-6.66134e-16,-52}},
               color = {255,0,255}));
-          connect(eventClock.y, tick)
-            annotation (Line(
+          connect(eventClock.y, y) annotation (Line(
               points = {{8.88178e-16,-29},{0,-29},{0,-20},{80,-20},{80,0},{110,0}},
               color = {175,175,175},
               pattern = LinePattern.Dot,
@@ -2176,10 +2174,10 @@ initial equation
               Line(
               points={{-57,-4},{-56,-4},{-56,-10},{-52,-10}},
               color={0,0,127}));
-          connect(cylinderAirCharge.clock, crankshaftPositionEvent.tick)
+          connect(cylinderAirCharge.clock, crankshaftPositionEvent.y)
             annotation (Line(points={{-40,-22},{-40,-64},{49,-64}}, color={128,
                   0,255}));
-          connect(inductionToPowerDelay.clock, crankshaftPositionEvent.tick)
+          connect(inductionToPowerDelay.clock, crankshaftPositionEvent.y)
             annotation (Line(points={{-12,-22},{-12,-64},{49,-64}}, color={128,
                   0,255}));
           connect(torque.tau, torqueGeneration.T_torque_e) annotation (Line(
