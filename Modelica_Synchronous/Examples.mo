@@ -1556,7 +1556,7 @@ Obviously, the concentration follows reasonably well the desired one. By using a
                    hold1(y_start=8.9)
         annotation (Placement(transformation(extent={{8,-6},{20,6}})));
       Modelica_Synchronous.Examples.Systems.Utilities.ComponentsThrottleControl.CrankshaftPositionEvent
-        triggeredSpeed
+        rotationalClock
         annotation (Placement(transformation(extent={{20,-60},{0,-40}})));
       Modelica_Synchronous.Examples.Systems.Utilities.ComponentsThrottleControl.Engine2
         engine
@@ -1619,13 +1619,13 @@ Obviously, the concentration follows reasonably well the desired one. By using a
         annotation (Line(points={{-1,-80},{-20.8,-80}}, color={0,0,127}));
       connect(sample2.y, speedControl.N) annotation (Line(points={{-34.6,-80},{
               -50,-80},{-50,-9},{-35.2,-9}}, color={0,0,127}));
-      connect(triggeredSpeed.edge180Clock, sample2.clock) annotation (Line(
+      connect(rotationalClock.edge180Clock, sample2.clock) annotation (Line(
           points={{-1,-50},{-28,-50},{-28,-72.8}},
           color={175,175,175},
           pattern=LinePattern.Dot,
           thickness=0.5));
-      connect(angleSensor.phi, triggeredSpeed.angle) annotation (Line(points={{
-              64,-43},{64,-50},{22,-50}}, color={0,0,127}));
+      connect(angleSensor.phi, rotationalClock.angle)
+        annotation (Line(points={{64,-43},{64,-50},{22,-50}}, color={0,0,127}));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                 -100},{160,100}}),
                           graphics={Rectangle(extent={{104,26},{154,-32}},
@@ -1639,51 +1639,36 @@ Obviously, the concentration follows reasonably well the desired one. By using a
       Documentation(info="<html>
 <p>
 This example shows how to model a non-periodic synchronous sampled data systems
-with the Modelica_Synchronous library.
-This is demonstrated at hand of a closed-loop throttle control synchronized
-to the crankshaft angle of an internal combustion engine.
-This system has the following properties:
-</p>
-
+with the <code>Modelica_Synchronous library</code>. This is demonstrated at hand
+of a closed-loop throttle control synchronized to the crankshaft angle of an
+internal combustion engine. This system has the following properties:
 <ul>
 <li> Engine speed is regulated with a throttle actuator.</li>
 <li> Controller execution is synchronized with the engine crankshaft angle.</li>
 <li> The influence of disturbances, such as a change in load torque, is reduced.</li>
 </ul>
-
 <p>
-The complete system is shown in the diagram layer and in the figure below:
+The complete system is shown in figure below (diagram-layer):
 </p>
-
-<p>
 <img src=\"modelica://Modelica_Synchronous/Resources/Images/Examples/EngineThrottleControl_Model.png\">
-</p>
-
 <p>
-Block speedControl is the discrete control system. The boundaries of this controller
-are defined by sample1 and hold1. A special element triggeredSpeed
-has the crankshaft angle as input and provides the sampled crankshaft
-speed as output. Additionally, the clock associated with the output
-(and therefore also to component speedControl) ticks, at every 180 degree
-rotation of the crankshaft angle. This special application is implemented
-in the text layer of component
-<a href=\"modelica://Modelica_Synchronous.Examples.Systems.Utilities.ComponentsThrottleControl.CrankshaftPositionEvent\">triggeredSpeed</a> as:
-</p>
-
-<pre>
- N = der(angle);
- when Clock(angle >= hold(offset)+Modelica.Constants.pi) then
-      offset = sample(angle);
-     N_clocked = sample(N);
- end when;
-</pre>
-
+Block <code>speedControl</code> is the discrete control system. The boundaries
+of this controller are defined by <code>sample1</code>, <code>sample2</code> and
+<code>hold1</code>. The sampling is done via <code>rotationalClock</code>, an
+event-based clock that ticks every 180 degree rotation of the crankshaft angle.
+The speed controller therefore is automatically executed every half-rotation of
+the engine's crankshaft. To produce respective clock ticks,
+<a href=\"modelica://Modelica_Synchronous.Examples.Systems.Utilities.ComponentsThrottleControl.CrankshaftPositionEvent\">rotationalClock</a>
+bookeeps the angular of the last time a half-rotation of
+the crankshaft has been recognized (<code>angular_offset</code>). Given
+<code>angular_offset</code>, the event-condition for half-rotations is:
 <p>
-Here, N is the derivative of the crankshaft angle. Whenever this angle becomes
-larger as 180 degree an event clock is activated due to Clock(..).
-In such a case the when-clause becomes active, and the speed N is sampled,
-and the new offset for the next event is computed.
-</p>
+<code>angle >= hold(angular_offset) + Modelica.Constants.pi</code>
+<p>
+In the end, <code>rotationalClock</code> samples it's own input angle to bookeep
+an offset used to decide when to tick; the clock's event condition depends on
+the state present when the condition changed last time from beeing non-satisfied
+to beeing satisfied, i.e., the state when the clock last ticked.
 </html>"));
     end EngineThrottleControl;
 
