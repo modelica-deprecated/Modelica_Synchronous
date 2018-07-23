@@ -209,6 +209,138 @@ For an example, see
 </p>
 </html>"));
     end EventClock;
+
+    package Rotational
+      block RotationalClock
+        "Event clock generating a clock tick each time an observed input angle
+   changed for a rotational interval given as variable input."
+        extends ClockSignals.Interfaces.PartialClock;
+
+        Modelica.Blocks.Interfaces.RealInput angle(unit = "rad")
+          "Input angle observed for generating clock ticks."
+          annotation (Placement(transformation(extent = {{-140,-20},{-100,20}})));
+        Modelica.Blocks.Interfaces.RealInput trigger_interval(unit = "rad")
+          "Rotational interval the input angle must be changed to trigger the next
+     clock tick."
+         annotation (Placement(transformation(extent = {{-140,40},{-100,80}})));
+
+        ClockSignals.Clocks.EventClock eventClock(
+          useSolver = useSolver,
+          solverMethod = solverMethod)
+          annotation (Placement(transformation(
+            extent = {{-10,-10},{10,10}},
+            rotation = 90,
+            origin={0,-50})));
+        RealSignals.Sampler.SampleClocked update_offset
+          annotation (Placement(transformation(extent = {{-78,-8},{-62,8}})));
+        RealSignals.Sampler.Hold angular_offset
+          annotation (Placement(transformation(extent = {{-48,-8},{-32,8}})));
+        Modelica.Blocks.Math.Add sub(k2 = -1)
+          annotation (Placement(transformation(extent = {{-10,20},{10,40}})));
+        Modelica.Blocks.Logical.Less less
+          annotation (Placement(transformation(extent = {{60,28},{80,48}})));
+        Modelica.Blocks.Math.Abs abs2
+          annotation (Placement(transformation(extent = {{20,50},{40,70}})));
+        Modelica.Blocks.Math.Abs abs1
+          annotation (Placement(transformation(extent = {{20,20},{40,40}})));
+
+      equation
+        connect(angle, update_offset.u)
+          annotation (Line(
+            points = {{-120,0},{-79.6,0}},
+            color = {0,0,127}));
+        connect(eventClock.y, update_offset.clock)
+          annotation (Line(
+            points = {{6.66134e-16,-39},{6.66134e-16,-30},{-70,-30},{-70,-9.6}},
+            color = {175,175,175},
+            pattern = LinePattern.Dot,
+            thickness = 0.5));
+        connect(update_offset.y, angular_offset.u)
+          annotation (Line(
+            points = {{-61.2,0},{-49.6,0}},
+            color = {0,0,127}));
+        connect(angular_offset.y,sub. u2)
+          annotation (Line(
+            points = {{-31.2,0},{-20,0},{-20,24},{-12,24}},
+            color = {0,0,127}));
+        connect(less.y, eventClock.u)
+          annotation (Line(
+            points = {{81,38},{90,38},{90,-70},{0,-70},{0,-62},{-8.88178e-16,-62}},
+            color = {255,0,255}));
+        connect(eventClock.y, y)
+          annotation (Line(
+            points = {{6.66134e-16,-39},{0,-39},{0,-30},{80,-30},{80,0},{110,0}},
+            color = {175,175,175},
+            pattern = LinePattern.Dot,
+            thickness = 0.5));
+        connect(sub.y, abs1.u)
+          annotation (Line(
+            points = {{11,30},{18,30}},
+            color = {0,0,127}));
+        connect(angle, sub.u1)
+          annotation (Line(
+            points = {{-120,0},{-90,0},{-90,36},{-12,36}},
+            color = {0,0,127}));
+        connect(trigger_interval, abs2.u)
+          annotation (Line(
+            points = {{-120,60},{18,60}},
+            color = {0,0,127}));
+        connect(abs1.y, less.u2)
+          annotation (Line(
+            points = {{41,30},{58,30}},
+            color = {0,0,127}));
+        connect(abs2.y, less.u1)
+          annotation (Line(
+            points = {{41,60},{50,60},{50,38},{58,38}},
+            color = {0,0,127}));
+
+        annotation (Icon(graphics={
+          Line(
+            points = {{-100,60},{-90,60},{-80,60}},
+            color = {0,0,127})}));
+      end RotationalClock;
+
+      model FixedRotationalClock
+        "Event clock generating a clock tick each time an observed input angle
+   changed for a certain, constant rotational interval."
+        extends ClockSignals.Interfaces.PartialClock;
+
+        parameter Modelica.SIunits.Angle trigger_interval = 2*Modelica.Constants.pi
+          "Rotational interval the input angle must be changed to trigger the next
+     clock tick.";
+
+        Modelica.Blocks.Interfaces.RealInput angle(unit = "rad")
+          "Input angle observed for generating clock ticks."
+          annotation (Placement(transformation(extent = {{-140,-20},{-100,20}})));
+        RotationalClock rotationalClock
+          annotation (Placement(transformation(extent = {{-10,-10},{10,10}})));
+        Modelica.Blocks.Sources.Constant threshold(k = trigger_interval)
+          annotation (Placement(transformation(extent = {{-80,20},{-60,40}})));
+
+      equation
+        connect(angle, rotationalClock.angle)
+          annotation (Line(
+            points = {{-120,0},{-12,0}},
+            color = {0,0,127}));
+        connect(threshold.y, rotationalClock.trigger_interval)
+          annotation (Line(
+            points = {{-59,30},{-40,30},{-40,6},{-12,6}},
+            color = {0,0,127}));
+        connect(rotationalClock.y, y)
+          annotation (Line(
+            points = {{11,0},{110,0}},
+            color = {175,175,175},
+            pattern = LinePattern.Dot,
+            thickness = 0.5));
+
+        annotation (Icon(graphics={
+          Text(
+            extent = {{-140,-120},{140,-150}},
+            lineColor = {0,0,0},
+            textString = "%trigger_interval%")}));
+      end FixedRotationalClock;
+    end Rotational;
+
   annotation (Documentation(info="<html>
 <p>
 This package contains blocks that generate clock signals. For an introduction

@@ -1555,7 +1555,7 @@ Obviously, the concentration follows reasonably well the desired one. By using a
       Modelica_Synchronous.RealSignals.Sampler.Hold
                    hold1(y_start=8.9)
         annotation (Placement(transformation(extent={{8,4},{20,16}})));
-      Modelica_Synchronous.Examples.Systems.Utilities.ComponentsThrottleControl.RotationalClock
+      Modelica_Synchronous.ClockSignals.Clocks.Rotational.FixedRotationalClock
         rotationalClock(trigger_interval(displayUnit="deg") = 3.1415926535898)
         annotation (Placement(transformation(extent={{20,-50},{0,-30}})));
       Modelica_Synchronous.Examples.Systems.Utilities.ComponentsThrottleControl.Engine2
@@ -1660,7 +1660,7 @@ of this controller are defined by <code>sample1</code>, <code>sample2</code> and
 event-based clock that ticks every 180° rotation of the crankshaft angle. The
 speed controller therefore is automatically executed every half-rotation of the
 engine's crankshaft. To produce respective clock ticks,
-<a href=\"modelica://Modelica_Synchronous.Examples.Systems.Utilities.ComponentsThrottleControl.RotationalClock\">rotationalClock</a>
+<a href=\"modelica://Modelica_Synchronous.ClockSignals.Clocks.Rotational.RotationalClock\">rotationalClock</a>
 bookeeps the angular of the last time a half-rotation of
 the crankshaft has been recognized (<code>angular_offset</code>). Given
 <code>angular_offset</code>, the event-condition for half-rotations is:
@@ -1985,98 +1985,6 @@ initial equation
                   fillPattern=FillPattern.Solid)}));
         end SpeedControl;
 
-        block RotationalClock
-          "Event clock generating a clock tick each time an observed input angle
-   changed for a certain rotational interval."
-          extends ClockSignals.Interfaces.PartialClock;
-
-          parameter Modelica.SIunits.Angle trigger_interval = 2*Modelica.Constants.pi
-            "Rotational interval the input angle must be changed to trigger the next
-     clock tick.";
-
-          Modelica.Blocks.Interfaces.RealInput angle(unit = "rad")
-            "Input angle observed for generating clock ticks."
-            annotation (Placement(transformation(extent = {{-140,-20},{-100,20}})));
-
-          ClockSignals.Clocks.EventClock eventClock(
-            useSolver = useSolver,
-            solverMethod = solverMethod)
-            annotation (Placement(transformation(
-              extent = {{-10,-10},{10,10}},
-              rotation = 90,
-              origin={0,-50})));
-          RealSignals.Sampler.SampleClocked update_offset
-            annotation (Placement(transformation(extent = {{-78,-8},{-62,8}})));
-          RealSignals.Sampler.Hold angular_offset
-            annotation (Placement(transformation(extent = {{-48,-8},{-32,8}})));
-          Modelica.Blocks.Math.Add sub(k2=-1)
-            annotation (Placement(transformation(extent = {{-40,70},{-20,90}})));
-          Modelica.Blocks.Logical.GreaterEqual greaterEqual
-            annotation (Placement(transformation(extent = {{50,70},{70,90}})));
-          Modelica.Blocks.Sources.Constant threshold(k = trigger_interval)
-            annotation (Placement(transformation(extent = {{0,-10},{20,10}})));
-          Modelica.Blocks.Math.Abs abs2
-            annotation (Placement(transformation(extent = {{40,-10},{60,10}})));
-          Modelica.Blocks.Math.Abs abs1
-            annotation (Placement(transformation(extent = {{0,70},{20,90}})));
-
-        equation
-          connect(angle, update_offset.u)
-            annotation (Line(
-              points = {{-120,0},{-79.6,0}},
-              color = {0,0,127}));
-          connect(eventClock.y, update_offset.clock)
-            annotation (Line(
-              points = {{6.66134e-16,-39},{6.66134e-16,-30},{-70,-30},{-70,-9.6}},
-              color = {175,175,175},
-              pattern = LinePattern.Dot,
-              thickness = 0.5));
-          connect(update_offset.y, angular_offset.u)
-            annotation (Line(
-              points = {{-61.2,0},{-49.6,0}},
-              color = {0,0,127}));
-          connect(angular_offset.y,sub. u2)
-            annotation (Line(
-              points = {{-31.2,0},{-20,0},{-20,40},{-50,40},{-50,74},{-42,74}},
-              color = {0,0,127}));
-          connect(greaterEqual.y, eventClock.u)
-            annotation (Line(
-              points = {{71,80},{80,80},{80,-70},{0,-70},{0,-62},{-8.88178e-16,-62}},
-              color = {255,0,255}));
-          connect(eventClock.y, y)
-            annotation (Line(
-              points = {{6.66134e-16,-39},{0,-39},{0,-30},{90,-30},{90,0},{110,0}},
-              color = {175,175,175},
-              pattern = LinePattern.Dot,
-              thickness = 0.5));
-          connect(sub.y, abs1.u)
-            annotation (Line(
-              points = {{-19,80},{-2,80}},
-              color = {0,0,127}));
-          connect(angle, sub.u1)
-            annotation (Line(
-              points = {{-120,0},{-90,0},{-90,86},{-42,86}},
-              color = {0,0,127}));
-          connect(abs1.y, greaterEqual.u1)
-            annotation (Line(
-              points = {{21,80},{48,80}},
-              color = {0,0,127}));
-          connect(threshold.y, abs2.u)
-            annotation (Line(
-              points = {{21,0},{38,0}},
-              color = {0,0,127}));
-          connect(abs2.y, greaterEqual.u2)
-            annotation (Line(
-              points = {{61,0},{70,0},{70,40},{40,40},{40,72},{48,72}},
-              color = {0,0,127}));
-
-          annotation (Icon(graphics={
-            Text(
-              extent = {{-140,-120},{140,-150}},
-              lineColor = {0,0,0},
-              textString = "%trigger_interval%")}));
-        end RotationalClock;
-
         block CylinderAirCharge
           "Integrates the air mass flow into a cylinder. After the charge for one cylinder is complete, resets the mass to 0"
         extends Modelica.Blocks.Interfaces.BlockIcon;
@@ -2148,7 +2056,7 @@ initial equation
           Modelica_Synchronous.Examples.Systems.Utilities.ComponentsThrottleControl.TorqueGeneration
             torqueGeneration
             annotation (Placement(transformation(extent={{18,28},{38,48}})));
-          Modelica_Synchronous.Examples.Systems.Utilities.ComponentsThrottleControl.RotationalClock
+          Modelica_Synchronous.ClockSignals.Clocks.Rotational.FixedRotationalClock
             crankshaftPositionEvent
             annotation (Placement(transformation(extent={{70,-74},{50,-54}})));
           Modelica_Synchronous.Examples.Systems.Utilities.ComponentsThrottleControl.InductionToPowerDelay
