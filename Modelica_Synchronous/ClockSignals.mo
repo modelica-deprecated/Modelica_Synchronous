@@ -213,16 +213,16 @@ For an example, see
     package Rotational
       block RotationalClock
         "Event clock generating a clock tick each time an observed input angle
-   changed for a rotational interval given as variable input."
+   changed for a rotational-interval given as variable input."
         extends ClockSignals.Interfaces.PartialClock;
 
         Modelica.Blocks.Interfaces.RealInput angle(unit = "rad")
           "Input angle observed for generating clock ticks."
           annotation (Placement(transformation(extent = {{-140,-20},{-100,20}})));
         Modelica.Blocks.Interfaces.RealInput trigger_interval(unit = "rad")
-          "Rotational interval the input angle must be changed to trigger the next
+          "Rotational-interval the input angle must be changed to trigger the next
      clock tick."
-         annotation (Placement(transformation(extent = {{-140,40},{-100,80}})));
+          annotation (Placement(transformation(extent = {{-140,40},{-100,80}})));
 
         ClockSignals.Clocks.EventClock eventClock(
           useSolver = useSolver,
@@ -294,6 +294,11 @@ For an example, see
             points = {{41,60},{50,60},{50,38},{58,38}},
             color = {0,0,127}));
 
+      algorithm
+        assert(
+          not (trigger_interval == 0),
+          "The rotational-interval of rotational event clocks must be non-zero.");
+
         annotation (Icon(graphics={
           Line(
             points = {{-100,60},{-90,60},{-80,60}},
@@ -302,11 +307,11 @@ For an example, see
 
       model FixedRotationalClock
         "Event clock generating a clock tick each time an observed input angle
-   changed for a certain, constant rotational interval."
+   changed for a certain, constant rotational-interval."
         extends ClockSignals.Interfaces.PartialClock;
 
         parameter Modelica.SIunits.Angle trigger_interval = 2*Modelica.Constants.pi
-          "Rotational interval the input angle must be changed to trigger the next
+          "Rotational-interval the input angle must be changed to trigger the next
      clock tick.";
 
         Modelica.Blocks.Interfaces.RealInput angle(unit = "rad")
