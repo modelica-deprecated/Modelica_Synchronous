@@ -211,26 +211,42 @@ For an example, see
     end EventClock;
 
     package Rotational
-      block RotationalClock
-        "Event clock generating a clock tick each time an observed input angle
-   changed for a rotational-interval given as variable input."
+      partial block PartialRotationalClock
+        "Base class for event clocks that generate a clock tick each time an observed
+   input angle changed."
         extends ClockSignals.Interfaces.PartialClock;
 
         Modelica.Blocks.Interfaces.RealInput angle(unit = "rad")
           "Input angle observed for generating clock ticks."
           annotation (Placement(transformation(extent = {{-140,-20},{-100,20}})));
+        Interfaces.ClockOutput direction_change
+          "Ticks every time 'y' ticks and the rotational-direction of the observed
+     angle changed."
+          annotation (Placement(transformation(extent = {{100,-70},{120,-50}})));
+
+        annotation (Icon(graphics={
+          Line(
+            points = {{80,-60},{100,-60}},
+            color = {95,95,95})}));
+      end PartialRotationalClock;
+
+      block RotationalClock
+        "Event clock generating a clock tick each time an observed input angle
+   changed for a rotational-interval given as variable input."
+        extends PartialRotationalClock;
+
         Modelica.Blocks.Interfaces.RealInput trigger_interval(unit = "rad")
           "Rotational-interval the input angle must be changed to trigger the next
      clock tick."
           annotation (Placement(transformation(extent = {{-140,40},{-100,80}})));
 
-        ClockSignals.Clocks.EventClock eventClock(
+        ClockSignals.Clocks.EventClock y_clock(
           useSolver = useSolver,
           solverMethod = solverMethod)
           annotation (Placement(transformation(
-            extent = {{-10,-10},{10,10}},
+            extent = {{8,-8},{-8,8}},
             rotation = 90,
-            origin={0,-50})));
+            origin = {50,-10})));
         RealSignals.Sampler.SampleClocked update_offset
           annotation (Placement(transformation(extent = {{-78,-8},{-62,8}})));
         RealSignals.Sampler.Hold angular_offset
@@ -243,15 +259,27 @@ For an example, see
           annotation (Placement(transformation(extent = {{20,50},{40,70}})));
         Modelica.Blocks.Math.Abs abs1
           annotation (Placement(transformation(extent = {{20,20},{40,40}})));
+        Modelica.Blocks.Math.Sign sign(generateEvent = false)
+          annotation (Placement(transformation(extent = {{-50,-70},{-30,-50}})));
+        Modelica.Blocks.Math.RealToInteger cast
+          annotation (Placement(transformation(extent = {{-20,-70},{0,-50}})));
+        Modelica.Blocks.Math.IntegerChange change
+          annotation (Placement(transformation(extent = {{10,-70},{30,-50}})));
+        EventClock direction_clock
+          annotation (Placement(transformation(extent = {{72,-68},{88,-52}})));
+        BooleanSignals.Sampler.Hold direction_offset
+          annotation (Placement(transformation(extent = {{44,-66},{56,-54}})));
+        RealSignals.Sampler.SampleClocked update_direction
+          annotation (Placement(transformation(extent = {{-76,-54},{-64,-66}})));
 
       equation
         connect(angle, update_offset.u)
           annotation (Line(
             points = {{-120,0},{-79.6,0}},
             color = {0,0,127}));
-        connect(eventClock.y, update_offset.clock)
+        connect(y_clock.y, update_offset.clock)
           annotation (Line(
-            points = {{6.66134e-16,-39},{6.66134e-16,-30},{-70,-30},{-70,-9.6}},
+            points = {{50,-18.8},{50,-30},{-70,-30},{-70,-9.6}},
             color = {175,175,175},
             pattern = LinePattern.Dot,
             thickness = 0.5));
@@ -263,13 +291,13 @@ For an example, see
           annotation (Line(
             points = {{-31.2,0},{-20,0},{-20,24},{-12,24}},
             color = {0,0,127}));
-        connect(less.y, eventClock.u)
+        connect(less.y, y_clock.u)
           annotation (Line(
-            points = {{81,38},{90,38},{90,-70},{0,-70},{0,-62},{-8.88178e-16,-62}},
+            points = {{81,38},{90,38},{90,10},{50,10},{50,-0.4}},
             color = {255,0,255}));
-        connect(eventClock.y, y)
+        connect(y_clock.y, y)
           annotation (Line(
-            points = {{6.66134e-16,-39},{0,-39},{0,-30},{80,-30},{80,0},{110,0}},
+            points = {{50,-18.8},{50,-30},{80,-30},{80,0},{110,0}},
             color = {175,175,175},
             pattern = LinePattern.Dot,
             thickness = 0.5));
@@ -291,7 +319,43 @@ For an example, see
             color = {0,0,127}));
         connect(abs2.y, less.u1)
           annotation (Line(
-            points = {{41,60},{50,60},{50,38},{58,38}},
+            points = {{41,60},{52,60},{52,38},{58,38}},
+            color = {0,0,127}));
+        connect(sign.y, cast.u)
+          annotation (Line(
+            points = {{-29,-60},{-22,-60}},
+            color = {0,0,127}));
+        connect(direction_clock.y, direction_change)
+          annotation (Line(
+            points = {{88.8,-60},{110,-60}},
+            color = {175,175,175},
+            pattern = LinePattern.Dot,
+            thickness = 0.5));
+        connect(cast.y, change.u)
+          annotation (Line(
+            points = {{1,-60},{8,-60}},
+            color = {255,127,0}));
+        connect(change.y, direction_offset.u)
+          annotation (Line(
+            points = {{31,-60},{42.8,-60}},
+            color = {255,0,255}));
+        connect(direction_offset.y, direction_clock.u)
+          annotation (Line(
+            points = {{56.6,-60},{70.4,-60}},
+            color = {255,0,255}));
+        connect(y_clock.y, update_direction.clock)
+          annotation (Line(
+            points = {{50,-18.8},{50,-30},{-70,-30},{-70,-52.8}},
+            color = {175,175,175},
+            pattern = LinePattern.Dot,
+            thickness = 0.5));
+        connect(update_direction.y, sign.u)
+          annotation (Line(
+            points = {{-63.4,-60},{-52,-60}},
+            color = {0,0,127}));
+        connect(sub.y, update_direction.u)
+          annotation (Line(
+            points = {{11,30},{14,30},{14,-20},{-90,-20},{-90,-60},{-77.2,-60}},
             color = {0,0,127}));
 
       algorithm
@@ -299,24 +363,26 @@ For an example, see
           not (trigger_interval == 0),
           "The rotational-interval of rotational event clocks must be non-zero.");
 
-        annotation (Icon(graphics={
-          Line(
-            points = {{-100,60},{-90,60},{-80,60}},
-            color = {0,0,127})}));
+        annotation (
+          Icon(graphics={
+            Line(
+              points = {{-100,60},{-90,60},{-80,60}},
+              color = {0,0,127})}),
+          Documentation(info="<html>
+    For a simple example cf. the 
+    <a href=\"modelica://Modelica_Synchronous.Examples.Elementary.ClockSignals.RotationalSample\">rotational sampling example</a>.
+    </html>"));
       end RotationalClock;
 
       model FixedRotationalClock
         "Event clock generating a clock tick each time an observed input angle
    changed for a certain, constant rotational-interval."
-        extends ClockSignals.Interfaces.PartialClock;
+        extends PartialRotationalClock;
 
         parameter Modelica.SIunits.Angle trigger_interval = 2*Modelica.Constants.pi
           "Rotational-interval the input angle must be changed to trigger the next
      clock tick.";
 
-        Modelica.Blocks.Interfaces.RealInput angle(unit = "rad")
-          "Input angle observed for generating clock ticks."
-          annotation (Placement(transformation(extent = {{-140,-20},{-100,20}})));
         RotationalClock rotationalClock
           annotation (Placement(transformation(extent = {{-10,-10},{10,10}})));
         Modelica.Blocks.Sources.Constant threshold(k = trigger_interval)
@@ -334,6 +400,12 @@ For an example, see
         connect(rotationalClock.y, y)
           annotation (Line(
             points = {{11,0},{110,0}},
+            color = {175,175,175},
+            pattern = LinePattern.Dot,
+            thickness = 0.5));
+        connect(rotationalClock.direction_change, direction_change)
+          annotation (Line(
+            points = {{11,-6},{80,-6},{80,-60},{110,-60}},
             color = {175,175,175},
             pattern = LinePattern.Dot,
             thickness = 0.5));
