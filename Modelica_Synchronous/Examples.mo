@@ -2638,7 +2638,7 @@ Example used to generate a figure for the documentation of block
           amplitude = 10,
           freqHz = 1)
           annotation (Placement(transformation(extent = {{-70,-10},{-50,10}})));
-        Modelica.Blocks.Sources.Pulse direction_input(
+        Modelica.Blocks.Sources.Pulse trigger_interval_input(
           amplitude = 2,
           period = 1,
           offset = 1)
@@ -2675,7 +2675,7 @@ Example used to generate a figure for the documentation of block
           annotation (Line(
             points = {{-49,0},{-30,0},{-30,-40},{32.8,-40},{32.8,-41}},
             color = {0,0,127}));
-        connect(direction_input.y, rotationalClock.trigger_interval)
+        connect(trigger_interval_input.y, rotationalClock.trigger_interval)
           annotation (Line(
             points = {{-49,40},{-40,40},{-40,6},{-12,6}},
             color = {0,0,127}));
