@@ -2646,9 +2646,7 @@ Example used to generate a figure for the documentation of block
         Modelica_Synchronous.ClockSignals.Clocks.Rotational.RotationalClock rotationalClock
           annotation (Placement(transformation(extent = {{-10,-10},{10,10}})));
         Modelica_Synchronous.RealSignals.Sampler.SampleClocked sample_angle
-          annotation (Placement(transformation(extent = {{34,34},{46,46}})));
-        Modelica_Synchronous.RealSignals.Sampler.SampleClocked sample_direction
-          annotation (Placement(transformation(extent = {{34,-34},{46,-48}})));
+          annotation (Placement(transformation(extent = {{34,-14},{46,-26}})));
 
       equation
         connect(angle_input.y, rotationalClock.angle)
@@ -2657,23 +2655,13 @@ Example used to generate a figure for the documentation of block
             color = {0,0,127}));
         connect(rotationalClock.y, sample_angle.clock)
           annotation (Line(
-            points = {{11,0},{40,0},{40,32.8}},
+            points = {{11,0},{40,0},{40,-12.8}},
             color = {175,175,175},
             pattern = LinePattern.Dot,
             thickness = 0.5));
         connect(angle_input.y, sample_angle.u)
           annotation (Line(
-            points = {{-49,0},{-30,0},{-30,40},{32.8,40}},
-            color = {0,0,127}));
-        connect(rotationalClock.direction_change, sample_direction.clock)
-          annotation (Line(
-            points = {{11,-6},{40,-6},{40,-32.6}},
-            color = {175,175,175},
-            pattern = LinePattern.Dot,
-            thickness = 0.5));
-        connect(angle_input.y, sample_direction.u)
-          annotation (Line(
-            points = {{-49,0},{-30,0},{-30,-40},{32.8,-40},{32.8,-41}},
+            points = {{-49,0},{-30,0},{-30,-20},{32.8,-20}},
             color = {0,0,127}));
         connect(trigger_interval_input.y, rotationalClock.trigger_interval)
           annotation (Line(
@@ -2681,7 +2669,7 @@ Example used to generate a figure for the documentation of block
             color = {0,0,127}));
 
         annotation (
-          experiment(StopTime = 10),
+          experiment(StopTime = 2),
           Documentation(info="<html>
     Simple example of a rotational clock with variable trigger interval and
     switching rotation-direction. The input rotation is just sinodical,
@@ -2689,11 +2677,7 @@ Example used to generate a figure for the documentation of block
     the same pace; every half second it is doubled or halfed respectively. The
     generated clocked signals are therefore:
     <p>
-    <img src=\"modelica://Modelica_Synchronous/Resources/Images/Examples/RotationalSample_Result_clocks.png\">.
-    <p>
-    The resulting sampled angles are:
-    <p>
-    <img src=\"modelica://Modelica_Synchronous/Resources/Images/Examples/RotationalSample_Result_angles.png\">.
+    <img src=\"modelica://Modelica_Synchronous/Resources/Images/Examples/RotationalSample_Result.png\">.
     </html>"));
       end RotationalSample;
 
