@@ -1124,8 +1124,12 @@ contains utility blocks that are used as building blocks for user-relevant block
         annotation (Placement(transformation(extent={{100,-10},{120,10}})));
 
     equation
-      y = not
-             (u == previous(u));
+      if firstTick() then
+        y = false;
+      else
+        y = not
+               (u == previous(u));
+      end if;
 
       annotation (
         Icon(graphics={
@@ -1139,7 +1143,13 @@ contains utility blocks that are used as building blocks for user-relevant block
     It uses <code>previous</code> instead of the implicit <code>pre</code> of
     <code>change</code> to set the Boolean output <code>y</code> to
     <code>true</code> when the integer input <code>u</code> changed. Thus, it's
-    logic is <code>y = not(u == previous(u))</code>.
+    logic is:
+    <pre><code>
+    if firstTick() then
+      y = false;
+    else
+      y = not(u == previous(u));
+    end if;</code></pre>
     <p>
     <b>This block might be superfluous and replaced by
     </b><code>Modelica.Blocks.Math.IntegerChange</code><b> when the semantics
