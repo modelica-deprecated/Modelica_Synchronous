@@ -2632,6 +2632,8 @@ Example used to generate a figure for the documentation of block
       end ShiftSample;
 
       model RotationalSample
+        "Simple example of a rotational clock with variable trigger interval and
+   switching rotation-direction."
         extends Modelica.Icons.Example;
 
         Modelica.Blocks.Sources.Sine angle_input(

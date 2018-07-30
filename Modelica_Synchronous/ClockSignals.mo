@@ -271,7 +271,7 @@ For an example, see
           annotation (Placement(transformation(extent = {{-50,-70},{-30,-50}})));
         Modelica.Blocks.Math.RealToInteger cast
           annotation (Placement(transformation(extent = {{-10,-70},{10,-50}})));
-        Modelica.Blocks.Math.IntegerChange change
+        IntegerSignals.NonPeriodic.IntegerChange changed
           annotation (Placement(transformation(extent = {{60,-90},{80,-70}})));
         RealSignals.Sampler.SampleClocked update_direction
           annotation (Placement(transformation(extent = {{-76,-54},{-64,-66}})));
@@ -334,7 +334,7 @@ For an example, see
           annotation (Line(
             points = {{-29,-60},{-12,-60}},
             color = {0,0,127}));
-        connect(cast.y, change.u)
+        connect(cast.y, changed.u)
           annotation (Line(
             points = {{11,-60},{50,-60},{50,-80},{58,-80}},
             color = {255,127,0}));
@@ -352,7 +352,7 @@ For an example, see
           annotation (Line(
             points = {{11,30},{14,30},{14,-20},{-90,-20},{-90,-60},{-77.2,-60}},
             color = {0,0,127}));
-        connect(change.y, direction_changed)
+        connect(changed.y, direction_changed)
           annotation (Line(
             points = {{81,-80},{110,-80}},
             color = {255,0,255}));
