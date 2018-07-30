@@ -1139,7 +1139,7 @@ contains utility blocks that are used as building blocks for user-relevant block
 
   package NonPeriodic
     "Library of blocks that operate on periodically and non-periodically clocked signals"
-  extends Modelica.Icons.Package;
+    extends Modelica.Icons.Package;
 
     block UnitDelay "Delays the clocked input signal for one sample period"
       extends Modelica_Synchronous.BooleanSignals.Interfaces.PartialClockedSISO(
@@ -1250,7 +1250,6 @@ y is set to parameter y_start.
               fillColor={255,0,255},
               fillPattern=FillPattern.Solid)}));
     end FractionalDelay;
-
   end NonPeriodic;
 
   package TimeBasedSources

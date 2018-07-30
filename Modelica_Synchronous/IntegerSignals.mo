@@ -1111,7 +1111,52 @@ contains utility blocks that are used as building blocks for user-relevant block
 
   package NonPeriodic
     "Library of blocks that operate on periodically and non-periodically clocked signals"
-  extends Modelica.Icons.Package;
+    extends Modelica.Icons.Package;
+
+    block IntegerChange
+      extends Modelica_Synchronous.ClockSignals.Interfaces.ClockedBlockIcon;
+
+      Modelica.Blocks.Interfaces.IntegerInput u
+        "Connector of Integer input signal."
+        annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
+      Modelica.Blocks.Interfaces.BooleanOutput y
+        "Connector of Boolean output signal."
+        annotation (Placement(transformation(extent={{100,-10},{120,10}})));
+
+    equation
+      if firstTick() then
+        y = false;
+      else
+        y = not
+               (u == previous(u));
+      end if;
+
+      annotation (
+        Icon(graphics={
+          Text(
+            extent = {{-90,36},{90,-36}},
+            lineColor = {160,160,164},
+            textString = "change()")}),
+        Documentation(info="<html>
+    This block is a synchronous version of
+    <a href=\"Modelica.Blocks.Math.IntegerChange\">Modelica.Blocks.Math.IntegerChange</a>.
+    It uses <code>previous</code> instead of the implicit <code>pre</code> of
+    <code>change</code> to set the Boolean output <code>y</code> to
+    <code>true</code> when the integer input <code>u</code> changed. Thus, it's
+    logic is:
+    <pre><code>
+    if firstTick() then
+      y = false;
+    else
+      y = not(u == previous(u));
+    end if;</code></pre>
+    <p>
+    <b>This block might be superfluous and replaced by
+    </b><code>Modelica.Blocks.Math.IntegerChange</code><b> when the semantics
+    of </b><code>change</code><b> are relaxed and well-defined for
+    clocked discrete-time partitions.</b>
+    </html>"));
+    end IntegerChange;
 
     block UnitDelay "Delays the clocked input signal for one sample period"
       extends Modelica_Synchronous.IntegerSignals.Interfaces.PartialClockedSISO(
@@ -1220,7 +1265,6 @@ y is set to parameter y_start.
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid)}));
     end FractionalDelay;
-
   end NonPeriodic;
 
   package TimeBasedSources

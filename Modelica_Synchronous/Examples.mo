@@ -1,4 +1,4 @@
-within Modelica_Synchronous;
+﻿within Modelica_Synchronous;
 package Examples
   "Library of examples to demonstrate the usage of package Modelica_Synchronous"
   extends Modelica.Icons.ExamplesPackage;
@@ -814,7 +814,7 @@ Original cascade controlled drive with a
                                              subSample1(factor=5)
         annotation (Placement(transformation(extent={{16,-76},{4,-64}})));
       Modelica_Synchronous.ClockSignals.Clocks.PeriodicRealClock
-                               periodicRealClock(period=0.02)
+                               periodicRealClock(period=0.002)
         annotation (Placement(transformation(extent={{78,-76},{66,-64}})));
     equation
       connect(speed.flange, load.flange_b)       annotation (Line(
@@ -972,7 +972,7 @@ clock inference.
         inferFactor=false)
         annotation (Placement(transformation(extent={{-28,4},{-16,16}})));
       Modelica_Synchronous.ClockSignals.Clocks.PeriodicRealClock
-                               periodicRealClock(period=0.02)
+                               periodicRealClock(period=0.002)
         annotation (Placement(transformation(extent={{76,-72},{64,-60}})));
     equation
       connect(speed.flange, load.flange_b)       annotation (Line(
@@ -1118,11 +1118,11 @@ defined by the super-sampling factor defined at the \"super\" block.
           true)
         annotation (Placement(transformation(extent={{-28,4},{-16,16}})));
       Modelica_Synchronous.ClockSignals.Clocks.PeriodicExactClock
-                                slowClock(factor=100, resolution=
+                                slowClock(factor=10, resolution=
             Modelica_Synchronous.Types.Resolution.ms) annotation (Placement(
             transformation(extent={{-128,-74},{-116,-62}})));
       Modelica_Synchronous.ClockSignals.Clocks.PeriodicExactClock
-                                fastClock(factor=20, resolution=
+                                fastClock(factor=2, resolution=
             Modelica_Synchronous.Types.Resolution.ms)
         annotation (Placement(transformation(extent={{22,-76},{34,-64}})));
     equation
@@ -1545,81 +1545,94 @@ Obviously, the concentration follows reasonably well the desired one. By using a
       startTime=5,
       offset=207.34,
       height=103.67)
-        annotation (Placement(transformation(extent={{-90,-4},{-70,16}})));
+        annotation (Placement(transformation(extent={{-90,6},{-70,26}})));
       Modelica_Synchronous.Examples.Systems.Utilities.ComponentsThrottleControl.SpeedControl
         speedControl
-        annotation (Placement(transformation(extent={{-32,-15},{0,15}})));
+        annotation (Placement(transformation(extent={{-32,-5},{0,25}})));
       Modelica_Synchronous.RealSignals.Sampler.Sample
                      sample1
-        annotation (Placement(transformation(extent={{-60,-1},{-46,13}})));
+        annotation (Placement(transformation(extent={{-60,9},{-46,23}})));
       Modelica_Synchronous.RealSignals.Sampler.Hold
                    hold1(y_start=8.9)
-        annotation (Placement(transformation(extent={{8,-6},{20,6}})));
-      Modelica_Synchronous.Examples.Systems.Utilities.ComponentsThrottleControl.CrankshaftPositionEvent
-        triggeredSpeed
-        annotation (Placement(transformation(extent={{18,-60},{-2,-40}})));
+        annotation (Placement(transformation(extent={{8,4},{20,16}})));
+      Modelica_Synchronous.ClockSignals.Clocks.Rotational.FixedRotationalClock
+        rotationalClock(trigger_interval(displayUnit="deg") = 3.1415926535898)
+        annotation (Placement(transformation(extent={{20,-50},{0,-30}})));
       Modelica_Synchronous.Examples.Systems.Utilities.ComponentsThrottleControl.Engine2
-        engine
-        annotation (Placement(transformation(extent={{30,-14},{58,14}})));
+        engine(
+          crankshaftPositionEvent(
+            trigger_interval = rotationalClock.trigger_interval))
+        annotation (Placement(transformation(extent={{30,-4},{58,24}})));
       Modelica.Blocks.Sources.Step step(
         height=-5,
         offset=25,
         startTime=2)
-        annotation (Placement(transformation(extent={{148,7},{134,21}})));
+        annotation (Placement(transformation(extent={{148,17},{134,31}})));
       Modelica.Blocks.Sources.Step step1(
         height=5,
         offset=0,
         startTime=8)
-        annotation (Placement(transformation(extent={{148,-20},{134,-6}})));
+        annotation (Placement(transformation(extent={{148,-10},{134,4}})));
       Modelica.Blocks.Math.Add add(k1=-1, k2=-1)
-        annotation (Placement(transformation(extent={{122,-6},{110,6}})));
+        annotation (Placement(transformation(extent={{122,4},{110,16}})));
       Modelica.Mechanics.Rotational.Sources.Torque torque2(
                                         useSupport=false)
-                                annotation (Placement(transformation(extent={{90,-10},
-                {70,10}})));
+                                annotation (Placement(transformation(extent={{90,0},{
+                70,20}})));
       Modelica.Mechanics.Rotational.Sensors.AngleSensor angleSensor
         annotation (Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=-90,
-            origin={64,-32})));
+            origin={64,-22})));
+      Modelica.Blocks.Continuous.Der derivative
+        annotation (Placement(transformation(extent={{20,-90},{0,-70}})));
+      RealSignals.Sampler.SampleClocked sample2
+        annotation (Placement(transformation(extent={{-24,-74},{-36,-86}})));
     equation
     connect(speedRef.y, sample1.u)             annotation (Line(
-          points={{-69,6},{-61.4,6}},
+          points={{-69,16},{-61.4,16}},
           color={0,0,127}));
       connect(sample1.y, speedControl.N_des) annotation (Line(
-          points={{-45.3,6},{-35.2,6}},
+          points={{-45.3,16},{-35.2,16}},
           color={0,0,127}));
       connect(speedControl.Theta, hold1.u) annotation (Line(
-          points={{1.6,0},{6.8,0}},
+          points={{1.6,10},{6.8,10}},
           color={0,0,127}));
       connect(hold1.y, engine.Theta)    annotation (Line(
-          points={{20.6,0},{28,0},{28,1.77636e-015},{27.2,1.77636e-015}},
+          points={{20.6,10},{27.2,10}},
           color={0,0,127}));
       connect(torque2.flange, engine.flange_b)    annotation (Line(
-          points={{70,0},{65.28,0},{65.28,1.77636e-015},{58.56,1.77636e-015}}));
+          points={{70,10},{58.56,10}}));
 
       connect(add.y, torque2.tau) annotation (Line(
-          points={{109.4,0},{92,0}},
+          points={{109.4,10},{92,10}},
           color={0,0,127}));
       connect(step1.y, add.u2) annotation (Line(
-          points={{133.3,-13},{128,-13},{128,-3.6},{123.2,-3.6}},
+          points={{133.3,-3},{128,-3},{128,6.4},{123.2,6.4}},
           color={0,0,127}));
       connect(step.y, add.u1) annotation (Line(
-          points={{133.3,14},{128,14},{128,3.6},{123.2,3.6}},
-          color={0,0,127}));
-      connect(triggeredSpeed.N_clocked, speedControl.N) annotation (Line(
-          points={{-3,-50},{-60,-50},{-60,-9},{-35.2,-9}},
+          points={{133.3,24},{128,24},{128,13.6},{123.2,13.6}},
           color={0,0,127}));
       connect(engine.flange_b, angleSensor.flange) annotation (Line(
-          points={{58.56,1.77636e-015},{64,1.77636e-015},{64,-22}}));
-      connect(angleSensor.phi, triggeredSpeed.angle) annotation (Line(
-          points={{64,-43},{64,-50},{20,-50}},
-          color={0,0,127}));
+          points={{58.56,10},{64,10},{64,-12}}));
+      connect(angleSensor.phi, derivative.u) annotation (Line(points={{64,-33},
+              {64,-80},{22,-80}}, color={0,0,127}));
+      connect(derivative.y, sample2.u)
+        annotation (Line(points={{-1,-80},{-22.8,-80}}, color={0,0,127}));
+      connect(sample2.y, speedControl.N) annotation (Line(points={{-36.6,-80},{
+              -50,-80},{-50,1},{-35.2,1}},   color={0,0,127}));
+      connect(rotationalClock.y, sample2.clock) annotation (Line(
+          points={{-1,-40},{-30,-40},{-30,-72.8}},
+          color={175,175,175},
+          pattern=LinePattern.Dot,
+          thickness=0.5));
+      connect(angleSensor.phi, rotationalClock.angle)
+        annotation (Line(points={{64,-33},{64,-40},{22,-40}}, color={0,0,127}));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,
                 -100},{160,100}}),
-                          graphics={Rectangle(extent={{104,26},{154,-32}},
+                          graphics={Rectangle(extent={{104,36},{154,-22}},
                 lineColor={0,0,255}), Text(
-              extent={{110,-26},{152,-30}},
+              extent={{110,-16},{152,-20}},
               lineColor={0,0,255},
               textString="Load torque")}),
                                      Icon(coordinateSystem(preserveAspectRatio=true,
@@ -1628,51 +1641,41 @@ Obviously, the concentration follows reasonably well the desired one. By using a
       Documentation(info="<html>
 <p>
 This example shows how to model a non-periodic synchronous sampled data systems
-with the Modelica_Synchronous library.
-This is demonstrated at hand of a closed-loop throttle control synchronized
-to the crankshaft angle of an internal combustion engine.
-This system has the following properties:
-</p>
-
+with the <code>Modelica_Synchronous library</code>. This is demonstrated at hand
+of a closed-loop throttle control synchronized to the crankshaft angle of an
+internal combustion engine. This system has the following properties:
 <ul>
 <li> Engine speed is regulated with a throttle actuator.</li>
 <li> Controller execution is synchronized with the engine crankshaft angle.</li>
 <li> The influence of disturbances, such as a change in load torque, is reduced.</li>
 </ul>
-
 <p>
-The complete system is shown in the diagram layer and in the figure below:
+The complete system is shown in figure below (diagram-layer):
 </p>
-
-<p>
 <img src=\"modelica://Modelica_Synchronous/Resources/Images/Examples/EngineThrottleControl_Model.png\">
-</p>
-
 <p>
-Block speedControl is the discrete control system. The boundaries of this controller
-are defined by sample1 and hold1. A special element triggeredSpeed
-has the crankshaft angle as input and provides the sampled crankshaft
-speed as output. Additionally, the clock associated with the output
-(and therefore also to component speedControl) ticks, at every 180 degree
-rotation of the crankshaft angle. This special application is implemented
-in the text layer of component
-<a href=\"modelica://Modelica_Synchronous.Examples.Systems.Utilities.ComponentsThrottleControl.CrankshaftPositionEvent\">triggeredSpeed</a> as:
-</p>
-
-<pre>
- N = der(angle);
- when Clock(angle >= hold(offset)+Modelica.Constants.pi) then
-      offset = sample(angle);
-     N_clocked = sample(N);
- end when;
-</pre>
-
+Block <code>speedControl</code> is the discrete control system. The boundaries
+of this controller are defined by <code>sample1</code>, <code>sample2</code> and
+<code>hold1</code>. The sampling is done via <code>rotationalClock</code>, an
+event-based clock that ticks every 180° rotation of the crankshaft angle. The
+speed controller therefore is automatically executed every half-rotation of the
+engine's crankshaft. To produce respective clock ticks,
+<a href=\"modelica://Modelica_Synchronous.ClockSignals.Clocks.Rotational.RotationalClock\">rotationalClock</a>
+bookeeps the angular of the last time a half-rotation of
+the crankshaft has been recognized (<code>angular_offset</code>). Given
+<code>angular_offset</code>, the event-condition for half-rotations is:
 <p>
-Here, N is the derivative of the crankshaft angle. Whenever this angle becomes
-larger as 180 degree an event clock is activated due to Clock(..).
-In such a case the when-clause becomes active, and the speed N is sampled,
-and the new offset for the next event is computed.
+<code>abs(angle - angular_offset) >= abs(trigger_interval)</code>
+<p>
+with <code>trigger_interval = 180°</code>. The model of
+<code>rotationalClock</code> therefore is (diagram-layer):
 </p>
+<img src=\"modelica://Modelica_Synchronous/Resources/Images/Examples/RotationalClock_Model.png\">
+<p>
+In the end, <code>rotationalClock</code> samples it's own input angle to bookeep
+an offset used to decide when to tick; the clock's event condition depends on
+the state present when the condition changed last time from beeing non-satisfied
+to beeing satisfied, i.e., the state when the clock last ticked.
 </html>"));
     end EngineThrottleControl;
 
@@ -1982,33 +1985,6 @@ initial equation
                   fillPattern=FillPattern.Solid)}));
         end SpeedControl;
 
-        block CrankshaftPositionEvent
-          "Every 180deg crankshaft rotation an event is generated"
-          extends Modelica.Blocks.Interfaces.BlockIcon;
-          Modelica.Blocks.Interfaces.RealInput angle(unit="rad") "Engine angle"
-              annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
-          Modelica_Synchronous.ClockSignals.Interfaces.ClockOutput
-                                 edge180Clock
-            annotation (Placement(transformation(extent={{100,50},{120,70}})));
-        protected
-          Modelica.SIunits.AngularVelocity N;
-          Real offset(start=0, fixed=true);
-          Real hold_offset = hold(offset);
-          Boolean edge180Event;
-        public
-          Modelica.Blocks.Interfaces.RealOutput N_clocked
-            annotation (Placement(transformation(extent={{100,-10},{120,10}})));
-        equation
-          N = der(angle);
-          edge180Event = angle >= hold_offset+Modelica.Constants.pi;
-          edge180Clock = Clock(edge180Event);
-          when edge180Clock then
-             offset = sample(angle);
-             N_clocked = sample(N);
-          end when;
-          annotation (Diagram(graphics));
-        end CrankshaftPositionEvent;
-
         block CylinderAirCharge
           "Integrates the air mass flow into a cylinder. After the charge for one cylinder is complete, resets the mass to 0"
         extends Modelica.Blocks.Interfaces.BlockIcon;
@@ -2080,7 +2056,7 @@ initial equation
           Modelica_Synchronous.Examples.Systems.Utilities.ComponentsThrottleControl.TorqueGeneration
             torqueGeneration
             annotation (Placement(transformation(extent={{18,28},{38,48}})));
-          Modelica_Synchronous.Examples.Systems.Utilities.ComponentsThrottleControl.CrankshaftPositionEvent
+          Modelica_Synchronous.ClockSignals.Clocks.Rotational.FixedRotationalClock
             crankshaftPositionEvent
             annotation (Placement(transformation(extent={{70,-74},{50,-54}})));
           Modelica_Synchronous.Examples.Systems.Utilities.ComponentsThrottleControl.InductionToPowerDelay
@@ -2131,14 +2107,12 @@ initial equation
               Line(
               points={{-57,-4},{-56,-4},{-56,-10},{-52,-10}},
               color={0,0,127}));
-          connect(cylinderAirCharge.clock, crankshaftPositionEvent.edge180Clock)
-            annotation (Line(
-              points={{-40,-22},{-40,-58},{49,-58}},
-              color={128,0,255}));
-          connect(inductionToPowerDelay.clock, crankshaftPositionEvent.edge180Clock)
-            annotation (Line(
-              points={{-12,-22},{-12,-58},{49,-58}},
-              color={128,0,255}));
+          connect(cylinderAirCharge.clock, crankshaftPositionEvent.y)
+            annotation (Line(points={{-40,-22},{-40,-64},{49,-64}}, color={128,
+                  0,255}));
+          connect(inductionToPowerDelay.clock, crankshaftPositionEvent.y)
+            annotation (Line(points={{-12,-22},{-12,-64},{49,-64}}, color={128,
+                  0,255}));
           connect(torque.tau, torqueGeneration.T_torque_e) annotation (Line(
               points={{38.4,0},{32,0},{32,20},{48,20},{48,38},{39,38}},
               color={0,0,127}));
@@ -2656,6 +2630,59 @@ Example used to generate a figure for the documentation of block
 </p>
 </html>"));
       end ShiftSample;
+
+      model RotationalSample
+        "Simple example of a rotational clock with variable trigger interval and
+   switching rotation-direction."
+        extends Modelica.Icons.Example;
+
+        Modelica.Blocks.Sources.Sine angle_input(
+          amplitude = 10,
+          freqHz = 1)
+          annotation (Placement(transformation(extent = {{-70,-10},{-50,10}})));
+        Modelica.Blocks.Sources.Pulse trigger_interval_input(
+          amplitude = 2,
+          period = 1,
+          offset = 1)
+          annotation (Placement(transformation(extent = {{-70,30},{-50,50}})));
+        Modelica_Synchronous.ClockSignals.Clocks.Rotational.RotationalClock rotationalClock
+          annotation (Placement(transformation(extent = {{-10,-10},{10,10}})));
+        Modelica_Synchronous.RealSignals.Sampler.SampleClocked sample_angle
+          annotation (Placement(transformation(extent = {{34,-14},{46,-26}})));
+
+      equation
+        connect(angle_input.y, rotationalClock.angle)
+          annotation (Line(
+            points = {{-49,0},{-12,0}},
+            color = {0,0,127}));
+        connect(rotationalClock.y, sample_angle.clock)
+          annotation (Line(
+            points = {{11,0},{40,0},{40,-12.8}},
+            color = {175,175,175},
+            pattern = LinePattern.Dot,
+            thickness = 0.5));
+        connect(angle_input.y, sample_angle.u)
+          annotation (Line(
+            points = {{-49,0},{-30,0},{-30,-20},{32.8,-20}},
+            color = {0,0,127}));
+        connect(trigger_interval_input.y, rotationalClock.trigger_interval)
+          annotation (Line(
+            points = {{-49,40},{-40,40},{-40,6},{-12,6}},
+            color = {0,0,127}));
+
+        annotation (
+          experiment(StopTime = 2),
+          Documentation(info="<html>
+    Simple example of a rotational clock with variable trigger interval and
+    switching rotation-direction. The input rotation is just sinodical,
+    switching direction every half second. The trigger interval is changed with
+    the same pace; every half second it is doubled or halfed respectively. The
+    generated clocked signals are therefore:
+    <p>
+    <img src=\"modelica://Modelica_Synchronous/Resources/Images/Examples/RotationalSample_Result.png\">.
+    </html>"));
+      end RotationalSample;
+
     annotation (Documentation(info="<html>
 <p>
 This package contains models that have been used to produce
