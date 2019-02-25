@@ -1,4 +1,4 @@
-within Modelica_Synchronous;
+﻿within Modelica_Synchronous;
 package ClockSignals "Library of blocks for clocked signals"
   extends Modelica.Icons.Package;
 
@@ -418,6 +418,155 @@ For an example, see
       end FixedRotationalClock;
     end Rotational;
 
+    package Logical
+      block ConjunctiveClock
+        //extends Interfaces.ClockedBlockIcon;
+        extends Interfaces.PartialClock;
+
+        parameter Integer nu = 2;
+
+        Interfaces.ClockInput[nu] u
+          annotation (Placement(transformation(extent = {{-140,-20},{-100,20}})));
+
+        EventClock clock
+          annotation (Placement(transformation(extent={{60,-10},{80,10}})));
+
+        replaceable Modelica.Blocks.MathBoolean.And combinator
+          constrainedby Modelica.Blocks.Interfaces.PartialBooleanMISO(
+            nu = nu)
+          annotation (Placement(transformation(extent={{20,-10},{40,10}})));
+
+        BooleanSignals.Sampler.SampleClocked[nu] input_sample annotation (
+            Placement(transformation(
+              extent={{-6,-6},{6,6}},
+              rotation=-90,
+              origin={-80,74})));
+        BooleanSignals.Sampler.Hold[nu] input_hold(each y_start=false)
+          annotation (Placement(transformation(extent={{-16,54},{-4,66}})));
+        Modelica.Blocks.MathBoolean.Not[nu] input_tick
+          annotation (Placement(transformation(extent={{-46,54},{-34,66}})));
+        Modelica.Blocks.Routing.BooleanReplicator splitter(nout=nu) annotation (
+            Placement(transformation(
+              extent={{6,6},{-6,-6}},
+              rotation=-90,
+              origin={-70,-30})));
+        Modelica.Blocks.MathBoolean.Not reset_tick
+          annotation (Placement(transformation(extent={{46,-66},{34,-54}})));
+        BooleanSignals.Sampler.Hold reset_hold(each y_start=false)
+          annotation (Placement(transformation(extent={{16,-66},{4,-54}})));
+        BooleanSignals.Sampler.SampleClocked reset_sample
+          annotation (Placement(transformation(extent={{6,-6},{-6,6}},
+              rotation=90,
+              origin={80,-50})));
+        Modelica.Blocks.Logical.And[nu] forbidden_state annotation (Placement(
+              transformation(
+              extent={{-6,6},{6,-6}},
+              rotation=90,
+              origin={-70,10})));
+
+        Modelica.Blocks.MathBoolean.ChangingEdge[nu] input_ticked
+          annotation (Placement(transformation(extent={{24,54},{36,66}})));
+        Modelica.Blocks.MathBoolean.ChangingEdge reset_ticked
+          annotation (Placement(transformation(extent={{-34,-66},{-46,-54}})));
+        Modelica.Blocks.Logical.RSFlipFlop[nu] input_memory
+          annotation (Placement(transformation(extent={{-20,-10},{0,10}})));
+        Modelica.Blocks.Logical.LogicalSwitch[nu] suppress_S
+          annotation (Placement(transformation(extent={{-46,14},{-34,26}})));
+        Modelica.Blocks.Sources.BooleanConstant[nu] S_false(each k=false)
+          annotation (Placement(transformation(extent={{-34,32},{-46,44}})));
+      equation
+        for i in 1:nu loop
+          //combinator.u[i] = true;
+        end for;
+
+        connect(u, input_sample.clock) annotation (Line(
+            points={{-120,0},{-90,0},{-90,74},{-87.2,74}},
+            color={175,175,175},
+            pattern=LinePattern.Dot,
+            thickness=0.5));
+
+        connect(input_sample.y, input_tick.u) annotation (Line(points={{-80,
+                67.4},{-80,60},{-48.4,60}}, color={255,0,255}));
+        connect(input_tick.y, input_hold.u)
+          annotation (Line(points={{-32.8,60},{-17.2,60}}, color={255,0,255}));
+
+        connect(input_hold.y, input_sample.u) annotation (Line(points={{-3.4,60},
+                {10,60},{10,90},{-80,90},{-80,81.2}}, color={255,0,255}));
+        connect(clock.y, y) annotation (Line(
+            points={{81,0},{110,0}},
+            color={175,175,175},
+            pattern=LinePattern.Dot,
+            thickness=0.5));
+        connect(combinator.y, clock.u) annotation (Line(points={{41.5,0},{58,0}},
+                         color={255,0,255}));
+        connect(reset_sample.y, reset_tick.u) annotation (Line(points={{80,
+                -56.6},{80,-60},{48.4,-60}}, color={255,0,255}));
+        connect(reset_tick.y, reset_hold.u)
+          annotation (Line(points={{32.8,-60},{17.2,-60}}, color={255,0,255}));
+        connect(reset_hold.y, reset_sample.u) annotation (Line(points={{3.4,-60},
+                {-10,-60},{-10,-32},{80,-32},{80,-42.8}},     color={255,0,255}));
+        connect(clock.y, reset_sample.clock) annotation (Line(
+            points={{81,0},{90,0},{90,-50},{87.2,-50}},
+            color={175,175,175},
+            pattern=LinePattern.Dot,
+            thickness=0.5));
+        connect(input_hold.y, input_ticked.u)
+          annotation (Line(points={{-3.4,60},{21.6,60}}, color={255,0,255}));
+        connect(reset_hold.y, reset_ticked.u)
+          annotation (Line(points={{3.4,-60},{-31.6,-60}},  color={255,0,255}));
+        connect(reset_ticked.y, splitter.u) annotation (Line(points={{-47.2,-60},{-70,
+                -60},{-70,-37.2}}, color={255,0,255}));
+        connect(suppress_S.y, input_memory.S) annotation (Line(points={{-33.4,
+                20},{-28,20},{-28,6},{-22,6}}, color={255,0,255}));
+        connect(input_memory.Q, combinator.u) annotation (Line(points={{1,6},{
+                10,6},{10,0},{20,0}}, color={255,0,255}));
+        connect(S_false.y, suppress_S.u1) annotation (Line(points={{-46.6,38},{
+                -52,38},{-52,24.8},{-47.2,24.8}}, color={255,0,255}));
+        connect(splitter.y, input_memory.R) annotation (Line(points={{-70,-23.4},
+                {-70,-6},{-22,-6}}, color={255,0,255}));
+        connect(splitter.y, forbidden_state.u1)
+          annotation (Line(points={{-70,-23.4},{-70,2.8}}, color={255,0,255}));
+        connect(input_ticked.y, forbidden_state.u2) annotation (Line(points={{
+                37.2,60},{50,60},{50,50},{-80,50},{-80,-6},{-74.8,-6},{-74.8,
+                2.8}}, color={255,0,255}));
+        connect(forbidden_state.y, suppress_S.u2) annotation (Line(points={{-70,
+                16.6},{-70,20},{-47.2,20}}, color={255,0,255}));
+        connect(input_ticked.y, suppress_S.u3) annotation (Line(points={{37.2,
+                60},{50,60},{50,50},{-56,50},{-56,15.2},{-47.2,15.2}}, color={
+                255,0,255}));
+        annotation (Icon(graphics={Text(
+                extent={{-60,60},{60,-60}},
+                lineColor={217,67,180},
+                textStyle={TextStyle.Bold},
+                textString="∧")}), Diagram(graphics={
+              Polygon(
+                points={{-94,94},{60,94},{60,30},{6,30},{6,-20},{-94,-20},{-94,
+                    94}},
+                lineColor={238,46,47},
+                pattern=LinePattern.Dash,
+                lineThickness=0.5),
+              Text(
+                extent={{20,94},{60,80}},
+                lineColor={238,46,47},
+                pattern=LinePattern.Dash,
+                lineThickness=1,
+                textString="array of
+input trackers",
+                textStyle={TextStyle.Bold}),
+              Rectangle(
+                extent={{-56,-26},{96,-72}},
+                lineColor={28,108,200},
+                pattern=LinePattern.Dash,
+                lineThickness=0.5),
+              Text(
+                extent={{-56,-26},{-20,-40}},
+                lineColor={28,108,200},
+                pattern=LinePattern.Dash,
+                lineThickness=1,
+                textString="resetter",
+                textStyle={TextStyle.Bold})}));
+      end ConjunctiveClock;
+    end Logical;
   annotation (Documentation(info="<html>
 <p>
 This package contains blocks that generate clock signals. For an introduction
@@ -894,7 +1043,6 @@ Connector with one output signal of type Boolean.
 </html>"));
     partial block PartialClock
       "Icon, connector, and solver method of a block that generates a clock"
-
       parameter Boolean useSolver = false
         "= true, if solverMethod shall be explicitly defined"
         annotation(Evaluate=true, Dialog(tab="Advanced"), choices(checkBox=true));
@@ -976,7 +1124,6 @@ Connector with one output signal of type Boolean.
 
     partial block ClockedBlockIcon
       "Basic graphical layout of block where at least one input or output is a clocked variable"
-
       annotation (
         Icon(graphics={
               Rectangle(

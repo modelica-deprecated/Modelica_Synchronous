@@ -455,7 +455,6 @@ Analog to the corresponding Real signal block example there exists an elementary
 
     block ShiftSample
       "Shift the clocked Boolean input signal by a fraction of the last interval and and provide it as clocked output signal"
-
       parameter Integer shiftCounter(min=0)=0 "Numerator of shifting formula"
             annotation(Evaluate=true, Dialog(group="Shift first clock activation for 'shiftCounter/resolution*interval(u)' seconds"));
       parameter Integer resolution(min=1)=1
@@ -630,7 +629,6 @@ Analog to the corresponding Real signal block example there exists an elementary
     end BackSample;
 
     block AssignClock "Assigns a clock to a clocked Boolean signal"
-
       Modelica.Blocks.Interfaces.BooleanInput
                                            u
         "Connector of clocked, Boolean input signal"
@@ -720,7 +718,6 @@ Analog to the corresponding Real signal block example there exists an elementary
 
     block AssignClockVectorized
       "Assigns a clock to a clocked Boolean signal vector"
-
       parameter Integer n(min=1)=1
         "Size of input signal vector u (= size of output signal vector y)";
       Modelica.Blocks.Interfaces.BooleanInput
@@ -814,7 +811,6 @@ Analog to the corresponding Real signal block example there exists an elementary
 
       block UpSample
         "Upsample the clocked Boolean input signal and provide it as clocked output signal"
-
         parameter Boolean inferFactor=true
           "= true, if upsampling factor is inferred"  annotation(Evaluate=true, choices(checkBox=true));
         parameter Integer factor(min=1)=1
@@ -1140,6 +1136,51 @@ contains utility blocks that are used as building blocks for user-relevant block
   package NonPeriodic
     "Library of blocks that operate on periodically and non-periodically clocked signals"
     extends Modelica.Icons.Package;
+
+    block BooleanChange
+      extends Modelica_Synchronous.ClockSignals.Interfaces.ClockedBlockIcon;
+
+      Modelica.Blocks.Interfaces.BooleanInput u
+        "Connector of Boolean input signal."
+        annotation (Placement(transformation(extent = {{-140,-20},{-100,20}})));
+      Modelica.Blocks.Interfaces.BooleanOutput y
+        "Connector of Boolean output signal."
+        annotation (Placement(transformation(extent = {{100,-10},{120,10}})));
+
+    equation
+      if firstTick() then
+        y = false;
+      else
+        y = not
+               (u == previous(u));
+      end if;
+
+      annotation (
+        Icon(graphics={
+          Text(
+            extent = {{-90,36},{90,-36}},
+            lineColor = {160,160,164},
+            textString = "change()")}),
+        Documentation(info="<html>
+    This block is a synchronous version of
+    <a href=\"Modelica.Blocks.Math.BooleanChange\">Modelica.Blocks.Math.BooleanChange</a>.
+    It uses <code>previous</code> instead of the implicit <code>pre</code> of
+    <code>change</code> to set the Boolean output <code>y</code> to
+    <code>true</code> when the boolean input <code>u</code> changed. Thus, it's
+    logic is:
+    <pre><code>
+    if firstTick() then
+      y = false;
+    else
+      y = not(u == previous(u));
+    end if;</code></pre>
+    <p>
+    <b>This block might be superfluous and replaced by
+    </b><code>Modelica.Blocks.Math.BooleanChange</code><b> when the semantics
+    of </b><code>change</code><b> are relaxed and well-defined for
+    clocked discrete-time partitions.</b>
+    </html>"));
+    end BooleanChange;
 
     block UnitDelay "Delays the clocked input signal for one sample period"
       extends Modelica_Synchronous.BooleanSignals.Interfaces.PartialClockedSISO(
@@ -1915,7 +1956,6 @@ See model <a href=\"Modelica_Synchronous.Examples.Elementary.BooleanSignals.Tick
 
     partial block SamplerIcon
       "Basic graphical layout of block used for sampling of Boolean signals"
-
       annotation (
         Icon(
           coordinateSystem(
