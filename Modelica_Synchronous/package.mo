@@ -6,7 +6,7 @@ extends Modelica.Icons.Package;
   annotation (preferredView="info",
   uses(Modelica(version="3.2.3"), ModelicaServices(version="3.2.3")),
     version="0.92.2",
-    versionBuild=0,
+    versionBuild=1,
     versionDate="2019-03-20",
     dateModified = "2019-03-20 12:00:00Z",
     revisionId="$Id::                                       $",
