@@ -18,7 +18,7 @@ It is planned to include this library in a future version of the Modelica Standa
 
 ## Current release
 
-Coming release: [Modelica_Synchronous v0.92.2 (2019-03-20?)](../../releases/tag/v0.92.2)
+Coming release: Modelica_Synchronous v0.92.2 (2019-03-20?)
 
 [Modelica_Synchronous v0.92.1 (2016-03-11)](../../releases/tag/v0.92.1)
 
