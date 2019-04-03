@@ -1,15 +1,14 @@
 within ;
-package Modelica_Synchronous "Modelica_Synchronous (version 0.92.1) - Basic synchronous input/output control blocks
+package Modelica_Synchronous "Modelica_Synchronous - Development version for later inclusion into MSL 4.0.0  - Basic synchronous input/output control blocks
 that are triggered by clocks"
 extends Modelica.Icons.Package;
 
   annotation (preferredView="info",
-  uses(Modelica(version="3.2.2"), ModelicaServices(version="3.2.2")),
-    version="0.92.1",
-    versionBuild=0,
-    versionDate="2016-03-11",
-    dateModified = "2016-03-03 18:16:00Z",
-    revisionId="$Id::                                       $",
+  uses(Modelica(version="4.0.0-dev"), ModelicaServices(version="4.0.0-dev")),
+    version="4.0.0-dev",
+    versionBuild=1,
+    versionDate="2019-04-03",
+    dateModified = "2019-04-03 17:30:00Z",
   Documentation(info="<html>
 <p>
 Library <b>Modelica_Synchronous</b> is a Modelica package
