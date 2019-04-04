@@ -48,29 +48,34 @@ For an introduction, have especially a look at:
 <li> <a href=\"modelica://Modelica_Synchronous.UsersGuide.Contact\">Contact</a>
      gives author and acknowledgement information for this library.</li>
 </ul>
-
 <p>
-<table border=\"0\" cellpadding=\"2\" cellspacing=\"2\">
-<tr><td colspan=\"1\" rowspan=\"2\" style=\"vertical-align: middle;\">
-    <img src=\"modelica://Modelica_Synchronous/Resources/Images/dlr_logo.png\">
-    </td>
-    <td style=\"vertical-align: top;\"><br><b>Licensed by the Modelica Association under the Modelica License 2</b></td>
-</tr>
-<tr><td style=\"vertical-align: top;\"><b>Copyright &copy; 2012-2016, DLR Institute of System Dynamics and Control</b></td>
-</tr>
+<i>Copyright &copy; 2012-2019, Modelica Association and contributors.</i>
+</p>
+<p>
+</html>",
+revisions=
+"<html>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><th>Date</th> <th align=\"left\">Description</th></tr>
+
+<tr><td> Aug. 28, 2012 </td>
+    <td>
+    <table border=0>
+    <tr><td>
+         <img src=\"modelica://Modelica_Synchronous/Resources/Images/dlr_logo.png\">
+    </td><td valign=\"bottom\">
+    Initial version implemented by M. Otter and B. Thiele released as <i>Modelica_Synchronous</i> (version 0.9) library.<br>
+         <a href=\"http://www.dlr.de/rmc/sr/en\">DLR Institute of System Dynamics and Control</a>
+    </td></tr>
+    </table>
+</td></tr>
+    
+<tr><td></td><td>Several releases as <i>Modelica_Synchronous</i> library.</td></tr>
+    
+<tr><td> 2019 </td><td>The <i>Modelica_Synchronous</i> library is included as Modelica.??? in the Modelica Standard Library 4.0.0.</td></tr>
+
+<tr><td></td><td>see <a href=\"modelica://Modelica_Synchronous.UsersGuide.ReleaseNotes\">Release Notes</a>.</td></tr>
+
 </table>
-</p>
-
-<p>
-<i>This Modelica package is <u>free</u> software and
-the use is completely at <u>your own risk</u>;
-it can be redistributed and/or modified under the terms of the
-Modelica license 2, see the license conditions (including the
-disclaimer of warranty)
-<a href=\"modelica://Modelica_Synchronous.UsersGuide.ModelicaLicense2\">here</a></u>
-or at
-<a href=\"http://www.Modelica.org/licenses/ModelicaLicense2\">
-http://www.Modelica.org/licenses/ModelicaLicense2</a>.</i>
-</p>
-</html>", revisions=""));
+</html>"));
 end Modelica_Synchronous;

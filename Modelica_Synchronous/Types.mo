@@ -53,7 +53,6 @@ The following values are possible:<br>&nbsp;
 <p>
 </p>
 </html>"));
-
 annotation (Documentation(info="<html>
 <p>
 This package contains type definitions utilized
