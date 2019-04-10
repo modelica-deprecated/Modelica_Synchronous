@@ -2370,7 +2370,7 @@ The clocked Real input signal is value discretized
             equation
               assert(uMax >= uMin, "Limiter: Limits must be consistent. However, uMax (=" + String(uMax) +
                                    ") < uMin (=" + String(uMin) + ")");
-              y = smooth(0,if u > uMax then uMax else if u < uMin then uMin else u);
+              y = if u > uMax then uMax else if u < uMin then uMin else u;
               annotation (
                 Documentation(info="<HTML>
 <p>
