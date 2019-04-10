@@ -18,7 +18,7 @@ It is planned to include this library in a future version of the Modelica Standa
 
 ## Current release
 
-[Modelica_Synchronous v0.92.1 (2016-03-11)](../../releases/tag/v0.92.1)
+[Modelica_Synchronous v0.93.0 (2019-04-10)](../../releases/tag/v0.93.0)
 
 The library is supported by at least the following tools: Dymola, OpenModelica, SimulationX.
 
