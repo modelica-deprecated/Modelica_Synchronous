@@ -5,10 +5,10 @@ extends Modelica.Icons.Package;
 
   annotation (preferredView="info",
   uses(Modelica(version="3.2.3"), ModelicaServices(version="3.2.3")),
-    version="0.93.0-dev",
-    versionBuild=0,
-    versionDate="2019-04-09",
-    dateModified = "2019-04-09 18:00:00Z",
+    version="0.93.0",
+    versionBuild=1,
+    versionDate="2019-04-10",
+    dateModified = "2019-04-10 10:50:00Z",
     revisionId="$Id::                                       $",
   Documentation(info="<html>
 <p>
