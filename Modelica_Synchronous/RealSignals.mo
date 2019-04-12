@@ -1876,7 +1876,7 @@ For signal interpolation an <i>upsample</i> should be followed by an appropriate
 
 <p>
 The following
-<a href=\"Modelica_Synchronous.Examples.ForDocumentation.RealSignals.UpSample1\">example</a>
+<a href=\"Modelica_Synchronous.Examples.Elementary.RealSignals.UpSample1\">example</a>
 samples a sine signal with a periodic clock of 20 ms period, and
 then upsamples the resulting clocked signal with a factor of 3:<br>
 </p>
@@ -1901,7 +1901,7 @@ clocks of their outputs is faster than the clocks of their inputs.
 
 <p>
 The following
-<a href=\"Modelica_Synchronous.Examples.ForDocumentation.RealSignals.UpSample2\">example</a>
+<a href=\"Modelica_Synchronous.Examples.Elementary.RealSignals.UpSample2\">example</a>
 samples a sine signal with a periodic clock of 20 ms period,
 upsamples the resulting clocked signal with a factor of 3
 and applies varies filters on this signal:<br>
@@ -2013,7 +2013,7 @@ A particular use-case in which that block might be useful is the combination of 
 
 <p>
 The following
-<a href=\"Modelica_Synchronous.Examples.ForDocumentation.RealSignals.AssignClockToTriggerHold\">example</a>
+<a href=\"Modelica_Synchronous.Examples.Elementary.RealSignals.AssignClockToTriggerHold\">example</a>
 samples a sine signal with a periodic clock of 20 ms period. After that a continuous time Boolean trigger signal is generated at every clock tick of that sampled signal. The generated signal is used as trigger signal for an \"old-style\" <a href=\"Modelica.Blocks.Discrete.TriggeredSampler\">TriggeredSampler</a>  block from the Modelica.Blocks.Discrete package:<br>
 </p>
 
@@ -2093,7 +2093,7 @@ This block creates a Boolean, continuous time, square-wave output. Whenever the 
 
 <p>
 The following
-<a href=\"Modelica_Synchronous.Examples.ForDocumentation.RealSignals.AssignClockToSquareWaveHold\">example</a>
+<a href=\"Modelica_Synchronous.Examples.Elementary.RealSignals.AssignClockToSquareWaveHold\">example</a>
 samples a sine signal with a periodic clock of 20 ms period. After that a Boolean, continuous time, square-wave signal is generated that changes its value at every clock tick of the sampled signal:<br>
 </p>
 
@@ -2195,7 +2195,7 @@ For more details, see the underlying function
 <h4>Example</h4>
 <p>
 The following
-<a href=\"Modelica_Synchronous.Examples.ForDocumentation.RealSignals.UniformNoise\">example</a>
+<a href=\"Modelica_Synchronous.Examples.Elementary.RealSignals.UniformNoise\">example</a>
 samples zero signal with a periodic clock of 20 ms period, and adds
 noise in the range from -0.1 .. 0.1:<br>
 </p>
@@ -2370,7 +2370,7 @@ The clocked Real input signal is value discretized
             equation
               assert(uMax >= uMin, "Limiter: Limits must be consistent. However, uMax (=" + String(uMax) +
                                    ") < uMin (=" + String(uMin) + ")");
-              y = smooth(0,if u > uMax then uMax else if u < uMin then uMin else u);
+              y = if u > uMax then uMax else if u < uMin then uMin else u;
               annotation (
                 Documentation(info="<HTML>
 <p>
