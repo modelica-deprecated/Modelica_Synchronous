@@ -443,18 +443,18 @@ For an example, see
           annotation (Placement(transformation(extent = {{60,-10},{80,10}})));
 
         // Array of input trackers:
-        BooleanSignals.NonPeriodic.ClockToBoolean[nu] input_ticked
+        BooleanSignals.NonPeriodic.ClockToBoolean input_ticked[nu]
           annotation (Placement(transformation(extent = {{-50,60},{-30,80}})));
-        Modelica.Blocks.Logical.And[nu] forbidden_state
+        Modelica.Blocks.Logical.And forbidden_state[nu]
           annotation (Placement(transformation(
             extent = {{-6,6},{6,-6}},
             rotation = 90,
             origin = {-70,10})));
-        Modelica.Blocks.Sources.BooleanConstant[nu] S_false(each k = false)
+        Modelica.Blocks.Sources.BooleanConstant S_false[nu](each k = false)
           annotation (Placement(transformation(extent = {{-34,32},{-46,44}})));
-        Modelica.Blocks.Logical.LogicalSwitch[nu] suppress_S
+        Modelica.Blocks.Logical.LogicalSwitch suppress_S[nu]
           annotation (Placement(transformation(extent = {{-46,14},{-34,26}})));
-        Modelica.Blocks.Logical.RSFlipFlop[nu] input_memory
+        Modelica.Blocks.Logical.RSFlipFlop input_memory[nu]
           annotation (Placement(transformation(extent = {{-20,-10},{0,10}})));
 
         // Resetter:
