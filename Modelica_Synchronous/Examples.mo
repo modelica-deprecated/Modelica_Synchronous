@@ -2692,16 +2692,16 @@ Example used to generate a figure for the documentation of block
         Modelica.Blocks.Sources.Sine sine_angle_input(
           amplitude = 10,
           freqHz = 1)
-          annotation (Placement(transformation(extent = {{-70,30},{-50,50}})));
+          annotation (Placement(transformation(extent={{-80,30},{-60,50}})));
         Modelica.Blocks.Sources.Cosine cosine_angle_input(
           amplitude = 10,
           freqHz = 1)
-          annotation (Placement(transformation(extent = {{-70,-50},{-50,-30}})));
+          annotation (Placement(transformation(extent={{-80,-50},{-60,-30}})));
         Modelica.Blocks.Sources.Pulse trigger_interval_input(
           amplitude = 2,
           period = 1,
           offset = 1)
-          annotation (Placement(transformation(extent = {{-70,-10},{-50,10}})));
+          annotation (Placement(transformation(extent={{-80,-10},{-60,10}})));
 
         Modelica_Synchronous.ClockSignals.Clocks.Rotational.RotationalClock rotational_clock_1
           annotation (Placement(transformation(extent = {{-20,30},{0,50}})));
@@ -2715,22 +2715,26 @@ Example used to generate a figure for the documentation of block
           disjunctiveClock
           annotation (Placement(transformation(extent = {{40,-40},{60,-20}})));
 
+        Modelica_Synchronous.RealSignals.Sampler.SampleClocked sample_conjunctive
+          annotation (Placement(transformation(extent={{74,54},{86,66}})));
+        Modelica_Synchronous.RealSignals.Sampler.SampleClocked sample_disjunctive
+          annotation (Placement(transformation(extent={{74,-54},{86,-66}})));
       equation
         connect(sine_angle_input.y, rotational_clock_1.angle)
           annotation (Line(
-            points = {{-49,40},{-22,40}},
+            points={{-59,40},{-22,40}},
             color = {0,0,127}));
         connect(trigger_interval_input.y, rotational_clock_1.trigger_interval)
           annotation (Line(
-            points = {{-49,0},{-40,0},{-40,46},{-22,46}},
+            points={{-59,0},{-40,0},{-40,46},{-22,46}},
             color = {0,0,127}));
         connect(trigger_interval_input.y, rotational_clock_2.trigger_interval)
           annotation (Line(
-            points = {{-49,0},{-40,0},{-40,-34},{-22,-34}},
+            points={{-59,0},{-40,0},{-40,-34},{-22,-34}},
             color = {0,0,127}));
         connect(cosine_angle_input.y, rotational_clock_2.angle)
           annotation (Line(
-            points = {{-49,-40},{-22,-40}},
+            points={{-59,-40},{-22,-40}},
             color = {0,0,127}));
         connect(rotational_clock_1.y, conjunctiveClock.u[1])
           annotation (Line(
@@ -2757,6 +2761,20 @@ Example used to generate a figure for the documentation of block
             pattern = LinePattern.Dot,
             thickness = 0.5));
 
+        connect(disjunctiveClock.y, sample_disjunctive.clock) annotation (Line(
+            points={{61,-30},{80,-30},{80,-52.8}},
+            color={175,175,175},
+            pattern=LinePattern.Dot,
+            thickness=0.5));
+        connect(conjunctiveClock.y, sample_conjunctive.clock) annotation (Line(
+            points={{61,30},{80,30},{80,52.8}},
+            color={175,175,175},
+            pattern=LinePattern.Dot,
+            thickness=0.5));
+        connect(sample_conjunctive.u, sine_angle_input.y) annotation (Line(
+              points={{72.8,60},{-50,60},{-50,40},{-59,40}}, color={0,0,127}));
+        connect(sample_disjunctive.u, sine_angle_input.y) annotation (Line(
+              points={{72.8,-60},{-50,-60},{-50,40},{-59,40}}, color={0,0,127}));
         annotation (
           preferredView = "info",
           experiment(StopTime = 2),
