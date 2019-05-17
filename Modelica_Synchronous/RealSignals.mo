@@ -2148,72 +2148,43 @@ There is the restriction that shiftCounter/resolution &le; 1.
           extends Modelica_Synchronous.RealSignals.Interfaces.PartialNoise;
           parameter Real noiseMax=0.1 "Upper limit of noise band";
           parameter Real noiseMin=-noiseMax "Lower limit of noise band";
-          parameter Integer firstSeed[3](each min=0, each max=255) = {23,87,187}
-            "Integer[3] defining random sequence; required element range: 0..255";
+
+          parameter Integer globalSeed = 30020 "Global seed to initialize random number generator";
+          // Random number generators with exposed state
+          parameter Integer localSeed = 614657 "Local seed to initialize random number generator";
+          output Real r64(start=0) "Random number generated with Xorshift64star";
         protected
-          Integer seedState[3](start=firstSeed, each fixed=true)
-            "State of seed"                                                      annotation(HideResult=true);
-          Real noise "Noise in the range 0..1" annotation(HideResult=true);
+          discrete Integer state64[2](start=Modelica.Math.Random.Generators.Xorshift64star.initialState(localSeed, globalSeed));
+
         equation
-          (noise,seedState) =
-            Modelica_Synchronous.RealSignals.Sampler.Utilities.Internal.random(
-            previous(seedState));
-            y = u + noiseMin + (noiseMax - noiseMin)*noise;
+          (r64, state64) = Modelica.Math.Random.Generators.Xorshift64star.random(previous(state64));
+           y = u + noiseMin + (noiseMax - noiseMin)*r64;
 
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                     -100},{100,100}})),
             Documentation(info="<html>
-<p>
-This block adds uniformly distributed noise
-in the range noiseMin .. noiseMax to the clocked Real input signal
-and provides the sum as clocked Real output signal.
-</p>
-
-<p>
-The Integer[3] parameter vector <b>firstSeed</b> is used to initialize the
-basic random number generator. The 3 elements of firstSeed need
-to be in the range [0, 255]. The use of the same seed vector
-will lead to the same sequence of numbers when these are computed serially.
-This is usually not desired. Therefore, for every usage of block
-<b>Noise</b> a different firstSeed should be defined.
-</p>
-
-<p>
-This noise generator is based on a function that generates
-a random real number uniformely in the semi-open range [0.0, 1.0).
-The function uses the standard Wichmann-Hill generator,
-combining three pure multiplicative congruential generators of
-modulus 30269, 30307 and 30323. Its period (how many numbers it
-generates before repeating the sequence exactly) is 6,953,607,871,644.
-While of much higher quality than the rand() function supplied by
-most C libraries, the theoretical properties are much the same
-as for a single linear congruential generator of large modulus.
-For more details, see the underlying function
-<a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.Utilities.Internal.random\">Internal.random</a>.
-</p>
-
+<p>This block adds uniformly distributed noise in the range noiseMin .. noiseMax to the clocked Real input signal and provides the sum as clocked Real output signal. </p>
+<p><b>2019-05-17 FIXME:</b> Documentation is obsolete (describes old algorithm), update! </p>
+<p>The Integer[3] parameter vector <b>firstSeed</b> is used to initialize the basic random number generator. The 3 elements of firstSeed need to be in the range [0, 255]. The use of the same seed vector will lead to the same sequence of numbers when these are computed serially. This is usually not desired. Therefore, for every usage of block <b>Noise</b> a different firstSeed should be defined. </p>
+<p>This noise generator is based on a function that generates a random real number uniformely in the semi-open range [0.0, 1.0). The function uses the standard Wichmann-Hill generator, combining three pure multiplicative congruential generators of modulus 30269, 30307 and 30323. Its period (how many numbers it generates before repeating the sequence exactly) is 6,953,607,871,644. While of much higher quality than the rand() function supplied by most C libraries, the theoretical properties are much the same as for a single linear congruential generator of large modulus. For more details, see the underlying function <a href=\"modelica://Modelica_Synchronous.RealSignals.Sampler.Utilities.Internal.random\">Internal.random</a>. </p>
 <h4>Example</h4>
-<p>
-The following
-<a href=\"Modelica_Synchronous.Examples.Elementary.RealSignals.UniformNoise\">example</a>
-samples zero signal with a periodic clock of 20 ms period, and adds
-noise in the range from -0.1 .. 0.1:<br>
-</p>
-
-
-<table border=0 cellspacing=0 cellpadding=2>
-<tr><td width=\"50\"></td>
-    <td valign=\"bottom\"><img src=\"modelica://Modelica_Synchronous/Resources/Images/RealSignals/UniformNoise_Model.png\"></td>
-    </tr>
-<tr><td></td>
-    <td align=\"left\">model<br></td>
-   </tr>
-<tr><td></td>
-    <td valign=\"bottom\"><img src=\"modelica://Modelica_Synchronous/Resources/Images/RealSignals/UniformNoise_Result.png\"></td>
-    </tr>
-<tr><td></td>
-    <td align=\"center\">simulation result</td>
-   </tr>
+<p><br>The following <a href=\"Modelica_Synchronous.Examples.Elementary.RealSignals.UniformNoise\">example</a> samples zero signal with a periodic clock of 20 ms period, and adds noise in the range from -0.1 .. 0.1:</p>
+<table cellspacing=\"0\" cellpadding=\"2\" border=\"0\"><tr>
+<td></td>
+<td valign=\"bottom\"><p><br><img src=\"modelica://Modelica_Synchronous/Resources/Images/RealSignals/UniformNoise_Model.png\"/></p></td>
+</tr>
+<tr>
+<td></td>
+<td><p><br><br>model</p></td>
+</tr>
+<tr>
+<td></td>
+<td valign=\"bottom\"><p><br><img src=\"modelica://Modelica_Synchronous/Resources/Images/RealSignals/UniformNoise_Result.png\"/></p></td>
+</tr>
+<tr>
+<td></td>
+<td><p align=\"center\"><br>simulation result</p></td>
+</tr>
 </table>
 </html>"),  Icon(graphics={
                 Polygon(
