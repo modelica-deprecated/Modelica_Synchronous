@@ -88,10 +88,18 @@ For an example, see
       parameter Integer resolutionFactor = conversionTable[Integer(resolution)] annotation(Evaluate=true);
       Clock c annotation(HideResult=true);
     equation
+      // The following then-branch using subSample corresponds to the simpler Clock(factor*resolutionFactor, 1),
+      // but works better in some odd cases.
+      // 
+      // Specifically the simple variant may fail if the product exceeds 2^31 (seconds), roughly 68 years.
+      // 
+      // Using subSample works reliably up to 2^31 years according to the standard.
+      //
+      // There is no similar issue with the else-branch.
       if resolution < R.s then
          c = subSample(Clock(factor), resolutionFactor);
       else
-         c = superSample(Clock(factor), resolutionFactor);
+         c = Clock(factor, resolutionFactor);
       end if;
 
       if useSolver then
