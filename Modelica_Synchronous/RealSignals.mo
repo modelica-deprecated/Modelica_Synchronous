@@ -2544,11 +2544,11 @@ Copyright &copy; Hubertus Tummescheit and Department of Automatic Control, Lund 
 </p>
 <p>
 <i>This Modelica function is <b>free</b> software; it can be redistributed and/or modified
-under the terms of the <b>Modelica license</b>, see the license conditions
-and the accompanying <b>disclaimer</b>
-<a href=\"modelica://Modelica.UsersGuide.ModelicaLicense2\">here</a>.</i>
+under the terms of the BSD-3-Clause license.</i>
 </p>
-</HTML>"));
+</HTML>", revisions="<html>
+<p>2019-05-20: Changed license to BSD-3-Clause after consultation with Hubertus Tummescheit.</p>
+</html>"));
         end random;
 
         annotation (Documentation(info="<html>
