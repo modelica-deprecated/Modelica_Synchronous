@@ -53,8 +53,7 @@ For an introduction, have especially a look at:
 </p>
 <p>
 </html>",
-revisions=
-"<html>
+revisions="<html>
 <table border=1 cellspacing=0 cellpadding=2>
 <tr><th>Date</th> <th align=\"left\">Description</th></tr>
 
@@ -72,10 +71,30 @@ revisions=
     
 <tr><td></td><td>Several releases as <i>Modelica_Synchronous</i> library.</td></tr>
     
-<tr><td> 2019 </td><td>The <i>Modelica_Synchronous</i> library is included as Modelica.??? in the Modelica Standard Library 4.0.0.</td></tr>
+<tr><td> 2019 </td><td>The <i>Modelica_Synchronous</i> library is included as <i>Modelica.Clocked</i> in the Modelica Standard Library 4.0.0.</td></tr>
 
 <tr><td></td><td>see <a href=\"modelica://Modelica_Synchronous.UsersGuide.ReleaseNotes\">Release Notes</a>.</td></tr>
 
 </table>
-</html>"));
+</html>"),
+    Icon(graphics={
+        Ellipse(extent={{-80,80},{80,-80}}, lineColor={160,160,164}),
+        Line(points={{0,80},{0,60}}, color={160,160,164}),
+        Line(points={{80,0},{60,0}}, color={160,160,164}),
+        Line(points={{0,-80},{0,-60}}, color={160,160,164}),
+        Line(points={{-80,0},{-60,0}}, color={160,160,164}),
+        Line(points={{37,70},{26,50}}, color={160,160,164}),
+        Line(points={{70,38},{49,26}}, color={160,160,164}),
+        Line(points={{71,-37},{52,-27}}, color={160,160,164}),
+        Line(points={{39,-70},{29,-51}}, color={160,160,164}),
+        Line(points={{-39,-70},{-29,-52}}, color={160,160,164}),
+        Line(points={{-71,-37},{-50,-26}}, color={160,160,164}),
+        Line(points={{-71,37},{-54,28}}, color={160,160,164}),
+        Line(points={{-38,70},{-28,51}}, color={160,160,164}),
+        Line(
+          points={{0,0},{-50,50}},
+          thickness=0.5),
+        Line(
+          points={{0,0},{40,0}},
+          thickness=0.5)}));
 end Modelica_Synchronous;
