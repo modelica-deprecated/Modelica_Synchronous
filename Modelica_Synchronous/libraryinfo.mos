@@ -2,8 +2,8 @@ LibraryInfoMenuCommand(
   category="libraries",
   text="Modelica_Synchronous",
   reference="Modelica_Synchronous",
-  version="0.92.1",
+  version="0.93.0",
   isModel=true,
-  description="Modelica Synchronous library (version 0.92.1)",
-  ModelicaVersion="3.2.2",
+  description="Modelica Synchronous library (version 0.93.0)",
+  ModelicaVersion=">=3.2.2",
   pos=103)

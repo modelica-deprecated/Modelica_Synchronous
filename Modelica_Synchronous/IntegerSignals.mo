@@ -428,7 +428,6 @@ Analog to the corresponding Real signal block example there exists an elementary
 
     block ShiftSample
       "Shift the clocked Integer input signal by a fraction of the last interval and and provide it as clocked output signal"
-
       parameter Integer shiftCounter(min=0)=0 "Numerator of shifting formula"
             annotation(Evaluate=true, Dialog(group="Shift first clock activation for 'shiftCounter/resolution*interval(u)' seconds"));
       parameter Integer resolution(min=1)=1 "Denominator of shifting formula"
@@ -515,9 +514,9 @@ Analog to the corresponding Real signal block example there exists an elementary
     block BackSample
       "Shift clock of Integer input signal backwards in time (and access the most recent value of the input at this new clock)"
       parameter Integer backCounter(min=0)=0 "Numerator of shifting formula"
-            annotation(Dialog(group="Shift first clock activation backwards in time for 'shiftCounter/resolution*interval(u)' seconds"));
+            annotation(Evaluate = true, Dialog(group="Shift first clock activation backwards in time for 'shiftCounter/resolution*interval(u)' seconds"));
       parameter Integer resolution(min=1)=1 "Denominator of shifting formula"
-            annotation(Dialog(group="Shift first clock activation backwards in time for 'shiftCounter/resolution*interval(u)' seconds"));
+            annotation(Evaluate = true, Dialog(group="Shift first clock activation backwards in time for 'shiftCounter/resolution*interval(u)' seconds"));
       parameter Integer y_start=0
         "Value of output y before the first clock tick of the input u";
 
@@ -602,7 +601,6 @@ Analog to the corresponding Real signal block example there exists an elementary
     end BackSample;
 
     block AssignClock "Assigns a clock to a clocked Integer signal"
-
       Modelica.Blocks.Interfaces.IntegerInput
                                            u
         "Connector of clocked, Integer input signal"
@@ -692,7 +690,6 @@ Analog to the corresponding Real signal block example there exists an elementary
 
     block AssignClockVectorized
       "Assigns a clock to a clocked Integer signal vector"
-
       parameter Integer n(min=1)=1
         "Size of input signal vector u (= size of output signal vector y)";
       Modelica.Blocks.Interfaces.IntegerInput
@@ -786,7 +783,6 @@ Analog to the corresponding Real signal block example there exists an elementary
 
       block UpSample
         "Upsample the clocked Integer input signal and provide it as clocked output signal"
-
         parameter Boolean inferFactor=true
           "= true, if upsampling factor is inferred"  annotation(Evaluate=true, choices(checkBox=true));
         parameter Integer factor(min=1)=1
@@ -1118,10 +1114,10 @@ contains utility blocks that are used as building blocks for user-relevant block
 
       Modelica.Blocks.Interfaces.IntegerInput u
         "Connector of Integer input signal."
-        annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
+        annotation (Placement(transformation(extent = {{-140,-20},{-100,20}})));
       Modelica.Blocks.Interfaces.BooleanOutput y
         "Connector of Boolean output signal."
-        annotation (Placement(transformation(extent={{100,-10},{120,10}})));
+        annotation (Placement(transformation(extent = {{100,-10},{120,10}})));
 
     equation
       if firstTick() then
@@ -1622,7 +1618,6 @@ See model <a href=\"Modelica_Synchronous.Examples.Elementary.IntegerSignals.Tick
 
     partial block SamplerIcon
       "Basic graphical layout of block used for of Integer signals"
-
       annotation (
         Icon(
           coordinateSystem(
@@ -1673,7 +1668,6 @@ See model <a href=\"Modelica_Synchronous.Examples.Elementary.IntegerSignals.Tick
 
     partial block PartialSISOHold
       "Basic block used for zero order hold of Integer signals"
-
       parameter Integer y_start = 0
         "Value of output y before the first tick of the clock associated to input u";
 

@@ -1876,7 +1876,7 @@ For signal interpolation an <i>upsample</i> should be followed by an appropriate
 
 <p>
 The following
-<a href=\"Modelica_Synchronous.Examples.ForDocumentation.RealSignals.UpSample1\">example</a>
+<a href=\"Modelica_Synchronous.Examples.Elementary.RealSignals.UpSample1\">example</a>
 samples a sine signal with a periodic clock of 20 ms period, and
 then upsamples the resulting clocked signal with a factor of 3:<br>
 </p>
@@ -1901,7 +1901,7 @@ clocks of their outputs is faster than the clocks of their inputs.
 
 <p>
 The following
-<a href=\"Modelica_Synchronous.Examples.ForDocumentation.RealSignals.UpSample2\">example</a>
+<a href=\"Modelica_Synchronous.Examples.Elementary.RealSignals.UpSample2\">example</a>
 samples a sine signal with a periodic clock of 20 ms period,
 upsamples the resulting clocked signal with a factor of 3
 and applies varies filters on this signal:<br>
@@ -2013,7 +2013,7 @@ A particular use-case in which that block might be useful is the combination of 
 
 <p>
 The following
-<a href=\"Modelica_Synchronous.Examples.ForDocumentation.RealSignals.AssignClockToTriggerHold\">example</a>
+<a href=\"Modelica_Synchronous.Examples.Elementary.RealSignals.AssignClockToTriggerHold\">example</a>
 samples a sine signal with a periodic clock of 20 ms period. After that a continuous time Boolean trigger signal is generated at every clock tick of that sampled signal. The generated signal is used as trigger signal for an \"old-style\" <a href=\"Modelica.Blocks.Discrete.TriggeredSampler\">TriggeredSampler</a>  block from the Modelica.Blocks.Discrete package:<br>
 </p>
 
@@ -2093,7 +2093,7 @@ This block creates a Boolean, continuous time, square-wave output. Whenever the 
 
 <p>
 The following
-<a href=\"Modelica_Synchronous.Examples.ForDocumentation.RealSignals.AssignClockToSquareWaveHold\">example</a>
+<a href=\"Modelica_Synchronous.Examples.Elementary.RealSignals.AssignClockToSquareWaveHold\">example</a>
 samples a sine signal with a periodic clock of 20 ms period. After that a Boolean, continuous time, square-wave signal is generated that changes its value at every clock tick of the sampled signal:<br>
 </p>
 
@@ -2144,7 +2144,7 @@ There is the restriction that shiftCounter/resolution &le; 1.
 </html>"));
         end ComputationalDelay;
 
-        block UniformNoise "Add band-limited uniform noise to a clocked signal"
+        block UniformNoise "Add band-limited uniform noise using a variant of the Wichmann-Hill algorithm"
           extends Modelica_Synchronous.RealSignals.Interfaces.PartialNoise;
           parameter Real noiseMax=0.1 "Upper limit of noise band";
           parameter Real noiseMin=-noiseMax "Lower limit of noise band";
@@ -2195,7 +2195,7 @@ For more details, see the underlying function
 <h4>Example</h4>
 <p>
 The following
-<a href=\"Modelica_Synchronous.Examples.ForDocumentation.RealSignals.UniformNoise\">example</a>
+<a href=\"Modelica_Synchronous.Examples.Elementary.RealSignals.UniformNoise\">example</a>
 samples zero signal with a periodic clock of 20 ms period, and adds
 noise in the range from -0.1 .. 0.1:<br>
 </p>
@@ -2331,6 +2331,149 @@ noise in the range from -0.1 .. 0.1:<br>
                   textString="%noiseMin")}));
         end UniformNoise;
 
+        block UniformNoiseXorshift64star
+          "Add band-limited uniform noise based on a xorshift64* number generator"
+          extends Modelica_Synchronous.RealSignals.Interfaces.PartialNoise;
+          parameter Real noiseMax=0.1 "Upper limit of noise band";
+          parameter Real noiseMin=-noiseMax "Lower limit of noise band";
+
+          parameter Integer globalSeed = 30020 "Global seed to initialize random number generator";
+          // Random number generators with exposed state
+          parameter Integer localSeed = 614657 "Local seed to initialize random number generator";
+          output Real r64(start=0) "Random number generated with Xorshift64star";
+        protected
+          discrete Integer state64[2](start=Modelica.Math.Random.Generators.Xorshift64star.initialState(localSeed, globalSeed));
+
+        equation
+          (r64, state64) = Modelica.Math.Random.Generators.Xorshift64star.random(previous(state64));
+           y = u + noiseMin + (noiseMax - noiseMin)*r64;
+
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                    -100},{100,100}})),
+            Documentation(info="<html>
+<p>This block adds uniformly distributed noise in the range noiseMin .. noiseMax to the clocked Real input signal and provides the sum as clocked Real output signal. </p>
+<p>
+It is based on the xorshift64* algorithm.
+For more details, see the documentation to
+<a href=\"modelica://Modelica.Math.Random.Generators.Xorshift64star\">Xorshift64star</a>.
+</p>
+<p><b>2019-05-20 TODO:</b> Add an example which exercises this block.</p>
+</html>"),  Icon(graphics={
+                Polygon(
+                  points={{-81,90},{-89,68},{-73,68},{-81,90}},
+                  lineColor={192,192,192},
+                  fillColor={192,192,192},
+                  fillPattern=FillPattern.Solid),
+                Text(
+                  extent={{-74,92},{90,68}},
+                  lineColor={255,0,0},
+                  textString="%noiseMax"),
+                Line(points={{-81,78},{-81,-90}}, color={192,192,192}),
+                Line(points={{-89,62},{85,62}}, color={255,0,0}),
+                Line(points={{-81,-17},{-67,-17},{-67,-1},{-59,-1},{-59,-49},{
+                      -51,-49},{-51,-27},{-43,-27},{-43,57},{-35,57},{-35,25}},
+                                                                       color={0,0,
+                      127},
+                  pattern=LinePattern.Dot),
+                Line(points={{-35,25},{-35,-35},{-25,-35},{-25,-17},{-15,-17},{
+                      -15,-45},{-5,-45},{-5,37},{1,37},{1,51},{7,51},{7,-5},{17,
+                      -5},{17,7},{23,7},{23,-23},{33,-23},{33,49},{43,49},{43,
+                      15},{51,15},{51,-51},{61,-51}},
+                    color={0,0,127},
+                  pattern=LinePattern.Dot),
+                Line(points={{-90,-23},{82,-23}}, color={192,192,192}),
+                Polygon(
+                  points={{91,-22},{69,-14},{69,-30},{91,-22}},
+                  lineColor={192,192,192},
+                  fillColor={192,192,192},
+                  fillPattern=FillPattern.Solid),
+                Line(points={{-90,-54},{84,-54}}, color={255,0,0}),
+                Ellipse(
+                  extent={{-84,-13},{-78,-19}},
+                  lineColor={0,0,127},
+                  fillColor={0,0,127},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{-70,3},{-64,-3}},
+                  lineColor={0,0,127},
+                  fillColor={0,0,127},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{-62,-47},{-56,-53}},
+                  lineColor={0,0,127},
+                  fillColor={0,0,127},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{-54,-23},{-48,-29}},
+                  lineColor={0,0,127},
+                  fillColor={0,0,127},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{-46,59},{-40,53}},
+                  lineColor={0,0,127},
+                  fillColor={0,0,127},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{-38,-33},{-32,-39}},
+                  lineColor={0,0,127},
+                  fillColor={0,0,127},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{-28,-15},{-22,-21}},
+                  lineColor={0,0,127},
+                  fillColor={0,0,127},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{-18,-41},{-12,-47}},
+                  lineColor={0,0,127},
+                  fillColor={0,0,127},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{-8,39},{-2,33}},
+                  lineColor={0,0,127},
+                  fillColor={0,0,127},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{-2,53},{4,47}},
+                  lineColor={0,0,127},
+                  fillColor={0,0,127},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{4,-1},{10,-7}},
+                  lineColor={0,0,127},
+                  fillColor={0,0,127},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{14,9},{20,3}},
+                  lineColor={0,0,127},
+                  fillColor={0,0,127},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{20,-19},{26,-25}},
+                  lineColor={0,0,127},
+                  fillColor={0,0,127},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{30,53},{36,47}},
+                  lineColor={0,0,127},
+                  fillColor={0,0,127},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{40,19},{46,13}},
+                  lineColor={0,0,127},
+                  fillColor={0,0,127},
+                  fillPattern=FillPattern.Solid),
+                Ellipse(
+                  extent={{48,-47},{54,-53}},
+                  lineColor={0,0,127},
+                  fillColor={0,0,127},
+                  fillPattern=FillPattern.Solid),
+                Text(
+                  extent={{-80,-62},{98,-84}},
+                  lineColor={255,0,0},
+                  textString="%noiseMin")}));
+        end UniformNoiseXorshift64star;
+
         model Quantization "DAC quantization effects"
         extends Modelica_Synchronous.RealSignals.Interfaces.PartialClockedSISO;
 
@@ -2370,7 +2513,7 @@ The clocked Real input signal is value discretized
             equation
               assert(uMax >= uMin, "Limiter: Limits must be consistent. However, uMax (=" + String(uMax) +
                                    ") < uMin (=" + String(uMin) + ")");
-              y = smooth(0,if u > uMax then uMax else if u < uMin then uMin else u);
+              y = if u > uMax then uMax else if u < uMin then uMin else u;
               annotation (
                 Documentation(info="<HTML>
 <p>
@@ -2544,11 +2687,11 @@ Copyright &copy; Hubertus Tummescheit and Department of Automatic Control, Lund 
 </p>
 <p>
 <i>This Modelica function is <b>free</b> software; it can be redistributed and/or modified
-under the terms of the <b>Modelica license</b>, see the license conditions
-and the accompanying <b>disclaimer</b>
-<a href=\"modelica://Modelica.UsersGuide.ModelicaLicense2\">here</a>.</i>
+under the terms of the BSD-3-Clause license.</i>
 </p>
-</HTML>"));
+</HTML>", revisions="<html>
+<p>2019-05-20: Changed license to BSD-3-Clause after consultation with Hubertus Tummescheit.</p>
+</html>"));
         end random;
 
         annotation (Documentation(info="<html>
