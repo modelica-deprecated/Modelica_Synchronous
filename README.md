@@ -1,6 +1,8 @@
 # Modelica_Synchronous
 
-Free library to precisely define and synchronize sampled data systems with different sampling rates. It provides convenient to use blocks to utilize the new synchronous language elements introduced in Modelica 3.3.
+**Starting with the Modelica Standard Library v4.0.0 (MSL v4.0.0) the Modelica_Synchronous library becomes deprecated and is replaced by `Modelica.Clocked`. This repository is kept as an archive.**
+
+The Modelica_Synchronous library has been integrated into the MSL 4.0.0 under the new name `Modelica.Clocked` (https://github.com/modelica/ModelicaStandardLibrary/tree/master/Modelica/Clocked). The MSL 4.0.0 conversion scripts support automatic conversion of dependencies to Modelica_Synchronous to the new facilities provided in MSL v4.0.0. 
 
 ## Library description
 
